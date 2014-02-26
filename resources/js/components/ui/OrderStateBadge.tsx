@@ -9,7 +9,7 @@ export type OrderStateTextProps = {
 
 export const OrderStateColorMapping: { [state in OrderStateEnum]: BadgeColors } = {
     [OrderStateEnum.ACCEPTED]: 'info',
-    [OrderStateEnum.CANCELLED]: 'warning',
+    [OrderStateEnum.CANCELLED]: 'danger',
     [OrderStateEnum.DELIVERED]: 'primary',
     [OrderStateEnum.PENDING]: 'warning',
     [OrderStateEnum.READY]: 'info',

@@ -84,7 +84,7 @@ class OrderController extends Controller
             throw new OrderAlreadyCancelledException($order);
         }
 
-        if (!$order->state !== Order::PENDING || $order->opening->closed()) {
+        if ($order->state !== Order::PENDING || $order->opening->closed()) {
             throw new OrderCannotBeCancelledException($order);
         }
 
