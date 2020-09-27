@@ -27,6 +27,46 @@ window.axios = require('axios');
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 window.axios.defaults.headers.common['Accept'] = 'application/json';
 window.axios.defaults.withCredentials = true;
+window.axios.defaults.maxRedirects = 0;
+
+console.log('Axios setup finished');
+
+async function test() {
+    let response = await axios.get('/sanctum/csrf-cookie');
+    console.log('CSRF', response);
+
+    let logged = false;
+
+    let me = await axios.get('/me');
+    console.log('Me', me);
+
+    if (me.data.user) {
+        logged = true;
+    }
+
+    if (!logged) {
+        try {
+            let registration = await axios.post('/register', {
+                name: 'Hugo',
+                email: 'hugo_jeller@hotmail.com',
+                password: '123123123',
+                password_confirmation: '123123123',
+            });
+            console.log('Registration', registration);
+        } catch (e) {
+            let login = await axios.post('/login', {
+                email: 'hugo_jeller@hotmail.com',
+                password: '123123123',
+            });
+            console.log('Login', login);
+        }
+    }
+
+    let p = await axios.get('/protected');
+    console.log('Protected after', p)
+}
+
+test();
 
 /**
  * Echo exposes an expressive API for subscribing to channels and listening

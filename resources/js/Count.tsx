@@ -9,7 +9,6 @@ const mapState = (state: RootState) => ({
 });
 
 const mapDispatch = (dispatch: Dispatch) => ({
-    pogU: () => dispatch.dolphins.set(),
     incrementDolphins: () => dispatch.dolphins.increment(1),
     incrementDolphinsAsync: dispatch.dolphins.incrementAsync,
     incrementSharks: () => dispatch.sharks.increment(1),

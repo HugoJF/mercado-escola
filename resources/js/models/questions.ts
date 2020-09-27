@@ -1,5 +1,5 @@
 import {createModel} from "@rematch/core";
-import {RootModel}   from ".";
+import {RootModel}   from "./index";
 
 type QuestionType = "boolean" | "multiple" | "mixed";
 type QuestionsState = {

@@ -14,7 +14,17 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('home');
+});
+
+Route::get('me', function () {
+    if (auth()->check()) {
+        $user = auth()->user();
+    } else {
+        $user = null;
+    }
+
+    return response()->json(compact('user'));
 });
 
 Route::middleware('auth:sanctum')->group(function () {
@@ -22,7 +32,5 @@ Route::middleware('auth:sanctum')->group(function () {
         return 'success';
     });
 });
-
-Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
