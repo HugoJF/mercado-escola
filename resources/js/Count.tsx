@@ -22,6 +22,10 @@ type DispatchProps = ReturnType<typeof mapDispatch>;
 type Props = StateProps & DispatchProps;
 
 class Count extends React.Component<Props> {
+    componentDidMount(): void {
+        axios.get('/login');
+    }
+
     render() {
         return (
             <div style={{display: "flex", flexDirection: "row"}}>
