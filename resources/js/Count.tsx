@@ -22,10 +22,6 @@ type DispatchProps = ReturnType<typeof mapDispatch>;
 type Props = StateProps & DispatchProps;
 
 class Count extends React.Component<Props> {
-    componentDidMount(): void {
-        axios.get('/login');
-    }
-
     render() {
         return (
             <div style={{display: "flex", flexDirection: "row"}}>
@@ -42,7 +38,7 @@ class Count extends React.Component<Props> {
                     <button onClick={this.props.incrementSharksAsync}>Async +1</button>
                     <button onClick={this.props.incrementSharksAsync2}>Async +2</button>
                 </div>
-                <p>Using Rematch Models</p>
+                <p>Using Rematch MODELS</p>
             </div>
         );
     }

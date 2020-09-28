@@ -22,7 +22,11 @@ export const dolphins = createModel<RootModel>()({
             async incrementAsync(): Promise<void> {
                 await delay(500);
                 dolphins.increment(1);
-            }
+            },
+            async incrementAsync2(): Promise<void> {
+                await delay(500);
+                dolphins.increment(2);
+            },
         };
     }
 });

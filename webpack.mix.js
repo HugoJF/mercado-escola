@@ -19,5 +19,5 @@ mix
         tailwindcss('./tailwind.config.js'),
     ])
     .sourceMaps()
-    .version()
+    // .version()
 ;
