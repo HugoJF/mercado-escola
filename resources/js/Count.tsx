@@ -24,7 +24,7 @@ type Props = StateProps & DispatchProps;
 class Count extends React.Component<Props> {
     render() {
         return (
-            <div style={{display: "flex", flexDirection: "row"}}>
+            <div className="bg-blue-200" style={{display: "flex", flexDirection: "row"}}>
                 <div style={{width: 120}}>
                     <h3>Dolphins</h3>
                     <h1>{this.props.dolphins}</h1>
