@@ -1,4 +1,4 @@
-import {useAuth} from "../js/selectors";
+import {useAuth} from "../selectors";
 
 export default function useIsAuthed(): boolean {
     const auth = useAuth();

@@ -35,9 +35,9 @@ export const auth = createModel<RootModel>()({
 
     effects: (dispatch) => ({
         async csrf(): Promise<void> {
-            let response = await axios.get('/sanctum/csrf-cookie');
-
+            await axios.get('/sanctum/csrf-cookie');
         },
+
         async me(): Promise<object> {
             let response = await axios.get('/me');
 
