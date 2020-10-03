@@ -3,18 +3,12 @@
 namespace Tests\Feature;
 
 use App\Models\Product;
-use App\Models\User;
-use Illuminate\Support\Facades\Auth;
+use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Tests\TestCase;
 
 class ProductTest extends TestCase
 {
-    protected function loginAsAdmin()
-    {
-        $user = User::factory()->create(['admin' => true]);
-
-        Auth::login($user);
-    }
+    use DatabaseMigrations;
 
     public function test_user_cannot_see_products_index()
     {

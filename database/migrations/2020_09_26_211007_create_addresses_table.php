@@ -20,6 +20,10 @@ class CreateAddressesTable extends Migration
             $table->integer('number');
             $table->string('complement')->nullable();
 
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')->references('id')->on('users');
+
+            $table->softDeletes();
             $table->timestamps();
         });
     }
