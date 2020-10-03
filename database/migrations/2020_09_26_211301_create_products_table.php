@@ -17,10 +17,12 @@ class CreateProductsTable extends Migration
             $table->id();
 
             $table->string('title');
-            $table->mediumText('description');
+            $table->mediumText('description')->nullable();
 
             $table->string('quantity_type');
+            $table->unsignedInteger('quantity_cost');
 
+            $table->softDeletes();
             $table->timestamps();
         });
     }
