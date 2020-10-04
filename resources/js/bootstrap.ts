@@ -19,7 +19,6 @@
 /**
  * Globally declare axios object
  */
-
 import {AxiosStatic} from "axios";
 
 declare global {

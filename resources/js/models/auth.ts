@@ -35,11 +35,11 @@ export const auth = createModel<RootModel>()({
 
     effects: (dispatch) => ({
         async csrf(): Promise<void> {
-            await axios.get('/sanctum/csrf-cookie');
+            await window.axios.get('/sanctum/csrf-cookie');
         },
 
         async me(): Promise<object> {
-            let response = await axios.get('/me');
+            let response = await window.axios.get('/me');
 
             const user = response.data.user;
 
@@ -50,7 +50,7 @@ export const auth = createModel<RootModel>()({
             return user;
         },
         async registration(payload: RegisterCredentials): Promise<void> {
-            let registration = await axios.post('/register', {
+            let registration = await window.axios.post('/register', {
                 name: 'Hugo',
                 email: 'hugo_jeller@hotmail.com',
                 password: '123123123',
@@ -71,7 +71,7 @@ export const auth = createModel<RootModel>()({
             }
 
             try {
-                const response = await axios.post('/login', {
+                const response = await window.axios.post('/login', {
                     email, password,
                 });
 

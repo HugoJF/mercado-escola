@@ -23,10 +23,13 @@
         "@types/react": "^16.9.49",
         "@types/react-dom": "^16.9.8",
         "@types/react-redux": "^7.1.9",
+        "css.gg": "^2.0.0",
         "react": "^16.13.1",
         "react-dom": "^16.13.1",
         "react-redux": "^7.2.1",
+        "react-ripples": "^2.2.1",
         "redux": "^4.0.5",
+        "styled-components": "^5.2.0",
         "tailwindcss": "^1.8.10",
         "ts-loader": "^8.0.4",
         "typescript": "^4.0.3"

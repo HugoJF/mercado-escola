@@ -1,15 +1,18 @@
 import "./bootstrap";
-import React         from "react";
-import ReactDOM      from "react-dom";
-import {Provider}    from "react-redux";
-import {store}       from "./store";
-import {Logged}      from "./containers/Logged";
+import React      from "react";
+import ReactDOM   from "react-dom";
+import {Provider} from "react-redux";
+import {store}    from "./store";
+import {Logged}   from "./containers/Logged";
+import {Menu}     from "./components/Menu";
 
 ReactDOM.render(
     <React.StrictMode>
         <Provider store={store}>
             <Logged>
-                <h1>Logged</h1>
+                <Menu>
+                    <h1>Hello</h1>
+                </Menu>
             </Logged>
         </Provider>
     </React.StrictMode>,

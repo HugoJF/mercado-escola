@@ -3,3 +3,46 @@
 @tailwind components;
 
 @tailwind utilities;
+
+.ggs-1 {
+    --ggs: 1;
+}
+.ggs-1\/2 {
+    --ggs: 1.5;
+}
+
+.ggs-2 {
+    --ggs: 2;
+}
+
+.ggs-3 {
+    --ggs: 3;
+}
+
+.ggs-4 {
+    --ggs: 4;
+}
+
+.ggs-5 {
+    --ggs: 5;
+}
+
+.ggs-6 {
+    --ggs: 6;
+}
+
+.ggs-7 {
+    --ggs: 7;
+}
+
+.ggs-8 {
+    --ggs: 8;
+}
+
+.ggs-9 {
+    --ggs: 9;
+}
+
+.ggs-10 {
+    --ggs: 10;
+}
