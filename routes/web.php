@@ -16,10 +16,6 @@ use Illuminate\Support\Facades\Route;
 Route::apiResource('products', \App\Http\Controllers\ProductController::class);
 Route::apiResource('addresses', \App\Http\Controllers\AddressController::class);
 
-Route::get('/', function () {
-    return view('home');
-});
-
 Route::get('me', function () {
     if (auth()->check()) {
         $user = auth()->user();
@@ -37,3 +33,7 @@ Route::middleware('auth:sanctum')->group(function () {
 });
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::get('{all?}', function () {
+    return view('home');
+})->where('all', '([A-z\d\-\/_.]+)?');

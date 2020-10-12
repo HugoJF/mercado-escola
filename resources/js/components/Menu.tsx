@@ -1,51 +1,64 @@
 import React                             from "react";
-import {Heart, HomeAlt, Profile, Readme} from "../css.gg";
 import Ripples                           from 'react-ripples'
+import {useHistory, useLocation}         from "react-router-dom";
+import {Heart, HomeAlt, Profile, Readme} from "../css.gg";
 
-const MyRipples: React.FC = ({children}) => (
-    <Ripples className="flex-grow">
+const buttons = {
+    Home: {
+        to: '/',
+        icon: HomeAlt,
+    },
+    Favoritos: {
+        to: '/favoritos',
+        icon: Heart,
+    },
+    Pedidos: {
+        to: '/pedidos',
+        icon: Readme,
+    },
+    Conta: {
+        to: '/conta',
+        icon: Profile,
+    },
+};
+
+interface MenuButton {
+    onClick: () => void;
+    selected: boolean;
+}
+
+const MenuItem: React.FC<MenuButton> = ({onClick, selected, children}) => (
+    <Ripples onClick={onClick} className={`transition-colors duration-150 w-full flex flex-grow flex-col pt-8 pb-3 items-center justify-between ${selected ? 'text-secondary-600' : 'text-gray-300'}`}>
         {children}
     </Ripples>
 );
 
-const Selected: React.FC = ({children}) => (
-    <MyRipples>
-        <div className="w-full flex flex-col pt-8 pb-3 items-center justify-between text-secondary-600">
-            {children}
-        </div>
-    </MyRipples>
-);
-
-const Item: React.FC = ({children}) => (
-    <MyRipples>
-        <div className="w-full flex flex-col pt-8 pb-3 items-center justify-between text-gray-300">
-            {children}
-        </div>
-    </MyRipples>
-);
-
 export const Menu: React.FC = ({children}) => {
+    const location = useLocation();
+    const history = useHistory();
+
+    function redirect(to: string) {
+        console.log(to);
+        history.push(to);
+    }
+
     return <>
         <div>
             {children}
         </div>
-        <div className="fixed left-0 right-0 bottom-0 flex items-stretch justify-around px-4 bg-white shadow-2xl">
-            <Selected>
-                <HomeAlt className="mb-3 inline-block ggs-1/2"/>
-                <span className="font-medium">Home</span>
-            </Selected>
-            <Item>
-                <Heart className="mb-3 inline-block ggs-1/2"/>
-                <span className="font-medium">Favoritos</span>
-            </Item>
-            <Item>
-                <Readme className="mb-3 inline-block ggs-1/2"/>
-                <span className="font-medium">Pedidos</span>
-            </Item>
-            <Item>
-                <Profile className="mb-3 inline-block ggs-1/2"/>
-                <span className="font-medium">Conta</span>
-            </Item>
+        <div className="fixed left-0 right-0 bottom-0 flex items-stretch justify-around bg-white shadow-2xl">
+            {Object.entries(buttons).map(([name, details]) => {
+                const Icon = details.icon;
+
+                return <MenuItem
+                    key={name}
+                    onClick={() => redirect(details.to)}
+                    selected={location.pathname === details.to}
+                >
+                    <Icon className="mb-3 inline-block ggs-1/2"/>
+                    <span className="font-medium select-none">{name}</span>
+                </MenuItem>
+            })}
         </div>
     </>
 };

@@ -16,7 +16,7 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
-<body>
+<body class="bg-gray-100">
 @yield('content')
 <script src="{{ mix('js/app.js') }}"></script>
 </body>

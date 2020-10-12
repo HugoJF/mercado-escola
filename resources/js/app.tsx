@@ -12,11 +12,21 @@ ReactDOM.render(
     <React.StrictMode>
         <Provider store={store}>
             <Router>
-                <ProtectedRoute exact path="/">
-                    <Menu>
+                <Menu>
+                    <ProtectedRoute exact path="/">
                         <h1>Hello</h1>
-                    </Menu>
-                </ProtectedRoute>
+                    </ProtectedRoute>
+                    <ProtectedRoute exact path="/pedidos">
+                        <h1>Pedidos</h1>
+                    </ProtectedRoute>
+                    <ProtectedRoute exact path="/favoritos">
+                        <h1>Favoritos</h1>
+                    </ProtectedRoute>
+                    <ProtectedRoute path="/conta">
+                        <h1>Conta</h1>
+                    </ProtectedRoute>
+                </Menu>
+
                 <Route path="/login">
                     <Login/>
                 </Route>
