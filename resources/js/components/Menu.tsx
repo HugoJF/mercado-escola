@@ -1,7 +1,7 @@
 import React                             from "react";
-import Ripples                           from 'react-ripples'
-import {useHistory, useLocation}         from "react-router-dom";
 import {Heart, HomeAlt, Profile, Readme} from "../css.gg";
+import Ripples                           from "react-ripples";
+import {useHistory}                      from "react-router-dom";
 
 const buttons = {
     Home: {
@@ -22,19 +22,21 @@ const buttons = {
     },
 };
 
+
 interface MenuButton {
     onClick: () => void;
     selected: boolean;
 }
 
 const MenuItem: React.FC<MenuButton> = ({onClick, selected, children}) => (
-    <Ripples onClick={onClick} className={`transition-colors duration-150 w-full flex flex-grow flex-col pt-8 pb-3 items-center justify-between ${selected ? 'text-secondary-600' : 'text-gray-300'}`}>
+    <Ripples onClick={onClick} className={`transition-colors duration-150
+        w-full flex flex-grow flex-col pt-8 pb-3 items-center justify-between
+        hover:bg-gray-100 ${selected ? 'text-secondary-600' : 'text-gray-300'} cursor-pointer`
+    }>
         {children}
     </Ripples>
 );
-
-export const Menu: React.FC = ({children}) => {
-    const location = useLocation();
+export const Menu: React.FC = () => {
     const history = useHistory();
 
     function redirect(to: string) {
@@ -43,10 +45,7 @@ export const Menu: React.FC = ({children}) => {
     }
 
     return <>
-        <div>
-            {children}
-        </div>
-        <div className="fixed left-0 right-0 bottom-0 flex items-stretch justify-around bg-white shadow-2xl">
+        <div className="sticky left-0 right-0 bottom-0 flex items-stretch justify-around bg-white shadow-2xl">
             {Object.entries(buttons).map(([name, details]) => {
                 const Icon = details.icon;
 
