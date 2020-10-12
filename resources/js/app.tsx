@@ -1,19 +1,26 @@
 import "./bootstrap";
-import React      from "react";
-import ReactDOM   from "react-dom";
-import {Provider} from "react-redux";
-import {store}    from "./store";
-import {Logged}   from "./containers/Logged";
-import {Menu}     from "./components/Menu";
+import React                            from "react";
+import ReactDOM                         from "react-dom";
+import {Provider}                       from "react-redux";
+import {store}                          from "./store";
+import {Menu}                           from "./components/Menu";
+import {Login}                          from "./components/Login";
+import {BrowserRouter as Router, Route} from "react-router-dom";
+import {ProtectedRoute}                 from "./containers/ProtectedRoute";
 
 ReactDOM.render(
     <React.StrictMode>
         <Provider store={store}>
-            <Logged>
-                <Menu>
-                    <h1>Hello</h1>
-                </Menu>
-            </Logged>
+            <Router>
+                <ProtectedRoute exact path="/">
+                    <Menu>
+                        <h1>Hello</h1>
+                    </Menu>
+                </ProtectedRoute>
+                <Route path="/login">
+                    <Login/>
+                </Route>
+            </Router>
         </Provider>
     </React.StrictMode>,
     document.getElementById("root")
