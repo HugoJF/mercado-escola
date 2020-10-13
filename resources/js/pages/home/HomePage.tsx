@@ -1,10 +1,6 @@
-import React          from "react";
-import {ShoppingCart} from '../css.gg';
-import {useLocation}  from "react-router-dom";
+import React from "react";
 
-export const Home: React.FC = ({children}) => {
-    const location = useLocation();
-
+export const HomePage: React.FC = () => {
     return <>
         <div className="mx-auto container pt-8">
             <div className="mx-auto container flex justify-around">
@@ -26,7 +22,7 @@ export const Home: React.FC = ({children}) => {
                 </div>
 
                 {/* Items */}
-                <div className="flex">
+                <div className="flex py-1 overflow-x-auto">
                     {['Brócolis', 'Cenoura', 'Batata'].map(name => (
                         <div className="transition-shadow duration-150
                             p-4 mx-4 bg-white rounded-lg

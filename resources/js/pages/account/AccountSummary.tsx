@@ -1,7 +1,7 @@
 import React                                                                           from "react";
 import {useDispatch}                                                                   from "react-redux";
-import {Dispatch}                                                                      from "../store";
-import {ChevronRight, FlagAlt, Girl, GlobeAlt, Heart, Mail, Readme, Smartphone, Track} from "../css.gg";
+import {Dispatch}                                                                      from "../../store";
+import {ChevronRight, FlagAlt, Girl, GlobeAlt, Heart, Mail, Readme, Smartphone, Track} from "../../css.gg";
 import {Link, useRouteMatch}                                                           from "react-router-dom";
 
 const mainSections = [{
@@ -44,7 +44,7 @@ const secondarySections = [{
     to: 'ajuda',
 }];
 
-export const Account: React.FC = ({children}) => {
+export const AccountSummary: React.FC = ({children}) => {
     const dispatch = useDispatch<Dispatch>();
     const match = useRouteMatch();
 

@@ -2,14 +2,15 @@ import {Route, Switch, useLocation}      from "react-router-dom";
 import {Login}                           from "../components/Login";
 import {Overlay}                         from "./Overlay";
 import {ProtectedRoute}                  from "./ProtectedRoute";
-import {Home}                            from "./Home";
 import React, {useEffect}                from "react";
 import {CSSTransition, TransitionGroup,} from 'react-transition-group';
-import {Account}                         from "./Account";
 import {useDispatch}                     from "react-redux";
 import {Dispatch}                        from "../store";
 import {Register}                        from "../components/Register";
 import {Container}                       from "./Container";
+import {Account}                         from "../routes/Account";
+import {Home}                            from "../routes/Home";
+import {Orders}                          from "../routes/Orders";
 
 export const Root: React.FC = () => {
     const dispatch = useDispatch<Dispatch>();
@@ -20,11 +21,11 @@ export const Root: React.FC = () => {
     }, []);
 
     return <Overlay>
-        <TransitionGroup className="relative">
+        <TransitionGroup className="relative min-h-full">
             <CSSTransition
                 key={location.key}
                 classNames="alert"
-                timeout={300}
+                timeout={500}
             >
                 <Container>
                     <Switch location={location}>
@@ -35,14 +36,10 @@ export const Root: React.FC = () => {
                             <Register/>
                         </Route>
 
-                        <ProtectedRoute exact path="/">
-                            <Home/>
-                        </ProtectedRoute>
-                        <ProtectedRoute exact path="/pedidos">
-                            <h1>Pedidos</h1>
-                        </ProtectedRoute>
+                        <ProtectedRoute exact path="/" children={<Home/>}/>
+                        <ProtectedRoute path="/pedidos" children={<Orders/>}/>
                         <ProtectedRoute exact path="/favoritos">
-                            <h1>Favoritos</h1>
+                            <h1>Favoritoss</h1>
                         </ProtectedRoute>
                         <ProtectedRoute path="/conta">
                             <Account/>
