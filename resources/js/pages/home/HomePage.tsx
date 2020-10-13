@@ -1,6 +1,7 @@
 import React     from "react";
 import {Link}    from "react-router-dom";
 import {Product} from "../../components/Product";
+import {Title}   from "../../components/Title";
 
 export const HomePage: React.FC = () => {
     return <>
@@ -19,7 +20,7 @@ export const HomePage: React.FC = () => {
             <div className="mb-16">
                 {/* Header */}
                 <div className="flex justify-between items-baseline mb-8">
-                    <h2 className="text-3xl tracking-wider">Favoritos</h2>
+                    <Title>Favoritos</Title>
                     <a className="text-gray-500">Ver todos ›</a>
                 </div>
 
@@ -40,7 +41,7 @@ export const HomePage: React.FC = () => {
             <div className="mb-16">
                 {/* Header */}
                 <div className="flex justify-between items-baseline mb-8">
-                    <h2 className="text-3xl tracking-wider">Descontos do dia</h2>
+                    <Title>Descontos do dia</Title>
                     <a className="text-gray-500">Ver todos ›</a>
                 </div>
 

@@ -3,6 +3,7 @@ import {useDispatch}                                                            
 import {Dispatch}                                                                      from "../../store";
 import {ChevronRight, FlagAlt, Girl, GlobeAlt, Heart, Mail, Readme, Smartphone, Track} from "../../css.gg";
 import {Link, useRouteMatch}                                                           from "react-router-dom";
+import {Box}                                                                           from "../../components/Box";
 
 const mainSections = [{
     icon: Girl,
@@ -76,14 +77,16 @@ export const AccountSummary: React.FC = ({children}) => {
 
         <div className="my-8">
             {secondarySections.map(({icon: Icon, title, to}) => (
-                <Link to={`${match.url}/${to}`} className="transition-colors duration-150 w-full px-4 py-5 flex items-center hover:bg-gray-200 border-b last:border-b-0 border-gray-200 cursor-pointer">
-                    <div className="flex items-center justify-center w-6 mr-4">
-                        <Icon className="text-primary-500"/>
-                    </div>
-                    <div className="flex-grow">
-                        <h3 className="text-lg text-gray-500">{title}</h3>
-                    </div>
-                    <ChevronRight className="text-gray-500"/>
+                <Link to={`${match.url}/${to}`}>
+                    <Box>
+                        <div className="flex items-center justify-center w-6 mr-4">
+                            <Icon className="text-primary-500"/>
+                        </div>
+                        <div className="flex-grow">
+                            <h3 className="text-lg text-gray-500">{title}</h3>
+                        </div>
+                        <ChevronRight className="text-gray-500"/>
+                    </Box>
                 </Link>
             ))}
         </div>
