@@ -23,7 +23,7 @@ module.exports = {
 
                 gray: {
                     100: '#F1F1F1',
-                    200: '#DEDEDE',
+                    200: '#E8E8E8',
                     300: '#BFBFBF',
                     400: '#9E9E9E',
                     500: '#7A7A7A',
@@ -59,6 +59,8 @@ module.exports = {
             }
         },
     },
-    variants: {},
+    variants: {
+        borderWidth: ['responsive', 'hover', 'focus', 'last'],
+    },
     plugins: [],
 }

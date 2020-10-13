@@ -52,22 +52,22 @@
  */
 
 .alert-enter {
-    opacity: 0;
     transform: translateX(-100%);
+    opacity: 0;
 }
 .alert-enter-active {
-    opacity: 1;
-    transform: translateX(0);
+    transform: translateX(0%);
     transition: opacity 300ms, transform 300ms;
+    opacity: 1;
 }
 .alert-exit {
-    opacity: 1;
     transform: translateX(0%);
+    opacity: 1;
 }
 .alert-exit-active {
-    opacity: 0;
     transform: translateX(100%);
     transition: opacity 300ms, transform 300ms;
+    opacity: 0;
 }
 
 /*
@@ -83,7 +83,7 @@ textarea:-webkit-autofill:focus,
 select:-webkit-autofill,
 select:-webkit-autofill:hover,
 select:-webkit-autofill:focus {
-    @apply border bg-gray-200 border-primary-500 rounded;
+    @apply border bg-gray-200 border-gray-500 rounded;
     -webkit-text-fill-color: black;
     -webkit-box-shadow: 0 0 0px 0px #000 inset;
 }

@@ -7,6 +7,7 @@ import {useHistory}                 from "react-router";
 import useIsAuthed                  from "../hooks/useIsAuthed";
 import {useForm}                    from "react-hook-form";
 import {LoginCredentials}           from "../models/auth";
+import {Link}                       from "react-router-dom";
 
 export const Login: React.FC<object> = () => {
     const auth = useAuth();
@@ -75,10 +76,10 @@ export const Login: React.FC<object> = () => {
                 </button>
 
                 <div className="text-center mt-8">
-                    <a className="w-full text-gray-500" href="#">
+                    <Link to="/register" className="w-full text-gray-500">
                         Ainda não possui uma conta?
                         <span className="ml-1 text-orange-400">Registre-se aqui</span>
-                    </a>
+                    </Link>
                 </div>
             </div>
         </form>
