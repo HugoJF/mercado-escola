@@ -57,13 +57,26 @@ export const auth = createModel<RootModel>()({
                 password_confirmation: '123123123',
             });
         },
+        async logout(): Promise<void> {
+            const me = await dispatch.auth.me();
+
+            // @ts-ignore
+            if (!me) {
+                return;
+            }
+
+            try {
+                const response = await window.axios.post('/logout');
+
+                dispatch.auth.setUser({});
+            } catch (e) {
+                dispatch.auth.setFailed(true);
+            }
+        },
         async login(payload: LoginCredentials, state: RootState): Promise<void> {
             const {email, password} = payload;
 
             const me = await dispatch.auth.me();
-
-            // @ts-ignore
-            console.log('state.auth', me);
 
             // @ts-ignore
             if (me) {

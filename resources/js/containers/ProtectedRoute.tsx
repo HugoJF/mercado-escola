@@ -7,12 +7,6 @@ import {RouteProps}       from "react-router";
 
 export const ProtectedRoute: React.FC<RouteProps> = ({children, ...rest}) => {
     const logged = useIsAuthed();
-    const dispatch = useDispatch<Dispatch>();
-
-    // TODO: move to a dedicated "unique" component
-    useEffect(() => {
-        dispatch.auth.me();
-    }, []);
 
     return (
         <Route
