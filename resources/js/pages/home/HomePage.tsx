@@ -1,4 +1,6 @@
-import React from "react";
+import React     from "react";
+import {Link}    from "react-router-dom";
+import {Product} from "../../components/Product";
 
 export const HomePage: React.FC = () => {
     return <>
@@ -18,23 +20,19 @@ export const HomePage: React.FC = () => {
                 {/* Header */}
                 <div className="flex justify-between items-baseline mb-8">
                     <h2 className="text-3xl tracking-wider">Favoritos</h2>
-                    <a className="text-gray-500">Ver todos</a>
+                    <a className="text-gray-500">Ver todos ›</a>
                 </div>
 
                 {/* Items */}
                 <div className="flex py-1 overflow-x-auto">
                     {['Brócolis', 'Cenoura', 'Batata'].map(name => (
-                        <div className="transition-shadow duration-150
-                            p-4 mx-4 bg-white rounded-lg
-                            cursor-pointer shadow hover:shadow-md"
-                        >
-                            <div className="mx-auto mb-4 h-48 w-48 rounded-full bg-gray-200"/>
-                            <h3 className="text-xl text-gray-800 font-medium">{name}</h3>
-                            <h4 className="text-lg">
-                                <span className="text-secondary-400 font-medium">R$ 4,30</span>
-                                <small className="ml-1 text-gray-500 font-thin tracking-tight">pacote</small>
-                            </h4>
-                        </div>
+                        <Product
+                            url={`/produtos/${name}`}
+                            image="https://conteudo.imguol.com.br/c/entretenimento/0e/2017/10/15/batata-crua-1508077604971_v2_1920x1269.jpg"
+                            name={name}
+                            cost={4.3}
+                            quantity="unidade"
+                        />
                     ))}
                 </div>
             </div>
@@ -43,23 +41,19 @@ export const HomePage: React.FC = () => {
                 {/* Header */}
                 <div className="flex justify-between items-baseline mb-8">
                     <h2 className="text-3xl tracking-wider">Descontos do dia</h2>
-                    <a className="text-gray-500">Ver todos</a>
+                    <a className="text-gray-500">Ver todos ›</a>
                 </div>
 
                 {/* Items */}
                 <div className="flex">
                     {['Brócolis', 'Cenoura', 'Batata', 'Banana'].map(name => (
-                        <div className="transition-shadow duration-150
-                            p-4 mx-4 bg-white rounded-lg
-                            cursor-pointer shadow hover:shadow-md"
-                        >
-                            <div className="mx-auto mb-4 h-48 w-48 rounded-full bg-gray-200"/>
-                            <h3 className="text-xl text-gray-800 font-medium">{name}</h3>
-                            <h4 className="text-lg">
-                                <span className="text-secondary-400 font-medium">R$ 4,30</span>
-                                <small className="ml-1 text-gray-500 font-thin tracking-tight">pacote</small>
-                            </h4>
-                        </div>
+                        <Product
+                            url={`/produtos/${name}`}
+                            image="https://conteudo.imguol.com.br/c/entretenimento/0e/2017/10/15/batata-crua-1508077604971_v2_1920x1269.jpg"
+                            name={name}
+                            cost={4.3}
+                            quantity="unidade"
+                        />
                     ))}
                 </div>
             </div>

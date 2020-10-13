@@ -1,23 +1,11 @@
-import React                      from "react";
-import {useDispatch}              from "react-redux";
-import {Dispatch}                 from "../../store";
-import {useParams, useRouteMatch} from "react-router-dom";
-import {Button}                   from "../../components/Button";
+import React    from 'react';
+import {Button} from "../../components/Button";
 
-
-export const OrdersShow: React.FC = ({children}) => {
-    const dispatch = useDispatch<Dispatch>();
-    const params = useParams<{ orderId: string }>();
-    const match = useRouteMatch();
-
-    function logout() {
-        dispatch.auth.logout();
-    }
-
+export const ProductShow: React.FC = () => {
     return <>
         <div className="flex flex-col justify-around min-h-full">
             <div
-                style={{background: 'url(https://conteudo.imguol.com.br/c/entretenimento/0e/2017/10/15/batata-crua-1508077604971_v2_1920x1269.jpg)'}}
+                style={{background: 'url(https://conteudo.imguol.com.br/c/entretenimento/0e/2017/10/15/batata-crua-1508077604971_v2_1920x1269.jpg) content-box'}}
                 className="h-64 w-64 mx-auto bg-gray-300 rounded-full shadow-md bg-cover"
             />
 
@@ -53,4 +41,5 @@ export const OrdersShow: React.FC = ({children}) => {
             </Button>
         </div>
     </>
-};
+
+}

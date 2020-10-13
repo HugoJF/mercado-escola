@@ -11,6 +11,7 @@ import {Container}                       from "./Container";
 import {Account}                         from "../routes/Account";
 import {Home}                            from "../routes/Home";
 import {Orders}                          from "../routes/Orders";
+import {Products}                        from "../routes/Products";
 
 export const Root: React.FC = () => {
     const dispatch = useDispatch<Dispatch>();
@@ -38,6 +39,7 @@ export const Root: React.FC = () => {
 
                         <ProtectedRoute exact path="/" children={<Home/>}/>
                         <ProtectedRoute path="/pedidos" children={<Orders/>}/>
+                        <ProtectedRoute path="/produtos" children={<Products/>}/>
                         <ProtectedRoute exact path="/favoritos">
                             <h1>Favoritoss</h1>
                         </ProtectedRoute>
