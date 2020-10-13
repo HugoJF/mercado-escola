@@ -5,15 +5,17 @@ import {useAuth}                    from "../selectors";
 import {SpinnerAlt}                 from "../css.gg";
 import {useHistory}                 from "react-router";
 import useIsAuthed                  from "../hooks/useIsAuthed";
+import {useForm}                    from "react-hook-form";
+import {LoginCredentials}           from "../models/auth";
 
 export const Login: React.FC<object> = () => {
     const auth = useAuth();
     const logged = useIsAuthed();
     const dispatch = useDispatch<Dispatch>();
     const history = useHistory();
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
     const [loading, setLoading] = useState(false);
+    const {register, handleSubmit, watch, errors} = useForm<LoginCredentials>();
+
 
     useEffect(() => {
         if (logged) {
@@ -21,19 +23,9 @@ export const Login: React.FC<object> = () => {
         }
     }, [logged]);
 
-    function handleEmailChange(event: React.FormEvent<HTMLInputElement>) {
-        setEmail(event.currentTarget.value);
-    }
-
-    function handlePasswordChange(event: React.FormEvent<HTMLInputElement>) {
-        setPassword(event.currentTarget.value)
-    }
-
-    async function handleOnSubmit(event: React.FormEvent<HTMLFormElement>) {
-        event.preventDefault();
-
+    async function login(credentials: LoginCredentials) {
         setLoading(true);
-        await dispatch.auth.login({email, password});
+        await dispatch.auth.login(credentials);
         setLoading(false);
         history.push('/');
     }
@@ -42,26 +34,26 @@ export const Login: React.FC<object> = () => {
 
     // @ts-ignore
     return <div className="mx-auto container min-h-screen flex justify-center items-center">
-        <form className="px-4 w-full" onSubmit={handleOnSubmit}>
+        <form className="px-4 w-full" onSubmit={handleSubmit(login)}>
             <h1 className="text-5xl text-center">DiCasa</h1>
 
             <div>
                 <label className={`${failed ? 'text-red-500' : ' text-gray-500'}`} htmlFor="#email">Email</label>
                 <input
-                    className={`transition-colors duration-300 block w-full mb-8 py-3 px-4 text-black bg-transparent border-b border-lg${failed ? ' border-red-500' : ''}`}
+                    className={`transition-colors duration-300 block w-full mb-8 py-3 px-4 text-black bg-transparent border-b border-lg${errors.email ? ' border-red-500' : ''}`}
                     placeholder="Digite seu email..."
                     id="email"
-                    onChange={handleEmailChange}
+                    ref={register({required: true})}
                     name="email"
                     type="text"
                 />
 
                 <label className={`${failed ? 'text-red-500' : ' text-gray-500'}`} htmlFor="#password">Password</label>
                 <input
-                    className={`transition-colors duration-300 block w-full mb-8 py-3 px-4 text-black bg-transparent border-b border-lg${failed ? ' border-red-500' : ''}`}
+                    className={`transition-colors duration-300 block w-full mb-8 py-3 px-4 text-black bg-transparent border-b border-lg${errors.password ? ' border-red-500' : ''}`}
                     placeholder="Digital sua senha..."
                     id="password"
-                    onChange={handlePasswordChange}
+                    ref={register({required: true})}
                     name="password"
                     type="password"
                 />
