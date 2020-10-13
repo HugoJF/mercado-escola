@@ -44,20 +44,18 @@ export const Menu: React.FC = () => {
         history.push(to);
     }
 
-    return <>
-        <div className="sticky left-0 right-0 bottom-0 flex items-stretch justify-around bg-white shadow-2xl">
-            {Object.entries(buttons).map(([name, details]) => {
-                const Icon = details.icon;
+    return <div className="flex items-stretch justify-around bg-white shadow-menu">
+        {Object.entries(buttons).map(([name, details]) => {
+            const Icon = details.icon;
 
-                return <MenuItem
-                    key={name}
-                    onClick={() => redirect(details.to)}
-                    selected={location.pathname === details.to}
-                >
-                    <Icon className="mb-3 inline-block ggs-1/2"/>
-                    <span className="font-medium select-none">{name}</span>
-                </MenuItem>
-            })}
-        </div>
-    </>
+            return <MenuItem
+                key={name}
+                onClick={() => redirect(details.to)}
+                selected={location.pathname === details.to}
+            >
+                <Icon className="mb-3 inline-block ggs-1/2"/>
+                <span className="font-medium select-none">{name}</span>
+            </MenuItem>
+        })}
+    </div>
 };

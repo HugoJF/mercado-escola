@@ -17,18 +17,18 @@ export const Root: React.FC = () => {
         dispatch.auth.me();
     }, []);
 
-    return <TransitionGroup>
-        <CSSTransition
-            key={location.key}
-            classNames="alert"
-            timeout={300}
-        >
-            <Switch>
-                <Route path="/login">
-                    <Login/>
-                </Route>
+    return <Overlay>
+        <TransitionGroup>
+            <CSSTransition
+                key={location.key}
+                classNames="alert"
+                timeout={300}
+            >
+                <Switch>
+                    <Route path="/login">
+                        <Login/>
+                    </Route>
 
-                <Overlay>
                     <ProtectedRoute exact path="/">
                         <Home/>
                     </ProtectedRoute>
@@ -41,8 +41,8 @@ export const Root: React.FC = () => {
                     <ProtectedRoute path="/conta">
                         <Account/>
                     </ProtectedRoute>
-                </Overlay>
-            </Switch>
-        </CSSTransition>
-    </TransitionGroup>
+                </Switch>
+            </CSSTransition>
+        </TransitionGroup>
+    </Overlay>
 };
