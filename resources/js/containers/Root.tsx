@@ -43,9 +43,7 @@ export const Root: React.FC = () => {
                         <ProtectedRoute exact path="/favoritos">
                             <h1>Favoritoss</h1>
                         </ProtectedRoute>
-                        <ProtectedRoute path="/conta">
-                            <Account/>
-                        </ProtectedRoute>
+                        <ProtectedRoute path="/conta" children={<Account/>}/>
                     </Switch>
                 </Container>
             </CSSTransition>
