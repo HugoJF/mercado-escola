@@ -8,22 +8,37 @@
  * Transitions
  */
 
-.alert-enter {
+.slide-enter {
     transform: translateX(100%);
     opacity: 0;
 }
-.alert-enter-active {
+.slide-enter-active {
     transform: translateX(0%);
     transition: opacity 500ms, transform 500ms;
     opacity: 1;
 }
-.alert-exit {
+.slide-exit {
     transform: translateX(0%);
     opacity: 1;
 }
-.alert-exit-active {
+.slide-exit-active {
     transform: translateX(-100%);
     transition: opacity 500ms, transform 500ms;
+    opacity: 0;
+}
+
+.fade-enter {
+    opacity: 0;
+}
+.fade-enter-active {
+    transition: opacity 1000ms;
+    opacity: 1;
+}
+.fade-exit {
+    opacity: 1;
+}
+.fade-exit-active {
+    transition: opacity 1000ms;
     opacity: 0;
 }
 

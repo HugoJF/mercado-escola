@@ -76,6 +76,7 @@ export const auth = createModel<RootModel>()({
         async login(payload: LoginCredentials, state: RootState): Promise<void> {
             const {email, password} = payload;
 
+            await dispatch.auth.csrf();
             const me = await dispatch.auth.me();
 
             // @ts-ignore

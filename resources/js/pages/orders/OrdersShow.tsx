@@ -1,21 +1,11 @@
 import React                              from "react";
-import {useDispatch}                      from "react-redux";
-import {Dispatch}                         from "../../store";
-import {useParams, useRouteMatch}         from "react-router-dom";
+import {Link}                             from "react-router-dom";
 import {Button}                           from "../../components/Button";
 import {Title}                            from "../../components/Title";
 import {Calendar, Heart, MapPin, XSquare} from "react-feather";
 
 
 export const OrdersShow: React.FC = ({children}) => {
-    const dispatch = useDispatch<Dispatch>();
-    const params = useParams<{ orderId: string }>();
-    const match = useRouteMatch();
-
-    function logout() {
-        dispatch.auth.logout();
-    }
-
     return <>
         <div className="flex flex-col justify-around min-h-full">
             <Title>Carrinho</Title>
@@ -61,7 +51,9 @@ export const OrdersShow: React.FC = ({children}) => {
             </div>
 
             <Button>
-                Finalizar pedido
+                <Link to="/pedidos/1">
+                    Finalizar pedido
+                </Link>
             </Button>
         </div>
     </>

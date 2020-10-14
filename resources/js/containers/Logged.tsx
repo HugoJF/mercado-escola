@@ -1,5 +1,5 @@
 import React, {ReactElement} from "react";
-import {Login}               from "../components/Login";
+import {Login}               from "../pages/auth/Login";
 import useIsAuthed           from "../hooks/useIsAuthed";
 
 export const Logged: React.FC = ({children}) => {

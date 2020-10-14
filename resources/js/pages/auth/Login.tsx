@@ -1,17 +1,15 @@
-import React, {useEffect, useState} from "react";
-import {useDispatch}                from "react-redux";
-import {Dispatch}                   from "../store";
-import {useAuth}                    from "../selectors";
-import {useHistory}                 from "react-router";
-import useIsAuthed                  from "../hooks/useIsAuthed";
-import {useForm}                    from "react-hook-form";
-import {LoginCredentials}           from "../models/auth";
-import {Link}                       from "react-router-dom";
-import {Loader}                     from "react-feather";
+import React, {useState}  from "react";
+import {useDispatch}      from "react-redux";
+import {Dispatch}         from "../../store";
+import {useAuth}          from "../../selectors";
+import {useHistory}       from "react-router";
+import {useForm}          from "react-hook-form";
+import {LoginCredentials} from "../../models/auth";
+import {Link}             from "react-router-dom";
+import {Loader}           from "react-feather";
 
 export const Login: React.FC<object> = () => {
     const auth = useAuth();
-    const logged = useIsAuthed();
     const dispatch = useDispatch<Dispatch>();
     const history = useHistory();
     const [loading, setLoading] = useState(false);
