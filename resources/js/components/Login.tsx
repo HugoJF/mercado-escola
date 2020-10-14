@@ -17,13 +17,6 @@ export const Login: React.FC<object> = () => {
     const [loading, setLoading] = useState(false);
     const {register, handleSubmit, watch, errors} = useForm<LoginCredentials>();
 
-
-    useEffect(() => {
-        if (logged) {
-            history.push('/');
-        }
-    }, [logged]);
-
     async function login(credentials: LoginCredentials) {
         setLoading(true);
         await dispatch.auth.login(credentials);

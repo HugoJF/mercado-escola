@@ -26,16 +26,16 @@ export const AddressesIndex: React.FC = ({children}) => {
                 {addresses.addresses && addresses.addresses.map(address => (
                     <Box onClick={() => history.push('/conta')}>
                         {address.deleted_at ?
-                            <CheckSquare size={36} className="mr-8 text-secondary-500"/>
+                            <CheckSquare size={30} className="mr-8 flex-shrink-0 text-secondary-500"/>
                             :
-                            <Square size={36} className="mr-8 text-gray-400"/>
+                            <Square size={30} className="mr-8 flex-shrink-0 text-gray-400"/>
                         }
                         <div className="flex-grow">
                             <h2 className="text-lg font-medium">{address.complement}</h2>
                             <p className="text-gray-600">{address.address}</p>
                             <p className="text-sm text-gray-600 font-thin">{address.number}</p>
                         </div>
-                        <ChevronRight className="text-gray-500"/>
+                        <ChevronRight className="flex-shrink-0 text-gray-500"/>
                     </Box>
                 ))}
 

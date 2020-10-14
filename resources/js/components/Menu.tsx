@@ -22,20 +22,6 @@ const buttons = {
     },
 };
 
-
-interface MenuButton {
-    onClick: () => void;
-    selected: boolean;
-}
-
-const MenuItem: React.FC<MenuButton> = ({onClick, selected, children}) => (
-    <Ripples onClick={onClick} className={`transition-colors duration-150
-        w-full flex flex-grow flex-col pt-4 pb-2 items-center justify-between
-        hover:bg-gray-100 ${selected ? 'text-secondary-600' : 'text-gray-300'} cursor-pointer`
-    }>
-        {children}
-    </Ripples>
-);
 export const Menu: React.FC = () => {
     const history = useHistory();
 
@@ -48,14 +34,17 @@ export const Menu: React.FC = () => {
         {Object.entries(buttons).map(([name, details]) => {
             const Icon = details.icon;
 
-            return <MenuItem
-                key={name}
+            return <Ripples
                 onClick={() => redirect(details.to)}
-                selected={location.pathname === details.to}
+                className={`transition-colors duration-150
+                    w-full flex flex-grow flex-col pt-4 pb-2 items-center justify-between
+                    hover:bg-gray-100 ${location.pathname === details.to ? 'text-secondary-600' : 'text-gray-500'} cursor-pointer`
+                }
             >
-                <Icon size={30} className="mb-2 inline-block"/>
+                <Icon size={30} className="inline-block"/>
                 <span className="font-medium select-none">{name}</span>
-            </MenuItem>
+            </Ripples>
+
         })}
     </div>
 };

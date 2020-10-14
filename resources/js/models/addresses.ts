@@ -1,16 +1,19 @@
-import {createModel} from "@rematch/core";
-import {RootModel}   from "./index";
-import {RootState}   from "../store";
+import {createModel}             from "@rematch/core";
+import {RootModel}               from "./index";
+import {RootState}               from "../store";
+import {SoftDeletes, Timestamps} from "../types";
 
-export type AddressType = {
+export type AddressType = AddressProperties & AddressComputedProperties & Timestamps & SoftDeletes;
+
+export type AddressProperties = {
     address: string;
     number: number;
     complement?: string;
+}
+
+export type AddressComputedProperties = {
     user_id: number;
-    deleted_at: string;
-    updated_at: string;
-    created_at: string;
-};
+}
 
 export type AddressesState = {
     addresses: AddressType[];
@@ -52,6 +55,19 @@ export const addresses = createModel<RootModel>()({
             } catch (e) {
                 dispatch.addresses.setFailed(true);
             }
-        }
+        },
+        async store(payload: AddressProperties, state: RootState): Promise<void> {
+            try {
+                dispatch.addresses.setLoading(true);
+
+                await window.axios.post('/addresses', payload);
+
+                await dispatch.addresses.index();
+
+                dispatch.addresses.setLoading(false);
+            } catch (e) {
+                dispatch.addresses.setFailed(true);
+            }
+        },
     })
 });
