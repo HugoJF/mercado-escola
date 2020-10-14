@@ -1,27 +1,31 @@
-import React                       from "react";
-import {useDispatch}               from "react-redux";
-import {Dispatch}                  from "../../store";
-import {useHistory, useRouteMatch} from "react-router-dom";
-import {Add, ChevronRight}         from "../../css.gg"
-import {Title}                     from "../../components/Title";
-import {Box}                       from "../../components/Box";
+import React                                         from "react";
+import {useDispatch}                                 from "react-redux";
+import {Dispatch}                                    from "../../store";
+import {useHistory, useRouteMatch}                   from "react-router-dom";
+import {Add, ChevronRight, RadioCheck, RadioChecked} from "../../css.gg"
+import {Title}                                       from "../../components/Title";
+import {Box}                                         from "../../components/Box";
 
 const addresses = [{
     name: 'Maria Casadevall',
     address: 'R. Alabama, 222',
     location: 'Campo Grande, Mato Grosso do Sul, 78554-255',
+    main: true,
 }, {
     name: 'Maria Casadevall',
     address: 'R. Alabama, 222',
     location: 'Campo Grande, Mato Grosso do Sul, 78554-255',
+    main: false,
 }, {
     name: 'Maria Casadevall',
     address: 'R. Alabama, 222',
     location: 'Campo Grande, Mato Grosso do Sul, 78554-255',
+    main: false,
 }, {
     name: 'Maria Casadevall',
     address: 'R. Alabama, 222',
     location: 'Campo Grande, Mato Grosso do Sul, 78554-255',
+    main: false,
 }];
 
 export const Addresses: React.FC = ({children}) => {
@@ -35,6 +39,11 @@ export const Addresses: React.FC = ({children}) => {
         <div className="my-8">
             {addresses.map(address => (
                 <Box onClick={() => history.push('/conta')}>
+                    {address.main ?
+                        <RadioChecked className="mr-8 text-secondary-500"/>
+                        :
+                        <RadioCheck className="mr-8 text-gray-400"/>
+                    }
                     <div className="flex-grow">
                         <h2 className="text-lg font-medium">{address.name}</h2>
                         <div className="pl-3">

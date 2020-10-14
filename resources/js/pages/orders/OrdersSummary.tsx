@@ -1,9 +1,9 @@
-import React                                                                           from "react";
-import {useDispatch}                                                                   from "react-redux";
-import {Dispatch}                                                                      from "../../store";
-import {ChevronRight, FlagAlt, Girl, GlobeAlt, Heart, Mail, Readme, Smartphone, Track} from "../../css.gg";
-import {Link, useRouteMatch}                                                           from "react-router-dom";
-import useRelativePath                                                                 from "../../hooks/useRelativePath";
+import React                                                             from "react";
+import {useDispatch}                                                     from "react-redux";
+import {Dispatch}                                                        from "../../store";
+import {FlagAlt, Girl, GlobeAlt, Heart, Mail, Readme, Smartphone, Track} from "../../css.gg";
+import {Link, useRouteMatch}                                             from "react-router-dom";
+import useRelativePath                                                   from "../../hooks/useRelativePath";
 
 const mainSections = [{
     icon: Girl,
