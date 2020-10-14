@@ -9,7 +9,7 @@
  */
 
 .alert-enter {
-    transform: translateX(-100%);
+    transform: translateX(100%);
     opacity: 0;
 }
 .alert-enter-active {
@@ -22,7 +22,7 @@
     opacity: 1;
 }
 .alert-exit-active {
-    transform: translateX(100%);
+    transform: translateX(-100%);
     transition: opacity 500ms, transform 500ms;
     opacity: 0;
 }

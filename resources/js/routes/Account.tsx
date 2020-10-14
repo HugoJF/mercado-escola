@@ -1,9 +1,10 @@
-import React            from 'react';
-import {Route}          from "react-router";
-import useRelativePath  from "../hooks/useRelativePath";
-import {AccountSummary} from "../pages/account/AccountSummary";
-import {Link}           from "react-router-dom";
-import {Addresses}      from "../pages/account/Addresses";
+import React             from 'react';
+import {Route}           from "react-router";
+import useRelativePath   from "../hooks/useRelativePath";
+import {AccountSummary}  from "../pages/account/AccountSummary";
+import {Link}            from "react-router-dom";
+import {AddressesIndex}  from "../pages/account/AddressesIndex";
+import {AddressesCreate} from "../pages/account/AddressesCreate";
 
 export const Account: React.FC = () => {
     const relative = useRelativePath();
@@ -18,7 +19,8 @@ export const Account: React.FC = () => {
         <Route path={relative('/email')}>
             <Link to={relative('')}>Back2</Link>
         </Route>
-        <Route path={relative('/endereco')} children={<Addresses/>}/>
+        <Route exact path={relative('/endereco/novo')} children={<AddressesCreate/>}/>
+        <Route exact path={relative('/endereco')} children={<AddressesIndex/>}/>
         <Route path={relative('/telefone')}>
             <Link to={relative('')}>Back2</Link>
         </Route>

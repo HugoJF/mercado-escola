@@ -30,7 +30,7 @@ interface MenuButton {
 
 const MenuItem: React.FC<MenuButton> = ({onClick, selected, children}) => (
     <Ripples onClick={onClick} className={`transition-colors duration-150
-        w-full flex flex-grow flex-col pt-8 pb-3 items-center justify-between
+        w-full flex flex-grow flex-col pt-4 pb-2 items-center justify-between
         hover:bg-gray-100 ${selected ? 'text-secondary-600' : 'text-gray-300'} cursor-pointer`
     }>
         {children}
@@ -53,7 +53,7 @@ export const Menu: React.FC = () => {
                 onClick={() => redirect(details.to)}
                 selected={location.pathname === details.to}
             >
-                <Icon size={30} className="mb-3 inline-block"/>
+                <Icon size={30} className="mb-2 inline-block"/>
                 <span className="font-medium select-none">{name}</span>
             </MenuItem>
         })}

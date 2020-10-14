@@ -1,8 +1,10 @@
-import React                      from "react";
-import {useDispatch}              from "react-redux";
-import {Dispatch}                 from "../../store";
-import {useParams, useRouteMatch} from "react-router-dom";
-import {Button}                   from "../../components/Button";
+import React                              from "react";
+import {useDispatch}                      from "react-redux";
+import {Dispatch}                         from "../../store";
+import {useParams, useRouteMatch}         from "react-router-dom";
+import {Button}                           from "../../components/Button";
+import {Title}                            from "../../components/Title";
+import {Calendar, Heart, MapPin, XSquare} from "react-feather";
 
 
 export const OrdersShow: React.FC = ({children}) => {
@@ -16,40 +18,50 @@ export const OrdersShow: React.FC = ({children}) => {
 
     return <>
         <div className="flex flex-col justify-around min-h-full">
-            <div
-                style={{background: 'url(https://conteudo.imguol.com.br/c/entretenimento/0e/2017/10/15/batata-crua-1508077604971_v2_1920x1269.jpg)'}}
-                className="h-64 w-64 mx-auto bg-gray-300 rounded-full shadow-md bg-cover"
-            />
+            <Title>Carrinho</Title>
 
-            <div>
-                <h2 className="mb-4 text-2xl tracking-wide">Descrição</h2>
-
-                <p className="px-2 text-sm text-gray-500 leading-4">A batata inglesa é fonte importante de fósforo, vitaminas do grupo B, e se destaca como fonte de vitamina C entre os alimentos básicos.</p>
+            <div className="border-b border-gray-200">
+                {Array(3).fill(0).map(() => (
+                    <div className="flex my-8">
+                        <div className="w-24 h-20 bg-gray-300 rounded-lg"/>
+                        <div className="px-4 flex-grow">
+                            <h3 className="text-xl font-medium">Brócolis</h3>
+                            <p className="text-gray-500">200g</p>
+                            <p className="mt-2 text-secondary-500 font-medium">R$ 3,14</p>
+                        </div>
+                        <div className="flex items-center">
+                            <Heart className="ml-8 cursor-pointer"/>
+                            <XSquare className="ml-8 text-red-600 cursor-pointer"/>
+                        </div>
+                    </div>
+                ))}
             </div>
 
-            <div className="my-8 flex items-center justify-between">
-                <div className="text-3xl text-secondary-500 font-medium">R$ 1,34</div>
-                <div className="flex items-center">
-                    <div className="transition-colors duration-150
-                    pb-1 flex justify-center items-center w-12 h-12
-                    hover:bg-gray-200 text-gray-400 text-2xl font-bold
-                    border border-gray-300 rounded-lg cursor-pointer"
-                    >
-                        -
-                    </div>
-                    <div className="mx-4 text-2xl font-medium">200g</div>
-                    <div className="transition-colors duration-150
-                    pb-1 flex justify-center items-center w-12 h-12
-                    hover:bg-gray-200 text-gray-400 text-2xl font-bold
-                    border border-gray-300 rounded-lg cursor-pointer"
-                    >
-                        +
-                    </div>
-                </div>
+            <div className="my-8 flex justify-between items-baseline text-xl">
+                <span className="text-gray-500">Valor total</span>
+                <span className="text-secondary-500 font-medium">R$ 3,14</span>
+            </div>
+
+            <Title>Endereço de entrega</Title>
+
+            <div className="my-8 flex items-center">
+                <MapPin className="mr-4 text-gray-500"/>
+                <p className="text-gray-500">
+                    R. Alabama, 222 - Campo Grande, MS
+                </p>
+            </div>
+
+            <Title>Data de entrega</Title>
+
+            <div className="my-8 flex items-center">
+                <Calendar className="mr-4 text-gray-500"/>
+                <p className="text-gray-500">
+                    <span className="mr-1 text-secondary-500 font-medium">22/09/2020</span>entre 10h e 16h
+                </p>
             </div>
 
             <Button>
-                Adicionar ao carrinho
+                Finalizar pedido
             </Button>
         </div>
     </>
