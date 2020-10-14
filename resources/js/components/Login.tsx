@@ -2,12 +2,12 @@ import React, {useEffect, useState} from "react";
 import {useDispatch}                from "react-redux";
 import {Dispatch}                   from "../store";
 import {useAuth}                    from "../selectors";
-import {SpinnerAlt}                 from "../css.gg";
 import {useHistory}                 from "react-router";
 import useIsAuthed                  from "../hooks/useIsAuthed";
 import {useForm}                    from "react-hook-form";
 import {LoginCredentials}           from "../models/auth";
 import {Link}                       from "react-router-dom";
+import {Loader}                     from "react-feather";
 
 export const Login: React.FC<object> = () => {
     const auth = useAuth();
@@ -69,7 +69,7 @@ export const Login: React.FC<object> = () => {
 
                 <button className="w-full py-4 bg-primary-500 text-center text-xl text-white font-medium rounded-lg">
                     {loading ?
-                        <SpinnerAlt className="mx-auto block ggs-2"/>
+                        <Loader size={30} className="animate-spin mx-auto block"/>
                         :
                         <span>Entrar</span>
                     }

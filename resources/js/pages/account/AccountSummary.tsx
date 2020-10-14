@@ -1,11 +1,11 @@
-import React                                                                           from "react";
-import {ChevronRight, FlagAlt, Girl, GlobeAlt, Heart, Mail, Readme, Smartphone, Track} from "../../css.gg";
-import {Link, useRouteMatch}                                                           from "react-router-dom";
-import {Box}                                                                           from "../../components/Box";
-import {DivOrLink}                                                                     from "../../components/DivOrLink";
+import React                                                            from "react";
+import {Link, useRouteMatch}                                            from "react-router-dom";
+import {Box}                                                            from "../../components/Box";
+import {DivOrLink}                                                                                 from "../../components/DivOrLink";
+import {AlertCircle, Book, ChevronLeft, ChevronRight, Flag, Heart, Mail, MapPin, Smartphone, User} from "react-feather";
 
 const mainSections = [{
-    icon: Girl,
+    icon: User,
     title: 'Nome',
     sub: 'Maria Casadevall',
     to: 'nome',
@@ -17,7 +17,7 @@ const mainSections = [{
     to: 'email',
     clickable: false,
 }, {
-    icon: Track,
+    icon: MapPin,
     title: 'Endereço principal',
     sub: 'R. Alabama, 222',
     to: 'endereco',
@@ -31,12 +31,12 @@ const mainSections = [{
 }];
 
 const secondarySections = [{
-    icon: GlobeAlt,
+    icon: AlertCircle,
     title: 'Avisos',
     to: 'avisos',
     clickable: true,
 }, {
-    icon: Readme,
+    icon: Book,
     title: 'Pedidos',
     to: 'pedidos',
     clickable: true,
@@ -46,7 +46,7 @@ const secondarySections = [{
     to: 'favoritos',
     clickable: true,
 }, {
-    icon: FlagAlt,
+    icon: Flag,
     title: 'Ajuda',
     to: 'ajuda',
     clickable: true,
@@ -63,7 +63,12 @@ export const AccountSummary: React.FC = ({children}) => {
 
         <div className="my-8">
             {mainSections.map(({icon: Icon, title, sub, to, clickable}) => (
-                <DivOrLink isLink={clickable} to={`${match.url}/${to}`} className="transition-colors duration-150 w-full px-4 py-3 flex items-center hover:bg-gray-200 border-b last:border-b-0 border-gray-200 cursor-pointer">
+                <DivOrLink
+                    isLink={clickable}
+                    to={`${match.url}/${to}`}
+                    className={`transition-colors duration-150 w-full px-4 py-3 flex items-center
+                        ${clickable && 'hover:bg-gray-200'} border-b last:border-b-0 border-gray-200 ${clickable && 'cursor-pointer'}`}
+                >
                     <div className="flex items-center justify-center w-6 mr-4">
                         <Icon className="text-primary-500"/>
                     </div>

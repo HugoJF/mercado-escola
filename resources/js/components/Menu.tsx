@@ -1,12 +1,12 @@
-import React                             from "react";
-import {Heart, HomeAlt, Profile, Readme} from "../css.gg";
-import Ripples                           from "react-ripples";
-import {useHistory}                      from "react-router-dom";
+import React                     from "react";
+import Ripples                   from "react-ripples";
+import {useHistory}              from "react-router-dom";
+import {Book, Heart, Home, User} from "react-feather";
 
 const buttons = {
     Home: {
         to: '/',
-        icon: HomeAlt,
+        icon: Home,
     },
     Favoritos: {
         to: '/favoritos',
@@ -14,11 +14,11 @@ const buttons = {
     },
     Pedidos: {
         to: '/pedidos',
-        icon: Readme,
+        icon: Book,
     },
     Conta: {
         to: '/conta',
-        icon: Profile,
+        icon: User,
     },
 };
 
@@ -53,7 +53,7 @@ export const Menu: React.FC = () => {
                 onClick={() => redirect(details.to)}
                 selected={location.pathname === details.to}
             >
-                <Icon className="mb-3 inline-block ggs-1/2"/>
+                <Icon size={30} className="mb-3 inline-block"/>
                 <span className="font-medium select-none">{name}</span>
             </MenuItem>
         })}

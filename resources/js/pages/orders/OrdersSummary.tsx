@@ -1,12 +1,12 @@
-import React                                                             from "react";
-import {useDispatch}                                                     from "react-redux";
-import {Dispatch}                                                        from "../../store";
-import {FlagAlt, Girl, GlobeAlt, Heart, Mail, Readme, Smartphone, Track} from "../../css.gg";
-import {Link, useRouteMatch}                                             from "react-router-dom";
-import useRelativePath                                                   from "../../hooks/useRelativePath";
+import React                                                            from "react";
+import {useDispatch}                                                    from "react-redux";
+import {Dispatch}                                                       from "../../store";
+import {Link, useRouteMatch}                                            from "react-router-dom";
+import useRelativePath                                                  from "../../hooks/useRelativePath";
+import {AlertCircle, Book, Flag, Heart, Mail, MapPin, Smartphone, User} from "react-feather";
 
 const mainSections = [{
-    icon: Girl,
+    icon: User,
     title: 'Nome',
     sub: 'Maria Casadevall',
     to: 'nome',
@@ -16,7 +16,7 @@ const mainSections = [{
     sub: 'maria.casadevall@gmail.com',
     to: 'email',
 }, {
-    icon: Track,
+    icon: MapPin,
     title: 'Endereço principal',
     sub: 'R. Alabama, 222',
     to: 'endereco',
@@ -28,11 +28,11 @@ const mainSections = [{
 }];
 
 const secondarySections = [{
-    icon: GlobeAlt,
+    icon: AlertCircle,
     title: 'Avisos',
     to: 'avisos',
 }, {
-    icon: Readme,
+    icon: Book,
     title: 'Pedidos',
     to: 'pedidos',
 }, {
@@ -40,7 +40,7 @@ const secondarySections = [{
     title: 'Favoritos',
     to: 'favoritos',
 }, {
-    icon: FlagAlt,
+    icon: Flag,
     title: 'Ajuda',
     to: 'ajuda',
 }];

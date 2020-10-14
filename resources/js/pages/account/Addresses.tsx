@@ -1,10 +1,10 @@
-import React                                         from "react";
-import {useDispatch}                                 from "react-redux";
-import {Dispatch}                                    from "../../store";
-import {useHistory, useRouteMatch}                   from "react-router-dom";
-import {Add, ChevronRight, RadioCheck, RadioChecked} from "../../css.gg"
-import {Title}                                       from "../../components/Title";
-import {Box}                                         from "../../components/Box";
+import React                       from "react";
+import {useDispatch}               from "react-redux";
+import {Dispatch}                  from "../../store";
+import {useHistory, useRouteMatch} from "react-router-dom";
+import {Title}                     from "../../components/Title";
+import {Box}                                     from "../../components/Box";
+import {CheckSquare, ChevronRight, Plus, Square} from "react-feather";
 
 const addresses = [{
     name: 'Maria Casadevall',
@@ -40,9 +40,9 @@ export const Addresses: React.FC = ({children}) => {
             {addresses.map(address => (
                 <Box onClick={() => history.push('/conta')}>
                     {address.main ?
-                        <RadioChecked className="mr-8 text-secondary-500"/>
+                        <CheckSquare className="mr-8 text-secondary-500"/>
                         :
-                        <RadioCheck className="mr-8 text-gray-400"/>
+                        <Square className="mr-8 text-gray-400"/>
                     }
                     <div className="flex-grow">
                         <h2 className="text-lg font-medium">{address.name}</h2>
@@ -62,7 +62,7 @@ export const Addresses: React.FC = ({children}) => {
             border-b last:border-b-0 border-gray-200 cursor-pointer"
         >
             <span className="mr-4 text-lg">Adicionar novo endereço</span>
-            <Add/>
+            <Plus/>
         </div>
     </>
 };

@@ -20,7 +20,7 @@ export const Product: React.FC<ProductParameters> = ({name, image, cost, quantit
     >
         <div
             className="mx-auto mb-4 h-48 w-48 rounded-full bg-gray-200 bg-cover shadow-md"
-            style={{background: `url(${image})`}}
+            style={{backgroundImage: `url(${image})`}}
         />
         <h3 className="text-xl text-gray-800 font-medium">{name}</h3>
         <h4 className="text-lg">

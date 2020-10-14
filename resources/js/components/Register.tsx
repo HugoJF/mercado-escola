@@ -1,11 +1,11 @@
 import React, {useState}     from "react";
 import {useDispatch}         from "react-redux";
 import {Dispatch}            from "../store";
-import {SpinnerAlt}          from "../css.gg";
 import {useHistory}          from "react-router";
 import {useForm}             from "react-hook-form";
 import {RegisterCredentials} from "../models/auth";
 import {Link}                from "react-router-dom";
+import {Loader}              from "react-feather";
 
 export const Register: React.FC<object> = () => {
     const dispatch = useDispatch<Dispatch>();
@@ -121,7 +121,7 @@ export const Register: React.FC<object> = () => {
                 </div>
                 <button className="w-full mt-8 py-4 bg-primary-500 text-center text-xl text-white font-medium rounded-lg">
                     {loading ?
-                        <SpinnerAlt className="mx-auto block ggs-2"/>
+                        <Loader className="animate-spin mx-auto block"/>
                         :
                         <span>Registrar</span>
                     }
