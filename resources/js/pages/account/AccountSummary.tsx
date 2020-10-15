@@ -33,7 +33,7 @@ export const AccountSummary: React.FC = ({children}) => {
     }, {
         icon: MapPin,
         title: 'Endereço principal',
-        sub: addresses.addresses.length > 0 ? addresses.addresses[0].address : null,
+        sub: addresses.addresses.length > 0 ? addresses.addresses[0].address : '',
         to: 'endereco',
         clickable: true,
     }, {

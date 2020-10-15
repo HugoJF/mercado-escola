@@ -20,7 +20,7 @@ export const Splash: React.FC = ({children}) => {
             timeout={1000}
         >
             {loading ?
-                <div className="w-full min-h-screen flex flex-col items-center justify-center bg-primary-500 justify-center">
+                <div className="w-full min-h-screen flex flex-col items-center justify-center bg-gradient-to-br from-primary-500 to-primary-700 justify-center">
                     <h1 className="mb-8 text-5xl text-white font-bold">DiCasa</h1>
                     <Loader size={48} className="text-white animate-spin"/>
                 </div>

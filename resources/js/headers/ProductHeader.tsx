@@ -1,17 +1,15 @@
-import React, {useState}                     from 'react';
-import {useHistory, useParams}               from "react-router";
-import {Bookmark, ChevronLeft, ShoppingCart} from "react-feather";
+import React, {useState} from 'react';
+import {useParams}       from "react-router";
+import {Bookmark}        from "react-feather";
+import {BackAndCart}     from "./partial/BackAndCart";
+import {HeaderWrapper}   from "./partial/HeaderWrapper";
 
 export const ProductHeader: React.FC = () => {
     const [favorite, setFavorite] = useState(false);
-    const history = useHistory();
     const params = useParams<{ productId: string }>();
 
-    return <div className="px-6 py-6 bg-primary-600 text-white shadow-md">
-        <div className="flex justify-between items-center px-6">
-            <ChevronLeft size={30} className="cursor-pointer" onClick={history.goBack}/>
-            <ShoppingCart size={30}/>
-        </div>
+    return <HeaderWrapper>
+        <BackAndCart/>
 
         <div className="flex justify-between items-center mt-12 px-6">
             <h2 className="text-3xl font-medium">{params.productId}</h2>
@@ -22,5 +20,5 @@ export const ProductHeader: React.FC = () => {
                 <Bookmark size={30}/>
             </div>
         </div>
-    </div>
+    </HeaderWrapper>
 };

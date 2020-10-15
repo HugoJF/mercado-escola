@@ -15,11 +15,11 @@ export const Product: React.FC<ProductParameters> = ({name, image, cost, quantit
     return <Link
         to={url}
         className="transition-shadow duration-150
-            p-6 mx-4 bg-white rounded-lg
+            p-6 bg-white rounded-lg
             cursor-pointer shadow hover:shadow-md"
     >
         <div
-            className="mx-auto mb-4 h-48 w-48 rounded-full bg-gray-200 bg-cover shadow-md"
+            className="mx-auto mb-4 h-40 w-40 rounded-full bg-gray-200 bg-cover shadow-md"
             style={{backgroundImage: `url(${image})`}}
         />
         <h3 className="text-xl text-gray-800 font-medium">{name}</h3>
