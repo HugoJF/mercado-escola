@@ -1,4 +1,4 @@
-import React, {useEffect}                        from "react";
+import React, {useEffect, useState}              from "react";
 import {useDispatch}                             from "react-redux";
 import {Dispatch}                                from "../../store";
 import {Link, useHistory, useRouteMatch}         from "react-router-dom";
@@ -7,22 +7,25 @@ import {Box}                                     from "../../components/Box";
 import {CheckSquare, ChevronRight, Plus, Square} from "react-feather";
 import {useAddresses}                            from "../../selectors";
 import {Loading}                                 from "../../components/Loading";
+import useAsyncEffect                            from "../../hooks/useAsyncEffect";
 
 export const AddressesIndex: React.FC = ({children}) => {
+    const [loading, setLoading] = useState(true);
     const dispatch = useDispatch<Dispatch>();
     const history = useHistory();
     const match = useRouteMatch();
     const addresses = useAddresses();
 
-    useEffect(() => {
-        dispatch.addresses.index();
+    useAsyncEffect(async () => {
+        await dispatch.addresses.index();
+        setLoading(false);
     }, []);
 
     return <>
         <Title>Selecione o seu endereço</Title>
 
         <div className="my-8">
-            <Loading loading={addresses.loading}>
+            <Loading loading={loading}>
                 {addresses.addresses && addresses.addresses.map(address => (
                     <Box onClick={() => history.push('/conta')}>
                         {address.deleted_at ?

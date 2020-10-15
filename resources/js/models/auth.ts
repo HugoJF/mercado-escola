@@ -39,6 +39,7 @@ export const auth = createModel<RootModel>()({
         },
 
         async me(): Promise<object> {
+            await dispatch.auth.csrf();
             let response = await window.axios.get('/me');
 
             const user = response.data.user;
@@ -49,14 +50,19 @@ export const auth = createModel<RootModel>()({
 
             return user;
         },
+
         async registration(payload: RegisterCredentials): Promise<void> {
-            let registration = await window.axios.post('/register', {
-                name: 'Hugo',
-                email: 'hugo_jeller@hotmail.com',
-                password: '123123123',
-                password_confirmation: '123123123',
+            const {name, email, password, password_confirmation} = payload;
+
+            return await window.axios.post('/register', {
+                name, email, password, password_confirmation,
             });
         },
+
+        async update(payload: object, state: RootState): Promise<void> {
+            return await window.axios.patch('/me', payload);
+        },
+
         async logout(): Promise<void> {
             const me = await dispatch.auth.me();
 
@@ -73,6 +79,7 @@ export const auth = createModel<RootModel>()({
                 dispatch.auth.setFailed(true);
             }
         },
+
         async login(payload: LoginCredentials, state: RootState): Promise<void> {
             const {email, password} = payload;
 

@@ -17,7 +17,6 @@ export type AddressComputedProperties = {
 
 export type AddressesState = {
     addresses: AddressType[];
-    loading: boolean;
     failed: boolean;
 };
 
@@ -28,10 +27,6 @@ export const addresses = createModel<RootModel>()({
         failed: false,
     } as AddressesState,
     reducers: {
-        setLoading: (state, payload: boolean) => {
-            state.loading = payload;
-            return state;
-        },
         setFailed: (state, payload: boolean) => {
             state.failed = payload;
             return state;
@@ -45,26 +40,18 @@ export const addresses = createModel<RootModel>()({
     effects: (dispatch) => ({
         async index(payload, state: RootState): Promise<void> {
             try {
-                dispatch.addresses.setLoading(true);
-
                 const response = await window.axios.get('/addresses');
 
                 dispatch.addresses.setAddresses(response.data);
-
-                dispatch.addresses.setLoading(false);
             } catch (e) {
                 dispatch.addresses.setFailed(true);
             }
         },
         async store(payload: AddressProperties, state: RootState): Promise<void> {
             try {
-                dispatch.addresses.setLoading(true);
-
                 await window.axios.post('/addresses', payload);
 
                 await dispatch.addresses.index();
-
-                dispatch.addresses.setLoading(false);
             } catch (e) {
                 dispatch.addresses.setFailed(true);
             }

@@ -1,10 +1,8 @@
-import {Route}   from "react-router-dom";
-import {Login}   from "../pages/auth/Login";
+import {Route}                 from "react-router-dom";
+import {Login}                 from "../pages/auth/Login";
 import {Overlay}               from "./Overlay";
 import {ProtectedRoute}        from "./ProtectedRoute";
-import React, {useEffect}      from "react";
-import {useDispatch}           from "react-redux";
-import {Dispatch}              from "../store";
+import React                   from "react";
 import {Register}              from "../components/Register";
 import {Account}               from "../routes/Account";
 import {Home}                  from "../routes/Home";
@@ -14,12 +12,6 @@ import {SwitchWithTransitions} from "../components/SwitchWithTransition";
 import {Splash}                from "../components/Splash";
 
 export const Root: React.FC = () => {
-    const dispatch = useDispatch<Dispatch>();
-
-    useEffect(() => {
-        dispatch.auth.me();
-    }, []);
-
     return <Splash>
         <Overlay>
             <div className="p-4">
@@ -27,7 +19,7 @@ export const Root: React.FC = () => {
                     <Route path="/login" children={<Login/>}/>
                     <Route path="/register" children={<Register/>}/>
 
-                    <ProtectedRoute exact path="/" children={<Home/>}/>
+                    <ProtectedRoute path="/home" children={<Home/>}/>
                     <ProtectedRoute path="/pedidos" children={<Orders/>}/>
                     <ProtectedRoute path="/produtos" children={<Products/>}/>
                     <ProtectedRoute exact path="/favoritos" children={<h1>Favoritoss</h1>}/>

@@ -1,60 +1,70 @@
-import React                                                            from "react";
-import {Link, useRouteMatch}                                            from "react-router-dom";
-import {Box}                                                            from "../../components/Box";
+import React, {useEffect}                                                                          from "react";
+import {Link, useRouteMatch}                                                                       from "react-router-dom";
+import {Box}                                                                                       from "../../components/Box";
 import {DivOrLink}                                                                                 from "../../components/DivOrLink";
 import {AlertCircle, Book, ChevronLeft, ChevronRight, Flag, Heart, Mail, MapPin, Smartphone, User} from "react-feather";
-
-const mainSections = [{
-    icon: User,
-    title: 'Nome',
-    sub: 'Maria Casadevall',
-    to: 'nome',
-    clickable: false,
-}, {
-    icon: Mail,
-    title: 'Email',
-    sub: 'maria.casadevall@gmail.com',
-    to: 'email',
-    clickable: false,
-}, {
-    icon: MapPin,
-    title: 'Endereço principal',
-    sub: 'R. Alabama, 222',
-    to: 'endereco',
-    clickable: true,
-}, {
-    icon: Smartphone,
-    title: 'Telefone',
-    sub: '(67) 9 9821 2015',
-    to: 'telefone',
-    clickable: true,
-}];
-
-const secondarySections = [{
-    icon: AlertCircle,
-    title: 'Avisos',
-    to: 'avisos',
-    clickable: true,
-}, {
-    icon: Book,
-    title: 'Pedidos',
-    to: 'pedidos',
-    clickable: true,
-}, {
-    icon: Heart,
-    title: 'Favoritos',
-    to: 'favoritos',
-    clickable: true,
-}, {
-    icon: Flag,
-    title: 'Ajuda',
-    to: 'ajuda',
-    clickable: true,
-}];
+import {useAddresses, useAuth}                                                                     from "../../selectors";
+import {useDispatch}                                                                               from "react-redux";
+import {Dispatch}                                                                                  from "../../store";
 
 
 export const AccountSummary: React.FC = ({children}) => {
+    const dispatch = useDispatch<Dispatch>();
+    const addresses = useAddresses();
     const match = useRouteMatch();
+    const auth = useAuth();
+
+    useEffect(() => {
+        dispatch.addresses.index();
+    }, []);
+
+    const mainSections = [{
+        icon: User,
+        title: 'Nome',
+        sub: auth.me?.name,
+        to: 'nome',
+        clickable: false,
+    }, {
+        icon: Mail,
+        title: 'Email',
+        sub: auth.me?.email,
+        to: 'email',
+        clickable: false,
+    }, {
+        icon: MapPin,
+        title: 'Endereço principal',
+        sub: addresses.addresses.length > 0 ? addresses.addresses[0].address : null,
+        to: 'endereco',
+        clickable: true,
+    }, {
+        icon: Smartphone,
+        title: 'Telefone',
+        sub: '(67) 9 9821 2015',
+        to: 'telefone',
+        clickable: true,
+    }];
+
+    const secondarySections = [{
+        icon: AlertCircle,
+        title: 'Avisos',
+        to: 'avisos',
+        clickable: true,
+    }, {
+        icon: Book,
+        title: 'Pedidos',
+        to: 'pedidos',
+        clickable: true,
+    }, {
+        icon: Heart,
+        title: 'Favoritos',
+        to: 'favoritos',
+        clickable: true,
+    }, {
+        icon: Flag,
+        title: 'Ajuda',
+        to: 'ajuda',
+        clickable: true,
+    }];
 
     return <>
         <h1 className="text-3xl text-center font-medium">Conta</h1>

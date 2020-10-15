@@ -24,7 +24,7 @@ export const Register: React.FC<object> = () => {
         setLoading(true);
         try {
             await dispatch.auth.registration(credentials);
-            history.push('/');
+            history.push('/home');
         } catch (e) {
             setErrors(e.response.data.errors);
         }

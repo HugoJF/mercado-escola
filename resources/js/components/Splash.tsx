@@ -1,14 +1,17 @@
 import React, {useEffect, useState}     from "react";
 import {Loader}                         from "react-feather";
 import {CSSTransition, TransitionGroup} from "react-transition-group";
-import {useLocation}                    from "react-router";
+import {useDispatch}                    from "react-redux";
+import useAsyncEffect                   from "../hooks/useAsyncEffect";
 
 export const Splash: React.FC = ({children}) => {
+    const dispatch = useDispatch();
     const [loading, setLoading] = useState(true);
 
-    useEffect(() => {
-        setTimeout(setLoading.bind(true), 2000)
-    });
+    useAsyncEffect(async () => {
+        await dispatch.auth.me();
+        setLoading(false);
+    }, []);
 
     return <TransitionGroup className="relative min-h-full">
         <CSSTransition
