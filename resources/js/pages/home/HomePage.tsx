@@ -1,9 +1,19 @@
-import React     from "react";
-import {Product} from "../../components/Product";
-import {Title}   from "../../components/Title";
-import {Link}    from "react-router-dom";
+import React, {useEffect} from "react";
+import {Product}          from "../../components/Product";
+import {Title}            from "../../components/Title";
+import {Link}             from "react-router-dom";
+import {useDispatch}      from "react-redux";
+import {Dispatch}         from "../../store";
+import {useProducts}      from "../../selectors";
 
 export const HomePage: React.FC = () => {
+    const dispatch = useDispatch<Dispatch>();
+    const products = useProducts();
+
+    useEffect(() => {
+        dispatch.openings.index();
+    }, []);
+
     return <>
         <div className="mx-auto container">
             <div className="mb-4 overflow-x-auto">
@@ -33,9 +43,9 @@ export const HomePage: React.FC = () => {
                     {['Brócolis', 'Cenoura', 'Batata'].map(name => (
                         <Product
                             url={`/produtos/${name}`}
-                            image="https://conteudo.imguol.com.br/c/entretenimento/0e/2017/10/15/batata-crua-1508077604971_v2_1920x1269.jpg"
+                            image={`https://picsum.photos/seed/${name}/200/300`}
                             name={name}
-                            cost={4.3}
+                            cost={455}
                             quantity="unidade"
                         />
                     ))}
@@ -45,21 +55,23 @@ export const HomePage: React.FC = () => {
             <div className="mb-16">
                 {/* Header */}
                 <div className="flex justify-between items-baseline mb-8">
-                    <Title>Descontos do dia</Title>
+                    <Title>Produtos</Title>
                     <Link to="/produtos/tag/desconto" className="text-gray-500">Ver todos ›</Link>
                 </div>
 
                 {/* Items */}
-                <div className="flex space-x-8">
-                    {['Brócolis', 'Cenoura', 'Batata', 'Banana'].map(name => (
-                        <Product
-                            url={`/produtos/${name}`}
-                            image="https://conteudo.imguol.com.br/c/entretenimento/0e/2017/10/15/batata-crua-1508077604971_v2_1920x1269.jpg"
-                            name={name}
-                            cost={4.3}
-                            quantity="unidade"
-                        />
-                    ))}
+                <div className="flex pb-4 space-x-8 overflow-x-auto">
+                    {
+                        Object.values(products.products).map(product => (
+                            <Product
+                                url={`/produtos/${product.id}`}
+                                image={`https://picsum.photos/seed/${product.id}/200/300`}
+                                name={product.title}
+                                cost={product.quantity_cost}
+                                quantity={product.quantity_type}
+                            />
+                        ))
+                    }
                 </div>
             </div>
         </div>

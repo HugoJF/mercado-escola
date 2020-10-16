@@ -1,5 +1,6 @@
-import React  from "react";
-import {Link} from "react-router-dom";
+import React            from "react";
+import {Link}           from "react-router-dom";
+import {PriceFormatter} from "./PriceFormatter";
 
 interface ProductParameters {
     url: string;
@@ -8,8 +9,6 @@ interface ProductParameters {
     cost: number;
     quantity: string;
 }
-
-const formatter = new Intl.NumberFormat('pt-BR', {style: 'currency', currency: 'BRL'});
 
 export const Product: React.FC<ProductParameters> = ({name, image, cost, quantity, url}) => {
     return <Link
@@ -25,7 +24,7 @@ export const Product: React.FC<ProductParameters> = ({name, image, cost, quantit
         <h3 className="text-xl text-gray-800 font-medium">{name}</h3>
         <h4 className="text-lg">
             <span className="text-secondary-400 text-xl font-medium">
-                {formatter.format(cost)}
+                <PriceFormatter cents price={cost}/>
             </span>
             <small className="ml-1 text-gray-500 font-thin tracking-tight">{quantity}</small>
         </h4>

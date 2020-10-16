@@ -17,7 +17,7 @@ class OpeningResource extends JsonResource
         return array_merge(
             parent::toArray($request),
             [
-                'products' => ProductResource::collection($this->whenLoaded('products')),
+                'products' => ProductResource::collection($this->products),
             ]
         );
     }

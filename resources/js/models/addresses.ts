@@ -12,6 +12,7 @@ export type AddressProperties = {
 }
 
 export type AddressComputedProperties = {
+    id: number;
     user_id: number;
 }
 

@@ -7,3 +7,9 @@ export function useAuth() {
 export function useAddresses() {
     return useSelector((state: RootState) => state.addresses);
 }
+export function useOpenings() {
+    return useSelector((state: RootState) => state.openings);
+}
+export function useProducts() {
+    return useSelector((state: RootState) => state.products);
+}

@@ -17,9 +17,13 @@ export const Login: React.FC<object> = () => {
 
     async function login(credentials: LoginCredentials) {
         setLoading(true);
-        await dispatch.auth.login(credentials);
+        try {
+            await dispatch.auth.login(credentials);
+            history.push('/home');
+        } catch (e) {
+            //
+        }
         setLoading(false);
-        history.push('/');
     }
 
     const failed = auth?.failed;

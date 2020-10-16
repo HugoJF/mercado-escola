@@ -45,8 +45,6 @@ class OpeningController extends Controller
      */
     public function show(Opening $opening)
     {
-        $opening->load('products');
-
         return new OpeningResource($opening);
     }
 
