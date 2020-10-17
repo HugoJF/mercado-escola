@@ -1,5 +1,5 @@
-import {Redirect, Route} from "react-router-dom";
-import {Login}           from "../pages/auth/Login";
+import {Route}                 from "react-router-dom";
+import {Login}                 from "../pages/auth/Login";
 import {Overlay}               from "./Overlay";
 import {ProtectedRoute}        from "./ProtectedRoute";
 import React                   from "react";
@@ -15,18 +15,16 @@ import {Favorites}             from "../routes/Favorites";
 export const Root: React.FC = () => {
     return <Splash>
         <Overlay>
-            <div className="p-4">
-                <SwitchWithTransitions>
-                    <Route path="/login" children={<Login/>}/>
-                    <Route path="/register" children={<Register/>}/>
+            <SwitchWithTransitions>
+                <Route path="/login" children={<Login/>}/>
+                <Route path="/register" children={<Register/>}/>
 
-                    <ProtectedRoute path="/home" children={<Home/>}/>
-                    <ProtectedRoute path="/pedidos" children={<Orders/>}/>
-                    <ProtectedRoute path="/produtos" children={<Products/>}/>
-                    <ProtectedRoute path="/favoritos" children={<Favorites/>}/>
-                    <ProtectedRoute path="/conta" children={<Account/>}/>
-                </SwitchWithTransitions>
-            </div>
+                <ProtectedRoute path="/home" children={<Home/>}/>
+                <ProtectedRoute path="/pedidos" children={<Orders/>}/>
+                <ProtectedRoute path="/produtos" children={<Products/>}/>
+                <ProtectedRoute path="/favoritos" children={<Favorites/>}/>
+                <ProtectedRoute path="/conta" children={<Account/>}/>
+            </SwitchWithTransitions>
         </Overlay>
     </Splash>
 };

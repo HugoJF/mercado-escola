@@ -9,7 +9,7 @@ export const Overlay: React.FC = ({children}) => {
         <Header/>
 
         {/* Content */}
-        <div className="flex-grow overflow-y-auto overflow-x-hidden">
+        <div className="relative flex-grow overflow-y-auto overflow-x-hidden">
             {children}
         </div>
 
