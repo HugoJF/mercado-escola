@@ -1,17 +1,19 @@
-import React, {useEffect} from "react";
-import {Product}          from "../../components/Product";
-import {Title}            from "../../components/Title";
-import {Link}             from "react-router-dom";
-import {useDispatch}      from "react-redux";
-import {Dispatch}         from "../../store";
-import {useProducts}      from "../../selectors";
+import React, {useEffect}          from "react";
+import {Title}                     from "../../components/Title";
+import {Link}                      from "react-router-dom";
+import {useDispatch}               from "react-redux";
+import {Dispatch}                  from "../../store";
+import {useFavorites, useProducts} from "../../selectors";
+import {ProductList}               from "../../components/ProductList";
 
 export const HomePage: React.FC = () => {
     const dispatch = useDispatch<Dispatch>();
     const products = useProducts();
+    const favorites = useFavorites();
 
     useEffect(() => {
         dispatch.openings.index();
+        dispatch.favorites.index();
     }, []);
 
     return <>
@@ -39,17 +41,7 @@ export const HomePage: React.FC = () => {
                 </div>
 
                 {/* Items */}
-                <div className="flex space-x-8 py-1 overflow-x-auto">
-                    {['Brócolis', 'Cenoura', 'Batata'].map(name => (
-                        <Product
-                            url={`/produtos/${name}`}
-                            image={`https://picsum.photos/seed/${name}/200/300`}
-                            name={name}
-                            cost={455}
-                            quantity="unidade"
-                        />
-                    ))}
-                </div>
+                <ProductList products={Object.values(products.products).filter(product => favorites.favorites.indexOf(product.id) >= 0)}/>
             </div>
 
             <div className="mb-16">
@@ -60,19 +52,7 @@ export const HomePage: React.FC = () => {
                 </div>
 
                 {/* Items */}
-                <div className="flex pb-4 space-x-8 overflow-x-auto">
-                    {
-                        Object.values(products.products).map(product => (
-                            <Product
-                                url={`/produtos/${product.id}`}
-                                image={`https://picsum.photos/seed/${product.id}/200/300`}
-                                name={product.title}
-                                cost={product.quantity_cost}
-                                quantity={product.quantity_type}
-                            />
-                        ))
-                    }
-                </div>
+                <ProductList products={Object.values(products.products)}/>
             </div>
         </div>
     </>

@@ -1,10 +1,10 @@
-import React, {useEffect} from "react";
-import {Product}          from "../../components/Product";
-import {Title}            from "../../components/Title";
-import {Link}             from "react-router-dom";
-import {useDispatch}      from "react-redux";
+import React, {useEffect}          from "react";
+import {Title}                     from "../../components/Title";
+import {Link}                      from "react-router-dom";
+import {useDispatch}               from "react-redux";
 import {Dispatch}                  from "../../store";
 import {useFavorites, useProducts} from "../../selectors";
+import {ProductList}               from "../../components/ProductList";
 
 export const FavoritesIndex: React.FC = () => {
     const dispatch = useDispatch<Dispatch>();
@@ -26,17 +26,7 @@ export const FavoritesIndex: React.FC = () => {
                 </div>
 
                 {/* Items */}
-                <div className="flex space-x-8 py-1 overflow-x-auto">
-                    {favorites.favorites.map(id => (
-                        <Product
-                            url={`/produtos/${id}`}
-                            image={`https://picsum.photos/seed/${id}/200/300`}
-                            name={products.products[id].title}
-                            cost={products.products[id].quantity_cost}
-                            quantity={products.products[id].quantity_type}
-                        />
-                    ))}
-                </div>
+                <ProductList products={Object.values(products.products).filter(product => favorites.favorites.indexOf(product.id) >= 0)}/>
             </div>
         </div>
     </>
