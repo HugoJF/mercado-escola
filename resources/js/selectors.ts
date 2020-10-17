@@ -13,3 +13,7 @@ export function useOpenings() {
 export function useProducts() {
     return useSelector((state: RootState) => state.products);
 }
+
+export function useFavorites() {
+    return useSelector((state: RootState) => state.favorites);
+}

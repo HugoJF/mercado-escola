@@ -3,6 +3,7 @@ import {auth}      from "./auth";
 import {addresses} from "./addresses";
 import {openings}  from "./openings";
 import {products}  from "./products";
+import {favorites}  from "./favorites";
 
 export interface RootModel extends Models<RootModel> {
     // @ts-ignore
@@ -10,11 +11,13 @@ export interface RootModel extends Models<RootModel> {
     addresses: typeof addresses;
     openings: typeof openings;
     products: typeof products;
+    favorites: typeof favorites;
 }
 
 export const models: RootModel = {
     auth,
     addresses,
     openings,
-    products
+    products,
+    favorites
 };

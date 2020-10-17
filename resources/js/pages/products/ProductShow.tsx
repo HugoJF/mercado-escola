@@ -29,17 +29,17 @@ export const ProductShow: React.FC = () => {
                 </div>
                 <div className="flex items-center">
                     <div className="transition-colors duration-150
-                    pb-1 flex justify-center items-center w-12 h-12
-                    hover:bg-gray-200 text-gray-400 text-2xl font-bold
-                    border border-gray-300 rounded-lg cursor-pointer"
+                        pb-1 flex justify-center items-center w-12 h-12
+                        hover:bg-gray-200 text-gray-400 text-2xl font-bold
+                        border border-gray-300 rounded-lg cursor-pointer"
                     >
                         -
                     </div>
                     <div className="mx-4 text-2xl font-medium">{product.quantity_type}</div>
                     <div className="transition-colors duration-150
-                    pb-1 flex justify-center items-center w-12 h-12
-                    hover:bg-gray-200 text-gray-400 text-2xl font-bold
-                    border border-gray-300 rounded-lg cursor-pointer"
+                        pb-1 flex justify-center items-center w-12 h-12
+                        hover:bg-gray-200 text-gray-400 text-2xl font-bold
+                        border border-gray-300 rounded-lg cursor-pointer"
                     >
                         +
                     </div>

@@ -37,6 +37,7 @@ export const Menu: React.FC = () => {
             const Icon = details.icon;
 
             return <Ripples
+                key={name}
                 onClick={() => redirect(details.to)}
                 className={`transition-colors duration-150
                     w-full flex flex-grow flex-col pt-4 pb-2 items-center justify-between

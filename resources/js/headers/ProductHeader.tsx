@@ -1,16 +1,33 @@
-import React, {useState} from 'react';
-import {useParams}       from "react-router";
-import {Bookmark}        from "react-feather";
-import {BackAndCart}     from "./partial/BackAndCart";
-import {HeaderWrapper}   from "./partial/HeaderWrapper";
-import {useProducts}     from "../selectors";
+import React, {useEffect, useState} from 'react';
+import {useParams}                  from "react-router";
+import {Bookmark}                   from "react-feather";
+import {BackAndCart}                from "./partial/BackAndCart";
+import {HeaderWrapper}             from "./partial/HeaderWrapper";
+import {useFavorites, useProducts} from "../selectors";
+import {useDispatch}               from "react-redux";
+import {Dispatch}                   from "../store";
 
 export const ProductHeader: React.FC = () => {
-    const [favorite, setFavorite] = useState(false);
+    const dispatch = useDispatch<Dispatch>();
+    const favorites = useFavorites();
     const params = useParams<{ productId: string }>();
     const products = useProducts();
 
-    const product = products.products[parseInt(params.productId)];
+    const productId = parseInt(params.productId);
+    const product = products.products[productId];
+    const favorite = favorites.favorites.indexOf(productId) >= 0;
+
+    useEffect(() => {
+        dispatch.favorites.index();
+    }, []);
+
+    function toggleFavorite() {
+        if (favorite) {
+            dispatch.favorites.destroy(productId);
+        } else {
+            dispatch.favorites.create(productId);
+        }
+    }
 
     return <HeaderWrapper>
         <BackAndCart/>
@@ -20,7 +37,7 @@ export const ProductHeader: React.FC = () => {
 
             <div
                 className={`transition-all duration-200 p-3 border-2 ${favorite && 'bg-secondary-500 border-secondary-500 text-white'} rounded-lg`}
-                onClick={() => setFavorite(!favorite)}
+                onClick={toggleFavorite}
             >
                 <Bookmark size={30}/>
             </div>

@@ -17,6 +17,12 @@ Route::apiResource('products', \App\Http\Controllers\ProductController::class);
 Route::apiResource('addresses', \App\Http\Controllers\AddressController::class);
 Route::apiResource('openings', \App\Http\Controllers\OpeningController::class);
 
+Route::prefix('favorites')->group(function () {
+    Route::get('/', [\App\Http\Controllers\FavoriteController::class, 'index'])->name('favorites.index');
+    Route::post('{product}', [\App\Http\Controllers\FavoriteController::class, 'store'])->name('favorites.store');
+    Route::delete('{product}', [\App\Http\Controllers\FavoriteController::class, 'destroy'])->name('favorites.destroy');
+});
+
 Route::get('me', function () {
     if (auth()->check()) {
         $user = auth()->user();
