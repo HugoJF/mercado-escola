@@ -10,7 +10,7 @@ export const Orders: React.FC = () => {
     const relative = useRelativePath();
     const location = useLocation();
 
-    return <SwitchWithTransitions>
+    return <SwitchWithTransitions padding>
         <Route exact path={relative('/')} children={<OrdersSummary/>}/>
         <Route exact path={relative('/carrinho')} children={<OrdersShow/>}/>
         <Route path={relative('/:orderId')} children={<OrdersEnd/>}/>

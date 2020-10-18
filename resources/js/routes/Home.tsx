@@ -7,7 +7,7 @@ import {SwitchWithTransitions} from "../components/SwitchWithTransition";
 export const Home: React.FC = () => {
     const relative = useRelativePath();
 
-    return <SwitchWithTransitions>
+    return <SwitchWithTransitions padding>
         <Route exact path={relative('/')} children={<HomePage/>}/>
     </SwitchWithTransitions>
 };

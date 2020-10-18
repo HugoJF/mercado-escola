@@ -10,7 +10,7 @@ import {SwitchWithTransitions} from "../components/SwitchWithTransition";
 export const Account: React.FC = () => {
     const relative = useRelativePath();
 
-    return <SwitchWithTransitions>
+    return <SwitchWithTransitions padding>
         <Route exact path={relative('/')} children={<AccountSummary/>}/>
         <Route path={relative('/nome')} children={<Link to={relative('')}>Back2</Link>}/>
         <Route path={relative('/email')} children={<Link to={relative('')}>Back2</Link>}/>

@@ -9,7 +9,7 @@ import {FavoritesIndex}        from "../pages/favorites/FavoritesIndex";
 export const Favorites: React.FC = () => {
     const relative = useRelativePath();
 
-    return <SwitchWithTransitions>
+    return <SwitchWithTransitions padding>
         <Route exact path={relative('/')} children={<FavoritesIndex/>}/>
     </SwitchWithTransitions>
 };
