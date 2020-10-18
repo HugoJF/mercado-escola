@@ -29,7 +29,7 @@ export const ProductHeader: React.FC = () => {
         }
     }
 
-    if (!favorite) return null;
+    if (!product) return null;
 
     return <HeaderWrapper>
         <BackAndCart/>

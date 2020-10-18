@@ -11,6 +11,7 @@ import {Products}              from "../routes/Products";
 import {SwitchWithTransitions} from "../components/SwitchWithTransition";
 import {Splash}                from "../components/Splash";
 import {Favorites}             from "../routes/Favorites";
+import {Cart}                  from "../routes/Cart";
 
 export const Root: React.FC = () => {
     return <Splash>
@@ -24,6 +25,7 @@ export const Root: React.FC = () => {
                 <ProtectedRoute path="/produtos" children={<Products/>}/>
                 <ProtectedRoute path="/favoritos" children={<Favorites/>}/>
                 <ProtectedRoute path="/conta" children={<Account/>}/>
+                <ProtectedRoute path="/carrinho" children={<Cart/>}/>
             </SwitchWithTransitions>
         </Overlay>
     </Splash>
