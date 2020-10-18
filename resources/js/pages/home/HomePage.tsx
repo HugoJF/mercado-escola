@@ -44,7 +44,7 @@ export const HomePage: React.FC = () => {
                 <ProductList products={Object.values(products.products).filter(product => favorites.favorites.indexOf(product.id) >= 0)}/>
             </div>
 
-            <div className="mb-16">
+            <div>
                 {/* Header */}
                 <div className="flex justify-between items-baseline mb-8">
                     <Title>Produtos</Title>

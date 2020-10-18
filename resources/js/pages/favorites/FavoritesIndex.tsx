@@ -18,7 +18,7 @@ export const FavoritesIndex: React.FC = () => {
 
     return <>
         <div className="mx-auto container">
-            <div className="mb-16">
+            <div>
                 {/* Header */}
                 <div className="flex justify-between items-baseline mb-8">
                     <Title>Favoritos</Title>

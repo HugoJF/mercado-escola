@@ -93,7 +93,7 @@ export const AccountSummary: React.FC = ({children}) => {
 
         <h2 className="text-2xl">Mais</h2>
 
-        <div className="my-8">
+        <div className="mt-8">
             {secondarySections.map(({icon: Icon, title, to, clickable}) => (
                 <Link to={`${match.url}/${to}`}>
                     <Box>
