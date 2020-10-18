@@ -37,13 +37,15 @@ export const ProductShow: React.FC = () => {
     if (!product) return null;
 
     return <>
-        <div className="flex flex-col justify-around min-h-full">
-            <img
-                src={`https://picsum.photos/seed/${product.id}/200/300`}
-                className="bg-gray-300 shadow-md rounded-lg"
-            />
+        <div className="mx-auto container flex flex-col justify-around min-h-full">
+            <div className="w-full flex justify-center">
+                <img
+                    src={`https://picsum.photos/seed/${product.id}/500/300`}
+                    className="bg-gray-300 shadow-md rounded-lg"
+                />
+            </div>
 
-            <div>
+            <div className="mt-8">
                 <h2 className="mb-4 text-2xl tracking-wide">Descrição</h2>
 
                 <p className="px-2 text-sm text-gray-500 leading-4">{product.description}</p>
@@ -63,6 +65,10 @@ export const ProductShow: React.FC = () => {
                 </div>}
             </div>
 
+            {cartAmount && <p className="pb-2 text-sm text-center text-gray-500 tracking-tight">
+                Quantidade de items é atualizada automaticamente.
+            </p>}
+
             {!cartAmount ?
                 <Button onClick={add}>
                     Adicionar ao carrinho
@@ -71,18 +77,18 @@ export const ProductShow: React.FC = () => {
                 <div className="grid grid-cols-2 gap-8">
                     <div
                         className="transition-colors duration-150
-                            py-3 flex justify-center items-center
-                            hover:bg-gray-200 text-gray-400 text-2xl font-bold
-                            border border-gray-300 rounded-lg cursor-pointer"
+                            flex justify-center items-center
+                            bg-primary-500 hover:bg-primary-600 text-gray-100 text-4xl font-bold
+                            shadow rounded-lg cursor-pointer"
                         onClick={subtract}
                     >
                         <span className="pb-1">-</span>
                     </div>
                     <div
                         className="transition-colors duration-150
-                            py-3 flex justify-center items-center
-                            hover:bg-gray-200 text-gray-400 text-2xl font-bold
-                            border border-gray-300 rounded-lg cursor-pointer"
+                            flex justify-center items-center
+                            bg-primary-500 hover:bg-primary-600 text-gray-100 text-4xl font-bold
+                            shadow rounded-lg cursor-pointer"
                         onClick={add}
                     >
                         <span className="pb-1">+</span>

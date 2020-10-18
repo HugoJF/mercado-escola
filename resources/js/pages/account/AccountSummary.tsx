@@ -66,7 +66,7 @@ export const AccountSummary: React.FC = ({children}) => {
         clickable: true,
     }];
 
-    return <>
+    return <div className="mx-auto container">
         <h1 className="text-3xl text-center font-medium">Conta</h1>
 
         <h2 className="text-2xl">Informações</h2>
@@ -108,5 +108,5 @@ export const AccountSummary: React.FC = ({children}) => {
                 </Link>
             ))}
         </div>
-    </>
+    </div>
 };

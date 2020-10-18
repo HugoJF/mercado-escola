@@ -12,8 +12,6 @@ export const Account: React.FC = () => {
 
     return <SwitchWithTransitions padding>
         <Route exact path={relative('/')} children={<AccountSummary/>}/>
-        <Route path={relative('/nome')} children={<Link to={relative('')}>Back2</Link>}/>
-        <Route path={relative('/email')} children={<Link to={relative('')}>Back2</Link>}/>
         <Route exact path={relative('/endereco/novo')} children={<AddressesCreate/>}/>
         <Route exact path={relative('/endereco')} children={<AddressesIndex/>}/>
         <Route path={relative('/telefone')} children={<Link to={relative('')}>Back2</Link>}/>

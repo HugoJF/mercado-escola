@@ -1,12 +1,13 @@
 import React           from 'react';
 import {ShoppingCart}  from "react-feather";
 import {HeaderWrapper} from "./partial/HeaderWrapper";
+import {Cart}          from "./partial/Cart";
 
 export const HomeHeader: React.FC = () => {
     return <HeaderWrapper>
         <div className="flex justify-between items-center px-6">
             <h2 className="text-xl font-medium">Olá, Maria 👋</h2>
-            <ShoppingCart size={30}/>
+            <Cart/>
         </div>
         <div className="px-6">
             <input
