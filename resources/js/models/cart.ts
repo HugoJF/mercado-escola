@@ -8,15 +8,22 @@ export type ItemType = {
 }
 
 export type CartState = {
-    items: {[productId: number]: number};
+    items: { [productId: number]: number };
+    address_id: number | null;
 };
 
 export const cart = createModel<RootModel>()({
     state: {
         items: {},
+        address_id: null,
     } as CartState,
 
     reducers: {
+        setAddress: (state, payload: number) => {
+            state.address_id = payload;
+
+            return state;
+        },
         add: (state, payload: ItemType) => {
             state.items[payload.product] = payload.amount;
 

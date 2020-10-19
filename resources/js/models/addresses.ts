@@ -17,13 +17,13 @@ export type AddressComputedProperties = {
 }
 
 export type AddressesState = {
-    addresses: AddressType[];
+    addresses: {[id: number]: AddressType};
     failed: boolean;
 };
 
 export const addresses = createModel<RootModel>()({
     state: {
-        addresses: [],
+        addresses: {},
         loading: false,
         failed: false,
     } as AddressesState,
@@ -32,8 +32,15 @@ export const addresses = createModel<RootModel>()({
             state.failed = payload;
             return state;
         },
-        setAddresses: (state, payload: object) => {
-            state.addresses = payload as AddressType[];
+        setAddresses: (state, payload: AddressType|AddressType[]) => {
+            if (!Array.isArray(payload)) {
+                payload = [payload];
+            }
+
+            for (let address of payload) {
+                state.addresses[address.id] = address;
+            }
+
             return state;
         },
     },
