@@ -48,7 +48,7 @@ export const HomePage: React.FC = () => {
                 {/* Header */}
                 <div className="flex justify-between items-baseline mb-8">
                     <Title>Produtos</Title>
-                    <Link to="/produtos/tag/desconto" className="text-gray-500">Ver todos ›</Link>
+                    <Link to="/produtos" className="text-gray-500">Ver todos ›</Link>
                 </div>
 
                 {/* Items */}
