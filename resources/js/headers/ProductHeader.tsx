@@ -35,7 +35,7 @@ export const ProductHeader: React.FC = () => {
         <BackAndCart/>
 
         <div className="flex justify-between items-center mt-12 px-6">
-            <h2 className="text-3xl font-medium">{product.title}</h2>
+            <h2 className="text-3xl font-medium truncate">{product.title}</h2>
 
             <div
                 className={`transition-all duration-200 p-3 border-2 ${favorite && 'bg-secondary-500 border-secondary-500 text-white'} rounded-lg`}

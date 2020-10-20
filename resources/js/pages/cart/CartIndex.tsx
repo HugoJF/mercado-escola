@@ -1,14 +1,15 @@
-import React, {useEffect, useState}         from "react";
-import {Link, useHistory}                   from "react-router-dom";
-import {Button}                             from "../../components/Button";
-import {Title}                                         from "../../components/Title";
-import {Calendar, ChevronRight, Edit, MapPin, XSquare} from "react-feather";
-import {useAddresses, useCart, useProducts}            from "../../selectors";
-import {useDispatch}                        from "react-redux";
-import {Dispatch}                           from "../../store";
-import {ProductType}                        from "../../models/products";
-import {PriceFormatter}                     from "../../components/PriceFormatter";
-import {FlatButton}                         from "../../components/FlatButton";
+import React, {useEffect, useState}                                              from "react";
+import {Link, useHistory}                                                        from "react-router-dom";
+import {Button}                                                                  from "../../components/Button";
+import {Title}                                                                   from "../../components/Title";
+import {Calendar, Check, ChevronRight, Edit, MapPin, ShoppingBag, User, XSquare} from "react-feather";
+import {useAddresses, useCart, useProducts}                                      from "../../selectors";
+import {useDispatch}                                                             from "react-redux";
+import {Dispatch}                                                                from "../../store";
+import {ProductType}                                                             from "../../models/products";
+import {PriceFormatter}                                                          from "../../components/PriceFormatter";
+import {FlatButton}                                                              from "../../components/FlatButton";
+import {Modal}                                                                   from "../../components/Modal";
 
 
 export const CartIndex: React.FC = ({children}) => {
@@ -18,6 +19,7 @@ export const CartIndex: React.FC = ({children}) => {
     const products = useProducts();
     const cart = useCart();
     const [total, setTotal] = useState(0);
+    const [open, setOpen] = useState(false);
 
     useEffect(() => {
         dispatch.products.index();
@@ -87,6 +89,38 @@ export const CartIndex: React.FC = ({children}) => {
                 </span>
             </div>
 
+            <Title>Opções de entrega</Title>
+            <div className="mt-2">
+                <FlatButton onClick={() => setOpen(true)}>
+                    <span className="flex-grow">Selecionar entrega</span>
+                    <ChevronRight className="flex-shrink-0 ml-2 text-gray-500"/>
+                </FlatButton>
+            </div>
+
+            <Modal open={open} onClose={() => setOpen(false)}>
+                <h1 className="text-center text-lg font-medium">Select option</h1>
+                <p className="text-center text-gray-500">Prices and menu items may vary</p>
+                <div className="mt-2 border-t border-gray-300">
+                    <div className="flex items-center px-4 py-6 border-b last:border-b-0 border-gray-100">
+                        <ShoppingBag className="mr-4"/>
+                        <span className="flex-grow text-lg font-medium">Delivery</span>
+                        <Check size={15} strokeWidth={5} className="text-green-500"/>
+                    </div>
+                    <div className="flex items-center px-4 py-6 border-b last:border-b-0 border-gray-100">
+                        <User className="mr-4"/>
+                        <span className="flex-grow text-lg font-medium">Pickup</span>
+                    </div>
+                </div>
+                <div className="mt-4 px-2">
+                    <button
+                        onClick={() => setOpen(false)}
+                        className="w-full py-3 text-white text-lg font-medium bg-gray-800"
+                    >
+                        Done
+                    </button>
+                </div>
+            </Modal>
+
             <Title>Endereço de entrega</Title>
 
             <Link to="/carrinho/endereco" className="mt-2 mb-6 py-2 flex items-center">
@@ -100,7 +134,7 @@ export const CartIndex: React.FC = ({children}) => {
                     </>
                     :
                     <FlatButton onClick={() => history.push('/carrinho/endereco')}>
-                        Selecionar um endereço para entrega
+                        <span className="flex-grow">Selecionar um endereço</span>
                         <ChevronRight className="flex-shrink-0 ml-2 text-gray-500"/>
                     </FlatButton>
                 }
@@ -116,7 +150,7 @@ export const CartIndex: React.FC = ({children}) => {
             </div>
 
             <Button>
-                <Link to="/pedidos/1">
+                <Link to="/pedidos/1/">
                     Finalizar pedido
                 </Link>
             </Button>

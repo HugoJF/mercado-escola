@@ -24,7 +24,7 @@ export const AddressesIndex: React.FC = ({children}) => {
     return <>
         <Title>Selecione o seu endereço</Title>
 
-        <div className="my-8">
+        <div className="px-2 my-8">
             <AddressList
                 loading={loading}
                 addresses={Object.values(addresses.addresses)}
