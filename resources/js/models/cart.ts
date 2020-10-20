@@ -10,6 +10,7 @@ export type ItemType = {
 export type CartState = {
     items: { [productId: number]: number };
     address_id: number | null;
+    delivery: boolean;
 };
 
 export const cart = createModel<RootModel>()({
@@ -19,6 +20,11 @@ export const cart = createModel<RootModel>()({
     } as CartState,
 
     reducers: {
+        setDelivery: (state, payload: boolean) => {
+            state.delivery = payload;
+
+            return state;
+        },
         setAddress: (state, payload: number) => {
             state.address_id = payload;
 
