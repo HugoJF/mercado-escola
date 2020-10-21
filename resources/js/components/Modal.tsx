@@ -14,7 +14,7 @@ export const Modal: React.FC<ModalProps> = ({children, open, onClose}) => {
         />
 
         <div className={`pb-8 z-50 transition-transform duration-500
-                transform ${!open && 'translate-y-full'} fixed left-0 bottom-0 right-0 py-2 bg-white`}
+                transform ${!open && 'translate-y-full'} fixed left-0 bottom-0 right-0 py-2 bg-gray-100`}
         >
             {children}
         </div>

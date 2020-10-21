@@ -121,15 +121,13 @@ export const CartIndex: React.FC = ({children}) => {
 
                 <div className="mt-2 mb-8 py-2 flex items-center" onClick={() => history.push('/carrinho/endereco')}>
                     <MapPin className="mr-3 flex flex-shrink-0 text-gray-500"/>
-                    {address ?
-                        <p className="text-gray-500">
-                            {[address.complement, address.address, address.number].join(' ')}
-                        </p>
-                        :
-                        <p className="flex-grow text-gray-500">
-                            Selecionar um endereço
-                        </p>
-                    }
+                    <p className="flex-grow text-gray-500">
+                        {address ?
+                            [address.complement, address.address, address.number].join(' ')
+                            :
+                            'Selecionar um endereço'
+                        }
+                    </p>
                     <ChevronRight className="ml-3 flex-shrink-0 text-gray-500"/>
                 </div>
             </>}

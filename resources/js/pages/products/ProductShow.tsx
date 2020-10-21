@@ -79,7 +79,7 @@ export const ProductShow: React.FC = () => {
                         className="transition-colors duration-150
                             flex justify-center items-center
                             bg-primary-500 hover:bg-primary-600 text-gray-100 text-4xl font-bold
-                            shadow rounded-lg cursor-pointer"
+                            shadow rounded-lg cursor-pointer select-none"
                         onClick={subtract}
                     >
                         <span className="pb-1">-</span>
@@ -88,7 +88,7 @@ export const ProductShow: React.FC = () => {
                         className="transition-colors duration-150
                             flex justify-center items-center
                             bg-primary-500 hover:bg-primary-600 text-gray-100 text-4xl font-bold
-                            shadow rounded-lg cursor-pointer"
+                            shadow rounded-lg cursor-pointer select-none"
                         onClick={add}
                     >
                         <span className="pb-1">+</span>
