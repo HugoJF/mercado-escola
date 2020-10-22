@@ -2,10 +2,12 @@
 
 namespace App\Providers;
 
+use App\Models\Order;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Event;
+use Illuminate\Support\Str;
 
 class EventServiceProvider extends ServiceProvider
 {
@@ -27,6 +29,8 @@ class EventServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        Order::creating(function (Order $order) {
+            $order->id = Str::random(8);
+        });
     }
 }

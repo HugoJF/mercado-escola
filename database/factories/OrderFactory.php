@@ -25,6 +25,15 @@ class OrderFactory extends Factory
     public function definition()
     {
         return [
+            'state'      => $this->faker->randomElement([
+                Order::PENDING,
+                Order::ACCEPTED,
+                Order::READY,
+                Order::SHIPPING,
+                Order::DELIVERED,
+                Order::CANCELLED,
+                Order::REJECTED,
+            ]),
             'opening_id' => Opening::factory(),
             'user_id'    => User::factory(),
             'address_id' => Address::factory(),

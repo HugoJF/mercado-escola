@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\Address;
 use App\Models\Opening;
+use App\Models\Order;
 use App\Models\Product;
 use App\Models\User;
 use Illuminate\Database\Seeder;
@@ -17,10 +18,15 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        User::factory()->has(Address::factory()->count(5))->create([
-            'email'    => 'asd@asd.com',
-            'password' => bcrypt('123123123'),
-        ]);
+        User::factory()
+            ->has(Address::factory()->count(5))
+            ->has(Order::factory()
+                       ->hasAttached(Product::factory()->count(5), ['quantity' => 2])
+                       ->count(5))
+            ->create([
+                'email'    => 'asd@asd.com',
+                'password' => bcrypt('123123123'),
+            ]);
 
         Opening::factory()->has(Product::factory()->count(10))->create();
     }

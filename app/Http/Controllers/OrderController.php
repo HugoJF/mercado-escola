@@ -21,7 +21,7 @@ class OrderController extends Controller
      */
     public function index()
     {
-        return auth()->user()->orders;
+        return OrderResource::collection(auth()->user()->orders);
     }
 
     /**
@@ -41,6 +41,7 @@ class OrderController extends Controller
 
         $order = new Order;
 
+        $order->state = Order::PENDING;
         $order->address()->associate($address);
         $order->opening()->associate($opening);
         $order->user()->associate(auth()->user());

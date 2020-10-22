@@ -6,9 +6,31 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
+/*
+ * States:
+ * ------
+ * PENDING:     Order has been registered;
+ * ACCEPTED:    Order has been accepted;
+ * READY:       Order is ready to be delivered;
+ * SHIPPING:    Order is underway;
+ * DELIVERED:   Order has been delivered;
+ * CANCELLED:   Order has been canceled by user;
+ * REJECTED:    Order has been rejected by admin;
+ */
+
 class Order extends Model
 {
     use HasFactory, SoftDeletes;
+
+    public const PENDING = 'PENDING';      # Order has been registered;
+    public const ACCEPTED = 'ACCEPTED';    # Order has been accepted;
+    public const READY = 'READY';          # Order is ready to be delivered;
+    public const SHIPPING = 'SHIPPING';    # Order is underway;
+    public const DELIVERED = 'DELIVERED';  # Order has been delivered;
+    public const CANCELLED = 'CANCELLED';  # Order has been canceled by user;
+    public const REJECTED = 'REJECTED';    # Order has been rejected by admin;
+
+    public $incrementing = false;
 
     public function opening()
     {

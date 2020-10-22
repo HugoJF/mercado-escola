@@ -2,6 +2,7 @@ import React                               from "react";
 import {AddressType}                       from "../models/addresses";
 import {CheckSquare, ChevronRight, Square} from "react-feather";
 import {Box}                               from "./Box";
+import {Skeleton}                          from "./Skeleton";
 
 interface AddressListParameters {
     addresses: AddressType[];
@@ -30,13 +31,13 @@ export const AddressList: React.FC<AddressListParameters> = ({onClick, loading =
                     }
                     <div className="flex-grow">
                         <h2 className="text-lg font-medium">
-                            {address.complement || <span className="animate-pulse w-1/2 h-4 block my-2 bg-gray-300 rounded"/>}
+                            {address.complement || <Skeleton randomSize/>}
                         </h2>
                         <p className="text-gray-600">
-                            {address.address || <span className="animate-pulse h-4 block my-2 bg-gray-300 rounded"/>}
+                            {address.address || <Skeleton/>}
                         </p>
                         <p className="text-sm text-gray-600 font-thin">
-                            {address.number || <span className="animate-pulse h-4 w-1/4 block my-2 bg-gray-300 rounded"/>}
+                            {address.number || <Skeleton/>}
                         </p>
                     </div>
                     <ChevronRight className="flex-shrink-0 text-gray-500"/>

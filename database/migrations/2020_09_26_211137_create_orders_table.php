@@ -14,7 +14,7 @@ class CreateOrdersTable extends Migration
     public function up()
     {
         Schema::create('orders', function (Blueprint $table) {
-            $table->id();
+            $table->string('id')->primary();
 
             $table->unsignedBigInteger('opening_id');
             $table->foreign('opening_id')->references('id')->on('openings');
@@ -24,6 +24,8 @@ class CreateOrdersTable extends Migration
 
             $table->unsignedBigInteger('address_id');
             $table->foreign('address_id')->references('id')->on('addresses');
+
+            $table->string('state');
 
             $table->softDeletes();
             $table->timestamps();

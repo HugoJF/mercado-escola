@@ -18,7 +18,7 @@ class CreateOrderProductTable extends Migration
 
             $table->unsignedInteger('quantity');
 
-            $table->unsignedBigInteger('order_id');
+            $table->string('order_id');
             $table->foreign('order_id')->references('id')->on('orders');
 
             $table->unsignedBigInteger('product_id');

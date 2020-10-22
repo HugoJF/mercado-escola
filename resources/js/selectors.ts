@@ -19,3 +19,6 @@ export function useFavorites() {
 export function useCart() {
     return useSelector((state: RootState) => state.cart);
 }
+export function useOrders() {
+    return useSelector((state: RootState) => state.orders);
+}

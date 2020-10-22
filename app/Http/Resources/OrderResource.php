@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources;
 
+use App\Models\Product;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class OrderResource extends JsonResource
@@ -19,7 +20,15 @@ class OrderResource extends JsonResource
             parent::toArray($request),
             [
                 'products' => ProductResource::collection($this->products),
+                'cost' => $this->calculateCost(),
             ]
         );
+    }
+
+    protected function calculateCost()
+    {
+        return $this->products->reduce(function (int $total, Product $product) {
+            return $product->quantity_cost * $product->pivot->quantity;
+        }, 0);
     }
 }
