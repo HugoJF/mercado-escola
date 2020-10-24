@@ -3,12 +3,13 @@ import {Link, useHistory}                                           from "react-
 import {Button}                                                     from "../../components/Button";
 import {Title}                                                      from "../../components/Title";
 import {Calendar, ChevronRight, Edit, MapPin, ShoppingBag, XSquare} from "react-feather";
-import {useAddresses, useCart, useProducts}                         from "../../selectors";
+import {useAddresses, useCart, useOpenings, useProducts}            from "../../selectors";
 import {useDispatch}                                                from "react-redux";
 import {Dispatch}                                                   from "../../store";
 import {ProductType}                                                from "../../models/products";
 import {PriceFormatter}                                             from "../../components/PriceFormatter";
 import {ShippingOptionActionMenu}                                   from "../../action-menu/ShippingOptionActionMenu";
+import {OrderProductsType}                                          from "../../models/orders";
 
 
 export const CartIndex: React.FC = ({children}) => {
@@ -17,6 +18,7 @@ export const CartIndex: React.FC = ({children}) => {
     const addresses = useAddresses();
     const products = useProducts();
     const cart = useCart();
+    const openings = useOpenings();
     const [total, setTotal] = useState(0);
     const [shippingOptionOpen, setShippingOptionOpen] = useState(false);
 
@@ -44,6 +46,23 @@ export const CartIndex: React.FC = ({children}) => {
 
     function remove(productId: number) {
         dispatch.cart.remove(productId);
+    }
+
+    function handleStoreOrder() {
+        const products: OrderProductsType[] = [];
+
+        for (let [productId, quantity] of Object.entries(cart.items)) {
+            products.push({
+                product_id: parseInt(productId),
+                quantity,
+            })
+        }
+
+        dispatch.orders.store({
+            address_id: cart.address_id as number,
+            opening_id: openings.current as number,
+            products,
+        });
     }
 
     const address = cart.address_id && addresses.addresses[cart.address_id];
@@ -143,10 +162,8 @@ export const CartIndex: React.FC = ({children}) => {
                 </p>
             </div>
 
-            <Button>
-                <Link to="/pedidos/1/">
-                    Finalizar pedido
-                </Link>
+            <Button onClick={handleStoreOrder}>
+                Finalizar pedido
             </Button>
         </div>
     </>

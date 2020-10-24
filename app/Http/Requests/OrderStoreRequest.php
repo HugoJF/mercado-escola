@@ -21,15 +21,6 @@ class OrderStoreRequest extends FormRequest
             'products'              => 'required|array',
             'products.*.product_id' => 'exists:products,id',
             'products.*.quantity'   => 'min:0|max:100',
-            'state'                 => Rule::in([
-                Order::PENDING,
-                Order::ACCEPTED,
-                Order::READY,
-                Order::SHIPPING,
-                Order::DELIVERED,
-                Order::CANCELLED,
-                Order::REJECTED,
-            ]),
         ];
     }
 

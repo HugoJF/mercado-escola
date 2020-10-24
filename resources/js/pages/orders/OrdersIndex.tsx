@@ -4,9 +4,9 @@ import {Title}            from "../../components/Title";
 import {MoreVertical}     from "react-feather";
 import {PriceFormatter}   from "../../components/PriceFormatter";
 import {Link}             from "react-router-dom";
-import {OrderType}              from "../../models/orders";
-import {useOpenings, useOrders} from "../../selectors";
-import {useDispatch}            from "react-redux";
+import {OrderType}        from "../../models/orders";
+import {useOrders}        from "../../selectors";
+import {useDispatch}      from "react-redux";
 import {Dispatch}         from "../../store";
 import {format, parseISO} from 'date-fns'
 import {ptBR}             from 'date-fns/locale'
@@ -20,9 +20,8 @@ const OrderList: React.FC<{ order: OrderType }> = ({order, children}) => {
     return <Link to={`/pedidos/${order.id}`} className="py-3 flex items-center">
         {/* Date */}
         <div className="h-20 w-16 flex flex-col items-center justify-center bg-gray-200">
-            {/* TODO: from created_at */}
             <span className="text-xl text-gray-900 font-medium">
-                {createdAt && createdAt.getDay()}
+                {createdAt && format(createdAt, 'd', {locale: ptBR})}
             </span>
             <span className="text-lg text-gray-500">
                 {createdAt && format(createdAt, 'E', {locale: ptBR})}

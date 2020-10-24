@@ -55,14 +55,16 @@ export const openings = createModel<RootModel>()({
 
             let normalized = normalize(response.data.data, [openingsSchema]);
 
-            let openings = normalized.entities['openings'] as OpeningType[];
+            let openings = normalized.entities['openings'] as OpeningType[]; // FIXME: this is an object
             let products = normalized.entities['products'] as ProductType[];
 
             dispatch.openings.addOpening(Object.values(openings));
             dispatch.products.addProduct(Object.values(products));
 
-            if (openings.length === 1) {
-                dispatch.openings.setCurrent(openings[0].id);
+            console.log('Trying to figure out current opening! Count:', Object.values(openings).length);
+
+            if (Object.values(openings).length === 1) {
+                dispatch.openings.setCurrent(Object.values(openings)[0].id);
             }
         },
     })
