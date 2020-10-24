@@ -36,6 +36,7 @@ export const OrdersEnd: React.FC = ({children}) => {
     useEffect(() => {
         dispatch.orders.index();
         dispatch.addresses.index();
+        dispatch.openings.index();
     }, []);
 
     const order = orders.orders[params.orderId];
@@ -45,6 +46,11 @@ export const OrdersEnd: React.FC = ({children}) => {
     }
 
     const opening = openings.openings[order.opening_id];
+
+    if (!opening) {
+        return null;
+    }
+
     const deliversAt = opening.delivers_at ? parseISO(opening.delivers_at) : null;
 
     const address = addresses.addresses[order.address_id];

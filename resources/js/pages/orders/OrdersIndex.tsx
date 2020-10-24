@@ -11,7 +11,8 @@ import {Dispatch}         from "../../store";
 import {format, parseISO} from 'date-fns'
 import {ptBR}             from 'date-fns/locale'
 import {Skeleton}         from "../../components/Skeleton";
-import {OrderStateText}   from "../../components/OrderStateText";
+import {Badge}            from "../../components/Badge";
+import {OrderStateBadge}  from "../../components/OrderStateBadge";
 
 const OrderList: React.FC<{ order: OrderType }> = ({order, children}) => {
     const relative = useRelativePath();
@@ -59,11 +60,7 @@ const OrderList: React.FC<{ order: OrderType }> = ({order, children}) => {
                         </span>
                     </li>
                 </ul>
-                {order.state &&
-                <span className="py-1 px-3 text-sm text-primary-100 font-medium bg-primary-600 rounded-full">
-                        <OrderStateText state={order.state}/>
-                    </span>
-                }
+                {order.state && <OrderStateBadge state={order.state}/>}
             </div>
         </div>
     </Link>
