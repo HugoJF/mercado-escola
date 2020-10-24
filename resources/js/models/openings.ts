@@ -14,6 +14,7 @@ export type OpeningProperties = {
     max_pickup_orders: number;
     opens_at: string;
     closes_at: string;
+    delivers_at: string;
 }
 
 export type OpeningComputedProperties = {

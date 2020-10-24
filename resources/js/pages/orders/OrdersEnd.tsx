@@ -1,8 +1,15 @@
-import React                                               from "react";
+import React, {useEffect}                                  from "react";
 import {Button}                                            from "../../components/Button";
 import {Title}                                             from "../../components/Title";
 import {Calendar, CheckSquare, DollarSign, MapPin, Square} from "react-feather";
 import {Box}                                               from "../../components/Box";
+import {useParams}                                         from "react-router";
+import {useDispatch}                                       from "react-redux";
+import {Dispatch}                                          from "../../store";
+import {useAddresses, useOpenings, useOrders}              from "../../selectors";
+import {PriceFormatter}                                    from "../../components/PriceFormatter";
+import {format, parseISO}                                  from "date-fns";
+import {ptBR}                                              from "date-fns/locale";
 
 const status = [{
     title: 'Pedido foi aceito',
@@ -19,6 +26,33 @@ const status = [{
 },];
 
 export const OrdersEnd: React.FC = ({children}) => {
+    const dispatch = useDispatch<Dispatch>();
+    const params = useParams<{ orderId: string }>();
+    const orders = useOrders();
+    const addresses = useAddresses();
+    const openings = useOpenings();
+
+
+    useEffect(() => {
+        dispatch.orders.index();
+        dispatch.addresses.index();
+    }, []);
+
+    const order = orders.orders[params.orderId];
+
+    if (!order) {
+        return null;
+    }
+
+    const opening = openings.openings[order.opening_id];
+    const deliversAt = opening.delivers_at ? parseISO(opening.delivers_at) : null;
+
+    const address = addresses.addresses[order.address_id];
+
+    if (!address) {
+        return null;
+    }
+
     return <>
         <div className="flex flex-col justify-around min-h-full">
             <Title>Situação</Title>
@@ -47,7 +81,10 @@ export const OrdersEnd: React.FC = ({children}) => {
             <div className="my-8 flex items-center">
                 <DollarSign className="mr-4 text-gray-500"/>
                 <p className="text-gray-500">
-                    <span className="mr-1 text-secondary-500 font-medium">R$ 3,14</span> em 1 item
+                    <span className="mr-1 text-secondary-500 font-medium">
+                        <PriceFormatter price={order.cost} cents/>
+                    </span>
+                    em {order.products.length} {order.products.length === 1 ? 'item' : 'items'}
                 </p>
             </div>
 
@@ -56,7 +93,7 @@ export const OrdersEnd: React.FC = ({children}) => {
             <div className="my-8 flex items-center">
                 <MapPin className="mr-4 text-gray-500"/>
                 <p className="text-gray-500">
-                    R. Alabama, 222 - Campo Grande, MS
+                    {address.address} {address.complement} {address.number}
                 </p>
             </div>
 
@@ -65,7 +102,12 @@ export const OrdersEnd: React.FC = ({children}) => {
             <div className="my-8 flex items-center">
                 <Calendar className="mr-4 text-gray-500"/>
                 <p className="text-gray-500">
-                    <span className="mr-1 text-secondary-500 font-medium">22/09/2020</span>entre 10h e 16h
+                    <span className="mr-1 text-secondary-500 font-medium">
+                        {deliversAt && format(deliversAt, 'dd/M/y', {locale: ptBR})}
+                    </span>
+                    <span>
+                        às {deliversAt && format(deliversAt, 'H', {locale: ptBR})}h
+                    </span>
                 </p>
             </div>
 

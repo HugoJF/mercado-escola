@@ -23,6 +23,7 @@ class CreateOpeningsTable extends Migration
 
             $table->dateTime('opens_at');
             $table->dateTime('closes_at');
+            $table->dateTime('delivers_at');
 
             $table->timestamps();
         });

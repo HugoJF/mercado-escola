@@ -4,19 +4,20 @@ import {Title}            from "../../components/Title";
 import {MoreVertical}     from "react-feather";
 import {PriceFormatter}   from "../../components/PriceFormatter";
 import {Link}             from "react-router-dom";
-import {OrderType}        from "../../models/orders";
-import {useOrders}        from "../../selectors";
-import {useDispatch}      from "react-redux";
+import {OrderType}              from "../../models/orders";
+import {useOpenings, useOrders} from "../../selectors";
+import {useDispatch}            from "react-redux";
 import {Dispatch}         from "../../store";
 import {format, parseISO} from 'date-fns'
 import {ptBR}             from 'date-fns/locale'
 import {Skeleton}         from "../../components/Skeleton";
+import {OrderStateText}   from "../../components/OrderStateText";
 
 const OrderList: React.FC<{ order: OrderType }> = ({order, children}) => {
     const relative = useRelativePath();
     const createdAt = order.created_at ? parseISO(order.created_at) : null;
 
-    return <Link to="/pedidos/1" className="py-3 flex items-center">
+    return <Link to={`/pedidos/${order.id}`} className="py-3 flex items-center">
         {/* Date */}
         <div className="h-20 w-16 flex flex-col items-center justify-center bg-gray-200">
             {/* TODO: from created_at */}
@@ -60,8 +61,8 @@ const OrderList: React.FC<{ order: OrderType }> = ({order, children}) => {
                     </li>
                 </ul>
                 {order.state &&
-                <span className="py-1 px-5 text-sm text-primary-100 bg-primary-600 rounded-full">
-                        {order.state}
+                <span className="py-1 px-3 text-sm text-primary-100 font-medium bg-primary-600 rounded-full">
+                        <OrderStateText state={order.state}/>
                     </span>
                 }
             </div>
@@ -76,7 +77,7 @@ export const OrdersIndex: React.FC = ({children}) => {
 
     useEffect(() => {
         dispatch.orders.index();
-    });
+    }, []);
 
     function getOrders() {
         if (Object.values(orders.orders)?.length) {
