@@ -5,34 +5,20 @@ import {useCart, useProducts} from "../../selectors";
 import {PriceFormatter}       from "../../components/PriceFormatter";
 import {useDispatch}          from "react-redux";
 import {Dispatch}             from "../../store";
+import useCartQuantity        from "../../hooks/useCartQuantity";
+import * as ProductQuantityConfig from "../../configs/ProductQuantityConfig";
 
 export const ProductShow: React.FC = () => {
-    const dispatch = useDispatch<Dispatch>();
     const params = useParams<{ productId: string }>();
-    const cart = useCart();
     const products = useProducts();
 
     const productId = parseInt(params.productId);
     const product = products.products[productId];
-    const cartAmount = cart.items[productId];
 
-    function add() {
-        dispatch.cart.add({
-            product: productId,
-            amount: (cartAmount || 0) + 1
-        });
-    }
+    type typeKey = keyof typeof ProductQuantityConfig;
+    const config = ProductQuantityConfig[product?.quantity_type as typeKey];
 
-    function subtract() {
-        if (cartAmount === 1) {
-            dispatch.cart.remove(productId);
-        } else {
-            dispatch.cart.add({
-                product: productId,
-                amount: +cartAmount - 1
-            });
-        }
-    }
+    const [text, quantity, add, subtract] = useCartQuantity(productId, config);
 
     if (!product) return null;
 
@@ -60,16 +46,16 @@ export const ProductShow: React.FC = () => {
                         / {product.quantity_type}
                     </span>
                 </div>
-                {cartAmount && <div className="flex items-center">
-                    <div className="mx-4 text-2xl font-medium">{cart.items[productId]} {product.quantity_type}</div>
+                {quantity && <div className="flex items-center">
+                    <div className="mx-4 text-2xl font-medium">{quantity} {text}</div>
                 </div>}
             </div>
 
-            {cartAmount && <p className="pb-2 text-sm text-center text-gray-500 tracking-tight">
+            {quantity && <p className="pb-2 text-sm text-center text-gray-500 tracking-tight">
                 Quantidade de items é atualizada automaticamente.
             </p>}
 
-            {!cartAmount ?
+            {!quantity ?
                 <Button onClick={add}>
                     Adicionar ao carrinho
                 </Button>
@@ -95,8 +81,6 @@ export const ProductShow: React.FC = () => {
                     </div>
                 </div>
             }
-
         </div>
     </>
-
-}
+};

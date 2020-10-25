@@ -1,11 +1,19 @@
 import {init, RematchDispatch, RematchRootState} from "@rematch/core";
 import {models, RootModel}                       from "./models";
 import createImmerPlugin                         from "@rematch/immer";
+import persist                                   from '@rematch/persist';
+import storage                                   from 'redux-persist/lib/storage'
 
 export const store = init<RootModel>({
     models,
     plugins: [
+        persist({
+            key: 'persist-storage',
+            storage,
+            whitelist: ['cart']
+        }),
         createImmerPlugin(),
+
     ]
 });
 
