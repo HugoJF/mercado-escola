@@ -83,7 +83,7 @@ export const CartIndex: React.FC = ({children}) => {
                     Carrinho vazio!
                 </h2>}
                 {eachCart(({product, amount}) => (
-                    <div className="flex my-8">
+                    <div key={product.id} className="flex my-8">
                         <div className="flex flex-shrink-0 items-center w-24 h-20 rounded-lg">
                             <img
                                 src={`https://picsum.photos/seed/${product.id}/500/300`}

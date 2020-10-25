@@ -73,6 +73,7 @@ export const AccountSummary: React.FC = ({children}) => {
         <div className="my-8">
             {mainSections.map(({icon: Icon, title, sub, to, clickable}) => (
                 <DivOrLink
+                    key={to}
                     isLink={clickable}
                     to={`${match.url}/${to}`}
                     className={`transition-colors duration-150 w-full px-4 py-3 flex items-center
