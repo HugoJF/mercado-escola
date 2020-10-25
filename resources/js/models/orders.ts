@@ -78,16 +78,18 @@ export const orders = createModel<RootModel>()({
 
             dispatch.orders.add(Object.values(response.data.data));
         },
-        async store(payload: OrderStore, state: RootState): Promise<void> {
+        async store(payload: OrderStore, state: RootState): Promise<OrderType> {
             const response = await window.axios.post('/orders', payload);
+            const order = response.data.data as OrderType;
+            const normalized = normalize(order, ordersSchema); // FIXME: there's also `opening`
 
-            let normalized = normalize(response.data, [ordersSchema]); // FIXME: there's also `opening`
-
-            let orders = normalized.entities['orders'] as OrderType[];
-            let products = normalized.entities['products'] as ProductType[];
+            const orders = normalized.entities['orders'] as OrderType[];
+            const products = normalized.entities['products'] as ProductType[];
 
             dispatch.orders.add(Object.values(orders));
             dispatch.products.addProduct(Object.values(products));
+
+            return order;
         },
     })
 });

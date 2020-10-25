@@ -17,7 +17,7 @@ class OrderStoreRequest extends FormRequest
     {
         return [
             'opening_id'            => 'required|exists:openings,id',
-            'address_id'            => 'required|exists:addresses,id',
+            'address_id'            => 'nullable|exists:addresses,id',
             'products'              => 'required|array',
             'products.*.product_id' => 'exists:products,id',
             'products.*.quantity'   => 'min:0|max:100',

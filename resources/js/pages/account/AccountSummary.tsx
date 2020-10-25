@@ -1,12 +1,11 @@
-import React, {useEffect}                                                                          from "react";
-import {Link, useRouteMatch}                                                                       from "react-router-dom";
-import {Box}                                                                                       from "../../components/Box";
-import {DivOrLink}                                                                                 from "../../components/DivOrLink";
-import {AlertCircle, Book, ChevronLeft, ChevronRight, Flag, Heart, Mail, MapPin, Smartphone, User} from "react-feather";
-import {useAddresses, useAuth}                                                                     from "../../selectors";
-import {useDispatch}                                                                               from "react-redux";
-import {Dispatch}                                                                                  from "../../store";
-
+import React, {useEffect}                                                             from "react";
+import {Link, useRouteMatch}                                                          from "react-router-dom";
+import {Box}                                                                          from "../../components/Box";
+import {DivOrLink}                                                                    from "../../components/DivOrLink";
+import {AlertCircle, Book, ChevronRight, Flag, Heart, Mail, MapPin, Smartphone, User} from "react-feather";
+import {useAddresses, useAuth}                                                        from "../../selectors";
+import {useDispatch}                                                                  from "react-redux";
+import {Dispatch}                                                                     from "../../store";
 
 export const AccountSummary: React.FC = ({children}) => {
     const dispatch = useDispatch<Dispatch>();
@@ -86,7 +85,7 @@ export const AccountSummary: React.FC = ({children}) => {
                         <h3 className="text-lg font-medium">{title}</h3>
                         <p className="text-gray-500 font-thin">{sub}</p>
                     </div>
-                    {clickable && <ChevronRight className="text-gray-500"/>}
+                    {clickable && <ChevronRight className="flex-shrink-0 text-gray-500"/>}
                 </DivOrLink>
             ))}
         </div>

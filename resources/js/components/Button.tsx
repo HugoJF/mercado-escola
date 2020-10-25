@@ -1,9 +1,11 @@
-import React from "react";
+import React    from "react";
+import {Loader} from "react-feather";
 
 type ButtonColors = 'primary' | 'secondary';
 
 export type ButtonProps = {
     color?: ButtonColors;
+    loading?: boolean;
 }
 
 const classes: { [id in ButtonColors]: string } = {
@@ -11,12 +13,16 @@ const classes: { [id in ButtonColors]: string } = {
     secondary: 'bg-secondary-500 hover:bg-secondary-600 text-white'
 };
 
-export const Button: React.FC<ButtonProps & React.HTMLAttributes<HTMLButtonElement>> = ({color = 'primary', children, ...rest}) => {
+export const Button: React.FC<ButtonProps & React.HTMLAttributes<HTMLButtonElement>> = ({loading = false, color = 'primary', children, ...rest}) => {
     return <button
         {...rest}
         className={`transition-all duration-150
             py-3 w-full ${classes[color]} text-center text-xl rounded-lg hover:shadow`}
     >
-        {children}
+        {loading ?
+            <Loader size={30} className="animate-spin mx-auto block"/>
+            :
+            children
+        }
     </button>
 };

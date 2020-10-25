@@ -37,7 +37,7 @@ class OrderController extends Controller
                           ->findOrFail($request->input('opening_id'));
 
         $address = Address::query()
-                          ->findOrFail($request->input('address_id'));
+                          ->find($request->input('address_id'));
 
         $order = new Order;
 

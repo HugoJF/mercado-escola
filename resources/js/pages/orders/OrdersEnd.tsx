@@ -53,11 +53,7 @@ export const OrdersEnd: React.FC = ({children}) => {
 
     const deliversAt = opening.delivers_at ? parseISO(opening.delivers_at) : null;
 
-    const address = addresses.addresses[order.address_id];
-
-    if (!address) {
-        return null;
-    }
+    const address = order.address_id && addresses.addresses[order.address_id];
 
     return <>
         <div className="flex flex-col justify-around min-h-full">
@@ -94,14 +90,16 @@ export const OrdersEnd: React.FC = ({children}) => {
                 </p>
             </div>
 
-            <Title>Endereço de entrega</Title>
+            {address && <>
+                <Title>Endereço de entrega</Title>
 
-            <div className="my-8 flex items-center">
-                <MapPin className="mr-4 text-gray-500"/>
-                <p className="text-gray-500">
-                    {address.address} {address.complement} {address.number}
-                </p>
-            </div>
+                <div className="my-8 flex items-center">
+                    <MapPin className="mr-4 text-gray-500"/>
+                    <p className="text-gray-500">
+                        {address.address} {address.complement} {address.number}
+                    </p>
+                </div>
+            </>}
 
             <Title>Data de entrega</Title>
 

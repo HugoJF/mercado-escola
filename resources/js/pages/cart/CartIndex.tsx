@@ -20,6 +20,7 @@ export const CartIndex: React.FC = ({children}) => {
     const cart = useCart();
     const openings = useOpenings();
     const [total, setTotal] = useState(0);
+    const [loading, setLoading] = useState(false);
     const [shippingOptionOpen, setShippingOptionOpen] = useState(false);
 
     useEffect(() => {
@@ -48,8 +49,9 @@ export const CartIndex: React.FC = ({children}) => {
         dispatch.cart.remove(productId);
     }
 
-    function handleStoreOrder() {
+    async function handleStoreOrder() {
         const products: OrderProductsType[] = [];
+        setLoading(true);
 
         for (let [productId, quantity] of Object.entries(cart.items)) {
             products.push({
@@ -58,11 +60,13 @@ export const CartIndex: React.FC = ({children}) => {
             })
         }
 
-        dispatch.orders.store({
+        let order = await dispatch.orders.store({
             address_id: cart.address_id as number,
             opening_id: openings.current as number,
             products,
         });
+        setLoading(false);
+        history.push(`/pedidos/${order.id}`)
     }
 
     const address = cart.address_id && addresses.addresses[cart.address_id];
@@ -74,6 +78,10 @@ export const CartIndex: React.FC = ({children}) => {
             {/* Cart products */}
 
             <div className="border-b border-gray-200">
+                {!Object.values(cart.items).length &&
+                <h2 className="py-6 text-lg text-gray-500 text-center tracking-wide">
+                    Carrinho vazio!
+                </h2>}
                 {eachCart(({product, amount}) => (
                     <div className="flex my-8">
                         <div className="flex flex-shrink-0 items-center w-24 h-20 rounded-lg">
@@ -84,19 +92,23 @@ export const CartIndex: React.FC = ({children}) => {
                         </div>
                         <div className="px-4 flex-grow">
                             <h3 className="text-xl font-medium">{product.title}</h3>
-                            <p className="text-gray-500">{amount} {product.quantity_type}</p>
-                            <p className="mt-2 text-secondary-500 font-medium">
-                                <PriceFormatter cents price={amount * product.quantity_cost}/>
-                            </p>
-                        </div>
-                        <div className="flex items-center">
-                            <Link to={`/produtos/${product.id}`}>
-                                <Edit className="ml-8 text-gray-500 cursor-pointer"/>
-                            </Link>
-                            <XSquare
-                                className="ml-8 text-red-600 cursor-pointer"
-                                onClick={() => remove(product.id)}
-                            />
+                            <div className="flex">
+                                <div className="flex-grow">
+                                    <p className="text-gray-500">{amount} {product.quantity_type}</p>
+                                    <p className="mt-2 text-secondary-500 font-medium">
+                                        <PriceFormatter cents price={amount * product.quantity_cost}/>
+                                    </p>
+                                </div>
+                                <div className="flex items-center space-x-4">
+                                    <Link to={`/produtos/${product.id}`}>
+                                        <Edit className="text-gray-500 cursor-pointer"/>
+                                    </Link>
+                                    <XSquare
+                                        className="text-red-600 cursor-pointer"
+                                        onClick={() => remove(product.id)}
+                                    />
+                                </div>
+                            </div>
                         </div>
                     </div>
                 ))}
@@ -162,7 +174,7 @@ export const CartIndex: React.FC = ({children}) => {
                 </p>
             </div>
 
-            <Button onClick={handleStoreOrder}>
+            <Button loading={loading} onClick={handleStoreOrder}>
                 Finalizar pedido
             </Button>
         </div>
