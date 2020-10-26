@@ -24,7 +24,6 @@ export type AddressesState = {
 export const addresses = createModel<RootModel>()({
     state: {
         addresses: {},
-        loading: false,
         failed: false,
     } as AddressesState,
     reducers: {

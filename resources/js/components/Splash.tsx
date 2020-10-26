@@ -1,15 +1,19 @@
-import React, {useEffect, useState}     from "react";
+import React, {useState}                from "react";
 import {Loader}                         from "react-feather";
 import {CSSTransition, TransitionGroup} from "react-transition-group";
 import {useDispatch}                    from "react-redux";
 import useAsyncEffect                   from "../hooks/useAsyncEffect";
+import {load}                           from "../google";
 
 export const Splash: React.FC = ({children}) => {
     const dispatch = useDispatch();
     const [loading, setLoading] = useState(true);
 
     useAsyncEffect(async () => {
-        await dispatch.auth.me();
+        await Promise.all([
+            dispatch.auth.me(),
+            load(),
+        ]);
         setLoading(false);
     }, []);
 
