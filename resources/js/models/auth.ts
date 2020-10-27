@@ -6,6 +6,7 @@ export type AuthState = {
     me?: {
         name: string,
         email: string,
+        main_address: number|null,
     },
     failed?: boolean,
 };
@@ -60,7 +61,15 @@ export const auth = createModel<RootModel>()({
         },
 
         async update(payload: object, state: RootState): Promise<void> {
-            return await window.axios.patch('/me', payload);
+            const response = await window.axios.patch('/me', payload);
+
+            const user = response.data.user;
+
+            if (user) {
+                dispatch.auth.setUser(user as AuthState);
+            }
+
+            return user;
         },
 
         async logout(): Promise<void> {

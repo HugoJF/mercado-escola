@@ -20,6 +20,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'main_address',
     ];
 
     /**
@@ -45,6 +46,11 @@ class User extends Authenticatable
     public function addresses()
     {
         return $this->hasMany(Address::class);
+    }
+
+    public function mainAddress()
+    {
+        return $this->belongsTo(Address::class, 'id', 'main_address');
     }
 
     public function favorites()

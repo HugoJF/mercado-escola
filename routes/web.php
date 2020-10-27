@@ -24,15 +24,9 @@ Route::prefix('favorites')->group(function () {
     Route::delete('{product}', [\App\Http\Controllers\FavoriteController::class, 'destroy'])->name('favorites.destroy');
 });
 
-Route::get('me', function () {
-    if (auth()->check()) {
-        $user = auth()->user();
-    } else {
-        $user = null;
-    }
 
-    return response()->json(compact('user'));
-})->name('me');
+Route::get('me', [\App\Http\Controllers\MeController::class, 'index'])->name('me.index');
+Route::patch('me', [\App\Http\Controllers\MeController::class, 'update'])->name('me.update');
 
 Route::middleware('auth:sanctum')->group(function () {
     Route::get('protected', function () {

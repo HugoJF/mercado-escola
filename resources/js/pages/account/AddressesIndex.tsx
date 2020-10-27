@@ -4,14 +4,16 @@ import {Dispatch}                        from "../../store";
 import {Link, useHistory, useRouteMatch} from "react-router-dom";
 import {Title}                           from "../../components/Title";
 import {Plus}                            from "react-feather";
-import {useAddresses}                    from "../../selectors";
+import {useAddresses, useAuth}           from "../../selectors";
 import useAsyncEffect                    from "../../hooks/useAsyncEffect";
 import {AddressList}                     from "../../components/AddressList";
 import {FlatButton}                      from "../../components/FlatButton";
+import {AddressType}                     from "../../models/addresses";
 
 export const AddressesIndex: React.FC = ({children}) => {
     const [loading, setLoading] = useState(true);
     const dispatch = useDispatch<Dispatch>();
+    const auth = useAuth();
     const history = useHistory();
     const match = useRouteMatch();
     const addresses = useAddresses();
@@ -21,14 +23,19 @@ export const AddressesIndex: React.FC = ({children}) => {
         setLoading(false);
     }, []);
 
+    async function handleAddressClick(address: AddressType) {
+        await dispatch.auth.update({main_address: address.id});
+    }
+
     return <>
         <Title>Selecione o seu endereço</Title>
 
         <div className="px-2 my-8">
             <AddressList
+                selected={auth.me?.main_address as number|undefined}
                 loading={loading}
                 addresses={Object.values(addresses.addresses)}
-                onClick={() => history.push('/conta')}
+                onClick={handleAddressClick}
             />
         </div>
 

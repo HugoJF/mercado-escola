@@ -6,11 +6,12 @@ import {Skeleton}                          from "./Skeleton";
 
 interface AddressListParameters {
     addresses: AddressType[];
+    selected?: number;
     loading?: boolean;
     onClick?: (address: AddressType) => void;
 }
 
-export const AddressList: React.FC<AddressListParameters> = ({onClick, loading = false, addresses}) => {
+export const AddressList: React.FC<AddressListParameters> = ({selected, onClick, loading = false, addresses}) => {
 
     function getAddresses() {
         if (loading) {
@@ -26,7 +27,7 @@ export const AddressList: React.FC<AddressListParameters> = ({onClick, loading =
                 key={address.id}
                 onClick={() => onClick && onClick(address)}
             >
-                {address.deleted_at ?
+                {selected === address.id ?
                     <CheckSquare size={30} className="mr-4 flex-shrink-0 text-secondary-500"/>
                     :
                     <Square size={30} className="mr-4 flex-shrink-0 text-gray-400"/>
