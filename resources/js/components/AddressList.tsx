@@ -33,13 +33,18 @@ export const AddressList: React.FC<AddressListParameters> = ({onClick, loading =
                 }
                 <div className="flex-grow">
                     <h2 className="text-sm">
-                        {address.address || <Skeleton randomSize/>}
+                        {address.address || <Skeleton className="w-full"/>}
                     </h2>
                     <p className="text-sm text-gray-600">
-                        {[address.number, address.complement].join(' - ') || <Skeleton className="w-1/2"/>}
+                        {address.address
+                            ?
+                            [address.number, address.complement].filter(i => !!i).join(' - ')
+                            :
+                            <Skeleton className="w-1/2"/>
+                        }
                     </p>
                 </div>
-                <ChevronRight className="flex-shrink-0 text-gray-500"/>
+                <ChevronRight className="ml-4 flex-shrink-0 text-gray-500"/>
             </Box>
         ))}
     </>
