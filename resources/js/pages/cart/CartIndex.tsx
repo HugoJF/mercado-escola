@@ -65,7 +65,7 @@ export const CartIndex: React.FC = ({children}) => {
             opening_id: openings.current as number,
             products,
         });
-        setLoading(false);
+        dispatch.cart.reset();
         history.push(`/pedidos/${order.id}`)
     }
 

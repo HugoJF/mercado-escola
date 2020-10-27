@@ -40,6 +40,12 @@ export const cart = createModel<RootModel>()({
 
             return state;
         },
+        reset: (state, payload) => {
+            return {
+                items: {},
+                address_id: null,
+            } as CartState
+        }
     },
 
     effects: (dispatch) => ({
