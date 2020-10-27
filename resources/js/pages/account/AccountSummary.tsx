@@ -6,6 +6,7 @@ import {AlertCircle, Book, ChevronRight, Flag, Heart, Mail, MapPin, Smartphone, 
 import {useAddresses, useAuth}                                                        from "../../selectors";
 import {useDispatch}                                                                  from "react-redux";
 import {Dispatch}                                                                     from "../../store";
+import {Title}                                                                        from "../../components/Title";
 
 export const AccountSummary: React.FC = ({children}) => {
     const dispatch = useDispatch<Dispatch>();
@@ -69,11 +70,9 @@ export const AccountSummary: React.FC = ({children}) => {
     }];
 
     return <div className="mx-auto container">
-        <h1 className="text-3xl text-center font-medium">Conta</h1>
+        <Title>Conta</Title>
 
-        <h2 className="text-2xl">Informações</h2>
-
-        <div className="my-8">
+        <div className="mb-8">
             {mainSections.map(({icon: Icon, title, sub, to, clickable}) => (
                 <DivOrLink
                     key={to}

@@ -1,26 +1,26 @@
-import React, {useEffect} from "react";
-import useRelativePath    from "../../hooks/useRelativePath";
-import {Title}            from "../../components/Title";
-import {MoreVertical}     from "react-feather";
-import {PriceFormatter}   from "../../components/PriceFormatter";
-import {Link}             from "react-router-dom";
-import {OrderType}        from "../../models/orders";
-import {useOrders}        from "../../selectors";
-import {useDispatch}      from "react-redux";
-import {Dispatch}         from "../../store";
-import {format, parseISO} from 'date-fns'
-import {ptBR}             from 'date-fns/locale'
-import {Skeleton}         from "../../components/Skeleton";
-import {Badge}            from "../../components/Badge";
-import {OrderStateBadge}  from "../../components/OrderStateBadge";
+import React, {useEffect}        from "react";
+import {Title}                   from "../../components/Title";
+import {MoreVertical}            from "react-feather";
+import {PriceFormatter}          from "../../components/PriceFormatter";
+import {Link}                    from "react-router-dom";
+import {OrderType}               from "../../models/orders";
+import {useAddresses, useOrders} from "../../selectors";
+import {useDispatch}             from "react-redux";
+import {Dispatch}                from "../../store";
+import {format, parseISO}        from 'date-fns'
+import {ptBR}                    from 'date-fns/locale'
+import {Skeleton}                from "../../components/Skeleton";
+import {OrderStateBadge}         from "../../components/OrderStateBadge";
 
 const OrderList: React.FC<{ order: OrderType }> = ({order, children}) => {
-    const relative = useRelativePath();
+    const addresses = useAddresses();
     const createdAt = order.created_at ? parseISO(order.created_at) : null;
+
+    const address = addresses.addresses[order.address_id];
 
     return <Link to={`/pedidos/${order.id}`} className="py-3 flex items-center">
         {/* Date */}
-        <div className="h-20 w-16 flex flex-col items-center justify-center bg-gray-200">
+        <div className="h-20 w-20 flex flex-col items-center justify-center bg-gray-200">
             <span className="text-xl text-gray-900 font-medium">
                 {createdAt && format(createdAt, 'd', {locale: ptBR})}
             </span>
@@ -32,7 +32,7 @@ const OrderList: React.FC<{ order: OrderType }> = ({order, children}) => {
         {/* Details */}
         <div className="ml-4 flex-grow">
             <div className="flex flex-grow justify-between">
-                <h2 className="flex-grow text-xl text-gray-900">
+                <h2 className="flex-grow text-xl text-gray-900 font-mono">
                     {order.id ?
                         `#${order.id}`
                         :
@@ -41,6 +41,9 @@ const OrderList: React.FC<{ order: OrderType }> = ({order, children}) => {
                 </h2>
                 <MoreVertical className="text-gray-500"/>
             </div>
+            <p className="text-sm text-gray-500 tracking-tight">
+                {address?.address || <Skeleton className="w-2/3"/>}
+            </p>
             <div className="mt-4 flex flex-grow justify-between items-center">
                 <ul className="text-sm text-gray-500">
                     <li>
@@ -68,11 +71,11 @@ const OrderList: React.FC<{ order: OrderType }> = ({order, children}) => {
 
 export const OrdersIndex: React.FC = ({children}) => {
     const dispatch = useDispatch<Dispatch>();
-    const relative = useRelativePath();
     const orders = useOrders();
 
     useEffect(() => {
         dispatch.orders.index();
+        dispatch.addresses.index();
     }, []);
 
     function getOrders() {

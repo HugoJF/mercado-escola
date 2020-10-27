@@ -25,7 +25,7 @@ export const WEIGHT_100G: ProductQuantityConfig = {
 };
 
 export const WEIGHT_1000G: ProductQuantityConfig = {
-    singular: 'kilograma',
-    plural: 'kilogramas',
+    singular: 'kg',
+    plural: 'kg',
     step: 1,
 };

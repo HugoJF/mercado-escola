@@ -94,7 +94,7 @@ export const OrdersEnd: React.FC = ({children}) => {
                 <Title>Endereço de entrega</Title>
 
                 <div className="my-8 flex items-center">
-                    <MapPin className="mr-4 text-gray-500"/>
+                    <MapPin className="mr-4 flex-shrink-0 text-gray-500"/>
                     <p className="text-gray-500">
                         {address.address} {address.complement} {address.number}
                     </p>
