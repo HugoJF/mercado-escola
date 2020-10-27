@@ -20,6 +20,9 @@ class CreateAddressesTable extends Migration
             $table->integer('number');
             $table->string('complement')->nullable();
 
+            $table->float('latitude');
+            $table->float('longitude');
+
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');
 

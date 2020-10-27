@@ -8,6 +8,8 @@ export type AddressType = AddressProperties & AddressComputedProperties & Timest
 export type AddressProperties = {
     address: string;
     number: number;
+    latitude: number;
+    longitude: number;
     complement?: string;
 }
 

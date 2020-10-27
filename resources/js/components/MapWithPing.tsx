@@ -1,24 +1,24 @@
 import {Map, Marker, TileLayer} from "react-leaflet";
-import {LatLngExpression} from "leaflet";
-import React, {useState}  from "react";
+import {LatLngExpression}       from "leaflet";
+import React, {useState}        from "react";
 
 export type MapWithPingProps = {
     center: [number, number];
-    className: string;
-    zoom: number;
+    className?: string;
 }
 
-export const MapWithPing: React.FC<MapWithPingProps> = ({zoom, center}) => {
+export const MapWithPing: React.FC<MapWithPingProps> = ({center}) => {
     const [currentCenter, setCurrentCenter] = useState(center);
+    const [zoom, setZoom] = useState(17);
 
     return <Map
-        onViewportChange={(e) => setCurrentCenter(e.center as typeof center)}
-        center={currentCenter as LatLngExpression}
-        zoom={zoom}
-        style={{
-            width: "100%",
-            height: "300px"
+        onViewportChange={(e) => {
+            if (e.zoom) setZoom(e.zoom);
+            if (e.center) setCurrentCenter(e.center)
         }}
+        zoom={zoom}
+        center={currentCenter as LatLngExpression}
+        className="w-full h-64 rounded-lg"
     >
         <TileLayer
             detectRetina={true}

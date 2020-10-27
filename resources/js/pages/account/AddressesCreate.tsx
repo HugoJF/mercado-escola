@@ -9,14 +9,19 @@ import {AddressProperties}             from "../../models/addresses";
 import {Box}                           from "../../components/Box";
 import {AddressStreetNumberActionMenu} from "../../action-menu/AdressStreetNumberActionMenu";
 import {Google}                        from "../../google";
+import {extractAddressComponents}      from "../../helpers/GoogleMapsHelpers";
+import {MapWithPing}                   from "../../components/MapWithPing";
+import {Button}                        from "../../components/Button";
 
 export const AddressesCreate: React.FC = ({children}) => {
     const dispatch = useDispatch<Dispatch>();
     const history = useHistory();
     const [numberSelectorOpen, setNumberSelectorOpen] = useState(false);
+    const [loading, setLoading] = useState(false);
     const [input, setInput] = useState('');
-    const [address, setAddress] = useState<google.maps.GeocoderResult|null>(null);
+    const [address, setAddress] = useState<google.maps.GeocoderResult | null>(null);
     const [number, setNumber] = useState<number | null>(null);
+    const [center, setCenter] = useState<[number, number] | null>(null);
 
     async function handleAddressSelection(address: string) {
         const geocode = new (Google()).maps.Geocoder().geocode({address},
@@ -34,8 +39,36 @@ export const AddressesCreate: React.FC = ({children}) => {
                 const result = results[0];
                 console.log('Found address', result);
 
+                console.log(extractAddressComponents(result.address_components, [
+                    'route', 'sublocality_level_1', 'administrative_area_level_2',
+                ]));
+
+                setCenter([
+                    result.geometry.location.lat(),
+                    result.geometry.location.lng()
+                ]);
                 setAddress(result);
             });
+    }
+
+    async function handleSave() {
+        if (!address) {
+            // TODO: do something
+            return;
+        }
+
+        if (!number) {
+            // TODO: do something
+            return;
+        }
+
+        setLoading(true);
+        await storeAddress({
+            address: address.formatted_address,
+            latitude: address.geometry.location.lat(),
+            longitude: address.geometry.location.lng(),
+            number: number,
+        });
     }
 
     async function storeAddress(data: AddressProperties) {
@@ -43,7 +76,7 @@ export const AddressesCreate: React.FC = ({children}) => {
         history.goBack();
     }
 
-    const ready = !!(address && number);
+    const ready = address && number && !numberSelectorOpen;
 
     return <>
         <AddressStreetNumberActionMenu
@@ -105,16 +138,24 @@ export const AddressesCreate: React.FC = ({children}) => {
             </PlacesAutocomplete>}
 
             {ready && <div>
-                <p className="text-center text-sm text-gray-700">{address?.formatted_address}</p>
+                <p className="text-center text-base text-gray-700">{address?.formatted_address}</p>
                 <p className="text-center text-base font-medium text-gray-700">{number}</p>
             </div>}
 
-            {ready &&
-            <button className="w-full py-4 bg-primary-500 text-center text-xl text-white font-medium rounded-lg">
-                Adicionar
-            </button>
-            }
+            {ready && center &&
+            <MapWithPing center={center}/>}
 
+            {ready &&
+            <div className="mt-4">
+                <Button
+                    loading={loading}
+                    color="primary"
+                    onClick={() => handleSave()}
+                    className="mt-4"
+                >
+                    Salvar
+                </Button>
+            </div>}
         </div>
     </>
 };

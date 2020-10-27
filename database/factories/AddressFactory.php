@@ -26,6 +26,8 @@ class AddressFactory extends Factory
             'address'    => $this->faker->address,
             'number'     => $this->faker->numberBetween(0, 999),
             'complement' => $this->faker->secondaryAddress,
+            'latitude'   => $this->faker->latitude,
+            'longitude'  => $this->faker->longitude,
             'user_id'    => User::factory(),
         ];
     }

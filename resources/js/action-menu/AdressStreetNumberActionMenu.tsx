@@ -1,14 +1,14 @@
 import {Modal, ModalProps} from "../components/Modal";
-import React, {useState}   from "react";
+import React               from "react";
 
 export type AddressStreetNumberActionMenuType = {
     address: string;
     onNumber: (number: number) => void;
-    number: number|null;
+    number: number | null;
 }
 
 export const AddressStreetNumberActionMenu: React.FC<ModalProps & AddressStreetNumberActionMenuType> =
-    ({onNumber, number,address, open, onClose}) => {
+    ({onNumber, number, address, open, onClose}) => {
         return <Modal open={open} onClose={onClose}>
             <h1 className="text-center text-lg font-medium">Qual o número do endereço?</h1>
             <p className="mb-4 text-center text-gray-500">
@@ -19,7 +19,7 @@ export const AddressStreetNumberActionMenu: React.FC<ModalProps & AddressStreetN
                 <input
                     value={number || ''}
                     onChange={e => onNumber(parseInt(e.currentTarget.value))}
-                    className="inline-block py-2 w-1/2 text-center text-xl bg-white rounded tracking-wide"
+                    className="inline-block py-2 w-1/2 text-center text-xl font-mono font-medium border rounded tracking-wide"
                     type="number"
                 />
             </div>
