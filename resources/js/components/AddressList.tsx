@@ -27,7 +27,7 @@ export const AddressList: React.FC<AddressListParameters> = ({selected, onClick,
                 key={address.id}
                 onClick={() => onClick && onClick(address)}
             >
-                {selected === address.id ?
+                {selected && selected === address.id ?
                     <CheckSquare size={30} className="mr-4 flex-shrink-0 text-secondary-500"/>
                     :
                     <Square size={30} className="mr-4 flex-shrink-0 text-gray-400"/>
