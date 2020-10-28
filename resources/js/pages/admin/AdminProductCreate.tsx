@@ -1,13 +1,10 @@
-import React, {useEffect}  from "react";
+import React               from "react";
 import {useDispatch}       from "react-redux";
 import {Dispatch}          from "../../store";
-import {useProducts}       from "../../selectors";
-import {useParams}         from "react-router-dom";
 import {useHistory}        from "react-router";
-import {useForm}           from "react-hook-form";
 import {ProductProperties} from "../../models/products";
-import {Title}       from "../../components/ui/Title";
-import {ProductForm} from "../../components/product/ProductForm";
+import {Title}             from "../../components/ui/Title";
+import {ProductForm}       from "../../components/product/ProductForm";
 
 export const AdminProductCreate: React.FC = () => {
     const dispatch = useDispatch<Dispatch>();
