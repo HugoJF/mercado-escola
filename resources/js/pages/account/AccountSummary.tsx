@@ -7,6 +7,7 @@ import {useAddresses, useAuth}                                                  
 import {useDispatch}                                                                  from "react-redux";
 import {Dispatch}                                                                     from "../../store";
 import {Title}                                                                        from "../../components/ui/Title";
+import classNames                                                                     from 'classnames';
 
 export const AccountSummary: React.FC = ({children}) => {
     const dispatch = useDispatch<Dispatch>();
@@ -78,8 +79,13 @@ export const AccountSummary: React.FC = ({children}) => {
                     key={to}
                     isLink={clickable}
                     to={`${match.url}/${to}`}
-                    className={`transition-colors duration-150 w-full px-4 py-3 flex items-center
-                        ${clickable && 'hover:bg-gray-200'} border-b last:border-b-0 border-gray-200 ${clickable && 'cursor-pointer'}`}
+                    className={classNames(
+                        `transition-colors duration-150 w-full px-4 py-3 flex items-center
+                        border-b last:border-b-0 border-gray-200`,
+                        {
+                            'hover:bg-gray-200 cursor-pointer': clickable
+                        }
+                    )}
                 >
                     <div className="flex items-center justify-center w-6 mr-4">
                         <Icon className="text-primary-500"/>

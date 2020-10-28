@@ -1,5 +1,6 @@
-import React    from "react";
-import {Loader} from "react-feather";
+import React      from "react";
+import {Loader}   from "react-feather";
+import classNames from 'classnames';
 
 type ButtonColors = 'default' | 'primary' | 'secondary' | 'danger';
 
@@ -21,8 +22,11 @@ export const Button: React.FC<ButtonProps & React.HTMLAttributes<HTMLButtonEleme
 
     return <button
         {...rest}
-        className={`transition-all duration-150
-            py-3 w-full ${classes[color](props)} text-center text-xl font-medium rounded-lg border-box hover:shadow`}
+        className={classNames(
+            classes[color](props),
+            `transition-all duration-150 py-3 w-full
+            text-center text-xl font-medium rounded-lg border-box hover:shadow`
+        )}
     >
         {loading ?
             <Loader size={30} className="animate-spin mx-auto block"/>

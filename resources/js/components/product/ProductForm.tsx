@@ -1,10 +1,7 @@
 import React, {useEffect, useState}     from "react";
-import {useDispatch}                    from "react-redux";
-import {useHistory}                     from "react-router";
 import {useForm}                        from "react-hook-form";
 import * as QuantityConfig              from "../../configs/ProductQuantityConfig";
 import {ProductProperties, ProductType} from "../../models/products";
-import {Dispatch}                       from "../../store";
 import {Input}                          from "../form/Input";
 import {Textarea}                       from "../form/Textarea";
 import {Select}                         from "../form/Select";
@@ -17,10 +14,8 @@ type ProductFormType = {
 
 export const ProductForm: React.FC<ProductFormType>
     = ({onSubmit, product}) => {
-    const dispatch = useDispatch<Dispatch>();
-    const history = useHistory();
     const [loading, setLoading] = useState(false);
-    const {register, handleSubmit, watch, errors, setError, setValue} = useForm<ProductProperties>();
+    const {register, handleSubmit, errors, setError, setValue} = useForm<ProductProperties>();
 
     useEffect(() => {
         if (!product) return;

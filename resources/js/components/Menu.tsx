@@ -3,6 +3,7 @@ import Ripples                             from "react-ripples";
 import {useHistory, useLocation}           from "react-router-dom";
 import {Book, Heart, Home, Settings, User} from "react-feather";
 import {useAuth}                           from "../selectors";
+import classNames                          from 'classnames';
 
 const buttons = {
     Home: {
@@ -47,20 +48,26 @@ export const Menu: React.FC = () => {
         {Object.entries(buttons)
             .filter(([name, details]) => !(details.adminOnly || false) || auth?.me?.admin)
             .map(([name, details]) => {
-            const Icon = details.icon;
+                const Icon = details.icon;
+                const isIn = location.pathname.startsWith(details.to);
 
-            return <Ripples
-                key={name}
-                onClick={() => redirect(details.to)}
-                className={`transition-colors duration-150
-                    w-full flex flex-grow flex-col pt-4 pb-2 items-center justify-between
-                    hover:bg-gray-100 ${location.pathname.startsWith(details.to) ? 'text-secondary-600' : 'text-gray-500'} cursor-pointer`
-                }
-            >
-                <Icon size={30} className="inline-block"/>
-                <span className="font-medium select-none">{name}</span>
-            </Ripples>
+                return <Ripples
+                    key={name}
+                    onClick={() => redirect(details.to)}
+                    className={classNames(
+                        `transition-colors duration-150
+                        w-full flex flex-grow flex-col pt-4 pb-2 items-center justify-between
+                        hover:bg-gray-100 cursor-pointer`,
+                        {
+                            'text-secondary-600': isIn,
+                            'text-gray-500': !isIn,
+                        }
+                    )}
+                >
+                    <Icon size={30} className="inline-block"/>
+                    <span className="font-medium select-none">{name}</span>
+                </Ripples>
 
-        })}
+            })}
     </div>
 };

@@ -6,6 +6,7 @@ import {HeaderWrapper}             from "./partial/HeaderWrapper";
 import {useFavorites, useProducts} from "../selectors";
 import {useDispatch}               from "react-redux";
 import {Dispatch}                  from "../store";
+import classNames                  from 'classnames';
 
 export const ProductHeader: React.FC = () => {
     const dispatch = useDispatch<Dispatch>();
@@ -38,7 +39,12 @@ export const ProductHeader: React.FC = () => {
             <h2 className="text-3xl font-medium truncate">{product.title}</h2>
 
             <div
-                className={`transition-all duration-200 p-3 border-2 ${favorite && 'bg-secondary-500 border-secondary-500 text-white'} rounded-lg`}
+                className={classNames(
+                    `transition-all duration-200 p-3 border-2 rounded-lg`,
+                    {
+                        'bg-secondary-500 border-secondary-500 text-white': favorite,
+                    }
+                )}
                 onClick={toggleFavorite}
             >
                 <Bookmark size={30}/>

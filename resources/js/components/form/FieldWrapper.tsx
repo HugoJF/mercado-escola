@@ -1,5 +1,6 @@
 import React        from 'react';
 import {FieldError} from "react-hook-form";
+import classNames   from 'classnames';
 
 export type FieldWrapperType = {
     name: string,
@@ -9,7 +10,13 @@ export type FieldWrapperType = {
 
 export const FieldWrapper: React.FC<FieldWrapperType> = ({name, label, error, children}) => {
     return <>
-        <label className={`${error ? 'text-red-500' : ' text-gray-500'}`} htmlFor={`#${name}`}>
+        <label
+            className={classNames({
+                'text-red-500': error,
+                'text-gray-500': !error
+            })}
+            htmlFor={`#${name}`}
+        >
             {label}
         </label>
 

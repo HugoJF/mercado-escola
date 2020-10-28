@@ -1,4 +1,5 @@
-import React from "react";
+import React      from "react";
+import classNames from 'classnames';
 
 export type BadgeColors = 'primary' | 'secondary' | 'warning' | 'info' | 'danger';
 
@@ -17,7 +18,10 @@ const classes: { [id in BadgeColors]: string } = {
 export const Badge: React.FC<BadgeProps & React.HTMLAttributes<HTMLSpanElement>> = ({color = 'primary', children, ...rest}) => {
     return <span
         {...rest}
-        className={`py-1 px-3 text-sm ${classes[color]} font-medium rounded-full`}
+        className={classNames(
+            classes[color],
+            'py-1 px-3 text-sm font-medium rounded-full'
+        )}
     >
         {children}
     </span>

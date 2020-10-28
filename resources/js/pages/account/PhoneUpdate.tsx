@@ -6,15 +6,16 @@ import {Title}           from "../../components/ui/Title";
 import {Loader}          from "react-feather";
 import {useForm}         from "react-hook-form";
 import InputMask         from "react-input-mask";
+import classNames        from 'classnames';
 
 export const PhoneUpdate: React.FC = ({children}) => {
     const dispatch = useDispatch<Dispatch>();
     const history = useHistory();
     const [loading, setLoading] = useState(false);
 
-    const {register, handleSubmit, errors} = useForm<{phone: string}>();
+    const {register, handleSubmit, errors} = useForm<{ phone: string }>();
 
-    async function updatePhone(data: {phone: string}) {
+    async function updatePhone(data: { phone: string }) {
         setLoading(true);
         console.log(data);
         setLoading(false);
@@ -24,7 +25,12 @@ export const PhoneUpdate: React.FC = ({children}) => {
     return <>
         <Title>Digite seu telefone</Title>
         <form className="mt-8 px-4 w-full" onSubmit={handleSubmit(updatePhone)}>
-            <label className={`${errors.phone ? 'text-red-500' : ' text-gray-500'}`} htmlFor="#phone">Telefone</label>
+            <label className={classNames(
+                {
+                    'text-red-500': errors.phone,
+                    'text-gray-500': !errors.phone,
+                }
+            )} htmlFor="#phone">Telefone</label>
             <InputMask
                 className={`transition-colors duration-300 block w-full mb-8 py-3 px-4 text-black bg-transparent border-b border-lg${errors.phone ? ' border-red-500' : ''}`}
                 id="phone"
