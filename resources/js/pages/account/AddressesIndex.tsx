@@ -40,10 +40,6 @@ export const AddressesIndex: React.FC = ({children}) => {
 
         <FlatButton
             onClick={() => history.push('/conta/endereco/novo')}
-            className="transition-all duration-150
-                flex justify-center items-center
-                w-full px-4 py-5 flex items-center bg-gray-200 hover:bg-gray-300 text-gray-600
-                border-b last:border-b-0 border-gray-200 cursor-pointer"
         >
             <span className="mr-4 text-lg">Adicionar novo endereço</span>
             <Plus/>

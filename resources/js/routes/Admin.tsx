@@ -5,6 +5,7 @@ import {SwitchWithTransitions} from "../components/ui/SwitchWithTransition";
 import {AdminProductIndex}     from "../pages/admin/AdminProductIndex";
 import {AdminProductEdit}      from "../pages/admin/AdminProductEdit";
 import {AdminIndex}            from "../pages/admin/AdminIndex";
+import {AdminProductCreate}    from "../pages/admin/AdminProductCreate";
 
 export const Admin: React.FC = () => {
     const relative = useRelativePath();
@@ -12,6 +13,7 @@ export const Admin: React.FC = () => {
     return <SwitchWithTransitions padding>
         <Route exact path={relative('/')} children={<AdminIndex/>}/>
         <Route exact path={relative('/produtos')} children={<AdminProductIndex/>}/>
+        <Route exact path={relative('/produtos/novo')} children={<AdminProductCreate/>}/>
         <Route path={relative('/produtos/:productId/editar')} children={<AdminProductEdit/>}/>
     </SwitchWithTransitions>
 };

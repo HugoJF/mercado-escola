@@ -58,7 +58,12 @@ export const products = createModel<RootModel>()({
             dispatch.products.reset();
             dispatch.products.addProduct(favoritesProducts);
         },
-        async update(payload: {id: number, data: ProductProperties}, state: RootState): Promise<void> {
+        async create(payload: ProductProperties, state: RootState): Promise<void> {
+            const response = await window.axios.post('/products', payload);
+
+            dispatch.products.addProduct(response.data);
+        },
+        async update(payload: { id: number, data: ProductProperties }, state: RootState): Promise<void> {
             const response = await window.axios.patch(`/products/${payload.id}`, payload.data);
 
             dispatch.products.addProduct(response.data);

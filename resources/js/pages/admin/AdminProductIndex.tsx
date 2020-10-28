@@ -1,16 +1,18 @@
-import React, {useEffect, useState}     from "react";
-import {Title}                          from "../../components/ui/Title";
-import {ArrowRight, ShoppingBag, Trash} from "react-feather";
-import useRelativePath                  from "../../hooks/useRelativePath";
-import {useDispatch}                    from "react-redux";
-import {Dispatch}                       from "../../store";
-import {useProducts}                    from "../../selectors";
-import {HeightTransitioner}             from "../../components/ui/HeightTransitioner";
-import {ConfirmActionMenu}              from "../../action-menu/ConfirmActionMenu";
-import {Link}                           from "react-router-dom";
+import React, {useEffect, useState}           from "react";
+import {Title}                                from "../../components/ui/Title";
+import {ArrowRight, Plus, ShoppingBag, Trash} from "react-feather";
+import useRelativePath                        from "../../hooks/useRelativePath";
+import {useDispatch}                          from "react-redux";
+import {Dispatch}                             from "../../store";
+import {useProducts}                          from "../../selectors";
+import {HeightTransitioner}                   from "../../components/ui/HeightTransitioner";
+import {ConfirmActionMenu}                    from "../../action-menu/ConfirmActionMenu";
+import {Link, useHistory}                     from "react-router-dom";
+import {FlatButton}                           from "../../components/ui/FlatButton";
 
 export const AdminProductIndex: React.FC = () => {
     const dispatch = useDispatch<Dispatch>();
+    const history = useHistory();
     const relative = useRelativePath();
     const products = useProducts();
     const [confirmMenuOpen, setConfirmMenuOpen] = useState(false);
@@ -106,6 +108,13 @@ export const AdminProductIndex: React.FC = () => {
                     </HeightTransitioner>
                 ))}
             </div>
+
+            <FlatButton
+                onClick={() => history.push(relative('/novo'))}
+            >
+                <span className="mr-4 text-lg">Adicionar produto</span>
+                <Plus/>
+            </FlatButton>
         </div>
     </>
 };
