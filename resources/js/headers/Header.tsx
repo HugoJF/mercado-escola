@@ -1,8 +1,8 @@
 import React           from 'react';
 import {Route, Switch} from "react-router";
-import {HomeHeader}    from "../headers/HomeHeader";
-import {DefaultHeader} from "../headers/DefaultHeader";
-import {ProductHeader} from "../headers/ProductHeader";
+import {HomeHeader}    from "./HomeHeader";
+import {DefaultHeader} from "./DefaultHeader";
+import {ProductHeader} from "./ProductHeader";
 
 export const Header: React.FC = () => {
     return <Switch>

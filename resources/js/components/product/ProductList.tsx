@@ -1,5 +1,5 @@
 import React         from "react";
-import {ProductType} from "../models/products";
+import {ProductType} from "../../models/products";
 import {Product}     from "./Product";
 
 interface ProductListParameters {

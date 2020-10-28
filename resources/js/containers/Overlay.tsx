@@ -1,6 +1,6 @@
 import React    from "react";
 import {Menu}   from "../components/Menu";
-import {Header} from "./Header";
+import {Header} from "../headers/Header";
 
 
 export const Overlay: React.FC = ({children}) => {

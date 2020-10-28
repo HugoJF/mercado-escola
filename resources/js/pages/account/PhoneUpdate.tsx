@@ -1,9 +1,9 @@
 import React, {useState}   from "react";
 import {useDispatch}       from "react-redux";
 import {Dispatch}          from "../../store";
-import {useHistory}        from "react-router-dom";
-import {Title}             from "../../components/Title";
-import {Loader}            from "react-feather";
+import {useHistory} from "react-router-dom";
+import {Title}      from "../../components/ui/Title";
+import {Loader}     from "react-feather";
 import {useForm}           from "react-hook-form";
 import InputMask           from "react-input-mask";
 

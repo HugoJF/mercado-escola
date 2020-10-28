@@ -1,7 +1,7 @@
 import React            from "react";
 import {Link}           from "react-router-dom";
-import {PriceFormatter} from "./PriceFormatter";
-import {ProductType}    from "../models/products";
+import {PriceFormatter} from "../ui/PriceFormatter";
+import {ProductType}    from "../../models/products";
 
 interface ProductParameters {
     product: ProductType

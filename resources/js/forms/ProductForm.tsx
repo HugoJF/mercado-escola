@@ -6,13 +6,17 @@ import {useForm}                        from "react-hook-form";
 import * as QuantityConfig              from "../configs/ProductQuantityConfig";
 import {ProductProperties, ProductType} from "../models/products";
 import {Dispatch}                       from "../store";
+import {Input}                          from "../components/form/Input";
+import {Textarea}                       from "../components/form/Textarea";
+import {Select} from "../components/form/Select";
+import {Button} from "../components/ui/Button";
 
-type ProductForm = {
+type ProductFormType = {
     product?: ProductType;
     onSubmit: (data: ProductProperties) => void;
 }
 
-export const ProductForm: React.FC<ProductForm>
+export const ProductForm: React.FC<ProductFormType>
     = ({onSubmit, product}) => {
     const dispatch = useDispatch<Dispatch>();
     const history = useHistory();
@@ -26,7 +30,7 @@ export const ProductForm: React.FC<ProductForm>
             // @ts-ignore
             setValue(prop, product[prop]);
         }
-    }, [setValue, product]);
+    }, [setValue, product?.id]);
 
     function setErrors(errors: object) {
         for (let [key, messages] of Object.entries(errors)) {
@@ -35,10 +39,10 @@ export const ProductForm: React.FC<ProductForm>
         }
     }
 
-    function submit(data: ProductProperties) {
+    async function submit(data: ProductProperties) {
         setLoading(true);
         try {
-            onSubmit(data);
+            await onSubmit(data);
         } catch (e) {
             // TODO: type check this
             setErrors(e.errors);
@@ -47,98 +51,68 @@ export const ProductForm: React.FC<ProductForm>
     }
 
     // @ts-ignore
-    return <form className="block" onSubmit={handleSubmit(submit)}>
+    return <form onSubmit={handleSubmit(submit)}>
         <div>
             {/* Title */}
             <div className="mb-8">
-                <label className={`${errors.title ? 'text-red-500' : ' text-gray-500'}`} htmlFor="#title">Nome</label>
-                <input
-                    className={`transition-colors duration-300
-                        block w-full py-3 px-4 text-black
-                        bg-transparent border-b border-lg${errors.title ? ' border-red-500' : ''}`}
-                    placeholder="Digite o nome do produto..."
-                    id="title"
-                    ref={register({required: 'Digite o nome do produto'})}
+                <Input
                     name="title"
-                    type="text"
-                />
-
-                {
-                    errors.title &&
-                    <p className="text-sm text-red-500 font-medium">{errors.title.message}</p>
-                }
+                    label="Nome"
+                    error={errors.title}
+                    inputProps={{
+                        ref: register({required: 'Digite o nome do produto'}),
+                        placeholder: "Digite o nome do produto...",
+                    }}/>
             </div>
 
             {/* Description */}
             <div className="mb-8">
-                <label className={`${errors.description ? 'text-red-500' : ' text-gray-500'}`} htmlFor="#description">Descrição</label>
-                <textarea
-                    className={`transition-colors duration-300
-                        block w-full py-3 px-4 text-black
-                        bg-transparent border-b border-lg${errors.description ? ' border-red-500' : ''}`}
-                    placeholder="Digite a descrição do produto..."
-                    id="description"
-                    ref={register({required: 'Digite a descrição do produto'})}
+                <Textarea
                     name="description"
+                    label="Descrição"
+                    error={errors.description}
+                    textAreaProps={{
+                        ref: register({required: 'Digite a descrição do produto'}),
+                    }}
                 />
-
-                {
-                    errors.description &&
-                    <p className="text-sm text-red-500 font-medium">{errors.description.message}</p>
-                }
             </div>
 
             {/* Quantity type */}
             <div className="mb-8">
-                <label className={`${errors.quantity_type ? 'text-red-500' : ' text-gray-500'}`} htmlFor="#quantity_type">Tipo da quantidade</label>
-                <select
-                    className={`transition-colors duration-300
-                        block w-full py-3 px-4 text-black
-                        bg-transparent border-b border-lg${errors.quantity_type ? ' border-red-500' : ''}`}
-                    placeholder="Selecione qual o tipo de unidade do produto..."
-                    id="quantity_type"
-                    ref={register({required: 'Selecione qual o tipo de unidade do produto'})}
+                <Select
                     name="quantity_type"
+                    label="Tipo da quantidade"
+                    error={errors.quantity_type}
+                    selectProps={{
+                        ref: register({required: 'Selecione qual o tipo de unidade do produto'})
+                    }}
                 >
-                    {Object.entries(QuantityConfig).map(([id, definition]) => (
-                        <option key={id} value={id}>{definition.singular}</option>
-                    ))}
-                </select>
-                {
-                    errors.quantity_type &&
-                    <p className="text-sm text-red-500 font-medium">{errors.quantity_type.message}</p>
-                }
+                    {Object.entries(QuantityConfig).map(
+                        ([id, definition]) => (
+                            <option key={id} value={id}>{definition.singular}</option>
+                        )
+                    )}
+                </Select>
             </div>
 
             {/* Quantity cost */}
             <div className="mb-8">
-                <label className={`${errors.quantity_cost ? 'text-red-500' : ' text-gray-500'}`} htmlFor="#quantity_cost">Preço da quantidade (em centavos)</label>
-                <input
-                    className={`transition-colors duration-300
-                        block w-full py-3 px-4 text-black
-                        bg-transparent border-b border-lg${errors.quantity_cost ? ' border-red-500' : ''}`}
-                    placeholder="Digite o preço (em R$) de 1 unidade do produto..."
-                    id="quantity_cost"
-                    ref={register({required: 'Digite o preço (em R$) de 1 unidade do produto'})}
+                <Input
                     name="quantity_cost"
-                    type="number"
-                    min={0}
-                    step={1}
+                    label="Preço da quantidade (em centavos)"
+                    error={errors.quantity_cost}
+                    inputProps={{
+                        ref: register({required: 'Digite o preço (em R$) de 1 unidade do produto'}),
+                        type: 'number',
+                        min: 0,
+                        step: 1,
+                    }}
                 />
-
-                {
-                    errors.quantity_cost &&
-                    <p className="text-sm text-red-500 font-medium">{errors.quantity_cost.message}</p>
-                }
             </div>
 
-            <button className="w-full mt-8 py-4 bg-primary-500 text-center text-xl text-white font-medium rounded-lg">
-                {loading ?
-                    <Loader className="animate-spin mx-auto block"/>
-                    :
-                    <span>Atualizar</span>
-                }
-            </button>
+            <Button loading={loading}>
+                Atualizar
+            </Button>
         </div>
     </form>
 };

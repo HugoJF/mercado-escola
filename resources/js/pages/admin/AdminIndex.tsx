@@ -1,5 +1,5 @@
 import React                                       from "react";
-import {Title}                                     from "../../components/Title";
+import {Title}                                     from "../../components/ui/Title";
 import {Calendar, Icon, ShoppingBag, Truck, Users} from "react-feather";
 import {Link}                                      from "react-router-dom";
 import useRelativePath                             from "../../hooks/useRelativePath";

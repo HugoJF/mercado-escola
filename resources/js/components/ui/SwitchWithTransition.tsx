@@ -1,5 +1,5 @@
 import {CSSTransition, TransitionGroup} from "react-transition-group";
-import {Container}                      from "../containers/Container";
+import {Container}                      from "../../containers/Container";
 import {Switch, useLocation}            from "react-router-dom";
 import React                            from "react";
 

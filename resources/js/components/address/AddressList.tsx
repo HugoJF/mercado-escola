@@ -1,8 +1,8 @@
 import React                               from "react";
-import {AddressType}                       from "../models/addresses";
+import {AddressType}                       from "../../models/addresses";
 import {CheckSquare, ChevronRight, Square} from "react-feather";
-import {Box}                               from "./Box";
-import {Skeleton}                          from "./Skeleton";
+import {Box}                               from "../ui/Box";
+import {Skeleton}                          from "../ui/Skeleton";
 
 interface AddressListParameters {
     addresses: AddressType[];

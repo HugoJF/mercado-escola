@@ -1,5 +1,5 @@
 import React            from "react";
-import {OrderStateEnum} from "../models/orders";
+import {OrderStateEnum} from "../../models/orders";
 
 export type OrderStateTextProps = {
     state: OrderStateEnum;

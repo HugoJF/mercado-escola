@@ -2,7 +2,7 @@ import React                   from 'react';
 import {Route}                 from "react-router";
 import useRelativePath         from "../hooks/useRelativePath";
 import {ProductShow}           from "../pages/products/ProductShow";
-import {SwitchWithTransitions} from "../components/SwitchWithTransition";
+import {SwitchWithTransitions} from "../components/ui/SwitchWithTransition";
 import {ProductIndex}          from "../pages/products/ProductIndex";
 
 export const Products: React.FC = () => {

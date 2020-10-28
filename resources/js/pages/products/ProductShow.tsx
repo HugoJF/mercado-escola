@@ -1,8 +1,8 @@
-import React                  from 'react';
-import {Button}               from "../../components/Button";
-import {useParams}            from "react-router";
+import React       from 'react';
+import {Button}    from "../../components/ui/Button";
+import {useParams} from "react-router";
 import {useCart, useProducts} from "../../selectors";
-import {PriceFormatter}       from "../../components/PriceFormatter";
+import {PriceFormatter}       from "../../components/ui/PriceFormatter";
 import {useDispatch}          from "react-redux";
 import {Dispatch}             from "../../store";
 import useCartQuantity        from "../../hooks/useCartQuantity";

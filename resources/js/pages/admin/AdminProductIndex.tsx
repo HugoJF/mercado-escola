@@ -1,12 +1,12 @@
 import React, {useEffect, useState}     from "react";
-import {Title}                          from "../../components/Title";
+import {Title}                          from "../../components/ui/Title";
 import {ArrowRight, ShoppingBag, Trash} from "react-feather";
 import useRelativePath                  from "../../hooks/useRelativePath";
 import {useDispatch}                    from "react-redux";
 import {Dispatch}                       from "../../store";
-import {useProducts}                    from "../../selectors";
-import {HeightTransitioner}             from "../../components/HeightTransitioner";
-import {ConfirmActionMenu}              from "../../action-menu/ConfirmActionMenu";
+import {useProducts}        from "../../selectors";
+import {HeightTransitioner} from "../../components/ui/HeightTransitioner";
+import {ConfirmActionMenu}  from "../../action-menu/ConfirmActionMenu";
 import {Link}                           from "react-router-dom";
 
 export const AdminProductIndex: React.FC = () => {

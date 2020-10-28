@@ -2,7 +2,7 @@ import React                   from 'react';
 import {Route}                 from "react-router";
 import useRelativePath         from "../hooks/useRelativePath";
 import {HomePage}              from "../pages/home/HomePage";
-import {SwitchWithTransitions} from "../components/SwitchWithTransition";
+import {SwitchWithTransitions} from "../components/ui/SwitchWithTransition";
 
 export const Home: React.FC = () => {
     const relative = useRelativePath();

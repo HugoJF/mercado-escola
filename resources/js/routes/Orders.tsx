@@ -3,7 +3,7 @@ import {Route, useLocation}    from "react-router";
 import useRelativePath         from "../hooks/useRelativePath";
 import {OrdersSummary}         from "../pages/orders/OrdersSummary";
 import {OrdersEnd}             from "../pages/orders/OrdersEnd";
-import {SwitchWithTransitions} from "../components/SwitchWithTransition";
+import {SwitchWithTransitions} from "../components/ui/SwitchWithTransition";
 import {OrdersIndex}           from "../pages/orders/OrdersIndex";
 
 export const Orders: React.FC = () => {

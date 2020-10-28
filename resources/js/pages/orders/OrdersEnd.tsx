@@ -1,14 +1,14 @@
-import React, {useEffect}                                  from "react";
-import {Button}                                            from "../../components/Button";
-import {Title}                                             from "../../components/Title";
+import React, {useEffect} from "react";
+import {Button}           from "../../components/ui/Button";
+import {Title}            from "../../components/ui/Title";
 import {Calendar, CheckSquare, DollarSign, MapPin, Square} from "react-feather";
-import {Box}                                               from "../../components/Box";
+import {Box}                                               from "../../components/ui/Box";
 import {useParams}                                         from "react-router";
 import {useDispatch}                                       from "react-redux";
 import {Dispatch}                                          from "../../store";
-import {useAddresses, useOpenings, useOrders}              from "../../selectors";
-import {PriceFormatter}                                    from "../../components/PriceFormatter";
-import {format, parseISO}                                  from "date-fns";
+import {useAddresses, useOpenings, useOrders} from "../../selectors";
+import {PriceFormatter}                       from "../../components/ui/PriceFormatter";
+import {format, parseISO}                     from "date-fns";
 import {ptBR}                                              from "date-fns/locale";
 
 const status = [{

@@ -2,13 +2,13 @@ import React, {useState}                 from "react";
 import {useDispatch}                     from "react-redux";
 import {Dispatch}                        from "../../store";
 import {Link, useHistory, useRouteMatch} from "react-router-dom";
-import {Title}                           from "../../components/Title";
+import {Title}                           from "../../components/ui/Title";
 import {Plus}                            from "react-feather";
 import {useAddresses, useAuth}           from "../../selectors";
-import useAsyncEffect                    from "../../hooks/useAsyncEffect";
-import {AddressList}                     from "../../components/AddressList";
-import {FlatButton}                      from "../../components/FlatButton";
-import {AddressType}                     from "../../models/addresses";
+import useAsyncEffect from "../../hooks/useAsyncEffect";
+import {AddressList}  from "../../components/address/AddressList";
+import {FlatButton}   from "../../components/ui/FlatButton";
+import {AddressType} from "../../models/addresses";
 
 export const AddressesIndex: React.FC = ({children}) => {
     const [loading, setLoading] = useState(true);

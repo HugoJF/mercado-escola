@@ -1,14 +1,14 @@
 import React, {useEffect, useState}                                 from "react";
-import {Link, useHistory}                                           from "react-router-dom";
-import {Button}                                                     from "../../components/Button";
-import {Title}                                                      from "../../components/Title";
+import {Link, useHistory} from "react-router-dom";
+import {Button}           from "../../components/ui/Button";
+import {Title}            from "../../components/ui/Title";
 import {Calendar, ChevronRight, Edit, MapPin, ShoppingBag, XSquare} from "react-feather";
 import {useAddresses, useCart, useOpenings, useProducts}            from "../../selectors";
 import {useDispatch}                                                from "react-redux";
 import {Dispatch}                                                   from "../../store";
-import {ProductType}                                                from "../../models/products";
-import {PriceFormatter}                                             from "../../components/PriceFormatter";
-import {ShippingOptionActionMenu}                                   from "../../action-menu/ShippingOptionActionMenu";
+import {ProductType}              from "../../models/products";
+import {PriceFormatter}           from "../../components/ui/PriceFormatter";
+import {ShippingOptionActionMenu} from "../../action-menu/ShippingOptionActionMenu";
 import {OrderProductsType}                                          from "../../models/orders";
 
 

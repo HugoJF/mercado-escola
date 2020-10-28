@@ -5,7 +5,7 @@ import {AccountSummary}        from "../pages/account/AccountSummary";
 import {Link}                  from "react-router-dom";
 import {AddressesIndex}        from "../pages/account/AddressesIndex";
 import {AddressesCreate}       from "../pages/account/AddressesCreate";
-import {SwitchWithTransitions} from "../components/SwitchWithTransition";
+import {SwitchWithTransitions} from "../components/ui/SwitchWithTransition";
 import {PhoneUpdate}           from "../pages/account/PhoneUpdate";
 
 export const Account: React.FC = () => {
