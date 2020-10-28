@@ -1,30 +1,41 @@
-import React                     from "react";
-import Ripples                   from "react-ripples";
-import {useHistory, useLocation} from "react-router-dom";
-import {Book, Heart, Home, User} from "react-feather";
+import React                               from "react";
+import Ripples                             from "react-ripples";
+import {useHistory, useLocation}           from "react-router-dom";
+import {Book, Heart, Home, Settings, User} from "react-feather";
+import {useAuth}                           from "../selectors";
 
 const buttons = {
     Home: {
         to: '/home',
         icon: Home,
+        adminOnly: false,
     },
     Favoritos: {
         to: '/favoritos',
         icon: Heart,
+        adminOnly: false,
     },
     Pedidos: {
         to: '/pedidos',
         icon: Book,
+        adminOnly: false,
+    },
+    Admin: {
+        to: '/admin',
+        icon: Settings,
+        adminOnly: true,
     },
     Conta: {
         to: '/conta',
         icon: User,
+        adminOnly: false,
     },
 };
 
 export const Menu: React.FC = () => {
     const history = useHistory();
     const location = useLocation();
+    const auth = useAuth();
 
     function redirect(to: string) {
         // TODO: remove
@@ -33,7 +44,9 @@ export const Menu: React.FC = () => {
     }
 
     return <div className="flex items-stretch justify-around bg-white shadow-menu">
-        {Object.entries(buttons).map(([name, details]) => {
+        {Object.entries(buttons)
+            .filter(([name, details]) => !(details.adminOnly || false) || auth?.me?.admin)
+            .map(([name, details]) => {
             const Icon = details.icon;
 
             return <Ripples

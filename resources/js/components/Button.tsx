@@ -1,23 +1,28 @@
 import React    from "react";
 import {Loader} from "react-feather";
 
-type ButtonColors = 'primary' | 'secondary';
+type ButtonColors = 'default' | 'primary' | 'secondary' | 'danger';
 
 export type ButtonProps = {
     color?: ButtonColors;
+    outline?: boolean;
     loading?: boolean;
 }
 
-const classes: { [id in ButtonColors]: string } = {
-    primary: 'bg-primary-500 hover:bg-primary-600 text-white',
-    secondary: 'bg-secondary-500 hover:bg-secondary-600 text-white'
+const classes: { [id in ButtonColors]: (params: ButtonProps) => string } = {
+    default: ({outline}) => `${outline ? 'text-gray-500 border-2 border-gray-500' : 'bg-gray-500 hover:bg-gray-600 text-white'}`,
+    primary: ({outline}) => 'bg-primary-500 hover:bg-primary-600 text-white',
+    secondary: ({outline}) => 'bg-secondary-500 hover:bg-secondary-600 text-white',
+    danger: ({outline}) => `${outline ? 'text-red-500 border-2 border-red-500' : 'bg-red-500 hover:bg-red-600 text-white'}`
 };
 
-export const Button: React.FC<ButtonProps & React.HTMLAttributes<HTMLButtonElement>> = ({loading = false, color = 'primary', children, ...rest}) => {
+export const Button: React.FC<ButtonProps & React.HTMLAttributes<HTMLButtonElement>> = (props) => {
+    const {loading = false, color = 'primary', outline, children, ...rest} = props;
+
     return <button
         {...rest}
         className={`transition-all duration-150
-            py-3 w-full ${classes[color]} text-center text-xl rounded-lg hover:shadow`}
+            py-3 w-full ${classes[color](props)} text-center text-xl font-medium rounded-lg border-box hover:shadow`}
     >
         {loading ?
             <Loader size={30} className="animate-spin mx-auto block"/>

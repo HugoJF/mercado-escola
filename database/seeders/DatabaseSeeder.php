@@ -22,6 +22,7 @@ class DatabaseSeeder extends Seeder
         $user = User::factory()->create([
             'email'    => 'asd@asd.com',
             'password' => bcrypt('123123123'),
+            'admin'    => true,
         ]);
         $addresses = Address::factory()->count(5)->create();
         $opening = Opening::factory()->create();

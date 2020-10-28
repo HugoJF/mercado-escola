@@ -6,6 +6,7 @@ export type AuthState = {
     me?: {
         name: string,
         email: string,
+        admin: boolean,
         main_address: number|null,
     },
     failed?: boolean,

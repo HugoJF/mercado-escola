@@ -26,6 +26,11 @@ export const products = createModel<RootModel>()({
     } as ProductsState,
 
     reducers: {
+        reset: (state, payload) => {
+            state.products = {};
+
+            return state;
+        },
         addProduct: (state, payload: ProductType | ProductType[]) => {
             if (!Array.isArray(payload)) {
                 payload = [payload];
@@ -37,11 +42,31 @@ export const products = createModel<RootModel>()({
 
             return state;
         },
+        remove: (state, payload: number) => {
+            delete state.products[payload];
+
+            return state;
+        }
     },
 
     effects: (dispatch) => ({
         async index(payload, state: RootState): Promise<void> {
-            //
+            const response = await window.axios.get('/products');
+
+            let favoritesProducts = response.data as ProductType[];
+
+            dispatch.products.reset();
+            dispatch.products.addProduct(favoritesProducts);
         },
+        async update(payload: {id: number, data: ProductProperties}, state: RootState): Promise<void> {
+            const response = await window.axios.patch(`/products/${payload.id}`, payload.data);
+
+            dispatch.products.addProduct(response.data);
+        },
+        async destroy(payload: number, state: RootState): Promise<void> {
+            const response = await window.axios.delete(`/products/${payload}`);
+
+            dispatch.products.remove(payload);
+        }
     })
 });

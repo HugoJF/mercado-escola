@@ -37,6 +37,7 @@
         "leaflet": "^1.7.1",
         "normalizr": "^3.6.0",
         "react": "^16.13.1",
+        "react-animate-height": "^2.0.23",
         "react-dom": "^16.13.1",
         "react-feather": "^2.0.8",
         "react-hook-form": "^6.9.2",
