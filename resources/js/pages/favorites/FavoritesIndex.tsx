@@ -1,6 +1,6 @@
-import React, {useEffect} from "react";
-import {Title}            from "../../components/ui/Title";
-import {Link}             from "react-router-dom";
+import React, {useEffect}          from "react";
+import {Title}                     from "../../components/ui/Title";
+import {Link}                      from "react-router-dom";
 import {useDispatch}               from "react-redux";
 import {Dispatch}                  from "../../store";
 import {useFavorites, useProducts} from "../../selectors";

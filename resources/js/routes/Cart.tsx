@@ -1,7 +1,6 @@
 import React                   from 'react';
 import {Route}                 from "react-router";
 import useRelativePath         from "../hooks/useRelativePath";
-import {HomePage}              from "../pages/home/HomePage";
 import {SwitchWithTransitions} from "../components/ui/SwitchWithTransition";
 import {CartIndex}             from "../pages/cart/CartIndex";
 import {CartAddress}           from "../pages/cart/CartAddress";

@@ -1,8 +1,7 @@
-import React                       from 'react';
-import {ChevronLeft, ShoppingCart} from "react-feather";
-import {useHistory}                from "react-router";
-import {useCart}                   from "../../selectors";
-import {Cart}                      from "./Cart";
+import React         from 'react';
+import {ChevronLeft} from "react-feather";
+import {useHistory}  from "react-router";
+import {Cart}        from "./Cart";
 
 export const BackAndCart: React.FC = () => {
     const history = useHistory();

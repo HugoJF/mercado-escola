@@ -1,16 +1,16 @@
-import React, {useEffect} from "react";
-import {Title}            from "../../components/ui/Title";
-import {MoreVertical}     from "react-feather";
-import {PriceFormatter} from "../../components/ui/PriceFormatter";
-import {Link}           from "react-router-dom";
+import React, {useEffect}        from "react";
+import {Title}                   from "../../components/ui/Title";
+import {MoreVertical}            from "react-feather";
+import {PriceFormatter}          from "../../components/ui/PriceFormatter";
+import {Link}                    from "react-router-dom";
 import {OrderType}               from "../../models/orders";
 import {useAddresses, useOrders} from "../../selectors";
 import {useDispatch}             from "react-redux";
 import {Dispatch}                from "../../store";
 import {format, parseISO}        from 'date-fns'
-import {ptBR}            from 'date-fns/locale'
-import {Skeleton}        from "../../components/ui/Skeleton";
-import {OrderStateBadge} from "../../components/ui/OrderStateBadge";
+import {ptBR}                    from 'date-fns/locale'
+import {Skeleton}                from "../../components/ui/Skeleton";
+import {OrderStateBadge}         from "../../components/ui/OrderStateBadge";
 
 const OrderList: React.FC<{ order: OrderType }> = ({order, children}) => {
     const addresses = useAddresses();

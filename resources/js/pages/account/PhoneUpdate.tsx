@@ -1,18 +1,18 @@
-import React, {useState}   from "react";
-import {useDispatch}       from "react-redux";
-import {Dispatch}          from "../../store";
-import {useHistory} from "react-router-dom";
-import {Title}      from "../../components/ui/Title";
-import {Loader}     from "react-feather";
-import {useForm}           from "react-hook-form";
-import InputMask           from "react-input-mask";
+import React, {useState} from "react";
+import {useDispatch}     from "react-redux";
+import {Dispatch}        from "../../store";
+import {useHistory}      from "react-router-dom";
+import {Title}           from "../../components/ui/Title";
+import {Loader}          from "react-feather";
+import {useForm}         from "react-hook-form";
+import InputMask         from "react-input-mask";
 
 export const PhoneUpdate: React.FC = ({children}) => {
     const dispatch = useDispatch<Dispatch>();
     const history = useHistory();
     const [loading, setLoading] = useState(false);
 
-    const {register, handleSubmit, watch, errors} = useForm<{phone: string}>();
+    const {register, handleSubmit, errors} = useForm<{phone: string}>();
 
     async function updatePhone(data: {phone: string}) {
         setLoading(true);

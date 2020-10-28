@@ -1,15 +1,14 @@
 import React, {useEffect, useState}     from "react";
-import {Loader}                         from "react-feather";
 import {useDispatch}                    from "react-redux";
 import {useHistory}                     from "react-router";
 import {useForm}                        from "react-hook-form";
-import * as QuantityConfig              from "../configs/ProductQuantityConfig";
-import {ProductProperties, ProductType} from "../models/products";
-import {Dispatch}                       from "../store";
-import {Input}                          from "../components/form/Input";
-import {Textarea}                       from "../components/form/Textarea";
-import {Select} from "../components/form/Select";
-import {Button} from "../components/ui/Button";
+import * as QuantityConfig              from "../../configs/ProductQuantityConfig";
+import {ProductProperties, ProductType} from "../../models/products";
+import {Dispatch}                       from "../../store";
+import {Input}                          from "../form/Input";
+import {Textarea}                       from "../form/Textarea";
+import {Select}                         from "../form/Select";
+import {Button}                         from "../ui/Button";
 
 type ProductFormType = {
     product?: ProductType;

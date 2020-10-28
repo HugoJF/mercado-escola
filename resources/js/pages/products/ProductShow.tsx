@@ -1,11 +1,9 @@
-import React       from 'react';
-import {Button}    from "../../components/ui/Button";
-import {useParams} from "react-router";
-import {useCart, useProducts} from "../../selectors";
-import {PriceFormatter}       from "../../components/ui/PriceFormatter";
-import {useDispatch}          from "react-redux";
-import {Dispatch}             from "../../store";
-import useCartQuantity        from "../../hooks/useCartQuantity";
+import React                      from 'react';
+import {Button}                   from "../../components/ui/Button";
+import {useParams}                from "react-router";
+import {useProducts}              from "../../selectors";
+import {PriceFormatter}           from "../../components/ui/PriceFormatter";
+import useCartQuantity            from "../../hooks/useCartQuantity";
 import * as ProductQuantityConfig from "../../configs/ProductQuantityConfig";
 
 export const ProductShow: React.FC = () => {

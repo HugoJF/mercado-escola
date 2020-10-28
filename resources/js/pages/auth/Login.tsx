@@ -7,13 +7,15 @@ import {useForm}          from "react-hook-form";
 import {LoginCredentials} from "../../models/auth";
 import {Link}             from "react-router-dom";
 import {Loader}           from "react-feather";
+import {Input}            from "../../components/form/Input";
+import {Button}           from "../../components/ui/Button";
 
 export const Login: React.FC<object> = () => {
     const auth = useAuth();
     const dispatch = useDispatch<Dispatch>();
     const history = useHistory();
     const [loading, setLoading] = useState(false);
-    const {register, handleSubmit, watch, errors} = useForm<LoginCredentials>();
+    const {register, handleSubmit, errors} = useForm<LoginCredentials>();
 
     async function login(credentials: LoginCredentials) {
         setLoading(true);
@@ -21,7 +23,7 @@ export const Login: React.FC<object> = () => {
             await dispatch.auth.login(credentials);
             history.push('/home');
         } catch (e) {
-            //
+            // TODO
         }
         setLoading(false);
     }
@@ -34,24 +36,22 @@ export const Login: React.FC<object> = () => {
             <h1 className="text-5xl text-center">DiCasa</h1>
 
             <div>
-                <label className={`${failed ? 'text-red-500' : ' text-gray-500'}`} htmlFor="#email">Email</label>
-                <input
-                    className={`transition-colors duration-300 block w-full mb-8 py-3 px-4 text-black bg-transparent border-b border-lg${errors.email ? ' border-red-500' : ''}`}
-                    placeholder="Digite seu email..."
-                    id="email"
-                    ref={register({required: true})}
+                <Input
                     name="email"
-                    type="text"
+                    label="Email"
+                    error={errors.email}
+                    inputProps={{
+                        ref: register({required: true})
+                    }}
                 />
 
-                <label className={`${failed ? 'text-red-500' : ' text-gray-500'}`} htmlFor="#password">Password</label>
-                <input
-                    className={`transition-colors duration-300 block w-full mb-8 py-3 px-4 text-black bg-transparent border-b border-lg${errors.password ? ' border-red-500' : ''}`}
-                    placeholder="Digital sua senha..."
-                    id="password"
-                    ref={register({required: true})}
+                <Input
                     name="password"
-                    type="password"
+                    label="Password"
+                    error={errors.password}
+                    inputProps={{
+                        ref: register({required: true})
+                    }}
                 />
 
                 <div className="flex justify-end mb-16">
@@ -62,13 +62,9 @@ export const Login: React.FC<object> = () => {
                     Email e senha inválidos! Por favor tente novamente.
                 </div>}
 
-                <button className="w-full py-4 bg-primary-500 text-center text-xl text-white font-medium rounded-lg">
-                    {loading ?
-                        <Loader size={30} className="animate-spin mx-auto block"/>
-                        :
-                        <span>Entrar</span>
-                    }
-                </button>
+                <Button loading={loading}>
+                    Entrar
+                </Button>
 
                 <div className="text-center mt-8">
                     <Link to="/register" className="w-full text-gray-500">

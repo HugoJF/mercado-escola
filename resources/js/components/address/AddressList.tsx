@@ -12,7 +12,6 @@ interface AddressListParameters {
 }
 
 export const AddressList: React.FC<AddressListParameters> = ({selected, onClick, loading = false, addresses}) => {
-
     function getAddresses() {
         if (loading) {
             return Array(3).fill({});

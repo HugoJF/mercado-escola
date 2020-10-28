@@ -5,7 +5,7 @@ import {openings}  from "./openings";
 import {products}  from "./products";
 import {favorites} from "./favorites";
 import {cart}      from "./cart";
-import {orders}      from "./orders";
+import {orders}    from "./orders";
 
 export interface RootModel extends Models<RootModel> {
     // @ts-ignore

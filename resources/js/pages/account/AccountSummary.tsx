@@ -1,12 +1,12 @@
 import React, {useEffect}                                                             from "react";
-import {Link, useRouteMatch} from "react-router-dom";
-import {Box}                 from "../../components/ui/Box";
-import {DivOrLink}           from "../../components/DivOrLink";
+import {Link, useRouteMatch}                                                          from "react-router-dom";
+import {Box}                                                                          from "../../components/ui/Box";
+import {DivOrLink}                                                                    from "../../components/DivOrLink";
 import {AlertCircle, Book, ChevronRight, Flag, Heart, Mail, MapPin, Smartphone, User} from "react-feather";
 import {useAddresses, useAuth}                                                        from "../../selectors";
 import {useDispatch}                                                                  from "react-redux";
-import {Dispatch} from "../../store";
-import {Title}    from "../../components/ui/Title";
+import {Dispatch}                                                                     from "../../store";
+import {Title}                                                                        from "../../components/ui/Title";
 
 export const AccountSummary: React.FC = ({children}) => {
     const dispatch = useDispatch<Dispatch>();

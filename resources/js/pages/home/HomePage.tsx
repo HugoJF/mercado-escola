@@ -1,6 +1,6 @@
-import React, {useEffect} from "react";
-import {Title}            from "../../components/ui/Title";
-import {Link}             from "react-router-dom";
+import React, {useEffect}          from "react";
+import {Title}                     from "../../components/ui/Title";
+import {Link}                      from "react-router-dom";
 import {useDispatch}               from "react-redux";
 import {Dispatch}                  from "../../store";
 import {useFavorites, useProducts} from "../../selectors";
@@ -9,7 +9,6 @@ import {ProductList}               from "../../components/product/ProductList";
 export const HomePage: React.FC = () => {
     const dispatch = useDispatch<Dispatch>();
     const products = useProducts();
-    const favorites = useFavorites();
 
     useEffect(() => {
         dispatch.openings.index();

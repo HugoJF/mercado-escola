@@ -1,11 +1,11 @@
-import React, {useEffect, useState} from 'react';
-import {useParams}                  from "react-router";
-import {Bookmark}                   from "react-feather";
-import {BackAndCart}                from "./partial/BackAndCart";
+import React, {useEffect}          from 'react';
+import {useParams}                 from "react-router";
+import {Bookmark}                  from "react-feather";
+import {BackAndCart}               from "./partial/BackAndCart";
 import {HeaderWrapper}             from "./partial/HeaderWrapper";
 import {useFavorites, useProducts} from "../selectors";
 import {useDispatch}               from "react-redux";
-import {Dispatch}                   from "../store";
+import {Dispatch}                  from "../store";
 
 export const ProductHeader: React.FC = () => {
     const dispatch = useDispatch<Dispatch>();

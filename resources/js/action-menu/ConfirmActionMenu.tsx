@@ -1,7 +1,6 @@
-import {Check, ShoppingBag, User} from "react-feather";
-import {Modal, ModalProps}        from "../components/Modal";
-import React    from "react";
-import {Button} from "../components/ui/Button";
+import {Modal, ModalProps} from "../components/Modal";
+import React               from "react";
+import {Button}            from "../components/ui/Button";
 
 interface ConfirmActionMenuProps {
     title: string;

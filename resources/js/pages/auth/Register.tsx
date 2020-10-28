@@ -5,7 +5,6 @@ import {useHistory}          from "react-router";
 import {useForm}             from "react-hook-form";
 import {RegisterCredentials} from "../../models/auth";
 import {Link}                from "react-router-dom";
-import {Loader}              from "react-feather";
 import {Input}               from "../../components/form/Input";
 import {Button}              from "../../components/ui/Button";
 

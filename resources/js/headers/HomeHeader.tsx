@@ -1,5 +1,4 @@
 import React           from 'react';
-import {ShoppingCart}  from "react-feather";
 import {HeaderWrapper} from "./partial/HeaderWrapper";
 import {Cart}          from "./partial/Cart";
 

@@ -4,9 +4,9 @@ import {ArrowRight, ShoppingBag, Trash} from "react-feather";
 import useRelativePath                  from "../../hooks/useRelativePath";
 import {useDispatch}                    from "react-redux";
 import {Dispatch}                       from "../../store";
-import {useProducts}        from "../../selectors";
-import {HeightTransitioner} from "../../components/ui/HeightTransitioner";
-import {ConfirmActionMenu}  from "../../action-menu/ConfirmActionMenu";
+import {useProducts}                    from "../../selectors";
+import {HeightTransitioner}             from "../../components/ui/HeightTransitioner";
+import {ConfirmActionMenu}              from "../../action-menu/ConfirmActionMenu";
 import {Link}                           from "react-router-dom";
 
 export const AdminProductIndex: React.FC = () => {
@@ -33,7 +33,10 @@ export const AdminProductIndex: React.FC = () => {
             return;
         }
 
-        dispatch.products.destroy(open);
+        if (confirmed) {
+            dispatch.products.destroy(open);
+        }
+
         setOpen(null);
     }
 

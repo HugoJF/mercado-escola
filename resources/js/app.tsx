@@ -1,8 +1,8 @@
 import "./bootstrap";
 import React                     from "react";
-import ReactDOM from "react-dom";
-import {Root}   from "./routes/Root";
-import {store}  from "./store";
+import ReactDOM                  from "react-dom";
+import {Root}                    from "./routes/Root";
+import {store}                   from "./store";
 import {BrowserRouter as Router} from "react-router-dom";
 import {Provider}                from "react-redux";
 

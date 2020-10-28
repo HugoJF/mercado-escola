@@ -1,6 +1,5 @@
 import {google, Loader, LoaderOptions} from "google-maps";
 
-const options: LoaderOptions = {/* todo */};
 const loader = new Loader(process.env.MIX_GOOGLE_MAPS_KEY, {
     libraries: ['places'],
     language: 'pt-BR',

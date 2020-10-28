@@ -2,16 +2,16 @@ import React, {useState}               from "react";
 import {useDispatch}                   from "react-redux";
 import {useHistory}                    from "react-router-dom";
 import {ChevronRight, Loader, MapPin}  from "react-feather";
-import PlacesAutocomplete from 'react-places-autocomplete';
-import {Title}            from "../../components/ui/Title";
-import {Dispatch}         from "../../store";
+import PlacesAutocomplete              from 'react-places-autocomplete';
+import {Title}                         from "../../components/ui/Title";
+import {Dispatch}                      from "../../store";
 import {AddressProperties}             from "../../models/addresses";
 import {Box}                           from "../../components/ui/Box";
 import {AddressStreetNumberActionMenu} from "../../action-menu/AdressStreetNumberActionMenu";
 import {Google}                        from "../../google";
 import {extractAddressComponents}      from "../../helpers/GoogleMapsHelpers";
-import {MapWithPing} from "../../components/MapWithPing";
-import {Button}      from "../../components/ui/Button";
+import {MapWithPing}                   from "../../components/MapWithPing";
+import {Button}                        from "../../components/ui/Button";
 
 export const AddressesCreate: React.FC = ({children}) => {
     const dispatch = useDispatch<Dispatch>();

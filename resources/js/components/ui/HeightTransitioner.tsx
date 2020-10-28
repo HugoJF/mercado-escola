@@ -20,4 +20,4 @@ export const HeightTransitioner: React.FC = ({children}) => {
             </div>
         </AnimateHeight>
     );
-}
+};
