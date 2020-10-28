@@ -8,9 +8,9 @@ import {useHistory}          from "react-router";
 import {useForm}             from "react-hook-form";
 import {RegisterCredentials} from "../../models/auth";
 import {ProductProperties}   from "../../models/products";
-import * as QuantityConfig   from "../../configs/ProductQuantityConfig";
-import {Title}               from "../../components/Title";
-import {ProductForm}         from "../../forms/ProductForm";
+import * as QuantityConfig from "../../configs/ProductQuantityConfig";
+import {Title}             from "../../components/ui/Title";
+import {ProductForm}       from "../../forms/ProductForm";
 
 export const AdminProductEdit: React.FC = () => {
     const dispatch = useDispatch<Dispatch>();
