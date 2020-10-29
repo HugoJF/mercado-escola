@@ -116,14 +116,20 @@ export const ProductForm: React.FC<ProductFormType>
                 </div>
 
                 <ul className="grid grid-cols-4 gap-4">
-                    {Object.entries(product?.media ?? {}).map(([id, url]) => <li className="p-1 border border-gray-200 rounded-lg">
+                    {Object.entries(product?.media ?? {}).map(([id, url]) => <li className="relative flex items-center justify-center p-1
+                        bg-gray-200 border border-gray-300 shadow-inner rounded-lg"
+                    >
                         <img
                             onClick={() => removeExistingImage(parseInt(id))}
                             src={url}
                             alt={product?.title}
                         />
                     </li>)}
-                    {uploadingFiles.map(file => <li className="p-1 border border-gray-200 rounded-lg">
+
+                    {uploadingFiles.map(file => <li className="relative flex items-center justify-center p-1
+                        bg-gray-200 border border-gray-300 shadow-inner rounded-lg"
+                    >
+                        <div className="transform translate-x-1/2 -translate-y-1/2 absolute top-0 right-0 h-2 w-2 bg-red-500 rounded-full animate-bounce"/>
                         <img
                             onClick={() => removeFile(file)}
                             key={file.file.name}
