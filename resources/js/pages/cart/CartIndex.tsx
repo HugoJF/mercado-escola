@@ -1,4 +1,4 @@
-import React, {useEffect, useState}                                 from "react";
+import React, {useEffect, useMemo, useState}                        from "react";
 import {Link, useHistory}                                           from "react-router-dom";
 import {Button}                                                     from "../../components/ui/Button";
 import {Title}                                                      from "../../components/ui/Title";
@@ -19,7 +19,6 @@ export const CartIndex: React.FC = () => {
     const products = useProducts();
     const cart = useCart();
     const openings = useOpenings();
-    const [total, setTotal] = useState(0);
     const [loading, setLoading] = useState(false);
     const [shippingOptionOpen, setShippingOptionOpen] = useState(false);
 
@@ -27,12 +26,10 @@ export const CartIndex: React.FC = () => {
         dispatch.products.index();
     }, []);
 
-    useEffect(() => {
-        setTotal(cartProducts()
+    const total = useMemo(() => (cartProducts()
             .map(({product, amount}) => (product.quantity_cost * amount))
             .reduce((acc, value) => acc + value, 0)
-        )
-    }, [products, cart.items]);
+    ), [products, cart]);
 
     function cartProducts() {
         return Object
