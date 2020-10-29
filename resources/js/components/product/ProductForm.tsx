@@ -6,16 +6,36 @@ import {Input}                          from "../form/Input";
 import {Textarea}                       from "../form/Textarea";
 import {Select}                         from "../form/Select";
 import {Button}                         from "../ui/Button";
+import {useDropzone}                    from "react-dropzone";
+import {FieldWrapper}                   from "../form/FieldWrapper";
+import useConfirmMenu                   from "../../hooks/useConfirmMenu";
+import {useDispatch}                    from "react-redux";
+import {Dispatch}                       from "../../store";
 
 type ProductFormType = {
     product?: ProductType;
-    onSubmit: (data: ProductProperties) => void;
+    onSubmit: (data: FormData) => void;
 }
+
+type FileWithPreview = { file: File, preview: string };
 
 export const ProductForm: React.FC<ProductFormType>
     = ({onSubmit, product}) => {
+    const dispatch = useDispatch<Dispatch>();
     const [loading, setLoading] = useState(false);
     const {register, handleSubmit, errors, setError, setValue} = useForm<ProductProperties>();
+    const [menu, confirm] = useConfirmMenu();
+    const [uploadingFiles, setUploadingFiles] = useState<FileWithPreview[]>([]);
+    const {getRootProps, getInputProps} = useDropzone({
+        accept: 'image/*',
+        onDrop: acceptedFiles => {
+            const filesWithPreview = acceptedFiles.map(file => ({
+                file: file,
+                preview: URL.createObjectURL(file)
+            }));
+            setUploadingFiles([...uploadingFiles, ...filesWithPreview]);
+        }
+    });
 
     useEffect(() => {
         if (!product) return;
@@ -24,7 +44,7 @@ export const ProductForm: React.FC<ProductFormType>
             // @ts-ignore
             setValue(prop, product[prop]);
         }
-    }, [setValue, product?.id]);
+    }, [setValue, product]);
 
     function setErrors(errors: object) {
         for (let [key, messages] of Object.entries(errors)) {
@@ -36,7 +56,17 @@ export const ProductForm: React.FC<ProductFormType>
     async function submit(data: ProductProperties) {
         setLoading(true);
         try {
-            await onSubmit(data);
+            const form = new FormData();
+
+            for (const [key, value] of Object.entries(data)) {
+                form.append(key, String(value));
+            }
+
+            uploadingFiles.forEach((value) => {
+                form.append(`images[]`, value.file);
+            });
+
+            await onSubmit(form);
         } catch (e) {
             // TODO: type check this
             setErrors(e.errors);
@@ -44,9 +74,66 @@ export const ProductForm: React.FC<ProductFormType>
         setLoading(false);
     }
 
+    async function removeExistingImage(id: number) {
+        if (!product) return;
+
+        const remove = await confirm({title: 'Deseja remover essa imagem?', action: 'Remover'});
+
+        if (remove) {
+            dispatch.products.destroyMedia({productId: product.id, mediaId: id});
+        }
+    }
+
+    function removeFile(remove: FileWithPreview) {
+        const removedFiles: FileWithPreview[] = [];
+        const filteredFiles: FileWithPreview[] = [];
+
+        uploadingFiles.forEach(file => file.file.name === remove.file.name ? removedFiles.push(file) : filteredFiles.push(file));
+
+        for (const file of removedFiles) {
+            URL.revokeObjectURL(file.preview);
+        }
+
+        setUploadingFiles(filteredFiles);
+    }
+
     // @ts-ignore
     return <form onSubmit={handleSubmit(submit)}>
+        {menu}
         <div>
+            {/* Images */}
+            <FieldWrapper label="Imagens" name="images">
+                <div
+                    {...getRootProps()}
+                    className="flex items-center justify-center mt-2 mb-8 px-8 py-8 bg-gray-200 text-gray-400 text-center
+                        border-2 border-dashed border-gray-400 focus:border-primary-500 h-32 rounded-lg"
+                >
+                    <input
+                        name="images"
+                        {...getInputProps()}
+                    />
+                    <p>Arraste fotos do produto aqui ou clique para selecioná-los</p>
+                </div>
+
+                <ul className="grid grid-cols-4 gap-4">
+                    {Object.entries(product?.media ?? {}).map(([id, url]) => <li className="p-1 border border-gray-200 rounded-lg">
+                        <img
+                            onClick={() => removeExistingImage(parseInt(id))}
+                            src={url}
+                            alt={product?.title}
+                        />
+                    </li>)}
+                    {uploadingFiles.map(file => <li className="p-1 border border-gray-200 rounded-lg">
+                        <img
+                            onClick={() => removeFile(file)}
+                            key={file.file.name}
+                            src={file.preview}
+                            alt={file.file.name}
+                        />
+                    </li>)}
+                </ul>
+            </FieldWrapper>
+
             {/* Title */}
             <div className="mb-8">
                 <Input

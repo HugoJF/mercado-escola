@@ -98,4 +98,9 @@ class ProductPolicy
     {
         return false;
     }
+
+    public function deleteMedia(User $user, Product $product)
+    {
+        return false;
+    }
 }

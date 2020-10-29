@@ -14,6 +14,7 @@ export type ProductProperties = {
 
 export type ProductComputedProperties = {
     id: number;
+    media: {[id: number]: string};
 }
 
 export type ProductsState = {
@@ -53,25 +54,45 @@ export const products = createModel<RootModel>()({
         async index(payload, state: RootState): Promise<void> {
             const response = await window.axios.get('/products');
 
-            let favoritesProducts = response.data as ProductType[];
+            let favoritesProducts = response.data.data as ProductType[];
 
             dispatch.products.reset();
             dispatch.products.addProduct(favoritesProducts);
         },
-        async create(payload: ProductProperties, state: RootState): Promise<void> {
-            const response = await window.axios.post('/products', payload);
 
-            dispatch.products.addProduct(response.data);
-        },
-        async update(payload: { id: number, data: ProductProperties }, state: RootState): Promise<void> {
-            const response = await window.axios.patch(`/products/${payload.id}`, payload.data);
+        async create(payload: FormData, state: RootState): Promise<void> {
+            const response = await window.axios.post('/products', payload, {
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                }
+            });
 
-            dispatch.products.addProduct(response.data);
+            dispatch.products.addProduct(response.data.data);
         },
+
+        async update(payload: { id: number, data: FormData }, state: RootState): Promise<void> {
+            // https://github.com/laravel/framework/issues/13457
+            payload.data.append('_method', 'PATCH');
+
+            const response = await window.axios.post(`/products/${payload.id}`, payload.data, {
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                }
+            });
+
+            dispatch.products.addProduct(response.data.data);
+        },
+
         async destroy(payload: number, state: RootState): Promise<void> {
             const response = await window.axios.delete(`/products/${payload}`);
 
             dispatch.products.remove(payload);
+        },
+
+        async destroyMedia(payload: {productId: number, mediaId: number}, state: RootState): Promise<void> {
+            const response = await window.axios.delete(`/products/${payload.productId}/media/${payload.mediaId}`);
+
+            dispatch.products.addProduct(response.data.data);
         }
     })
 });

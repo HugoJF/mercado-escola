@@ -24,10 +24,10 @@ export const ProductShow: React.FC = () => {
     return <>
         <div className="mx-auto container flex flex-col justify-around min-h-full">
             <div className="w-full flex justify-center">
-                <img
-                    src={`https://picsum.photos/seed/${product.id}/500/300`}
+                {product?.media?.[0] && <img
+                    src={product.media[0]}
                     className="bg-gray-300 shadow-md rounded-lg"
-                />
+                />}
             </div>
 
             <div className="mt-8">

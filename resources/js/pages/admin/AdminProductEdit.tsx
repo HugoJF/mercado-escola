@@ -21,7 +21,7 @@ export const AdminProductEdit: React.FC = () => {
         dispatch.products.index();
     }, []);
 
-    async function updateProduct(data: ProductProperties) {
+    async function updateProduct(data: FormData) {
         try {
             await dispatch.products.update({id: productId, data: data});
             history.push('/admin/produtos');

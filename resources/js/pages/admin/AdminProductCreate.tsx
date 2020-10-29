@@ -10,7 +10,7 @@ export const AdminProductCreate: React.FC = () => {
     const dispatch = useDispatch<Dispatch>();
     const history = useHistory();
 
-    async function updateProduct(data: ProductProperties) {
+    async function updateProduct(data: FormData) {
         try {
             await dispatch.products.create(data);
             history.push('/admin/produtos');

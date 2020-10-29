@@ -41,6 +41,7 @@
         "react": "^16.13.1",
         "react-animate-height": "^2.0.23",
         "react-dom": "^16.13.1",
+        "react-dropzone": "^11.2.2",
         "react-feather": "^2.0.8",
         "react-hook-form": "^6.9.2",
         "react-input-mask": "^3.0.0-alpha.2",
