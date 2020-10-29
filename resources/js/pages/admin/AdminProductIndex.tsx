@@ -1,4 +1,4 @@
-import React, {useEffect, useState}           from "react";
+import React, {useState}                      from "react";
 import {Title}                                from "../../components/ui/Title";
 import {ArrowRight, Plus, ShoppingBag, Trash} from "react-feather";
 import useRelativePath                        from "../../hooks/useRelativePath";
@@ -6,11 +6,11 @@ import {useDispatch}                          from "react-redux";
 import {Dispatch}                             from "../../store";
 import {useProducts}                          from "../../selectors";
 import {HeightTransitioner}                   from "../../components/ui/HeightTransitioner";
-import {ConfirmActionMenu}                    from "../../action-menu/ConfirmActionMenu";
 import {Link, useHistory}                     from "react-router-dom";
 import {FlatButton}                           from "../../components/ui/FlatButton";
 import {Skeleton}                             from "../../components/ui/Skeleton";
 import useAsyncEffect                         from "../../hooks/useAsyncEffect";
+import useConfirmMenu                         from "../../hooks/useConfirmMenu";
 
 export const AdminProductIndex: React.FC = () => {
     const dispatch = useDispatch<Dispatch>();
@@ -18,8 +18,8 @@ export const AdminProductIndex: React.FC = () => {
     const relative = useRelativePath();
     const products = useProducts();
     const [loading, setLoading] = useState(true);
-    const [confirmMenuOpen, setConfirmMenuOpen] = useState(false);
     const [open, setOpen] = useState<number | null>(null);
+    const [menu, confirm] = useConfirmMenu();
 
     useAsyncEffect(async () => {
         setLoading(true);
@@ -35,16 +35,18 @@ export const AdminProductIndex: React.FC = () => {
         }
     }
 
-    function handleConfirmDeletion(confirmed: boolean) {
-        if (!open) {
-            return;
-        }
+    async function handleDelete() {
+        if (!open) return;
 
-        if (confirmed) {
+        const result = await confirm({
+            title: 'Deletar produto?',
+            description: 'Deletar permanentemente o produto do sistema',
+            action: 'Deletar',
+        });
+
+        if (result) {
             dispatch.products.destroy(open);
         }
-
-        setOpen(null);
     }
 
     function getProducts() {
@@ -59,14 +61,7 @@ export const AdminProductIndex: React.FC = () => {
         <div className="mx-auto container">
             <Title>Lista de produtos</Title>
 
-            <ConfirmActionMenu
-                open={confirmMenuOpen}
-                onClose={() => setConfirmMenuOpen(false)}
-                title="Deletar produto?"
-                action="Deletar"
-                description="Deletar permanentemente o produto do sistema"
-                onClick={handleConfirmDeletion}
-            />
+            {menu}
 
             <div className="mt-8">
                 {getProducts().map(product => (
@@ -82,8 +77,8 @@ export const AdminProductIndex: React.FC = () => {
                             </div>
 
                             <div className="flex-grow">
-                                <h3 className="text-lg font-medium">{product.title || <Skeleton className="w-3/4"/> }</h3>
-                                <p className="text-gray-500 font-thin">{product.description || <Skeleton className="w-full"/> }</p>
+                                <h3 className="text-lg font-medium">{product.title || <Skeleton className="w-3/4"/>}</h3>
+                                <p className="text-gray-500 font-thin">{product.description || <Skeleton className="w-full"/>}</p>
                             </div>
 
                             {!loading && <ArrowRight className={`transform transition-transform duration-150
@@ -103,7 +98,7 @@ export const AdminProductIndex: React.FC = () => {
 
                             {/* Delete */}
                             <div
-                                onClick={() => setConfirmMenuOpen(true)}
+                                onClick={handleDelete}
                                 className="flex justify-center items-center py-2 px-4 text-red-600 font-medium rounded-lg"
                             >
                                 <Trash size={20} className="mr-1 flex-shrink-0 inline"/>

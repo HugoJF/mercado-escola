@@ -4,7 +4,7 @@ import {Button}            from "../components/ui/Button";
 
 interface ConfirmActionMenuProps {
     title: string;
-    description: string;
+    description?: string;
     action: string;
     onClick: (confirmed: boolean) => void;
 }
@@ -15,9 +15,9 @@ export const ConfirmActionMenu: React.FC<ModalProps & ConfirmActionMenuProps> = 
         <h1 className="text-center text-lg font-medium">
             {title}
         </h1>
-        <p className="text-center text-gray-500">
+        {description &&<p className="text-center text-gray-500">
             {description}
-        </p>
+        </p>}
 
         {/* Actions button */}
         <div className="mt-4 px-4 space-y-4">
