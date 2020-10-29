@@ -1,7 +1,8 @@
-import React            from "react";
-import {Link}           from "react-router-dom";
-import {PriceFormatter} from "../ui/PriceFormatter";
-import {ProductType}    from "../../models/products";
+import React                             from "react";
+import {Link}                            from "react-router-dom";
+import {PriceFormatter}                  from "../ui/PriceFormatter";
+import {ProductType}                     from "../../models/products";
+import {QuantityTypes, QuantityTypeText} from "../ui/QuantityTypeText";
 
 interface ProductParameters {
     product: ProductType
@@ -22,12 +23,18 @@ export const Product: React.FC<ProductParameters> = ({product, url}) => {
             src={`https://picsum.photos/seed/${product.id}/300/300`}
             alt={title}
         />
-        <h3 className="text-xl text-gray-800 font-medium">{title}</h3>
+
+        <h3 className="text-xl text-gray-800 font-medium">
+            {title}
+        </h3>
+
         <h4 className="text-lg">
             <span className="text-secondary-400 text-xl font-medium">
                 <PriceFormatter cents price={quantity_cost}/>
             </span>
-            <small className="ml-1 text-gray-500 font-thin tracking-tight">{quantity_type}</small>
+            <small className="ml-px text-gray-500 tracking-tight">
+                /<QuantityTypeText type={quantity_type as QuantityTypes}/>
+            </small>
         </h4>
     </Link>
 };

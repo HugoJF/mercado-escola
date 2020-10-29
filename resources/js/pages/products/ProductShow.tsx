@@ -1,10 +1,11 @@
-import React                      from 'react';
-import {Button}                   from "../../components/ui/Button";
-import {useParams}                from "react-router";
-import {useProducts}              from "../../selectors";
-import {PriceFormatter}           from "../../components/ui/PriceFormatter";
-import useCartQuantity            from "../../hooks/useCartQuantity";
-import * as ProductQuantityConfig from "../../configs/ProductQuantityConfig";
+import React                             from 'react';
+import {Button}                          from "../../components/ui/Button";
+import {useParams}                       from "react-router";
+import {useProducts}                     from "../../selectors";
+import {PriceFormatter}                  from "../../components/ui/PriceFormatter";
+import useCartQuantity                   from "../../hooks/useCartQuantity";
+import * as ProductQuantityConfig        from "../../configs/ProductQuantityConfig";
+import {QuantityTypes, QuantityTypeText} from "../../components/ui/QuantityTypeText";
 
 export const ProductShow: React.FC = () => {
     const params = useParams<{ productId: string }>();
@@ -40,8 +41,11 @@ export const ProductShow: React.FC = () => {
                     <span className="text-3xl text-secondary-500 font-medium">
                         <PriceFormatter cents price={product.quantity_cost}/>
                     </span>
-                    <span className="ml-1 text-gray-500">
-                        / {product.quantity_type}
+                    <span className="ml-px text-gray-500">
+                        /
+                        <QuantityTypeText
+                            type={product.quantity_type as QuantityTypes}
+                        />
                     </span>
                 </div>
                 {quantity && <div className="flex items-center">

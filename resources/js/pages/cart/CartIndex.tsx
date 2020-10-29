@@ -10,6 +10,7 @@ import {ProductType}                                                from "../../
 import {PriceFormatter}                                             from "../../components/ui/PriceFormatter";
 import {ShippingOptionActionMenu}                                   from "../../action-menu/ShippingOptionActionMenu";
 import {OrderProductsType}                                          from "../../models/orders";
+import {QuantityTypes, QuantityTypeText}                            from "../../components/ui/QuantityTypeText";
 
 
 export const CartIndex: React.FC = () => {
@@ -94,7 +95,13 @@ export const CartIndex: React.FC = () => {
                             <h3 className="text-xl font-medium">{product.title}</h3>
                             <div className="flex">
                                 <div className="flex-grow">
-                                    <p className="text-gray-500">{amount} {product.quantity_type}</p>
+                                    <p className="text-gray-500">
+                                        <span>{amount} </span>
+                                        <QuantityTypeText
+                                            type={product.quantity_type as QuantityTypes}
+                                            quantity={amount}
+                                        />
+                                    </p>
                                     <p className="mt-2 text-secondary-500 font-medium">
                                         <PriceFormatter cents price={amount * product.quantity_cost}/>
                                     </p>
