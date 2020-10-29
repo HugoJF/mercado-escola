@@ -11,6 +11,7 @@ import {format, parseISO}        from 'date-fns'
 import {ptBR}                    from 'date-fns/locale'
 import {Skeleton}                from "../../components/ui/Skeleton";
 import {OrderStateBadge}         from "../../components/ui/OrderStateBadge";
+import {HeightTransitioner}      from "../../components/ui/HeightTransitioner";
 
 const OrderList: React.FC<{ order: OrderType }> = ({order, children}) => {
     const addresses = useAddresses();
@@ -90,7 +91,9 @@ export const OrdersIndex: React.FC = ({children}) => {
         <Title>Meus pedidos</Title>
 
         {getOrders().map(order => (
-            <OrderList key={order.id} order={order}/>
+            <HeightTransitioner>
+                <OrderList key={order.id} order={order}/>
+            </HeightTransitioner>
         ))}
     </>
 };

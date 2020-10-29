@@ -9,17 +9,22 @@ import {HeightTransitioner}                   from "../../components/ui/HeightTr
 import {ConfirmActionMenu}                    from "../../action-menu/ConfirmActionMenu";
 import {Link, useHistory}                     from "react-router-dom";
 import {FlatButton}                           from "../../components/ui/FlatButton";
+import {Skeleton}                             from "../../components/ui/Skeleton";
+import useAsyncEffect                         from "../../hooks/useAsyncEffect";
 
 export const AdminProductIndex: React.FC = () => {
     const dispatch = useDispatch<Dispatch>();
     const history = useHistory();
     const relative = useRelativePath();
     const products = useProducts();
+    const [loading, setLoading] = useState(true);
     const [confirmMenuOpen, setConfirmMenuOpen] = useState(false);
     const [open, setOpen] = useState<number | null>(null);
 
-    useEffect(() => {
-        dispatch.products.index();
+    useAsyncEffect(async () => {
+        setLoading(true);
+        await dispatch.products.index();
+        setLoading(false);
     }, []);
 
     function handleClick(id: number) {
@@ -42,6 +47,14 @@ export const AdminProductIndex: React.FC = () => {
         setOpen(null);
     }
 
+    function getProducts() {
+        if (loading) {
+            return Array(4).fill({});
+        } else {
+            return Object.values(products.products);
+        }
+    }
+
     return <>
         <div className="mx-auto container">
             <Title>Lista de produtos</Title>
@@ -56,7 +69,7 @@ export const AdminProductIndex: React.FC = () => {
             />
 
             <div className="mt-8">
-                {Object.values(products.products).map(product => (
+                {getProducts().map(product => (
                     <HeightTransitioner>
                         <div
                             key={product.id}
@@ -69,13 +82,13 @@ export const AdminProductIndex: React.FC = () => {
                             </div>
 
                             <div className="flex-grow">
-                                <h3 className="text-lg font-medium">{product.title}</h3>
-                                <p className="text-gray-500 font-thin">{product.description}</p>
+                                <h3 className="text-lg font-medium">{product.title || <Skeleton className="w-3/4"/> }</h3>
+                                <p className="text-gray-500 font-thin">{product.description || <Skeleton className="w-full"/> }</p>
                             </div>
 
-                            <ArrowRight className={`transform transition-transform duration-150
-                                ${open === product.id ? 'rotate-90' : ''} flex-shrink-0 text-gray-500`}
-                            />
+                            {!loading && <ArrowRight className={`transform transition-transform duration-150
+                                ml-2 ${open === product.id ? 'rotate-90' : ''} flex-shrink-0 text-gray-500`}
+                            />}
                         </div>
 
                         {/* Reveal menu */}
