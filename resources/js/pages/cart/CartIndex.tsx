@@ -12,7 +12,7 @@ import {ShippingOptionActionMenu}                                   from "../../
 import {OrderProductsType}                                          from "../../models/orders";
 
 
-export const CartIndex: React.FC = ({children}) => {
+export const CartIndex: React.FC = () => {
     const dispatch = useDispatch<Dispatch>();
     const history = useHistory();
     const addresses = useAddresses();
@@ -25,20 +25,23 @@ export const CartIndex: React.FC = ({children}) => {
 
     useEffect(() => {
         dispatch.products.index();
-    });
+    }, []);
 
     useEffect(() => {
         setTotal(cartProducts()
             .map(({product, amount}) => (product.quantity_cost * amount))
             .reduce((acc, value) => acc + value, 0)
         )
-    }, [cart.items]);
+    }, [products, cart.items]);
 
     function cartProducts() {
-        return Object.entries(cart.items).map(([productId, amount]) => ({
-            product: products.products[parseInt(productId)],
-            amount,
-        }));
+        return Object
+            .entries(cart.items)
+            .map(([productId, amount]) => ({
+                product: products.products[parseInt(productId)],
+                amount,
+            }))
+            .filter(entry => entry.product);
     }
 
     function eachCart(transformer: (product: { product: ProductType, amount: number }) => any): any[] {
