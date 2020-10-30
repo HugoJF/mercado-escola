@@ -6,6 +6,7 @@ import {PriceFormatter}                  from "../../components/ui/PriceFormatte
 import useCartQuantity                   from "../../hooks/useCartQuantity";
 import * as ProductQuantityConfig        from "../../configs/ProductQuantityConfig";
 import {QuantityTypes, QuantityTypeText} from "../../components/ui/QuantityTypeText";
+import {ImageHolder}                     from "../../components/ui/ImageHolder";
 
 export const ProductShow: React.FC = () => {
     const params = useParams<{ productId: string }>();
@@ -23,11 +24,10 @@ export const ProductShow: React.FC = () => {
 
     return <>
         <div className="mx-auto container flex flex-col justify-around min-h-full">
-            <div className="w-full flex justify-center">
-                {product?.media?.[0] && <img
-                    src={product.media[0]}
-                    className="bg-gray-300 shadow-md rounded-lg"
-                />}
+            <div className="w-full">
+                <ImageHolder
+                    src={product?.media?.[0]}
+                />
             </div>
 
             <div className="mt-8">

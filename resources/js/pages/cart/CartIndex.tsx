@@ -11,6 +11,7 @@ import {PriceFormatter}                                             from "../../
 import {ShippingOptionActionMenu}                                   from "../../action-menu/ShippingOptionActionMenu";
 import {OrderProductsType}                                          from "../../models/orders";
 import {QuantityTypes, QuantityTypeText}                            from "../../components/ui/QuantityTypeText";
+import {ImageHolder}                                                from "../../components/ui/ImageHolder";
 
 
 export const CartIndex: React.FC = () => {
@@ -84,11 +85,10 @@ export const CartIndex: React.FC = () => {
                     Carrinho vazio!
                 </h2>}
                 {eachCart(({product, amount}) => (
-                    <div key={product.id} className="flex my-8">
-                        <div className="flex flex-shrink-0 items-center w-24 h-20 rounded-lg">
-                            <img
+                    <div key={product.id} className="flex my-8 items-center">
+                        <div className="w-4/12">
+                            <ImageHolder
                                 src={`https://picsum.photos/seed/${product.id}/500/300`}
-                                className="bg-gray-300 shadow-md rounded-lg"
                             />
                         </div>
                         <div className="px-4 flex-grow">
