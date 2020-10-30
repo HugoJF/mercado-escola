@@ -4,6 +4,16 @@ import AnimateHeight                                   from "react-animate-heigh
 export const HeightTransitioner: React.FC = ({children}) => {
     const ref = useRef<HTMLDivElement>();
     const [height, setHeight] = useState<string | number>('auto');
+    const [windowSize, setWindowSize] = useState<[number, number] | null>(null);
+
+    useEffect(() => {
+        function handleResize() {
+            setWindowSize([window.innerWidth, window.innerHeight]);
+        }
+
+        window.addEventListener('resize', handleResize);
+        return () => window.removeEventListener('resize', handleResize);
+    });
 
     useEffect(() => {
         if (ref.current) {
@@ -11,7 +21,7 @@ export const HeightTransitioner: React.FC = ({children}) => {
         } else {
             setHeight('auto');
         }
-    }, [children]);
+    }, [children, windowSize]);
 
     return (
         <AnimateHeight height={height}>

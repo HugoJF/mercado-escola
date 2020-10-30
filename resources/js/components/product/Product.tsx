@@ -15,14 +15,16 @@ export const Product: React.FC<ProductParameters> = ({product, url}) => {
     return <Link
         to={url}
         className="transition-shadow duration-150
-            p-6 bg-white rounded-lg
+            p-4 bg-white rounded-lg
             cursor-pointer shadow hover:shadow-md"
     >
-        <img
-            className="w-full mb-4 shadow-md rounded-lg"
-            src={`https://picsum.photos/seed/${product.id}/300/300`}
-            alt={title}
-        />
+        <div className="relative pb-3/5 mb-2">
+            <img
+                className="absolute w-full h-full mb-4 shadow-md rounded-lg object-cover"
+                src={`https://picsum.photos/seed/${product.id}/300/300`}
+                alt={title}
+            />
+        </div>
 
         <h3 className="text-xl text-gray-800 font-medium">
             {title}
