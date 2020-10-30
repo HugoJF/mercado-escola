@@ -3,12 +3,12 @@
 namespace Tests\Feature;
 
 use App\Models\Product;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
+use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Tests\TestCase;
 
 class ProductTest extends TestCase
 {
-    use DatabaseMigrations;
+    use DatabaseTransactions;
 
     public function test_user_cannot_see_products_index()
     {
@@ -27,7 +27,7 @@ class ProductTest extends TestCase
     public function test_user_cannot_create_product()
     {
         $this->post(route('products.store'), [])
-            ->assertStatus(403);
+             ->assertStatus(403);
     }
 
     public function test_admin_can_create_product()
@@ -43,7 +43,7 @@ class ProductTest extends TestCase
         $product = Product::factory()->create();
 
         $this->get(route('products.show', $product))
-            ->assertStatus(200);
+             ->assertStatus(200);
     }
 
     public function test_user_cannot_update_product()

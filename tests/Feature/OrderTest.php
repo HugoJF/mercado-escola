@@ -6,12 +6,12 @@ use App\Models\Address;
 use App\Models\Opening;
 use App\Models\Order;
 use App\Models\Product;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
+use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Tests\TestCase;
 
 class OrderTest extends TestCase
 {
-    use DatabaseMigrations;
+    use DatabaseTransactions;
 
     public function test_order_products_relationship()
     {

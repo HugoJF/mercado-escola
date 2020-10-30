@@ -24,8 +24,10 @@ class ProductController extends Controller
         $product = new Product($request->all());
         $product->save();
 
-        $product->addMultipleMediaFromRequest(['images'])
-                ->each(fn(FileAdder $file) => $file->toMediaCollection());
+        if ($request->hasFile('images')) {
+            $product->addMultipleMediaFromRequest(['images'])
+                    ->each(fn(FileAdder $file) => $file->toMediaCollection());
+        }
 
         return new ProductResource($product);
     }
@@ -39,8 +41,10 @@ class ProductController extends Controller
     {
         $product->update($request->input());
 
-        $product->addMultipleMediaFromRequest(['images'])
-                ->each(fn(FileAdder $file) => $file->toMediaCollection());
+        if ($request->hasFile('images')) {
+            $product->addMultipleMediaFromRequest(['images'])
+                    ->each(fn(FileAdder $file) => $file->toMediaCollection());
+        }
 
         return new ProductResource($product);
     }

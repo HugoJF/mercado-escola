@@ -2,14 +2,13 @@
 
 namespace Tests\Feature;
 
-use App\Http\Resources\OpeningResource;
 use App\Models\Opening;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
+use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Tests\TestCase;
 
 class OpeningTest extends TestCase
 {
-    use DatabaseMigrations;
+    use DatabaseTransactions;
 
     public function test_guests_cannot_see_openings_index()
     {

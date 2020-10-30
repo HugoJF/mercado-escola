@@ -18,4 +18,17 @@ class AddMainAddressColumnToUsersTable extends Migration
             $table->foreign('main_address')->references('id')->on('addresses');
         });
     }
+
+
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        Schema::table('users', function (Blueprint $table) {
+            $table->dropForeign('users_main_address_foreign');
+        });
+    }
 }
