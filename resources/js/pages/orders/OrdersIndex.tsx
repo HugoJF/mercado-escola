@@ -1,17 +1,17 @@
-import React, {useEffect}        from "react";
-import {Title}                   from "../../components/ui/Title";
-import {MoreVertical}            from "react-feather";
-import {PriceFormatter}          from "../../components/ui/PriceFormatter";
-import {Link}                    from "react-router-dom";
-import {OrderType}               from "../../models/orders";
-import {useAddresses, useOrders} from "../../selectors";
-import {useDispatch}             from "react-redux";
-import {Dispatch}                from "../../store";
-import {format, parseISO}        from 'date-fns'
-import {ptBR}                    from 'date-fns/locale'
-import {Skeleton}                from "../../components/ui/Skeleton";
-import {OrderStateBadge}         from "../../components/ui/OrderStateBadge";
-import {HeightTransitioner}      from "../../components/ui/HeightTransitioner";
+import React, {useEffect}         from "react";
+import {Title}                    from "../../components/ui/Title";
+import {PriceFormatter}           from "../../components/ui/PriceFormatter";
+import {Link}                     from "react-router-dom";
+import {OrderType}                from "../../models/orders";
+import {useAddresses, useOrders}  from "../../selectors";
+import {useDispatch}              from "react-redux";
+import {Dispatch}                 from "../../store";
+import {formatDistance, parseISO} from 'date-fns'
+import {Skeleton}                 from "../../components/ui/Skeleton";
+import {OrderStateBadge}          from "../../components/ui/OrderStateBadge";
+import {HeightTransitioner}       from "../../components/ui/HeightTransitioner";
+import {ptBR}                         from "date-fns/locale";
+import {MoreHorizontal, MoreVertical} from "react-feather";
 
 const OrderList: React.FC<{ order: OrderType }> = ({order, children}) => {
     const addresses = useAddresses();
@@ -19,42 +19,55 @@ const OrderList: React.FC<{ order: OrderType }> = ({order, children}) => {
 
     const address = addresses.addresses[order.address_id];
 
-    return <Link to={`/pedidos/${order.id}`} className="py-3 flex items-center">
+    return <Link to={`/pedidos/${order.id}`} className="py-5 flex items-center">
         {/* Date */}
-        <div className="h-20 w-20 flex flex-col items-center justify-center bg-gray-200">
-            <span className="text-xl text-gray-900 font-medium">
-                {createdAt && format(createdAt, 'd', {locale: ptBR})}
-            </span>
-            <span className="text-lg text-gray-500">
-                {createdAt && format(createdAt, 'E', {locale: ptBR})}
-            </span>
-        </div>
+        {/*<div className="h-20 w-20 flex flex-col items-center justify-center bg-gray-200">*/}
+        {/*    <span className="text-xl text-gray-900 font-medium">*/}
+        {/*        {createdAt && format(createdAt, 'd', {locale: ptBR})}*/}
+        {/*    </span>*/}
+        {/*    <span className="text-lg text-gray-500">*/}
+        {/*        {createdAt && format(createdAt, 'E', {locale: ptBR})}*/}
+        {/*    </span>*/}
+        {/*</div>*/}
 
         {/* Details */}
-        <div className="ml-4 flex-grow">
+        <div className="flex-grow">
+            {/* Header */}
             <div className="flex flex-grow justify-between">
-                <h2 className="flex-grow text-xl text-gray-900 font-mono">
+                <h2 className="flex-grow text-lg text-gray-900 font-mono tracking-tighter">
                     {order.id ?
                         `#${order.id}`
                         :
                         <Skeleton className="w-1/2"/>
                     }
                 </h2>
-                <MoreVertical className="text-gray-500"/>
+                {order.state && <OrderStateBadge state={order.state}/>}
             </div>
-            <p className="text-sm text-gray-500 tracking-tight">
+
+            {/* Address line */}
+            <p className="my-2 text-sm text-gray-400">
                 {address?.address || <Skeleton className="w-2/3"/>}
             </p>
-            <div className="mt-4 flex flex-grow justify-between items-center">
-                <ul className="text-sm text-gray-500">
+
+            {/* Details line */}
+            <ul className="flex text-sm text-gray-500">
+                {/* Product quantity */}
+                {order.products?.length ?
                     <li>
-                        <span>Produtos: </span>
-                        <span className="inline-block text-secondary-600 font-medium">
-                            {order.products?.length || <Skeleton className="w-4"/>}
-                        </span>
+                            <span className="inline-block text-secondary-600 font-medium">
+                                {order.products?.length}
+                            </span>
+                        <span> {order.products?.length === 1 ? 'produto' : 'produtos'}</span>
                     </li>
-                    <li>
-                        <span>Custo: </span>
+                    :
+                    <Skeleton className="w-16"/>
+                }
+
+                {/* Separator */}
+                <span className="mx-2 font-bold text-gray-500">·</span>
+
+                {/* Order cost */}
+                <li>
                         <span className="inline-block text-secondary-600 font-medium">
                             {order.cost ?
                                 <PriceFormatter cents price={order.cost}/>
@@ -62,10 +75,24 @@ const OrderList: React.FC<{ order: OrderType }> = ({order, children}) => {
                                 <Skeleton className="w-8"/>
                             }
                         </span>
-                    </li>
-                </ul>
-                {order.state && <OrderStateBadge state={order.state}/>}
-            </div>
+                </li>
+
+                {/* Separator */}
+                <span className="mx-2 font-bold text-gray-500">·</span>
+
+                {/* Order cost */}
+                <li>
+                    {createdAt ?
+                        formatDistance(createdAt, new Date(), {addSuffix: true, locale: ptBR})
+                        :
+                        <Skeleton className="w-8"/>
+                    }
+                </li>
+
+                <div className="flex flex-grow justify-end text-gray-600">
+                    <MoreVertical/>
+                </div>
+            </ul>
         </div>
     </Link>
 };
@@ -91,9 +118,11 @@ export const OrdersIndex: React.FC = ({children}) => {
         <Title>Meus pedidos</Title>
 
         {getOrders().map(order => (
-            <HeightTransitioner>
-                <OrderList key={order.id} order={order}/>
-            </HeightTransitioner>
+            <div className="border-b last:border-b-0">
+                <HeightTransitioner>
+                    <OrderList key={order.id} order={order}/>
+                </HeightTransitioner>
+            </div>
         ))}
     </>
 };
