@@ -6,6 +6,9 @@ import {store}                   from "./store";
 import {BrowserRouter as Router} from "react-router-dom";
 import {Provider}                from "react-redux";
 import {hot, setConfig}          from "react-hot-loader";
+import {MuiPickersUtilsProvider} from '@material-ui/pickers';
+import DateFnsUtils              from '@date-io/date-fns';
+import {ptBR}                    from "date-fns/locale";
 
 setConfig({reloadHooks: false});
 
@@ -15,7 +18,9 @@ ReactDOM.render(
     <React.StrictMode>
         <Provider store={store}>
             <Router>
-                <WrappedRoot/>
+                <MuiPickersUtilsProvider utils={DateFnsUtils} locale={ptBR}>
+                    <WrappedRoot/>
+                </MuiPickersUtilsProvider>
             </Router>
         </Provider>
     </React.StrictMode>,

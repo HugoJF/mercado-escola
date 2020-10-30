@@ -13,7 +13,7 @@ const buttons: ButtonType[] = [{
 }, {
     title: 'Pedidos',
     icon: Truck,
-    to: '/produtos',
+    to: '/pedidos',
 }, {
     title: 'Produtores',
     icon: Users,

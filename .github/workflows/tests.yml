@@ -46,6 +46,8 @@ jobs:
 
       - name: Run migrations
         run: php artisan migrate
+        env:
+          DB_PORT: ${{ job.services.mysql.ports[3306] }}
 
       - name: Execute tests (Unit and Feature tests) via PHPUnit
         run: vendor/bin/phpunit --configuration phpunit.dist.xml
