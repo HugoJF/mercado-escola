@@ -7,6 +7,8 @@ import {OpeningProperties} from "../../models/openings";
 import {useDispatch}       from "react-redux";
 import {Dispatch}          from "../../store";
 import {formatISO}         from "date-fns";
+import {FieldWrapper}      from "../../components/form/FieldWrapper";
+import {Title}             from "../../components/ui/Title";
 
 export const AdminOpeningCreate: React.FC = () => {
     const dispatch = useDispatch<Dispatch>();
@@ -38,7 +40,9 @@ export const AdminOpeningCreate: React.FC = () => {
         }
     }
 
-    return <form className="flex flex-col space-y-4 items-stretch" onSubmit={handleSubmit(submit)}>
+    return <form className="space-y-4" onSubmit={handleSubmit(submit)}>
+        <Title>Formulário de abertura</Title>
+
         <Input
             name="max_delivery_orders"
             label="Quantidade máxima de pedidos delivery"
@@ -61,32 +65,44 @@ export const AdminOpeningCreate: React.FC = () => {
             }}
         />
 
-        <DateTimePicker
-            ampm={true}
-            format="d 'de' MMMM 'às' HH:mm:ss"
-            disablePast
-            value={opensAt}
-            onChange={(date) => setOpensAt(date as Date)}
-            label="Data de abertura"
-        />
+        <FieldWrapper name="opens_at" label="Data de abertura">
+            <div className="flex flex-col items-stretch w-full px-2 pb-4">
+                <DateTimePicker
+                    name="opens_at"
+                    ampm={true}
+                    format="d 'de' MMMM 'às' HH:mm:ss"
+                    disablePast
+                    value={opensAt}
+                    onChange={(date) => setOpensAt(date as Date)}
+                />
+            </div>
+        </FieldWrapper>
 
-        <DateTimePicker
-            ampm={true}
-            format="d 'de' MMMM 'às' HH:mm:ss"
-            disablePast
-            value={closesAt}
-            onChange={(date) => setClosesAt(date as Date)}
-            label="Data de fechamento"
-        />
+        <FieldWrapper name="closes_at" label="Data de abertura">
+            <div className="flex flex-col items-stretch w-full px-2 pb-4">
+                <DateTimePicker
+                    name="closes_at"
+                    ampm={true}
+                    format="d 'de' MMMM 'às' HH:mm:ss"
+                    disablePast
+                    value={closesAt}
+                    onChange={(date) => setClosesAt(date as Date)}
+                />
+            </div>
+        </FieldWrapper>
 
-        <DateTimePicker
-            ampm={true}
-            format="d 'de' MMMM 'às' HH:mm:ss"
-            disablePast
-            value={deliversAt}
-            onChange={(date) => setDeliversAt(date as Date)}
-            label="Data da entrega"
-        />
+        <FieldWrapper name="delivers_at" label="Data de abertura">
+            <div className="flex flex-col items-stretch w-full px-2 pb-4">
+                <DateTimePicker
+                    name="delivers_at"
+                    ampm={true}
+                    format="d 'de' MMMM 'às' HH:mm:ss"
+                    disablePast
+                    value={deliversAt}
+                    onChange={(date) => setDeliversAt(date as Date)}
+                />
+            </div>
+        </FieldWrapper>
 
         <Button loading={loading}>
             Criar
