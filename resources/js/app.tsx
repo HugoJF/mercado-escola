@@ -5,20 +5,20 @@ import {Root}                    from "./routes/Root";
 import {store}                   from "./store";
 import {BrowserRouter as Router} from "react-router-dom";
 import {Provider}                from "react-redux";
+import {hot, setConfig}          from "react-hot-loader";
+
+setConfig({reloadHooks: false});
+
+const WrappedRoot = hot(module)(Root);
 
 ReactDOM.render(
     <React.StrictMode>
         <Provider store={store}>
             <Router>
-                <Root/>
+                <WrappedRoot/>
             </Router>
         </Provider>
     </React.StrictMode>,
     document.getElementById("root")
 );
 
-// @ts-ignore
-if (module.hot && process.env.NODE_ENV === 'development') {
-    // @ts-ignore
-    module.hot.accept();
-}

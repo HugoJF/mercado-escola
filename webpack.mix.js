@@ -18,6 +18,13 @@ mix
     .postCss('resources/css/app.css', 'public/css', [
         tailwindcss('./tailwind.config.js'),
     ])
+    .webpackConfig({
+        resolve: {
+            alias: {
+                'react-dom': '@hot-loader/react-dom'
+            }
+        }
+    })
     .sourceMaps()
 // .version()
 ;
