@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -15,7 +16,7 @@ class Opening extends Model
         'max_delivery_orders',
         'max_pickup_orders',
         'closes_at',
-        'delivers_at'
+        'delivers_at',
     ];
 
     protected $dates = ['enabled_at', 'opens_at', 'closes_at', 'delivers_at'];
@@ -43,5 +44,12 @@ class Opening extends Model
     public function enabled()
     {
         return $this->enabled_at->isPast();
+    }
+
+    public function scopeActive(Builder $query)
+    {
+        return $query->where('opens_at', '<', now())
+                     ->where('closes_at', '>', now())
+                     ->where('enabled_at', '<', now());
     }
 }

@@ -26,21 +26,32 @@ class OpeningController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
+     *
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
+        $activeOpenings = Opening::active()->get();
+
+        // FIXME: exception
+        if ($activeOpenings->count() > 1) {
+            return response()->json([
+                'message' => 'An opening is already active!',
+            ], 412);
+        }
+
         $opening = new Opening($request->all());
         $opening->save();
 
-        return $opening;
+        return new OpeningResource($opening);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Opening  $opening
+     * @param \App\Models\Opening $opening
+     *
      * @return \Illuminate\Http\Response
      */
     public function show(Opening $opening)
@@ -51,8 +62,9 @@ class OpeningController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Opening  $opening
+     * @param \Illuminate\Http\Request $request
+     * @param \App\Models\Opening      $opening
+     *
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Opening $opening)
@@ -65,7 +77,8 @@ class OpeningController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Opening  $opening
+     * @param \App\Models\Opening $opening
+     *
      * @return \Illuminate\Http\Response
      */
     public function destroy(Opening $opening)

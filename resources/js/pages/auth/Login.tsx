@@ -6,7 +6,6 @@ import {useHistory}       from "react-router";
 import {useForm}          from "react-hook-form";
 import {LoginCredentials} from "../../models/auth";
 import {Link}             from "react-router-dom";
-import {Loader}           from "react-feather";
 import {Input}            from "../../components/form/Input";
 import {Button}           from "../../components/ui/Button";
 
@@ -50,7 +49,8 @@ export const Login: React.FC<object> = () => {
                     label="Password"
                     error={errors.password}
                     inputProps={{
-                        ref: register({required: true})
+                        ref: register({required: true}),
+                        type: 'password',
                     }}
                 />
 

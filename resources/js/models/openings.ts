@@ -67,5 +67,21 @@ export const openings = createModel<RootModel>()({
                 dispatch.openings.setCurrent(Object.values(openings)[0].id);
             }
         },
+        async store(payload: OpeningProperties, state: RootState): Promise<void> {
+            const response = await window.axios.post('/openings', payload);
+
+            let normalized = normalize(response.data.data, [openingsSchema]);
+
+            let openings = normalized.entities['openings'] as OpeningType[]; // FIXME: this is an object
+            let products = normalized.entities['products'] as ProductType[];
+
+            if (openings) {
+                dispatch.openings.addOpening(Object.values(openings));
+            }
+
+            if (products) {
+                dispatch.products.addProduct(Object.values(products));
+            }
+        },
     })
 });

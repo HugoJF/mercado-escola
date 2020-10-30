@@ -17,11 +17,11 @@ const buttons: ButtonType[] = [{
 }, {
     title: 'Produtores',
     icon: Users,
-    to: '/produtos',
+    to: '/produtores',
 }, {
     title: 'Aberturas',
     icon: Calendar,
-    to: '/produtos',
+    to: '/aberturas',
 }];
 
 export const AdminIndex: React.FC = () => {

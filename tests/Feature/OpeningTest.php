@@ -101,6 +101,20 @@ class OpeningTest extends TestCase
              ->assertStatus(201);
     }
 
+    public function test_admins_cannot_create_openings_when_an_active_one_exists()
+    {
+        Opening::factory([
+            'opens_at'     => now()->subDay(),
+            'closes_at'    => now()->addDay(),
+            'enabled_at' => now()->subHour(),
+        ])->create();
+
+        $this->loginAsAdmin();
+
+        $this->post(route('openings.store'), Opening::factory()->make()->attributesToArray())
+             ->assertStatus(412);
+    }
+
     public function test_guests_cannot_see_openings_show()
     {
         $opening = Opening::factory()->create();

@@ -6,6 +6,7 @@ import {Dispatch}                  from "../../store";
 import {useFavorites, useProducts} from "../../selectors";
 import {ProductList}               from "../../components/product/ProductList";
 import {Archive}                   from "react-feather";
+import {Empty}                     from "../../components/ui/Empty";
 
 export const FavoritesIndex: React.FC = () => {
     const dispatch = useDispatch<Dispatch>();
@@ -27,11 +28,10 @@ export const FavoritesIndex: React.FC = () => {
                 </div>
 
                 {/* Empty warning */}
-                {Object.values(favorites.favorites).length === 0 && <div className="flex flex-col justify-center items-center">
-                    <Archive size={64} className="text-gray-400"/>
-                    <h2 className="mt-4 text-lg">Nenhum favorito!</h2>
-                    <p className="mt-2 text-center text-sm text-gray-400 tracking-tight">Você ainda não possui nenhum produto marcado como favorito</p>
-                </div>}
+                {Object.values(favorites.favorites).length === 0 && <Empty
+                    title="Nenhum favorito!"
+                    description="Você ainda não possui nenhum produto marcado como favorito"
+                />}
 
                 {/* Items */}
                 <ProductList products={Object.values(products.products).filter(product => favorites.favorites.indexOf(product.id) >= 0)}/>
