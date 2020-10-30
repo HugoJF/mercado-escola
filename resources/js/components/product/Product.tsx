@@ -19,8 +19,9 @@ export const Product: React.FC<ProductParameters> = ({product, url}) => {
             cursor-pointer shadow hover:shadow-md"
     >
         <div className="relative pb-3/5 mb-2">
+            <div className="absolute w-full h-full bg-gradient-to-b from-gray-100 to-gray-300 rounded-lg animate-pulse"/>
             <img
-                className="absolute w-full h-full mb-4 shadow-md rounded-lg object-cover"
+                className="absolute w-full h-full mb-4 rounded-lg shadow-md object-cover"
                 src={`https://picsum.photos/seed/${product.id}/300/300`}
                 alt={title}
             />

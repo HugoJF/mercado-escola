@@ -35,9 +35,9 @@ export const AdminIndex: React.FC = () => {
                 {buttons.map(button => (
                     <Link
                         to={relative(button.to)}
-                        className="flex flex-col items-center px-4 py-6 bg-gray-200 rounded-lg shadow-sm"
+                        className="flex flex-col items-center px-4 py-6 bg-gray-200 border rounded-lg shadow-sm"
                     >
-                        <button.icon size={40} className="mb-4 text-gray-400"/>
+                        <button.icon size={40} className="mb-3 text-gray-400"/>
                         <h2 className="text-gray-700 font-medium">{button.title}</h2>
                     </Link>
                 ))}
