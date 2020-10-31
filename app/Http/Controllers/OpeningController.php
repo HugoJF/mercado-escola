@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Exceptions\TooManyOpeningsException;
 use App\Http\Resources\OpeningResource;
 use App\Models\Opening;
 use Illuminate\Http\Request;
@@ -23,6 +24,17 @@ class OpeningController extends Controller
         return OpeningResource::collection(Opening::all());
     }
 
+    public function current()
+    {
+        $openings = Opening::active()->get();
+
+        if ($openings->count() > 1) {
+            throw new TooManyOpeningsException;
+        }
+
+        return new OpeningResource($openings->first());
+    }
+
     /**
      * Store a newly created resource in storage.
      *
@@ -34,11 +46,8 @@ class OpeningController extends Controller
     {
         $activeOpenings = Opening::active()->get();
 
-        // FIXME: exception
         if ($activeOpenings->count() > 1) {
-            return response()->json([
-                'message' => 'An opening is already active!',
-            ], 412);
+            throw new TooManyOpeningsException;
         }
 
         $opening = new Opening($request->all());

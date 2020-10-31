@@ -61,11 +61,29 @@ export const openings = createModel<RootModel>()({
             dispatch.openings.addOpening(Object.values(openings));
             dispatch.products.addProduct(Object.values(products));
 
-            console.log('Trying to figure out current opening! Count:', Object.values(openings).length);
+        },
+        async current(payload, state: RootState): Promise<void> {
+            const response = await window.axios.get('/openings/current');
 
-            if (Object.values(openings).length === 1) {
-                dispatch.openings.setCurrent(Object.values(openings)[0].id);
+            let normalized = normalize(response.data.data, openingsSchema);
+            console.log(normalized);
+
+            if (normalized.entities['openings']) {
+                let openings = Object.values(normalized.entities['openings'] as object) as OpeningType[];
+                dispatch.openings.addOpening(openings);
+                console.log(openings);
+
+                if (openings.length === 1) {
+                    dispatch.openings.setCurrent(openings[0].id);
+                }
             }
+
+            if (normalized.entities['products']) {
+                let products = Object.values(normalized.entities['products'] as object) as ProductType[];
+                dispatch.products.addProduct(products);
+                console.log(products);
+            }
+
         },
         async store(payload: OpeningProperties, state: RootState): Promise<void> {
             const response = await window.axios.post('/openings', payload);

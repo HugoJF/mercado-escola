@@ -13,7 +13,7 @@ export const HomePage: React.FC = () => {
     const products = useProducts();
 
     useEffect(() => {
-        dispatch.openings.index();
+        dispatch.openings.current();
         dispatch.favorites.index();
     }, []);
 
