@@ -47,6 +47,11 @@ export const openings = createModel<RootModel>()({
 
             return state;
         },
+        remove: (state, payload: number) => {
+            delete state.openings[payload];
+
+            return state;
+        }
     },
 
     effects: (dispatch) => ({
@@ -100,6 +105,16 @@ export const openings = createModel<RootModel>()({
             if (products) {
                 dispatch.products.addProduct(Object.values(products));
             }
+        },
+        async update(payload: { id: number, data: OpeningProperties }, state: RootState): Promise<void> {
+            const response = await window.axios.post(`/openings/${payload.id}`, payload.data);
+
+            dispatch.openings.addOpening(response.data.data);
+        },
+        async destroy(payload: number, state: RootState): Promise<void> {
+            const response = await window.axios.delete(`/openings/${payload}`);
+
+            dispatch.openings.remove(payload);
         },
     })
 });

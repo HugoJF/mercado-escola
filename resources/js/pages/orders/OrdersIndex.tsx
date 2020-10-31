@@ -20,16 +20,6 @@ const OrderList: React.FC<{ order: OrderType }> = ({order, children}) => {
     const address = addresses.addresses[order.address_id];
 
     return <Link to={`/pedidos/${order.id}`} className="py-5 flex items-center">
-        {/* Date */}
-        {/*<div className="h-20 w-20 flex flex-col items-center justify-center bg-gray-200">*/}
-        {/*    <span className="text-xl text-gray-900 font-medium">*/}
-        {/*        {createdAt && format(createdAt, 'd', {locale: ptBR})}*/}
-        {/*    </span>*/}
-        {/*    <span className="text-lg text-gray-500">*/}
-        {/*        {createdAt && format(createdAt, 'E', {locale: ptBR})}*/}
-        {/*    </span>*/}
-        {/*</div>*/}
-
         {/* Details */}
         <div className="flex-grow">
             {/* Header */}
