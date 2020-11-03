@@ -24,26 +24,26 @@ class DatabaseSeeder extends Seeder
             'password' => bcrypt('123123123'),
             'admin'    => true,
         ]);
-//        $addresses = Address::factory()->count(5)->create();
-//        $opening = Opening::factory()->create();
-//        $products = Product::factory()->count(5)->create();
-//
-//        $opening->products()->saveMany($products);
-//        $user->addresses()->saveMany($addresses);
-//
-//        $orders = Order::factory([
-//            'opening_id' => $opening->id,
-//            'address_id' => $addresses->random()->id,
-//            'user_id'    => $user->id,
-//        ])->count(5)->create();
-//
-//        /** @var Order $order */
-//        foreach ($orders as $order) {
-//            $p = $products
-//                ->random(random_int(2, 5))
-//                ->keyBy(fn($product) => $product->id)
-//                ->map(fn() => ['quantity' => random_int(2, 5)]);
-//            $order->products()->sync($p);
-//        }
+        $addresses = Address::factory()->count(5)->create();
+        $opening = Opening::factory()->create();
+        $products = Product::factory()->count(5)->create();
+
+        $opening->products()->saveMany($products);
+        $user->addresses()->saveMany($addresses);
+
+        $orders = Order::factory([
+            'opening_id' => $opening->id,
+            'address_id' => $addresses->random()->id,
+            'user_id'    => $user->id,
+        ])->count(5)->create();
+
+        /** @var Order $order */
+        foreach ($orders as $order) {
+            $p = $products
+                ->random(random_int(2, 5))
+                ->keyBy(fn($product) => $product->id)
+                ->map(fn() => ['quantity' => random_int(2, 5)]);
+            $order->products()->sync($p);
+        }
     }
 }

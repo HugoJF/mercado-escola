@@ -32,7 +32,6 @@ export const AdminOpeningIndex: React.FC = () => {
         if (loading) {
             return Array(4).fill({});
         } else {
-            console.log(Object.values(openings.openings));
             return Object.values(openings.openings);
         }
     }

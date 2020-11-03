@@ -25,7 +25,7 @@ const status = [{
     date: '15h15 - 14/09/2020'
 },];
 
-export const OrdersEnd: React.FC = ({children}) => {
+export const OrdersShow: React.FC = ({children}) => {
     const dispatch = useDispatch<Dispatch>();
     const params = useParams<{ orderId: string }>();
     const orders = useOrders();

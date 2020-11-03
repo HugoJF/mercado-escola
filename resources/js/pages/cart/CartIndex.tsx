@@ -68,7 +68,7 @@ export const CartIndex: React.FC = () => {
             products,
         });
         dispatch.cart.reset();
-        history.push(`/pedidos/${order.id}`)
+        history.push(`/pedidos/${order.id}/finalizado`)
     }
 
     const address = cart.address_id && addresses.addresses[cart.address_id];
