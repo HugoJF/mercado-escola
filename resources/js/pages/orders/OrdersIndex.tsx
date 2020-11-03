@@ -10,8 +10,8 @@ import {formatDistance, parseISO} from 'date-fns'
 import {Skeleton}                 from "../../components/ui/Skeleton";
 import {OrderStateBadge}          from "../../components/ui/OrderStateBadge";
 import {HeightTransitioner}       from "../../components/ui/HeightTransitioner";
-import {ptBR}                         from "date-fns/locale";
-import {MoreHorizontal, MoreVertical} from "react-feather";
+import {ptBR}                     from "date-fns/locale";
+import {MoreVertical}             from "react-feather";
 
 const OrderList: React.FC<{ order: OrderType }> = ({order, children}) => {
     const addresses = useAddresses();
@@ -36,7 +36,11 @@ const OrderList: React.FC<{ order: OrderType }> = ({order, children}) => {
 
             {/* Address line */}
             <p className="my-2 text-sm text-gray-400">
-                {address?.address || <Skeleton className="w-2/3"/>}
+                {order.address_id ? address?.address
+                    ||
+                    <Skeleton className="w-2/3"/>
+                    :
+                    <>Pedido para retirada</>}
             </p>
 
             {/* Details line */}
