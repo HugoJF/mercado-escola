@@ -51,4 +51,9 @@ class Order extends Model
     {
         return $this->belongsTo(Address::class);
     }
+
+    public function getTotalAttribute()
+    {
+        return $this->products->reduce(fn ($total, $product) => $total + $product->quantity_cost * $product->pivot->quantity, 0);
+    }
 }

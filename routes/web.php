@@ -13,13 +13,16 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::delete('products/{product}/media/{id}', [\App\Http\Controllers\ProductController::class, 'deleteMedia']);
+
 Route::apiResource('products', \App\Http\Controllers\ProductController::class);
+
 Route::apiResource('addresses', \App\Http\Controllers\AddressController::class);
+
 Route::get('openings/current', [\App\Http\Controllers\OpeningController::class, 'current']);
 Route::apiResource('openings', \App\Http\Controllers\OpeningController::class);
-Route::apiResource('orders', \App\Http\Controllers\OrderController::class);
 
-Route::delete('products/{product}/media/{id}', [\App\Http\Controllers\ProductController::class, 'deleteMedia']);
+Route::apiResource('orders', \App\Http\Controllers\OrderController::class);
 
 Route::prefix('favorites')->group(function () {
     Route::get('/', [\App\Http\Controllers\FavoriteController::class, 'index'])->name('favorites.index');
@@ -27,6 +30,11 @@ Route::prefix('favorites')->group(function () {
     Route::delete('{product}', [\App\Http\Controllers\FavoriteController::class, 'destroy'])->name('favorites.destroy');
 });
 
+Route::get('mailable', function () {
+    $order = \App\Models\Order::query()->inRandomOrder()->first();
+
+    return new App\Mail\OrderCreated($order);
+});
 
 Route::get('me', [\App\Http\Controllers\MeController::class, 'index'])->name('me.index');
 Route::patch('me', [\App\Http\Controllers\MeController::class, 'update'])->name('me.update');

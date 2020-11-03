@@ -4,12 +4,14 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\OrderStoreRequest;
 use App\Http\Resources\OrderResource;
+use App\Mail\OrderCreated;
 use App\Models\Address;
 use App\Models\Opening;
 use App\Models\Order;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Mail;
 use Symfony\Component\HttpKernel\Exception\MethodNotAllowedHttpException;
 
 class OrderController extends Controller
@@ -58,6 +60,8 @@ class OrderController extends Controller
                 'quantity' => $product['quantity'],
             ]);
         $order->products()->sync($products);
+
+        Mail::to(auth()->user())->send(new OrderCreated($order));
 
         return new OrderResource($order);
     }
