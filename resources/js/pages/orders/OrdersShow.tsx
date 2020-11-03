@@ -114,10 +114,6 @@ export const OrdersShow: React.FC = ({children}) => {
                     </span>
                 </p>
             </div>
-
-            <Button>
-                Continuar
-            </Button>
         </div>
     </>
 };
