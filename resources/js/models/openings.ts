@@ -19,6 +19,9 @@ export type OpeningProperties = {
 
 export type OpeningComputedProperties = {
     id: number;
+    products: number[]
+    pickup_count: number,
+    delivery_count: number,
 }
 
 export type OpeningsState = {
@@ -71,7 +74,6 @@ export const openings = createModel<RootModel>()({
             const response = await window.axios.get('/openings/current');
 
             let normalized = normalize(response.data.data, openingsSchema);
-            console.log(normalized);
 
             if (normalized.entities['openings']) {
                 let openings = Object.values(normalized.entities['openings'] as object) as OpeningType[];
@@ -95,15 +97,16 @@ export const openings = createModel<RootModel>()({
 
             let normalized = normalize(response.data.data, [openingsSchema]);
 
-            let openings = normalized.entities['openings'] as OpeningType[]; // FIXME: this is an object
-            let products = normalized.entities['products'] as ProductType[];
-
-            if (openings) {
-                dispatch.openings.addOpening(Object.values(openings));
+            if (normalized.entities['openings']) {
+                let openings = Object.values(normalized.entities['openings'] as object) as OpeningType[];
+                dispatch.openings.addOpening(openings);
+                console.log(openings);
             }
 
-            if (products) {
-                dispatch.products.addProduct(Object.values(products));
+            if (normalized.entities['products']) {
+                let products = Object.values(normalized.entities['products'] as object) as ProductType[];
+                dispatch.products.addProduct(products);
+                console.log(products);
             }
         },
         async update(payload: { id: number, data: OpeningProperties }, state: RootState): Promise<void> {

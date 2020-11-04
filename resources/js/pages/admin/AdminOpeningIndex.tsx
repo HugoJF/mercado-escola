@@ -1,17 +1,16 @@
-import React, {useEffect, useState}                      from "react";
-import {FlatButton}                                      from "../../components/ui/FlatButton";
-import {ArrowRight, Calendar, MoreVertical, Plus, Trash} from "react-feather";
-import {useHistory}                                      from "react-router";
-import useRelativePath                                   from "../../hooks/useRelativePath";
-import {HeightTransitioner}                              from "../../components/ui/HeightTransitioner";
-import {Skeleton}                                        from "../../components/ui/Skeleton";
-import classNames                                        from "classnames";
-import {Link}                                            from "react-router-dom";
-import useLoading                                        from "../../hooks/useLoading";
-import {Dispatch}                                        from "../../store";
-import {useDispatch}                                     from "react-redux";
-import {useOpenings}                                     from "../../selectors";
-import useConfirmMenu                                    from "../../hooks/useConfirmMenu";
+import React, {useEffect, useState} from "react";
+import {FlatButton}           from "../../components/ui/FlatButton";
+import {Plus}                 from "react-feather";
+import {useHistory}           from "react-router";
+import useRelativePath        from "../../hooks/useRelativePath";
+import useLoading             from "../../hooks/useLoading";
+import {Dispatch}             from "../../store";
+import {useDispatch}          from "react-redux";
+import {useOpenings}          from "../../selectors";
+import useConfirmMenu         from "../../hooks/useConfirmMenu";
+import {AdminOpeningListItem} from "./AdminOpeningListItem";
+import {OpeningType}          from "../../models/openings";
+import {Title}                from "../../components/ui/Title";
 
 export const AdminOpeningIndex: React.FC = () => {
     const dispatch = useDispatch<Dispatch>();
@@ -30,23 +29,13 @@ export const AdminOpeningIndex: React.FC = () => {
 
     function getOpenings() {
         if (loading) {
-            return Array(4).fill({});
+            return Array(4).fill(null);
         } else {
             return Object.values(openings.openings);
         }
     }
 
-    function handleClick(id: number) {
-        if (open === id) {
-            setOpen(null);
-        } else {
-            setOpen(id);
-        }
-    }
-
-    async function handleDelete() {
-        if (!open) return;
-
+    async function handleDelete(opening: OpeningType) {
         const result = await confirm({
             title: 'Deletar abertura?',
             description: 'Deletar permanentemente o abertura do sistema',
@@ -54,7 +43,7 @@ export const AdminOpeningIndex: React.FC = () => {
         });
 
         if (result) {
-            dispatch.openings.destroy(open);
+            dispatch.openings.destroy(opening.id);
         }
     }
 
@@ -62,97 +51,16 @@ export const AdminOpeningIndex: React.FC = () => {
 
         {menu}
 
+        <Title>Aberturas</Title>
+
         <div className="mt-8">
             {getOpenings().map(opening => (
-                <div
-                    key={opening.id}
-                    className="transition-colors duration-150 w-full py-3
-                                border-b last:border-b-0 border-gray-200"
-                >
-                    <HeightTransitioner>
-                        {/* Product details */}
-                        <div
-                            onClick={() => handleClick(opening.id)}
-                            className="flex items-center"
-                        >
-                            <div className="flex items-center justify-center w-6 mr-4">
-                                <Calendar className="text-primary-500"/>
-                            </div>
-
-                            <div className="flex-grow">
-                                <h3 className="text-lg font-medium">Abertura {opening.id || <Skeleton className="w-1/4"/>}</h3>
-                                <div className="my-2 flex items-center">
-                                    <span className="text-gray-700 tracking-tight">24 out 2020</span>
-                                    <span className="mx-4 border-b-2 border-dashed flex-grow"/>
-                                    <span className="text-gray-700 tracking-tight">31 out 2020</span>
-                                </div>
-                                <ul className="flex text-sm text-gray-500">
-                                    {/* Order datetime */}
-                                    <li>
-                                        <span className="inline-block text-secondary-600 font-medium">
-                                            Aberto
-                                        </span>
-                                    </li>
-
-                                    {/* Separator */}
-                                    <span className="mx-2 font-bold text-gray-500">·</span>
-
-                                    {/* Order cost */}
-                                    <li>
-                                        20 pedidos
-                                    </li>
-
-                                    {/* Separator */}
-                                    <span className="mx-2 font-bold text-gray-500">·</span>
-
-                                    {/* Product quantity */}
-                                    <li>
-                                        30 produtos
-                                    </li>
-                                </ul>
-                            </div>
-
-                            {!loading && <ArrowRight className={classNames(
-                                `transform transition-transform duration-150 ml-2 flex-shrink-0`,
-                                {
-                                    'rotate-90 text-gray-500': open === opening.id,
-                                    'text-gray-300': open !== opening.id,
-                                },
-                            )}
-                            />}
-                        </div>
-
-                        {/* Reveal menu */}
-                        <div className="mt-4">
-                            {open === opening.id && <div className="grid grid-cols-3 divide-x divide-gray-200">
-                                {/* View */}
-                                <Link
-                                    to={`/aberturas/${opening.id}`}
-                                    className="flex justify-center items-center py-2 px-5 text-gray-700 font-medium rounded-lg"
-                                >
-                                    Ver
-                                </Link>
-
-                                {/* Delete */}
-                                <div
-                                    onClick={handleDelete}
-                                    className="flex justify-center items-center py-2 px-4 text-red-600 font-medium rounded-lg"
-                                >
-                                    <Trash size={20} className="mr-1 flex-shrink-0 inline"/>
-                                    Deletar
-                                </div>
-
-                                {/* Edit */}
-                                <Link
-                                    to={relative(`/${opening.id}/editar`)}
-                                    className="flex justify-center items-center py-2 px-5 text-gray-700 font-medium rounded-lg"
-                                >
-                                    Editar
-                                </Link>
-                            </div>}
-                        </div>
-                    </HeightTransitioner>
-                </div>
+                <AdminOpeningListItem
+                    opening={opening}
+                    open={open === opening?.id}
+                    onClick={(opening) => setOpen(open === opening.id ? null : opening.id)}
+                    onDelete={handleDelete}
+                />
             ))}
         </div>
 

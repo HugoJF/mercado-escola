@@ -1,7 +1,7 @@
 import React      from "react";
 import classNames from 'classnames';
 
-export type BadgeColors = 'primary' | 'secondary' | 'warning' | 'info' | 'danger';
+export type BadgeColors = 'primary' | 'secondary' | 'warning' | 'info' | 'danger' | 'default';
 
 export type BadgeProps = {
     color?: BadgeColors;
@@ -13,6 +13,7 @@ const classes: { [id in BadgeColors]: string } = {
     warning: 'text-yellow-100 bg-yellow-600',
     info: 'text-blue-100 bg-blue-600',
     danger: 'text-red-100 bg-red-600',
+    default: 'text-gray-100 bg-gray-600',
 };
 
 export const Badge: React.FC<BadgeProps & React.HTMLAttributes<HTMLSpanElement>> = ({color = 'primary', children, ...rest}) => {
