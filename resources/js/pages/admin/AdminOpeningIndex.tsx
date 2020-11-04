@@ -1,17 +1,17 @@
-import React, {useEffect, useState}           from "react";
-import {FlatButton}                                     from "../../components/ui/FlatButton";
-import {ArrowRight, Calendar, Plus, ShoppingBag, Trash} from "react-feather";
-import {useHistory}                                     from "react-router";
-import useRelativePath                        from "../../hooks/useRelativePath";
-import {HeightTransitioner}                   from "../../components/ui/HeightTransitioner";
-import {Skeleton}                             from "../../components/ui/Skeleton";
-import classNames                             from "classnames";
-import {Link}                                 from "react-router-dom";
-import useLoading                             from "../../hooks/useLoading";
-import {Dispatch}                             from "../../store";
-import {useDispatch}                          from "react-redux";
-import {useOpenings}                          from "../../selectors";
-import useConfirmMenu                         from "../../hooks/useConfirmMenu";
+import React, {useEffect, useState}                      from "react";
+import {FlatButton}                                      from "../../components/ui/FlatButton";
+import {ArrowRight, Calendar, MoreVertical, Plus, Trash} from "react-feather";
+import {useHistory}                                      from "react-router";
+import useRelativePath                                   from "../../hooks/useRelativePath";
+import {HeightTransitioner}                              from "../../components/ui/HeightTransitioner";
+import {Skeleton}                                        from "../../components/ui/Skeleton";
+import classNames                                        from "classnames";
+import {Link}                                            from "react-router-dom";
+import useLoading                                        from "../../hooks/useLoading";
+import {Dispatch}                                        from "../../store";
+import {useDispatch}                                     from "react-redux";
+import {useOpenings}                                     from "../../selectors";
+import useConfirmMenu                                    from "../../hooks/useConfirmMenu";
 
 export const AdminOpeningIndex: React.FC = () => {
     const dispatch = useDispatch<Dispatch>();
@@ -81,59 +81,35 @@ export const AdminOpeningIndex: React.FC = () => {
 
                             <div className="flex-grow">
                                 <h3 className="text-lg font-medium">Abertura {opening.id || <Skeleton className="w-1/4"/>}</h3>
+                                <div className="my-2 flex items-center">
+                                    <span className="text-gray-700 tracking-tight">24 out 2020</span>
+                                    <span className="mx-4 border-b-2 border-dashed flex-grow"/>
+                                    <span className="text-gray-700 tracking-tight">31 out 2020</span>
+                                </div>
+                                <ul className="flex text-sm text-gray-500">
+                                    {/* Order datetime */}
+                                    <li>
+                                        <span className="inline-block text-secondary-600 font-medium">
+                                            Aberto
+                                        </span>
+                                    </li>
 
-                                {opening.max_delivery_orders ?
-                                    <p className="text-gray-500 font-thin">
-                                        <span className="mr-1 inline-block text-secondary-600 font-medium">
-                                            Máximo de pedidos delivery:
-                                        </span>
-                                        {opening.max_delivery_orders}
-                                    </p>
-                                    :
-                                    <Skeleton className="w-full"/>
-                                }
-                                {opening.max_pickup_orders ?
-                                    <p className="text-gray-500 font-thin">
-                                        <span className="mr-1 inline-block text-secondary-600 font-medium">
-                                            Máximo de pedidos retirada:
-                                        </span>
-                                        {opening.max_pickup_orders}
-                                    </p>
-                                    :
-                                    <Skeleton className="w-full"/>
-                                }
-                                {opening.opens_at ?
-                                    <p className="text-gray-500 font-thin">
-                                        <span className="mr-1 inline-block text-secondary-600 font-medium">
-                                            Abre em:
-                                        </span>
-                                        {opening.opens_at}
-                                    </p>
-                                    :
-                                    <Skeleton className="w-full"/>
-                                }
+                                    {/* Separator */}
+                                    <span className="mx-2 font-bold text-gray-500">·</span>
 
-                                {opening.closes_at ?
-                                    <p className="text-gray-500 font-thin">
-                                        <span className="mr-1 inline-block text-secondary-600 font-medium">
-                                            Fecha em:
-                                        </span>
-                                        {opening.closes_at}
-                                    </p>
-                                    :
-                                    <Skeleton className="w-full"/>
-                                }
+                                    {/* Order cost */}
+                                    <li>
+                                        20 pedidos
+                                    </li>
 
-                                {opening.delivers_at ?
-                                    <p className="text-gray-500 font-thin">
-                                        <span className="mr-1 inline-block text-secondary-600 font-medium">
-                                            Entrega em:
-                                        </span>
-                                        {opening.delivers_at}
-                                    </p>
-                                    :
-                                    <Skeleton className="w-full"/>
-                                }
+                                    {/* Separator */}
+                                    <span className="mx-2 font-bold text-gray-500">·</span>
+
+                                    {/* Product quantity */}
+                                    <li>
+                                        30 produtos
+                                    </li>
+                                </ul>
                             </div>
 
                             {!loading && <ArrowRight className={classNames(
