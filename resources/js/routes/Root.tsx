@@ -1,5 +1,5 @@
-import {Route}                 from "react-router-dom";
-import {Login}                 from "../pages/auth/Login";
+import {Redirect, Route} from "react-router-dom";
+import {Login}           from "../pages/auth/Login";
 import {Overlay}               from "../containers/Overlay";
 import {ProtectedRoute}        from "../containers/ProtectedRoute";
 import React                   from "react";
@@ -27,8 +27,9 @@ export const Root: React.FC = () => {
                 <ProtectedRoute path="/favoritos" children={<Favorites/>}/>
                 <ProtectedRoute path="/conta" children={<Account/>}/>
                 <ProtectedRoute path="/carrinho" children={<Cart/>}/>
-
                 <ProtectedRoute path="/admin" children={<Admin/>}/>
+                
+                <Redirect to="/home"/>
             </SwitchWithTransitions>
         </Overlay>
     </Splash>
