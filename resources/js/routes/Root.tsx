@@ -28,7 +28,7 @@ export const Root: React.FC = () => {
                 <ProtectedRoute path="/conta" children={<Account/>}/>
                 <ProtectedRoute path="/carrinho" children={<Cart/>}/>
                 <ProtectedRoute path="/admin" children={<Admin/>}/>
-                
+
                 <Redirect to="/home"/>
             </SwitchWithTransitions>
         </Overlay>

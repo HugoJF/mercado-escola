@@ -32,11 +32,15 @@ export const OrderList: React.FC<{ order: OrderType }> = ({order, children}) => 
 
             {/* Address line */}
             <p className="my-2 text-sm text-gray-400">
-                {order.address_id ? address?.address
-                    ||
-                    <Skeleton className="w-2/3"/>
+                {order?.id ?
+                    (!order.address_id ?
+                            <>Pedido para retirada</>
+                            :
+                            address?.address
+                    )
                     :
-                    <>Pedido para retirada</>}
+                    <Skeleton className="w-2/3"/>
+                }
             </p>
 
             {/* Details line */}

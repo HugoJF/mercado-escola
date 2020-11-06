@@ -2,7 +2,7 @@ import React, {useEffect}                                                       
 import {Link, useRouteMatch}                                                          from "react-router-dom";
 import {Box}                                                                          from "../../components/ui/Box";
 import {DivOrLink}                                                                    from "../../components/DivOrLink";
-import {AlertCircle, Book, ChevronRight, Flag, Heart, Mail, MapPin, Smartphone, User} from "react-feather";
+import {AlertCircle, Book, ChevronRight, Flag, Heart, Mail, MapPin, Smartphone, User, LogOut} from "react-feather";
 import {useAddresses, useAuth}                                                        from "../../selectors";
 import {useDispatch}                                                                  from "react-redux";
 import {Dispatch}                                                                     from "../../store";
@@ -68,6 +68,11 @@ export const AccountSummary: React.FC = ({children}) => {
         icon: Flag,
         title: 'Ajuda',
         to: 'ajuda',
+        clickable: true,
+    }, {
+        icon: LogOut,
+        title: 'Sair',
+        to: 'sair',
         clickable: true,
     }];
 
