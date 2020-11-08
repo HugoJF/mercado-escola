@@ -1,10 +1,10 @@
 import React           from 'react';
 import {Route, Switch} from "react-router";
-import {HomeHeader}    from "./HomeHeader";
-import {DefaultHeader} from "./DefaultHeader";
-import {ProductHeader} from "./ProductHeader";
+import {HomeHeader}    from "../headers/HomeHeader";
+import {DefaultHeader} from "../headers/DefaultHeader";
+import {ProductHeader} from "../headers/ProductHeader";
 
-export const Header: React.FC = () => {
+export const HeaderRoutes: React.FC = () => {
     return <Switch>
         <Route exact path="/home" children={<HomeHeader/>}/>
         <Route path="/login" children={null}/>

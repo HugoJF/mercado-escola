@@ -5,7 +5,7 @@ import {ProductShow}           from "../pages/products/ProductShow";
 import {SwitchWithTransitions} from "../components/ui/SwitchWithTransition";
 import {ProductIndex}          from "../pages/products/ProductIndex";
 
-export const Products: React.FC = () => {
+export const ProductsRoutes: React.FC = () => {
     const relative = useRelativePath();
 
     return <SwitchWithTransitions padding>

@@ -8,7 +8,7 @@ import {SwitchWithTransitions} from "../components/ui/SwitchWithTransition";
 import {PhoneUpdate}           from "../pages/account/PhoneUpdate";
 import {Logout}                from "../pages/account/Logout";
 
-export const Account: React.FC = () => {
+export const AccountRoutes: React.FC = () => {
     const relative = useRelativePath();
 
     return <SwitchWithTransitions padding>

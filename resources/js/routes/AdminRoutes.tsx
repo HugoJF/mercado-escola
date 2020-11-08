@@ -10,7 +10,7 @@ import {AdminOpeningIndex}     from "../pages/admin/AdminOpeningIndex";
 import {AdminOpeningCreate}    from "../pages/admin/AdminOpeningCreate";
 import {AdminOpeningEdit}      from "../pages/admin/AdminOpeningEdit";
 
-export const Admin: React.FC = () => {
+export const AdminRoutes: React.FC = () => {
     const relative = useRelativePath();
 
     return <SwitchWithTransitions padding>

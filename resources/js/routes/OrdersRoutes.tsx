@@ -6,7 +6,7 @@ import {OrdersIndex}           from "../pages/orders/OrdersIndex";
 import {OrdersShow}            from "../pages/orders/OrdersShow";
 import {OrderDoneContainer}    from "../pages/orders/OrderDoneContainer";
 
-export const Orders: React.FC = () => {
+export const OrdersRoutes: React.FC = () => {
     const relative = useRelativePath();
 
     return <SwitchWithTransitions padding>

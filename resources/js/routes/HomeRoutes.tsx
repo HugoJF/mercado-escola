@@ -4,7 +4,7 @@ import useRelativePath         from "../hooks/useRelativePath";
 import {HomePage}              from "../pages/home/HomePage";
 import {SwitchWithTransitions} from "../components/ui/SwitchWithTransition";
 
-export const Home: React.FC = () => {
+export const HomeRoutes: React.FC = () => {
     const relative = useRelativePath();
 
     return <SwitchWithTransitions padding>
