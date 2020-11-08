@@ -24,9 +24,9 @@ export const ProductShow: React.FC = () => {
 
     return <>
         <div className="mx-auto container flex flex-col justify-around min-h-full">
-            <div className="w-full">
+            <div className="lg:px-48 xl:px-64 w-full">
                 <ImageHolder
-                    src={product?.media?.[0]}
+                    src={Object.values(product?.media)?.[0]}
                 />
             </div>
 

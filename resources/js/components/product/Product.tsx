@@ -21,7 +21,7 @@ export const Product: React.FC<ProductParameters> = ({product, url}) => {
     >
         <div className="mb-2">
             <ImageHolder
-                src={`https://picsum.photos/seed/${product.id}/300/300`}
+                src={Object.values(product.media)?.[0]}
                 alt={title}
             />
         </div>

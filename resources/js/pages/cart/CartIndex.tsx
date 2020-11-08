@@ -88,7 +88,7 @@ export const CartIndex: React.FC = () => {
                     <div key={product.id} className="flex my-8 items-center">
                         <div className="w-4/12">
                             <ImageHolder
-                                src={`https://picsum.photos/seed/${product.id}/500/300`}
+                                src={Object.values(product.media)?.[0]}
                             />
                         </div>
                         <div className="px-4 flex-grow">

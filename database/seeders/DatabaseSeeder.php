@@ -28,6 +28,19 @@ class DatabaseSeeder extends Seeder
         $opening = Opening::factory()->create();
         $products = Product::factory()->count(5)->create();
 
+        /** @var Product $product */
+        foreach ($products as $product) {
+            $images = random_int(0, 5);
+
+            foreach (range(0, $images) as $i) {
+                $image = file_get_contents("https://picsum.photos/500/500");
+                file_put_contents(storage_path("app/seed/image.jpg"), $image);
+
+                $media = $product->addMedia(storage_path("app/seed/image.jpg"));
+                $media->toMediaCollection();
+            }
+        }
+
         $opening->products()->saveMany($products);
         $user->addresses()->saveMany($addresses);
 
