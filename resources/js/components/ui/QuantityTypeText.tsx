@@ -6,10 +6,13 @@ export type QuantityTypes = keyof typeof QuantityConfig;
 export type QuantityTypeTextProps = {
     type: QuantityTypes,
     quantity?: number,
+    showTotal?: boolean;
 }
 
-export const QuantityTypeText: React.FC<QuantityTypeTextProps> = ({type, quantity = 1}: QuantityTypeTextProps) => {
-    const {plural, singular} = QuantityConfig[type];
+export const QuantityTypeText: React.FC<QuantityTypeTextProps> = ({type, quantity, showTotal}: QuantityTypeTextProps) => {
+    const {plural, singular, step, showStep} = QuantityConfig[type];
+    const multiplier = showTotal ? step : 1;
+    const number = (quantity === undefined ? step : quantity) * multiplier;
 
-    return <>{quantity === 1 ? singular : plural}</>
+    return <>{showStep && `${number} `}{number === 1 ? singular : plural}</>
 };

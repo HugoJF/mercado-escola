@@ -96,10 +96,10 @@ export const CartIndex: React.FC = () => {
                             <div className="flex">
                                 <div className="flex-grow">
                                     <p className="text-gray-500">
-                                        <span>{amount} </span>
                                         <QuantityTypeText
                                             type={product.quantity_type as QuantityTypes}
                                             quantity={amount}
+                                            showTotal
                                         />
                                     </p>
                                     <p className="mt-2 text-secondary-500 font-medium">

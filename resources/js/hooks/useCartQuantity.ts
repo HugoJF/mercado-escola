@@ -7,10 +7,12 @@ export type ProductQuantityConfig = {
     singular: string;
     plural: string;
     step: number;
+    showStep?: boolean,
 }
 
 export type useProductQuantityType = [
     string,
+    number,
     number,
     () => void,
     () => void
@@ -22,9 +24,10 @@ export default function useCartQuantity(productId: number, options: ProductQuant
 
     const quantity = cart.items[productId];
     const text = quantity === 1 ? options.singular : options.plural;
+    const total = quantity * options.step;
 
     function add() {
-        const newAmount = (quantity || 0) + options.step;
+        const newAmount = (quantity || 0) + 1;
 
         dispatch.cart.add({
             product: productId,
@@ -33,7 +36,7 @@ export default function useCartQuantity(productId: number, options: ProductQuant
     }
 
     function subtract() {
-        const newAmount = Math.max(quantity - options.step, 0);
+        const newAmount = Math.max(quantity - 1, 0);
 
         if (newAmount === 0) {
             dispatch.cart.remove(productId);
@@ -45,5 +48,5 @@ export default function useCartQuantity(productId: number, options: ProductQuant
         }
     }
 
-    return [text, quantity, add, subtract];
+    return [text, quantity, total, add, subtract];
 }

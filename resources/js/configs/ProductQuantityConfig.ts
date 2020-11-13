@@ -15,12 +15,14 @@ export const WEIGHT_1G: ProductQuantityConfig = {
 export const WEIGHT_10G: ProductQuantityConfig = {
     singular: 'grama',
     plural: 'gramas',
+    showStep: true,
     step: 10,
 };
 
 export const WEIGHT_100G: ProductQuantityConfig = {
     singular: 'grama',
     plural: 'gramas',
+    showStep: true,
     step: 100,
 };
 

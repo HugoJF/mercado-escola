@@ -18,7 +18,7 @@ export const ProductShow: React.FC = () => {
     type typeKey = keyof typeof ProductQuantityConfig;
     const config = ProductQuantityConfig[product?.quantity_type as typeKey];
 
-    const [text, quantity, add, subtract] = useCartQuantity(productId, config);
+    const [text, quantity, total, add, subtract] = useCartQuantity(productId, config);
 
     if (!product) return null;
 
@@ -49,7 +49,7 @@ export const ProductShow: React.FC = () => {
                     </span>
                 </div>
                 {quantity && <div className="flex items-center">
-                    <div className="mx-4 text-2xl font-medium">{quantity} {text}</div>
+                    <div className="mx-4 text-2xl font-medium">{total} {text}</div>
                 </div>}
             </div>
 
