@@ -1,5 +1,6 @@
 import {Modal, ModalProps} from "../components/Modal";
 import React               from "react";
+import {Skeleton}          from "../components/ui/Skeleton";
 
 export type AddressStreetNumberActionMenuType = {
     address: string;
@@ -12,7 +13,7 @@ export const AddressStreetNumberActionMenu: React.FC<ModalProps & AddressStreetN
         return <Modal open={open} onClose={onClose}>
             <h1 className="text-center text-lg font-medium">Qual o número do endereço?</h1>
             <p className="mb-4 text-center text-gray-500">
-                {address}
+                {address || <Skeleton className="w-1/2"/> }
             </p>
             <div className="block border-b border-gray-300"/>
             <div className="flex justify-center my-2">

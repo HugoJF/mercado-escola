@@ -18,7 +18,7 @@ export const MapWithPing: React.FC<MapWithPingProps> = ({center}) => {
         }}
         zoom={zoom}
         center={currentCenter as LatLngExpression}
-        className="w-full h-64 rounded-lg"
+        className="w-full flex-grow h-64 rounded-lg"
     >
         <TileLayer
             detectRetina={true}

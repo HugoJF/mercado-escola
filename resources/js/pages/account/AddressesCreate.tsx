@@ -13,6 +13,18 @@ import {extractAddressComponents}      from "../../helpers/GoogleMapsHelpers";
 import {MapWithPing}                   from "../../components/MapWithPing";
 import {Button}                        from "../../components/ui/Button";
 
+const fixOnBlur = (refObj: any) => {
+    // Avoid clearing suggestions when input loses focus
+    // ---
+    // https://github.com/hibiken/react-places-autocomplete/issues/260
+    // @ts-ignore
+    refObj?.clearSuggestions = () => {
+    };
+    // @ts-ignore
+    refObj?.handleInputOnBlur = () => {
+    };
+};
+
 export const AddressesCreate: React.FC = ({children}) => {
     const dispatch = useDispatch<Dispatch>();
     const history = useHistory();
@@ -87,75 +99,72 @@ export const AddressesCreate: React.FC = ({children}) => {
             onClose={() => setNumberSelectorOpen(false)}
         />
 
-        <Title>Selecione o seu endereço</Title>
-        <div className="mt-4 px-4 w-full">
-            {!ready && <PlacesAutocomplete
-                value={input}
-                onChange={input => setInput(input)}
-                onSelect={address => {
-                    handleAddressSelection(address);
-                    setNumberSelectorOpen(true);
-                }}
-                ref={refObj => {
-                    // Avoid clearing suggestions when input loses focus
-                    // ---
-                    // https://github.com/hibiken/react-places-autocomplete/issues/260
-                    // @ts-ignore
-                    refObj?.clearSuggestions = () => {
-                    };
-                    // @ts-ignore
-                    refObj?.handleInputOnBlur = () => {
-                    };
-                }}
-            >
-                {({getInputProps, suggestions, getSuggestionItemProps, loading}) => (
-                    <div>
-                        <label className="text-gray-500" htmlFor="#address">Endereço</label>
-                        <input
-                            {...getInputProps({
-                                placeholder: 'Digite seu endereço...',
-                                className: 'transition-colors duration-300 block w-full mb-4 py-3 px-4 text-black bg-transparent border-b border-lg',
-                            })}
-                        />
-
-                        {loading && <div className="flex justify-center py-8">
-                            <Loader className="animate-spin" size={30}/>
-                        </div>}
-
-                        <div>
-                            {suggestions.map(suggestion =>
-                                <Box {...getSuggestionItemProps(suggestion)}>
-                                    <MapPin className="flex-shrink-0 text-gray-500"/>
-
-                                    <p className="flex-grow mx-4 text-sm tracking-tight">{suggestion.description}</p>
-
-                                    <ChevronRight className="flex-shrink-0 text-gray-500"/>
-                                </Box>
-                            )}
-                        </div>
-                    </div>
-                )}
-            </PlacesAutocomplete>}
-
-            {ready && <div>
-                <p className="text-center text-base text-gray-700">{address?.formatted_address}</p>
-                <p className="text-center text-base font-medium text-gray-700">{number}</p>
-            </div>}
-
-            {ready && center &&
-            <MapWithPing center={center}/>}
-
-            {ready &&
-            <div className="mt-4">
-                <Button
-                    loading={loading}
-                    color="primary"
-                    onClick={() => handleSave()}
-                    className="mt-4"
+        <div className="flex flex-col pt-4 px-4 space-y-4 w-full h-full">
+            {!ready && <>
+                <Title>Selecione o seu endereço</Title>
+                <PlacesAutocomplete
+                    value={input}
+                    onChange={input => setInput(input)}
+                    onSelect={address => {
+                        handleAddressSelection(address);
+                        setNumberSelectorOpen(true);
+                    }}
+                    ref={fixOnBlur}
                 >
-                    Salvar
-                </Button>
-            </div>}
+                    {({getInputProps, suggestions, getSuggestionItemProps, loading}) => (
+                        <div>
+                            <label className="text-gray-500" htmlFor="#address">Busca de endereço</label>
+                            <input
+                                {...getInputProps({
+                                    placeholder: 'Digite seu endereço...',
+                                    className: 'transition-colors duration-300 block w-full mb-4 py-3 px-4 text-black bg-transparent border-b border-lg',
+                                })}
+                            />
+
+                            {loading && <div className="flex justify-center py-8">
+                                <Loader className="animate-spin" size={30}/>
+                            </div>}
+
+                            <div>
+                                {suggestions.map(suggestion =>
+                                    <Box {...getSuggestionItemProps(suggestion)}>
+                                        <MapPin className="flex-shrink-0 text-gray-500"/>
+
+                                        <p className="flex-grow mx-4 tracking-tight">{suggestion.description}</p>
+
+                                        <ChevronRight className="flex-shrink-0 text-gray-500"/>
+                                    </Box>
+                                )}
+                            </div>
+                        </div>
+                    )}
+                </PlacesAutocomplete>
+            </>}
+
+            {/* When an address is selected */}
+            {ready && <>
+                {/* The address line */}
+                <div>
+                    <p className="text-xl text-center text-base text-gray-700">{address?.formatted_address}</p>
+                    <p className="text-center text-base font-medium text-gray-700">{number}</p>
+                </div>
+
+                {/* Map for fine-tuning */}
+                {center &&
+                <MapWithPing center={center}/>}
+
+                {/* Save */}
+                <div>
+                    <Button
+                        loading={loading}
+                        color="primary"
+                        onClick={() => handleSave()}
+                        className="mt-4"
+                    >
+                        Salvar
+                    </Button>
+                </div>
+            </>}
         </div>
     </>
 };

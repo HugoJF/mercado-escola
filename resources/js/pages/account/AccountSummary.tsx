@@ -1,14 +1,14 @@
-import React, {useEffect}                                                             from "react";
-import {Link, useRouteMatch}                                                          from "react-router-dom";
-import {Box}                                                                          from "../../components/ui/Box";
-import {DivOrLink}                                                                    from "../../components/DivOrLink";
-import {AlertCircle, Book, ChevronRight, Flag, Heart, Mail, MapPin, Smartphone, User, LogOut} from "react-feather";
-import {useAddresses, useAuth}                                                        from "../../selectors";
-import {useDispatch}                                                                  from "react-redux";
-import {Dispatch}                                                                     from "../../store";
-import {Title}                                                                        from "../../components/ui/Title";
-import classNames                                                                     from 'classnames';
-import {Skeleton}                                                                     from "../../components/ui/Skeleton";
+import React, {useEffect}                                                                     from "react";
+import {Link, useRouteMatch}                                                                  from "react-router-dom";
+import {Box}                                                                                  from "../../components/ui/Box";
+import {DivOrLink}                                                                            from "../../components/DivOrLink";
+import {AlertCircle, Book, ChevronRight, Flag, Heart, LogOut, Mail, MapPin, Smartphone, User} from "react-feather";
+import {useAddresses, useAuth}                                                                from "../../selectors";
+import {useDispatch}                                                                          from "react-redux";
+import {Dispatch}                                                                             from "../../store";
+import {Title}                                                                                from "../../components/ui/Title";
+import classNames                                                                             from 'classnames';
+import {Skeleton}                                                                             from "../../components/ui/Skeleton";
 
 export const AccountSummary: React.FC = ({children}) => {
     const dispatch = useDispatch<Dispatch>();
@@ -39,6 +39,7 @@ export const AccountSummary: React.FC = ({children}) => {
         icon: MapPin,
         title: 'Endereço principal',
         sub: mainAddress ? mainAddress.address : null,
+        hideSub: !auth.me?.main_address,
         to: 'endereco',
         clickable: true,
     }, {
@@ -80,7 +81,7 @@ export const AccountSummary: React.FC = ({children}) => {
         <Title>Conta</Title>
 
         <div className="mb-8">
-            {mainSections.map(({icon: Icon, title, sub, to, clickable}) => (
+            {mainSections.map(({icon: Icon, title, sub, hideSub, to, clickable}) => (
                 <DivOrLink
                     key={to}
                     isLink={clickable}
@@ -98,7 +99,7 @@ export const AccountSummary: React.FC = ({children}) => {
                     </div>
                     <div className="flex-grow">
                         <h3 className="text-lg font-medium">{title}</h3>
-                        <p className="text-gray-500 font-thin">{sub || <Skeleton className="w-3/4"/> }</p>
+                        {!hideSub && <p className="text-gray-500 font-thin">{sub || <Skeleton className="w-3/4"/>}</p>}
                     </div>
                     {clickable && <ChevronRight className="flex-shrink-0 text-gray-500"/>}
                 </DivOrLink>
