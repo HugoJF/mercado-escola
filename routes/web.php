@@ -13,6 +13,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+/*
+ * TODO
+ *
+ * https://i.imgur.com/FgBKuYB.png
+ * https://i.imgur.com/127LyuF.png
+ * https://i.imgur.com/LZbGnBe.png
+ */
+
 Route::delete('products/{product}/media/{id}', [\App\Http\Controllers\ProductController::class, 'deleteMedia']);
 
 Route::apiResource('products', \App\Http\Controllers\ProductController::class);

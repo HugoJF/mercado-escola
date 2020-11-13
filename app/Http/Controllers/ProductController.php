@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Http\Resources\ProductResource;
 use App\Models\Product;
+use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Spatie\MediaLibrary\MediaCollections\FileAdder;
 
 class ProductController extends Controller
@@ -21,12 +23,21 @@ class ProductController extends Controller
 
     public function store(Request $request)
     {
-        $product = new Product($request->all());
-        $product->save();
+        try {
+            DB::beginTransaction();
 
-        if ($request->hasFile('images')) {
-            $product->addMultipleMediaFromRequest(['images'])
-                    ->each(fn(FileAdder $file) => $file->toMediaCollection());
+            $product = new Product($request->all());
+            $product->save();
+
+            if ($request->hasFile('images')) {
+                $product->addMultipleMediaFromRequest(['images'])
+                        ->each(fn(FileAdder $file) => $file->toMediaCollection());
+            }
+
+            DB::commit();
+        } catch (Exception $e) {
+            DB::rollBack();
+            throw $e;
         }
 
         return new ProductResource($product);
