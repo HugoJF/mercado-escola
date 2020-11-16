@@ -53,8 +53,6 @@ export const OpeningForm: React.FC<OpeningFormType> = ({opening, onSubmit}) => {
     }
 
     return <form className="space-y-4" onSubmit={handleSubmit(submit)}>
-        <Title>Formulário de abertura</Title>
-
         <Input
             name="max_delivery_orders"
             label="Quantidade máxima de pedidos delivery"
@@ -90,7 +88,7 @@ export const OpeningForm: React.FC<OpeningFormType> = ({opening, onSubmit}) => {
             </div>
         </FieldWrapper>
 
-        <FieldWrapper name="closes_at" label="Data de abertura">
+        <FieldWrapper name="closes_at" label="Data de fechamento">
             <div className="flex flex-col items-stretch w-full px-2 pb-4">
                 <DateTimePicker
                     name="closes_at"
@@ -103,7 +101,7 @@ export const OpeningForm: React.FC<OpeningFormType> = ({opening, onSubmit}) => {
             </div>
         </FieldWrapper>
 
-        <FieldWrapper name="delivers_at" label="Data de abertura">
+        <FieldWrapper name="delivers_at" label="Data de entrega">
             <div className="flex flex-col items-stretch w-full px-2 pb-4">
                 <DateTimePicker
                     name="delivers_at"
