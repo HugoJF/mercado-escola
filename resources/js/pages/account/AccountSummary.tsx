@@ -36,17 +36,17 @@ export const AccountSummary: React.FC = ({children}) => {
         to: 'email',
         clickable: false,
     }, {
+        icon: Smartphone,
+        title: 'Telefone',
+        sub: '(67) 9 9821 2015',
+        to: 'telefone',
+        clickable: true,
+    }, {
         icon: MapPin,
         title: 'Endereço principal',
         sub: mainAddress ? mainAddress.address : null,
         hideSub: !auth.me?.main_address,
         to: 'endereco',
-        clickable: true,
-    }, {
-        icon: Smartphone,
-        title: 'Telefone',
-        sub: '(67) 9 9821 2015',
-        to: 'telefone',
         clickable: true,
     }];
 

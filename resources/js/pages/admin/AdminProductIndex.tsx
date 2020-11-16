@@ -12,6 +12,8 @@ import {Skeleton}                             from "../../components/ui/Skeleton
 import useAsyncEffect                         from "../../hooks/useAsyncEffect";
 import useConfirmMenu                         from "../../hooks/useConfirmMenu";
 import classNames                             from "classnames";
+import {PriceFormatter}                       from "../../components/ui/PriceFormatter";
+import {QuantityTypeText}                     from "../../components/ui/QuantityTypeText";
 
 export const AdminProductIndex: React.FC = () => {
     const dispatch = useDispatch<Dispatch>();
@@ -84,6 +86,31 @@ export const AdminProductIndex: React.FC = () => {
                                 <div className="flex-grow">
                                     <h3 className="text-lg font-medium">{product.title || <Skeleton className="w-3/4"/>}</h3>
                                     <p className="text-gray-500 font-thin">{product.description || <Skeleton className="w-full"/>}</p>
+                                    <div className="mt-2">
+                                        {/* Stats */}
+                                        <ul className="flex items-center justify-center text-sm text-gray-500 tracking-tight">
+                                            {/* Product price */}
+                                            <li className="mx-2 text-center">
+                                                {product?.quantity_cost ?
+                                                    <>
+                                                        <PriceFormatter cents price={product.quantity_cost}></PriceFormatter>
+                                                        /
+                                                        <QuantityTypeText type={product?.quantity_type}/>
+                                                    </>
+                                                    :
+                                                    <Skeleton className="w-20"/>
+                                                }
+                                            </li>
+
+                                            {/* Separator */}
+                                            <span className="mx-2 font-bold text-gray-300">·</span>
+
+                                            {/* Product quantity */}
+                                            <li className="mx-2 text-center">
+                                                {product?.media ? `${Object.values(product.media).length} imagens` : <Skeleton className="w-20"/>}
+                                            </li>
+                                        </ul>
+                                    </div>
                                 </div>
 
                                 {!loading && <ArrowRight className={classNames(

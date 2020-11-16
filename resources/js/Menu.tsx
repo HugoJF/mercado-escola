@@ -60,7 +60,7 @@ export const Menu: React.FC = () => {
                         hover:bg-gray-100 cursor-pointer`,
                         {
                             'text-secondary-600': isIn,
-                            'text-gray-500': !isIn,
+                            'text-gray-400': !isIn,
                         }
                     )}
                 >
