@@ -9,6 +9,7 @@ import {AdminProductCreate}    from "../pages/admin/AdminProductCreate";
 import {AdminOpeningIndex}     from "../pages/admin/AdminOpeningIndex";
 import {AdminOpeningCreate}    from "../pages/admin/AdminOpeningCreate";
 import {AdminOpeningEdit}      from "../pages/admin/AdminOpeningEdit";
+import {AdminProducerIndex}    from "../pages/admin/AdminProducerIndex";
 
 export const AdminRoutes: React.FC = () => {
     const relative = useRelativePath();
@@ -17,6 +18,7 @@ export const AdminRoutes: React.FC = () => {
         <Route exact path={relative('/')} children={<AdminIndex/>}/>
         <Route exact path={relative('/produtos')} children={<AdminProductIndex/>}/>
         <Route exact path={relative('/aberturas')} children={<AdminOpeningIndex/>}/>
+        <Route exact path={relative('/produtores')} children={<AdminProducerIndex/>}/>
         <Route exact path={relative('/produtos/novo')} children={<AdminProductCreate/>}/>
         <Route exact path={relative('/aberturas/novo')} children={<AdminOpeningCreate/>}/>
         <Route path={relative('/produtos/:productId/editar')} children={<AdminProductEdit/>}/>

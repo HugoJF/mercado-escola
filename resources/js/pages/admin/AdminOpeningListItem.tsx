@@ -40,7 +40,7 @@ export const AdminOpeningListItem: React.FC<AdminOpeningListItemProps> = ({openi
                 <div className="flex-grow">
                     {/* Header with ID and status */}
                     <div className="flex justify-between">
-                        <h3 className="flex text-lg font-medium">Abertura {opening?.id || <Skeleton className="w-4"/>}</h3>
+                        {opening?.id && <h3 className="flex text-lg font-medium">Abertura {opening?.id}</h3>}
                         {!opensAt || !closesAt ? <Skeleton className="w-1/3"/> : null}
                         {opensAt && closesAt && (
                             isPast(opensAt) && isFuture(closesAt) && <Badge>Aberto</Badge>
