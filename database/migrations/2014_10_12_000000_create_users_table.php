@@ -19,6 +19,8 @@ class CreateUsersTable extends Migration
             $table->boolean('admin')->default(false);
             $table->string('name');
 
+            $table->unsignedBigInteger('main_address_id')->nullable();
+
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
 

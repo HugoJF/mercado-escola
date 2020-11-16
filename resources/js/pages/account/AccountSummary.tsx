@@ -20,7 +20,7 @@ export const AccountSummary: React.FC = ({children}) => {
         dispatch.addresses.index();
     }, []);
 
-    const mainAddressId = auth.me?.main_address;
+    const mainAddressId = auth.me?.main_address_id;
     const mainAddress = mainAddressId && addresses.addresses[mainAddressId];
 
     const mainSections = [{
@@ -45,7 +45,7 @@ export const AccountSummary: React.FC = ({children}) => {
         icon: MapPin,
         title: 'Endereço principal',
         sub: mainAddress ? mainAddress.address : null,
-        hideSub: !auth.me?.main_address,
+        hideSub: !mainAddressId,
         to: 'endereco',
         clickable: true,
     }];

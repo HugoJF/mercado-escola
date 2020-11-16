@@ -20,7 +20,7 @@ class Address extends Model
 
     public function isMainAddressOf()
     {
-        return $this->hasMany(User::class, 'main_address', 'id');
+        return $this->hasMany(User::class, 'main_address_id', 'id');
     }
 
     public function orders()

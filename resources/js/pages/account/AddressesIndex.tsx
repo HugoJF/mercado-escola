@@ -23,7 +23,8 @@ export const AddressesIndex: React.FC = ({children}) => {
     }, []);
 
     async function handleAddressClick(address: AddressType) {
-        await dispatch.auth.update({main_address: address.id});
+        dispatch.auth.update({main_address_id: address.id});
+        history.push('/conta');
     }
 
     return <>
@@ -31,7 +32,7 @@ export const AddressesIndex: React.FC = ({children}) => {
 
         <div className="px-2 my-8">
             <AddressList
-                selected={auth.me?.main_address as number|undefined}
+                selected={auth.me?.main_address_id as number|undefined}
                 loading={loading}
                 addresses={Object.values(addresses.addresses)}
                 onClick={handleAddressClick}

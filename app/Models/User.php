@@ -20,7 +20,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
-        'main_address',
+        'main_address_id',
     ];
 
     /**
@@ -50,7 +50,7 @@ class User extends Authenticatable
 
     public function mainAddress()
     {
-        return $this->belongsTo(Address::class, 'id', 'main_address');
+        return $this->belongsTo(Address::class, 'id', 'main_address_id');
     }
 
     public function favorites()

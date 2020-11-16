@@ -7,7 +7,7 @@ export type AuthState = {
         name: string,
         email: string,
         admin: boolean,
-        main_address: number|null,
+        main_address_id: number|null,
     },
     failed?: boolean,
 };
