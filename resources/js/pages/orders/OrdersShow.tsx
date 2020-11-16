@@ -60,8 +60,8 @@ export const OrdersShow: React.FC = ({children}) => {
             <Title>Situação</Title>
 
             <div className="px-2">
-                {status.map((s => (
-                    <Box>
+                {status.map(((s, i) => (
+                    <Box key={i}>
                         {s.done ?
                             <CheckSquare size={24} className="mr-4 flex-shrink-0 text-secondary-500"/>
                             :

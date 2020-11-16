@@ -32,8 +32,9 @@ export const AdminIndex: React.FC = () => {
             <Title>Administrativo</Title>
 
             <div className="grid grid-cols-2 gap-8 mt-8">
-                {buttons.map(button => (
+                {buttons.map((button, i) => (
                     <Link
+                        key={i}
                         to={relative(button.to)}
                         className="flex flex-col items-center px-4 py-6 bg-gray-200 border rounded-lg shadow-sm"
                     >

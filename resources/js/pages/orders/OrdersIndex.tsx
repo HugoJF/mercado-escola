@@ -16,11 +16,11 @@ export const OrdersIndex: React.FC = ({children}) => {
         dispatch.addresses.index();
     }, []);
 
-    function getOrders() {
+    function getOrders(): any[] {
         if (Object.values(orders.orders)?.length) {
             return Object.values(orders.orders)
         } else {
-            return Array(5).fill({});
+            return Array.from(Array(5).keys()).map(id => ({id}));
         }
     }
 

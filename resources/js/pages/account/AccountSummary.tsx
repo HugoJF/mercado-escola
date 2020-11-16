@@ -111,7 +111,7 @@ export const AccountSummary: React.FC = ({children}) => {
         <div className="mt-8">
             {secondarySections.map(({icon: Icon, title, to, clickable}) => (
                 <Link to={`${match.url}/${to}`}>
-                    <Box>
+                    <Box key={to}>
                         <div className="flex items-center justify-center w-6 mr-4">
                             <Icon className="text-primary-500"/>
                         </div>

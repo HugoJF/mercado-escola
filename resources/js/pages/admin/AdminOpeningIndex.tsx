@@ -27,7 +27,7 @@ export const AdminOpeningIndex: React.FC = () => {
         })
     }, []);
 
-    function getOpenings() {
+    function getOpenings(): any[] {
         if (loading) {
             return Array(4).fill(null);
         } else {

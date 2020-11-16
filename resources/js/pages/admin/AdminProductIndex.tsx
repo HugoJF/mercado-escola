@@ -50,9 +50,9 @@ export const AdminProductIndex: React.FC = () => {
         }
     }
 
-    function getProducts() {
+    function getProducts(): any[] {
         if (loading) {
-            return Array(4).fill({});
+            return Array.from(Array(4).keys()).map(id => ({id}));
         } else {
             return Object.values(products.products);
         }
