@@ -9,10 +9,20 @@ export type QuantityTypeTextProps = {
     showTotal?: boolean;
 }
 
-export const QuantityTypeText: React.FC<QuantityTypeTextProps> = ({type, quantity, showTotal}: QuantityTypeTextProps) => {
+// FIXME: improve this component naming scheme
+export const rawTypeText = ({type, quantity, showTotal}: QuantityTypeTextProps) => {
     const {plural, singular, step, showStep} = QuantityConfig[type];
     const multiplier = showTotal ? step : 1;
     const number = (quantity === undefined ? step : quantity) * multiplier;
 
-    return <>{showStep && `${number} `}{number === 1 ? singular : plural}</>
+    const output = [
+        showStep && number,
+        number === 1 ? singular : plural
+    ];
+
+    return output.filter(i => i).join(' ');
+};
+
+export const QuantityTypeText: React.FC<QuantityTypeTextProps> = (params: QuantityTypeTextProps) => {
+    return <>{rawTypeText(params)}</>;
 };

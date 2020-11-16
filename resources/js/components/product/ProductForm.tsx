@@ -10,7 +10,8 @@ import {useDropzone}                    from "react-dropzone";
 import {FieldWrapper}                   from "../form/FieldWrapper";
 import useConfirmMenu                   from "../../hooks/useConfirmMenu";
 import {useDispatch}                    from "react-redux";
-import {Dispatch}                       from "../../store";
+import {Dispatch}                                     from "../../store";
+import {QuantityTypes, QuantityTypeText, rawTypeText} from "../ui/QuantityTypeText";
 
 type ProductFormType = {
     product?: ProductType;
@@ -174,9 +175,11 @@ export const ProductForm: React.FC<ProductFormType>
                         ref: register({required: 'Selecione qual o tipo de unidade do produto'})
                     }}
                 >
-                    {Object.entries(QuantityConfig).map(
-                        ([id, definition]) => (
-                            <option key={id} value={id}>{definition.singular}</option>
+                    {Object.keys(QuantityConfig).map(
+                        (type) => (
+                            <option key={type} value={type}>
+                                {rawTypeText({type: type as QuantityTypes})}
+                            </option>
                         )
                     )}
                 </Select>
