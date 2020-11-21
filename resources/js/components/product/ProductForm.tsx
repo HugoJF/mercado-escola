@@ -116,11 +116,12 @@ export const ProductForm: React.FC<ProductFormType>
                     <p>Arraste fotos do produto aqui ou clique para selecioná-los</p>
                 </div>
 
-                <ul className="grid grid-cols-4 gap-4">
-                    {Object.entries(product?.media ?? {}).map(([id, url]) => <li className="relative flex items-center justify-center p-1
-                        bg-gray-200 border border-gray-300 shadow-inner rounded-lg"
+                <ul className="grid grid-cols-4 gap-4 mb-4">
+                    {Object.entries(product?.media ?? {}).map(([id, url]) => <li className="relative flex items-center justify-center
+                        border-4 border-gray-300 rounded-lg"
                     >
                         <img
+                            className="rounded"
                             onClick={() => removeExistingImage(parseInt(id))}
                             src={url}
                             alt={product?.title}
