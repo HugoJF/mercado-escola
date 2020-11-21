@@ -38,7 +38,7 @@ export const OrderDone: React.FC<OrderDoneProps> = ({order, opening, address}) =
                             ?
                             <>Seu item será entregue no dia </>
                             :
-                            <>Seus <span className="text-gray-700 font-medium ">7</span> itens serão entregues no dia </>
+                            <>Seus <span className="text-gray-700 font-medium ">{order.products.length}</span> produtos serão entregues no dia </>
                         }
 
                         <span className="mr-1 text-secondary-500 font-medium">

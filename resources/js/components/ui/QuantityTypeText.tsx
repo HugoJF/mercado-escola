@@ -13,10 +13,10 @@ export type QuantityTypeTextProps = {
 export const rawTypeText = ({type, quantity, showTotal}: QuantityTypeTextProps) => {
     const {plural, singular, step, showStep} = QuantityConfig[type];
     const multiplier = showTotal ? step : 1;
-    const number = (quantity === undefined ? step : quantity) * multiplier;
+    const number = (!quantity ? step : quantity) * multiplier;
 
     const output = [
-        showStep && number,
+        (showStep || quantity) && number,
         number === 1 ? singular : plural
     ];
 
