@@ -13,6 +13,7 @@ import {FavoritesRoutes}       from "./FavoritesRoutes";
 import {AccountRoutes}         from "./AccountRoutes";
 import {CartRoutes}            from "./CartRoutes";
 import {AdminRoutes}           from "./AdminRoutes";
+import {OnBoardingRoutes}      from "./OnBoardingRoutes";
 
 export const RootRoutes: React.FC = () => {
     return <Splash>
@@ -22,6 +23,7 @@ export const RootRoutes: React.FC = () => {
                 <Route path="/register" children={<Register/>}/>
 
                 <ProtectedRoute path="/home" children={<HomeRoutes/>}/>
+                <ProtectedRoute path="/on-boarding" children={<OnBoardingRoutes/>}/>
                 <ProtectedRoute path="/pedidos" children={<OrdersRoutes/>}/>
                 <ProtectedRoute path="/produtos" children={<ProductsRoutes/>}/>
                 <ProtectedRoute path="/favoritos" children={<FavoritesRoutes/>}/>
