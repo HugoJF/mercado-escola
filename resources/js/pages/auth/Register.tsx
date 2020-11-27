@@ -7,6 +7,7 @@ import {RegisterCredentials} from "../../models/auth";
 import {Link}                from "react-router-dom";
 import {Input}               from "../../components/form/Input";
 import {Button}              from "../../components/ui/Button";
+import {Title}               from "../../components/ui/Title";
 
 export const Register: React.FC<object> = () => {
     const dispatch = useDispatch<Dispatch>();
@@ -35,7 +36,7 @@ export const Register: React.FC<object> = () => {
     // @ts-ignore
     return <div className="mx-auto container">
         <form onSubmit={handleSubmit(registerUser)}>
-            <h1 className="text-5xl text-center">DiCasa</h1>
+            <Title>Criando uma nova conta</Title>
 
             <div>
                 {/* Name */}
@@ -92,8 +93,10 @@ export const Register: React.FC<object> = () => {
                         }}
                     />
                 </div>
-
-                <Button loading={loading}>Registrar</Button>
+                
+                <div className="mt-8">
+                    <Button loading={loading}>Registrar</Button>
+                </div>
 
                 <div className="text-center mt-8">
                     <Link to="/login" className="w-full text-gray-500">

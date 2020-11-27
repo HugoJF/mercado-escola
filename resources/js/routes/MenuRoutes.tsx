@@ -41,6 +41,7 @@ const buttons = {
 export const MenuRoutes: React.FC = () => {
     return <Switch>
         <Route path="/login" children={null}/>
+        <Route path="/register" children={null}/>
         <Route path="/on-boarding" children={null}/>
         <Route children={<Menu/>}/>
     </Switch>
