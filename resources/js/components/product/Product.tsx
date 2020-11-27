@@ -11,7 +11,7 @@ interface ProductParameters {
 }
 
 export const Product: React.FC<ProductParameters> = ({product, url}) => {
-    const {title, quantity_cost, quantity_type} = product;
+    const {name, quantity_cost, quantity_type} = product;
 
     return <Link
         to={url}
@@ -22,12 +22,12 @@ export const Product: React.FC<ProductParameters> = ({product, url}) => {
         <div className="mb-2">
             <ImageHolder
                 src={Object.values(product.media)?.[0]}
-                alt={title}
+                alt={name}
             />
         </div>
 
         <h3 className="text-xl text-gray-800 font-medium">
-            {title}
+            {name}
         </h3>
 
         <h4 className="text-lg">

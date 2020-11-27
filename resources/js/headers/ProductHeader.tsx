@@ -36,7 +36,7 @@ export const ProductHeader: React.FC = () => {
         <BackAndCart/>
 
         <div className="flex justify-between items-center mt-12 px-6">
-            <h2 className="text-3xl font-medium truncate">{product.title}</h2>
+            <h2 className="text-3xl font-medium truncate">{product.name}</h2>
 
             <div
                 className={classNames(

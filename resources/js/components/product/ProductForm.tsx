@@ -124,7 +124,7 @@ export const ProductForm: React.FC<ProductFormType>
                             className="rounded"
                             onClick={() => removeExistingImage(parseInt(id))}
                             src={url}
-                            alt={product?.title}
+                            alt={product?.name}
                         />
                     </li>)}
 
@@ -147,7 +147,7 @@ export const ProductForm: React.FC<ProductFormType>
                 <Input
                     name="title"
                     label="Nome"
-                    error={errors.title}
+                    error={errors.name}
                     inputProps={{
                         ref: register({required: 'Digite o nome do produto'}),
                         placeholder: "Digite o nome do produto...",

@@ -32,7 +32,7 @@ export const AdminProductEdit: React.FC = () => {
 
     // @ts-ignore
     return <div className="mx-auto container">
-        <Title>Atualizando {product?.title}</Title>
+        <Title>Atualizando {product?.name}</Title>
 
         <ProductForm
             product={product}

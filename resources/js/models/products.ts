@@ -6,7 +6,7 @@ import {SoftDeletes, Timestamps} from "../types";
 export type ProductType = ProductProperties & ProductComputedProperties & Timestamps & SoftDeletes;
 
 export type ProductProperties = {
-    title: string;
+    name: string;
     description: string;
     quantity_type: string;
     quantity_cost: number;

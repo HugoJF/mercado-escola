@@ -92,7 +92,7 @@ export const CartIndex: React.FC = () => {
                             />
                         </div>
                         <div className="px-4 flex-grow">
-                            <h3 className="text-xl font-medium">{product.title}</h3>
+                            <h3 className="text-xl font-medium">{product.name}</h3>
                             <div className="flex">
                                 <div className="flex-grow">
                                     <p className="text-gray-500">
