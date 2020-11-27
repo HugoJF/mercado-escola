@@ -26,6 +26,10 @@ export const Register: React.FC<object> = () => {
         setLoading(true);
         try {
             await dispatch.auth.registration(credentials);
+            await dispatch.auth.login({
+                email: credentials.email,
+                password: credentials.password,
+            });
             history.push('/on-boarding');
         } catch (e) {
             setErrors(e.response.data.errors);
@@ -93,7 +97,7 @@ export const Register: React.FC<object> = () => {
                         }}
                     />
                 </div>
-                
+
                 <div className="mt-8">
                     <Button loading={loading}>Registrar</Button>
                 </div>
