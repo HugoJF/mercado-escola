@@ -145,7 +145,7 @@ export const ProductForm: React.FC<ProductFormType>
             {/* Title */}
             <div className="mb-8">
                 <Input
-                    name="title"
+                    name="name"
                     label="Nome"
                     error={errors.name}
                     inputProps={{

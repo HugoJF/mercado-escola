@@ -84,16 +84,15 @@ export const AdminProductIndex: React.FC = () => {
                                 </div>
 
                                 <div className="flex-grow">
-                                    <h3 className="text-lg font-medium">{product.title || <Skeleton className="w-3/4"/>}</h3>
-                                    <p className="text-gray-500 font-thin">{product.description || <Skeleton className="w-full"/>}</p>
+                                    <h3 className="text-lg font-medium">{product.name || <Skeleton className="w-3/4"/>}</h3>
                                     <div className="mt-2">
                                         {/* Stats */}
-                                        <ul className="flex items-center justify-center text-sm text-gray-500 tracking-tight">
+                                        <ul className="flex items-center text-sm text-gray-500 tracking-tight">
                                             {/* Product price */}
                                             <li className="mx-2 text-center">
                                                 {product?.quantity_cost ?
                                                     <>
-                                                        <PriceFormatter cents price={product.quantity_cost}></PriceFormatter>
+                                                        <PriceFormatter cents price={product.quantity_cost}/>
                                                         /
                                                         <QuantityTypeText type={product?.quantity_type}/>
                                                     </>

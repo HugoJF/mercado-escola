@@ -12,7 +12,7 @@ class Product extends Model implements HasMedia
 {
     use SoftDeletes, HasFactory, InteractsWithMedia;
 
-    protected $fillable = ['title', 'description', 'quantity_type', 'quantity_cost'];
+    protected $fillable = ['name', 'description', 'quantity_type', 'quantity_cost'];
 
     public function openings()
     {
