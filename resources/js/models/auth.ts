@@ -115,10 +115,7 @@ export const auth = createModel<RootModel>()({
                     email, password,
                 });
 
-                dispatch.auth.setUser({
-                    name: email,
-                    email: email,
-                });
+                await dispatch.auth.me();
             } catch (e) {
                 dispatch.auth.setFailed(true);
             }
