@@ -1,8 +1,16 @@
-import React              from 'react';
-import {Link, useHistory} from "react-router-dom";
+import React, {useEffect} from 'react';
+import {Link, useHistory}      from "react-router-dom";
+import {useAddresses, useAuth} from "../../selectors";
 
 export const OnBoarding2: React.FC = () => {
+    const addresses = useAddresses();
     const history = useHistory();
+
+    useEffect(() => {
+        if (Object.values(addresses.addresses).length > 0) {
+            history.push('/home');
+        }
+    }, [addresses.addresses]);
 
     async function addAddress() {
         history.push('/conta/endereco/novo');

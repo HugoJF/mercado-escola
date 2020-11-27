@@ -1,14 +1,20 @@
-import React, {useState} from 'react';
-import classNames        from "classnames";
+import React, {useEffect, useState} from 'react';
+import classNames                   from "classnames";
 import InputMask         from "react-input-mask";
 import {Loader}          from "react-feather";
 import {useForm}         from "react-hook-form";
 import {useHistory}      from "react-router-dom";
+import {useAuth}         from "../../selectors";
 
 export const OnBoarding1: React.FC = () => {
+    const auth = useAuth();
     const [loading, setLoading] = useState(false);
     const history = useHistory();
     const {register, handleSubmit, errors} = useForm<{ phone: string }>();
+
+    useEffect(() => {
+        // TODO: check if phone is set
+    }, [auth.me]);
 
     async function updatePhone(data: { phone: string }) {
         setLoading(true);
