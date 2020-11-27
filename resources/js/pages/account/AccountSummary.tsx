@@ -38,7 +38,8 @@ export const AccountSummary: React.FC = ({children}) => {
     }, {
         icon: Smartphone,
         title: 'Telefone',
-        sub: '(67) 9 9821 2015',
+        sub: auth.me?.phone,
+        hideSub: !auth.me?.phone,
         to: 'telefone',
         clickable: true,
     }, {

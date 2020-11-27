@@ -1,14 +1,23 @@
-import {createModel} from "@rematch/core";
-import {RootModel}   from "./index";
-import {RootState}   from "../store";
+import {createModel}             from "@rematch/core";
+import {RootModel}               from "./index";
+import {RootState}               from "../store";
+
+export type UserType = UserProperties & UserComputedProperties;
+
+export type UserProperties = {
+    admin: boolean;
+    name: string;
+    email: string;
+    phone: string|null;
+    main_address_id: number|null,
+}
+
+export type UserComputedProperties = {
+    id: number;
+}
 
 export type AuthState = {
-    me?: {
-        name: string,
-        email: string,
-        admin: boolean,
-        main_address_id: number|null,
-    },
+    me?: UserProperties,
     failed?: boolean,
 };
 
@@ -61,7 +70,7 @@ export const auth = createModel<RootModel>()({
             });
         },
 
-        async update(payload: object, state: RootState): Promise<void> {
+        async update(payload: Partial<UserProperties>): Promise<void> {
             const response = await window.axios.patch('/me', payload);
 
             const user = response.data.user;
