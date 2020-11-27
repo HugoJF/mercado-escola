@@ -17,7 +17,7 @@ export const OnBoarding1: React.FC = () => {
         history.push('/on-boarding/2');
     }
 
-    return <div className="px-4 bg-gradient-to-br from-primary-400 to-primary-700 min-h-screen flex flex-col justify-center bg-blue-500">
+    return <div className="px-4 bg-gradient-to-br from-primary-500 to-primary-700 min-h-screen flex flex-col justify-center bg-blue-500">
         <h1 className="text-5xl text-white text-center font-bold">Quase lá</h1>
         <h3 className="px-10 text-primary-100 text-center tracking-tight">Precisamos de um meio de entrar em contato quando necessário!</h3>
 

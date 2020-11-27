@@ -18,7 +18,7 @@ export const HomePage: React.FC = () => {
     }, []);
 
     return <>
-        <div className="mx-auto container h-full">
+        <div className="mx-auto container">
             {!openings.current && <Empty
                 title="Nenhuma abertura ativa!"
                 description="Não há nenhuma abertura ativa no momento. Por favor verique novamente mais tarde!"
