@@ -65,7 +65,7 @@ export const AdminOpeningListItem: React.FC<AdminOpeningListItemProps> = ({openi
                     {/* Stats */}
                     <ul className="flex items-center justify-center text-sm text-gray-500 tracking-tight">
                         {/* Order datetime */}
-                        <li className="mx-2 text-center">
+                        <li className="mx-1 text-center">
                             {opening ?
                                 `${opening.delivery_count}/${opening.max_delivery_orders} entregas`
                                 :

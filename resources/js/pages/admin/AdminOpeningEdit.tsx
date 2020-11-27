@@ -28,7 +28,11 @@ export const AdminOpeningEdit: React.FC = () => {
             await dispatch.openings.update({id: openingId, data: data});
             history.push('/admin/aberturas');
         } catch (e) {
-            throw {errors: e.response.data.errors};
+            if (e.response.data.errors)  {
+                throw {errors: e.response.data.errors};
+            } else {
+                throw e;
+            }
         }
     }
 

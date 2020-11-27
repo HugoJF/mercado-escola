@@ -95,24 +95,26 @@ export const openings = createModel<RootModel>()({
         async store(payload: OpeningProperties, state: RootState): Promise<void> {
             const response = await window.axios.post('/openings', payload);
 
-            let normalized = normalize(response.data.data, [openingsSchema]);
+            let normalized = normalize(response.data.data, openingsSchema);
 
             if (normalized.entities['openings']) {
                 let openings = Object.values(normalized.entities['openings'] as object) as OpeningType[];
                 dispatch.openings.addOpening(openings);
-                console.log(openings);
             }
 
             if (normalized.entities['products']) {
                 let products = Object.values(normalized.entities['products'] as object) as ProductType[];
                 dispatch.products.addProduct(products);
-                console.log(products);
             }
         },
         async update(payload: { id: number, data: OpeningProperties }, state: RootState): Promise<void> {
-            const response = await window.axios.post(`/openings/${payload.id}`, payload.data);
+            const response = await window.axios.patch(`/openings/${payload.id}`, payload.data);
 
-            dispatch.openings.addOpening(response.data.data);
+            const openings = response.data;
+
+            if (openings) {
+                dispatch.openings.addOpening(Object.values(openings));
+            }
         },
         async destroy(payload: number, state: RootState): Promise<void> {
             const response = await window.axios.delete(`/openings/${payload}`);

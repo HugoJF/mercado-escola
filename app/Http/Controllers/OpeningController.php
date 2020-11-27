@@ -6,6 +6,7 @@ use App\Exceptions\TooManyOpeningsException;
 use App\Http\Resources\OpeningResource;
 use App\Models\Opening;
 use Illuminate\Http\Request;
+use Illuminate\Support\Collection;
 
 class OpeningController extends Controller
 {
@@ -26,10 +27,15 @@ class OpeningController extends Controller
 
     public function current()
     {
+        /** @var Collection $openings */
         $openings = Opening::active()->get();
 
         if ($openings->count() > 1) {
             throw new TooManyOpeningsException;
+        }
+
+        if ($openings->isEmpty()) {
+            return null;
         }
 
         return new OpeningResource($openings->first());
