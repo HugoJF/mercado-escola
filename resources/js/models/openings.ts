@@ -73,7 +73,13 @@ export const openings = createModel<RootModel>()({
         async current(payload, state: RootState): Promise<void> {
             const response = await window.axios.get('/openings/current');
 
-            let normalized = normalize(response.data.data, openingsSchema);
+            const data = response.data.data;
+
+            if (!data) {
+                return;
+            }
+
+            let normalized = normalize(data, openingsSchema);
 
             if (normalized.entities['openings']) {
                 let openings = Object.values(normalized.entities['openings'] as object) as OpeningType[];
@@ -95,7 +101,13 @@ export const openings = createModel<RootModel>()({
         async store(payload: OpeningProperties, state: RootState): Promise<void> {
             const response = await window.axios.post('/openings', payload);
 
-            let normalized = normalize(response.data.data, openingsSchema);
+            const data = response.data.data;
+
+            if (!data) {
+                return;
+            }
+
+            let normalized = normalize(data, openingsSchema);
 
             if (normalized.entities['openings']) {
                 let openings = Object.values(normalized.entities['openings'] as object) as OpeningType[];
