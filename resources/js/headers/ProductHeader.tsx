@@ -1,28 +1,34 @@
-import React, {useEffect}          from 'react';
-import {useParams}                 from "react-router";
-import {Bookmark}                  from "react-feather";
-import {BackAndCart}               from "./partial/BackAndCart";
-import {HeaderWrapper}             from "./partial/HeaderWrapper";
-import {useFavorites, useProducts} from "../selectors";
-import {useDispatch}               from "react-redux";
-import {Dispatch}                  from "../store";
-import classNames                  from 'classnames';
+import React, {useEffect, useState} from 'react';
+import {useParams}                  from "react-router";
+import {Heart}                      from "react-feather";
+import {BackAndCart}                from "./partial/BackAndCart";
+import {HeaderWrapper}              from "./partial/HeaderWrapper";
+import {useFavorites, useProducts}  from "../selectors";
+import {useDispatch}                from "react-redux";
+import {Dispatch}                   from "../store";
+import classNames                   from 'classnames';
 
 export const ProductHeader: React.FC = () => {
     const dispatch = useDispatch<Dispatch>();
+    const [favorite, setFavorite] = useState(false);
     const favorites = useFavorites();
     const params = useParams<{ productId: string }>();
     const products = useProducts();
 
     const productId = parseInt(params.productId);
     const product = products.products[productId];
-    const favorite = favorites.favorites.indexOf(productId) >= 0;
 
     useEffect(() => {
         dispatch.favorites.index();
     }, []);
 
-    function toggleFavorite() {
+    useEffect(() => {
+        setFavorite(favorites.favorites.indexOf(productId) >= 0);
+    }, [favorites.favorites]);
+
+    async function toggleFavorite() {
+        setFavorite(!favorite);
+
         if (favorite) {
             dispatch.favorites.destroy(productId);
         } else {
@@ -36,18 +42,21 @@ export const ProductHeader: React.FC = () => {
         <BackAndCart/>
 
         <div className="flex justify-between items-center mt-12 px-6">
-            <h2 className="text-3xl font-medium truncate">{product.name}</h2>
-
+            <h2 className="text-2xl font-medium truncate leading-none">{product.name}</h2>
             <div
                 className={classNames(
-                    `transition-all duration-200 p-3 border-2 rounded-lg`,
+                    `transition-colors duration-50`,
                     {
-                        'bg-secondary-500 border-secondary-500 text-white': favorite,
+                        'text-red-500 ': favorite,
                     }
                 )}
                 onClick={toggleFavorite}
             >
-                <Bookmark size={30}/>
+                <Heart
+                    className="transition-colors duration-150 fill-current"
+                    fillOpacity={favorite ? 100 : 0}
+                    size={30}
+                />
             </div>
         </div>
     </HeaderWrapper>

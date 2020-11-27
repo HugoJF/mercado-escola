@@ -21,7 +21,7 @@ export const Product: React.FC<ProductParameters> = ({product, url}) => {
     >
         <div className="mb-2">
             <ImageHolder
-                src={Object.values(product.media)?.[0]}
+                src={Object.values(product.media ?? [])?.[0]}
                 alt={name}
             />
         </div>
