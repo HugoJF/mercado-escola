@@ -8,6 +8,7 @@ import {Link}                from "react-router-dom";
 import {Input}               from "../../components/form/Input";
 import {Button}              from "../../components/ui/Button";
 import {Title}               from "../../components/ui/Title";
+import {Container}           from "../../containers/Container";
 
 export const Register: React.FC<object> = () => {
     const dispatch = useDispatch<Dispatch>();
@@ -38,78 +39,83 @@ export const Register: React.FC<object> = () => {
     }
 
     // @ts-ignore
-    return <div className="mx-auto container">
-        <form onSubmit={handleSubmit(registerUser)}>
-            <Title>Criando uma nova conta</Title>
+    return <Container padding>
+        <div className="mx-auto container">
+            <form onSubmit={handleSubmit(registerUser)}>
+                <Title>Criando uma nova conta</Title>
 
-            <div>
-                {/* Name */}
-                <div className="mt-8">
-                    <Input
-                        name="name"
-                        label="Nome"
-                        error={errors.name}
-                        inputProps={{
-                            ref: register({required: 'Digite o seu nome'}),
-                            type: 'text',
-                        }}
-                    />
-                </div>
+                <div>
+                    {/* Name */}
+                    <div className="mt-8">
+                        <Input
+                            name="name"
+                            label="Nome"
+                            error={errors.name}
+                            inputProps={{
+                                ref: register({required: 'Digite o seu nome'}),
+                                placeholder: 'Digite o seu nome',
+                                type: 'text',
+                            }}
+                        />
+                    </div>
 
-                {/* Email */}
-                <div className="mt-8">
-                    <Input
-                        name="email"
-                        label="Email"
-                        error={errors.email}
-                        inputProps={{
-                            ref: register({required: 'Digite um email para registrar'}),
-                            type: 'email',
-                        }}
-                    />
-                </div>
+                    {/* Email */}
+                    <div className="mt-8">
+                        <Input
+                            name="email"
+                            label="Email"
+                            error={errors.email}
+                            inputProps={{
+                                ref: register({required: 'Digite um email para registrar'}),
+                                placeholder: 'Digite um email para registrar',
+                                type: 'email',
+                            }}
+                        />
+                    </div>
 
-                {/* Password */}
-                <div className="mt-8">
-                    <Input
-                        name="password"
-                        label="Senha"
-                        error={errors.password}
-                        inputProps={{
-                            ref: register({required: 'Digite uma senha'}),
-                            type: 'password',
-                        }}
-                    />
-                </div>
+                    {/* Password */}
+                    <div className="mt-8">
+                        <Input
+                            name="password"
+                            label="Senha"
+                            error={errors.password}
+                            inputProps={{
+                                ref: register({required: 'Digite uma senha'}),
+                                placeholder: 'Digite uma senha',
+                                type: 'password',
+                            }}
+                        />
+                    </div>
 
-                {/* Password confirmation */}
-                <div className="mt-8">
-                    <Input
-                        name="password_confirmation"
-                        label="Confirmação da senha"
-                        error={errors.password}
-                        inputProps={{
-                            ref: register({
-                                required: true,
-                                validate: p => p === watch('password') || 'Verifique a confirmação da senha'
-                            }),
-                            type: 'password',
-                        }}
-                    />
-                </div>
+                    {/* Password confirmation */}
+                    <div className="mt-8">
+                        <Input
+                            name="password_confirmation"
+                            label="Confirmação da senha"
+                            error={errors.password}
+                            inputProps={{
+                                ref: register({
+                                    required: true,
+                                    validate: p => p === watch('password') || 'Verifique a confirmação da senha',
+                                }),
+                                placeholder: 'Verifique a confirmação da senha',
+                                type: 'password',
+                            }}
+                        />
+                    </div>
 
-                <div className="mt-8">
-                    <Button loading={loading}>Registrar</Button>
-                </div>
+                    <div className="mt-8">
+                        <Button loading={loading}>Registrar</Button>
+                    </div>
 
-                <div className="text-center mt-8">
-                    <Link to="/login" className="w-full text-gray-500">
-                        Já possui uma conta?
-                        <span className="ml-1 text-orange-400">Clique aqui</span>
-                    </Link>
+                    <div className="text-center mt-8">
+                        <Link to="/login" className="w-full text-gray-500">
+                            Já possui uma conta?
+                            <span className="ml-1 text-orange-400">Clique aqui</span>
+                        </Link>
+                    </div>
                 </div>
-            </div>
-        </form>
-    </
-        div>
+            </form>
+        </div>
+    </Container>
 };

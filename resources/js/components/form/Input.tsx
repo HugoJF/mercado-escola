@@ -15,7 +15,7 @@ export const Input: React.FC<InputType> = ({name, label, inputProps, error}) => 
         <input
             className={classNames(
                 `transition-colors duration-300
-                block w-full py-3 px-4 text-black
+                block w-full py-3 px-4 text-black placeholder-gray-400
                 bg-transparent border-b border-lg`,
                 {'border-red-500': error}
             )}

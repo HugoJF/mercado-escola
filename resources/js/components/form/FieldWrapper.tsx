@@ -13,7 +13,7 @@ export const FieldWrapper: React.FC<FieldWrapperType> = ({name, label, error, ch
         <label
             className={classNames({
                 'text-red-500': error,
-                'text-gray-500': !error
+                'text-gray-600': !error
             })}
             htmlFor={`#${name}`}
         >
