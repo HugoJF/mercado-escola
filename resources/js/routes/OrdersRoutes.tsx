@@ -9,7 +9,7 @@ import {OrderDoneContainer}    from "../pages/orders/OrderDoneContainer";
 export const OrdersRoutes: React.FC = () => {
     const relative = useRelativePath();
 
-    return <SwitchWithTransitions padding>
+    return <SwitchWithTransitions>
         <Route exact path={relative('/')} children={<OrdersIndex/>}/>
         <Route path={relative('/:orderId/finalizado')} children={<OrderDoneContainer/>}/>
         <Route path={relative('/:orderId')} children={<OrdersShow/>}/>

@@ -39,7 +39,7 @@ export const Register: React.FC<object> = () => {
     }
 
     // @ts-ignore
-    return <Container padding>
+    return <Container>
         <div className="mx-auto container">
             <form onSubmit={handleSubmit(registerUser)}>
                 <Title>Criando uma nova conta</Title>

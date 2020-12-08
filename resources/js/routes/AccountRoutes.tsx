@@ -11,7 +11,7 @@ import {Logout}                from "../pages/account/Logout";
 export const AccountRoutes: React.FC = () => {
     const relative = useRelativePath();
 
-    return <SwitchWithTransitions padding>
+    return <SwitchWithTransitions>
         <Route exact path={relative('/')} children={<AccountSummary/>}/>
         <Route exact path={relative('/endereco/novo')} children={<AddressesCreate/>}/>
         <Route exact path={relative('/endereco')} children={<AddressesIndex/>}/>

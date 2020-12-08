@@ -8,7 +8,7 @@ import {ProductIndex}          from "../pages/products/ProductIndex";
 export const ProductsRoutes: React.FC = () => {
     const relative = useRelativePath();
 
-    return <SwitchWithTransitions padding>
+    return <SwitchWithTransitions>
         <Route exact path={relative('/')} children={<ProductIndex/>}/>
         <Route path={relative('/:productId')} children={<ProductShow/>}/>
     </SwitchWithTransitions>

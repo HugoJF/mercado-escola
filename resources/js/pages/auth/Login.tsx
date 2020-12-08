@@ -31,7 +31,7 @@ export const Login: React.FC<object> = () => {
     const failed = auth?.failed;
 
     // @ts-ignore
-    return <Container padding>
+    return <Container>
         <div className="mx-auto container min-h-screen flex justify-center items-center">
             <form className="px-4 w-full" onSubmit={handleSubmit(login)}>
                 <h1 className="text-5xl text-center">DiCasa</h1>

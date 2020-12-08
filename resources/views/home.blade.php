@@ -2,5 +2,5 @@
 
 @section('content')
     <div id="modal"></div>
-    <div class="min-h-screen flex flex-col items-stretch" id="root"></div>
+    <div class="absolute w-full h-full flex flex-col items-stretch" id="root"></div>
 @endsection

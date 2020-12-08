@@ -17,14 +17,14 @@ export const Splash: React.FC = ({children}) => {
         setLoading(false);
     }, []);
 
-    return <TransitionGroup className="relative min-h-full">
+    return <TransitionGroup className="min-h-full">
         <CSSTransition
             key={String(loading)}
             classNames="fade"
             timeout={1000}
         >
             {loading ?
-                <div className="w-full min-h-screen flex flex-col items-center justify-center bg-gradient-to-br from-primary-500 to-primary-700 justify-center">
+                <div className="w-full min-h-full flex flex-col items-center justify-center bg-gradient-to-br from-primary-500 to-primary-700 justify-center">
                     <h1 className="mb-8 text-center text-4xl text-white font-medium leading-none tracking-tight">
                         MercadoEscola
                     </h1>

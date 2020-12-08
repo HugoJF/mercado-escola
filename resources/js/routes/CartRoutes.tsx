@@ -8,7 +8,7 @@ import {CartAddress}           from "../pages/cart/CartAddress";
 export const CartRoutes: React.FC = () => {
     const relative = useRelativePath();
 
-    return <SwitchWithTransitions padding>
+    return <SwitchWithTransitions>
         <Route exact path={relative('/')} children={<CartIndex/>}/>
         <Route exact path={relative('/endereco')} children={<CartAddress/>}/>
     </SwitchWithTransitions>

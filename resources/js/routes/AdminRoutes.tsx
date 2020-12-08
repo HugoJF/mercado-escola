@@ -15,7 +15,7 @@ import {AdminOpeningView}      from "../pages/admin/AdminOpeningView";
 export const AdminRoutes: React.FC = () => {
     const relative = useRelativePath();
 
-    return <SwitchWithTransitions padding>
+    return <SwitchWithTransitions>
         <Route exact path={relative('/')} children={<AdminIndex/>}/>
         <Route exact path={relative('/produtos')} children={<AdminProductIndex/>}/>
         <Route exact path={relative('/aberturas')} children={<AdminOpeningIndex/>}/>

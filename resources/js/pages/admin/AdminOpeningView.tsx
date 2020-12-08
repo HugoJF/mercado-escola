@@ -2,13 +2,14 @@ import React, {useEffect, useState} from "react";
 import {useDispatch}                from "react-redux";
 import {Dispatch}                   from "../../store";
 import {useOpenings}                from "../../selectors";
-import {useParams}                 from "react-router-dom";
-import {useHistory, useRouteMatch} from "react-router";
-import {AnimationBox}              from "../../components/ui/AnimationBox";
+import {Redirect, Route, useParams} from "react-router-dom";
+import {useHistory}                 from "react-router";
+import {AnimationBox}               from "../../components/ui/AnimationBox";
 import classNames                   from 'classnames';
 import {Badge}                      from "../../components/ui/Badge";
 import {MoreVertical}               from "react-feather";
 import useRelativePath              from "../../hooks/useRelativePath";
+import {SwitchWithTransitions}      from "../../components/ui/SwitchWithTransition";
 
 export const AdminOpeningView: React.FC = () => {
     const [selected, setSelected] = useState('resumo');
@@ -19,25 +20,21 @@ export const AdminOpeningView: React.FC = () => {
     const openings = useOpenings();
     const openingId = parseInt(params.openingId);
     const opening = openings.openings[openingId];
-    const match = useRouteMatch();
 
     useEffect(() => {
         dispatch.openings.index();
     }, []);
 
     function goTo(tab: string): void {
-        console.log(relative(tab));
-        console.log(match);
         history.push(relative(tab));
     }
 
-    console.log(params);
     function isSelected(id: string): boolean {
         return id === selected;
     }
 
     // @ts-ignore
-    return <div className="mx-auto container">
+    return <div className="flex flex-col mx-auto min-h-full container">
         {/* Header */}
         <div className="flex items-center mb-8 space-x-4">
             <div>
@@ -116,5 +113,14 @@ export const AdminOpeningView: React.FC = () => {
                 )}
             </AnimationBox>
         </div>
+
+        <SwitchWithTransitions>
+            <Route path={relative('/resumo')} children={<div className="bg-red-500">{Array.from(Array(300).fill(0).keys()).map(i => <h1>{i}</h1>)}</div>}/>
+            <Route path={relative('/produtos')} children={<h1>produtos</h1>}/>
+            <Route path={relative('/pedidos')} children={<h1>pedidos</h1>}/>
+
+            <Redirect to={relative('/resumo')}/>
+        </SwitchWithTransitions>
+
     </div>
 };
