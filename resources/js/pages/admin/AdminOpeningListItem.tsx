@@ -110,7 +110,7 @@ export const AdminOpeningListItem: React.FC<AdminOpeningListItemProps> = ({openi
                 {open && <div className="grid grid-cols-3 divide-x divide-gray-200">
                     {/* View */}
                     <Link
-                        to={`/aberturas/${opening?.id}`}
+                        to={relative(`/${opening?.id}`)}
                         className="flex justify-center items-center py-2 px-5 text-gray-700 font-medium rounded-lg"
                     >
                         Ver

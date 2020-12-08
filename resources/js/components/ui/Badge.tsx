@@ -21,7 +21,7 @@ export const Badge: React.FC<BadgeProps & React.HTMLAttributes<HTMLSpanElement>>
         {...rest}
         className={classNames(
             classes[color],
-            'py-1 px-3 text-sm font-medium rounded-full'
+            'inline-block py-1 px-3 text-sm font-medium rounded-full'
         )}
     >
         {children}
