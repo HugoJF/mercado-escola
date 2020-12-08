@@ -10,6 +10,7 @@ import {Badge}                      from "../../components/ui/Badge";
 import {MoreVertical}               from "react-feather";
 import useRelativePath              from "../../hooks/useRelativePath";
 import {SwitchWithTransitions}      from "../../components/ui/SwitchWithTransition";
+import {AdminOpeningViewSummary}    from "./AdminOpeningViewSummary";
 
 export const AdminOpeningView: React.FC = () => {
     const [selected, setSelected] = useState('resumo');
@@ -26,7 +27,8 @@ export const AdminOpeningView: React.FC = () => {
     }, []);
 
     function goTo(tab: string): void {
-        history.push(relative(tab));
+        history.push(relative('/' + tab));
+        setSelected(tab);
     }
 
     function isSelected(id: string): boolean {
@@ -51,7 +53,7 @@ export const AdminOpeningView: React.FC = () => {
                     <>
                         {/* Resumo */}
                         <div
-                            className="transition-all duration-300 ease-out bg-secondary-500 shadow"
+                            className="transition-all duration-300 border-b border-secondary-500 ease-out bg-secondary-500 rounded-b shadow box-content"
                             {...props}
                         />
                         <div
@@ -59,7 +61,7 @@ export const AdminOpeningView: React.FC = () => {
                             className={`transition-colors duration-150
                                 flex-col flex-grow items-center bg-gray-100 hover:bg-gray-200
                                 text-xl text-gray-700 font-medium cursor-pointer`}
-                            onClick={() => goTo('/resumo')}
+                            onClick={() => goTo('resumo')}
                         >
                             <div className={classNames(`px-3 py-1 text-center font-normal`, {
                                 'text-gray-500': !isSelected('resumo'),
@@ -67,7 +69,7 @@ export const AdminOpeningView: React.FC = () => {
                             })}>Resumo
                             </div>
                             <div
-                                className="w-full h-1 bg-gray-300"
+                                className="w-full h-0.5 bg-gray-300"
                                 ref={isSelected('resumo') ? target : null}
                             />
                         </div>
@@ -78,7 +80,7 @@ export const AdminOpeningView: React.FC = () => {
                             className={`transition-colors duration-150
                                 flex-col flex-grow items-center bg-gray-100 hover:bg-gray-200
                                 text-xl text-gray-700 font-medium cursor-pointer`}
-                            onClick={() => goTo('/produtos')}
+                            onClick={() => goTo('produtos')}
                         >
                             <div className={classNames(`px-3 py-1 text-center font-normal`, {
                                 'text-gray-500': !isSelected('produtos'),
@@ -86,7 +88,7 @@ export const AdminOpeningView: React.FC = () => {
                             })}>Produtos
                             </div>
                             <div
-                                className="w-full h-1 bg-gray-300"
+                                className="w-full h-0.5 bg-gray-300"
                                 ref={isSelected('produtos') ? target : null}
                             />
                         </div>
@@ -97,7 +99,7 @@ export const AdminOpeningView: React.FC = () => {
                             className={`transition-colors duration-150
                                 flex-col flex-grow items-center bg-gray-100 hover:bg-gray-200
                                 text-xl text-gray-700 font-medium cursor-pointer`}
-                            onClick={() => goTo('/pedidos')}
+                            onClick={() => goTo('pedidos')}
                         >
                             <div className={classNames(`px-3 py-1 text-center font-normal`, {
                                 'text-gray-500': !isSelected('pedidos'),
@@ -105,7 +107,7 @@ export const AdminOpeningView: React.FC = () => {
                             })}>Pedidos
                             </div>
                             <div
-                                className="w-full h-1 bg-gray-300"
+                                className="w-full h-0.5 bg-gray-300"
                                 ref={isSelected('pedidos') ? target : null}
                             />
                         </div>
@@ -114,13 +116,15 @@ export const AdminOpeningView: React.FC = () => {
             </AnimationBox>
         </div>
 
-        <SwitchWithTransitions>
-            <Route path={relative('/resumo')} children={<div className="bg-red-500">{Array.from(Array(300).fill(0).keys()).map(i => <h1>{i}</h1>)}</div>}/>
-            <Route path={relative('/produtos')} children={<h1>produtos</h1>}/>
-            <Route path={relative('/pedidos')} children={<h1>pedidos</h1>}/>
+        <div className="flex-grow relative">
+            <SwitchWithTransitions>
+                <Route path={relative('/resumo')} children={<AdminOpeningViewSummary opening={opening}/>}/>
+                <Route path={relative('/produtos')} children={<h1>produtos</h1>}/>
+                <Route path={relative('/pedidos')} children={<h1>pedidos</h1>}/>
 
-            <Redirect to={relative('/resumo')}/>
-        </SwitchWithTransitions>
+                <Redirect to={relative('/resumo')}/>
+            </SwitchWithTransitions>
+        </div>
 
     </div>
 };
