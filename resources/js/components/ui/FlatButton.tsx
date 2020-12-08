@@ -5,8 +5,8 @@ export const FlatButton: React.FC<React.HTMLAttributes<HTMLButtonElement>> = ({c
         {...rest}
         className="transition-all duration-150
             flex justify-center items-center
-            w-full px-4 py-5 flex items-center bg-gray-200 hover:bg-gray-300 text-gray-600
-            border-b last:border-b-0 border-gray-200 cursor-pointer"
+            w-full px-3 py-4 flex items-center hover:bg-gray-200 text-gray-600
+            border-2 border-gray-400 border-dashed cursor-pointer rounded-lg"
     >
         {children}
     </button>

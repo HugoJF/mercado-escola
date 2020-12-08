@@ -67,8 +67,8 @@ export const AdminOpeningIndex: React.FC = () => {
         <FlatButton
             onClick={() => history.push(relative('/novo'))}
         >
-            <span className="mr-4 text-lg">Adicionar abertura</span>
-            <Plus/>
+            <Plus className="text-gray-500"/>
+            <span className="ml-2 text-gray-500 text-lg font-medium">Adicionar abertura</span>
         </FlatButton>
     </div>
 };
