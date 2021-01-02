@@ -52,7 +52,7 @@ class OpeningController extends Controller
     {
         $activeOpenings = Opening::active()->get();
 
-        if ($activeOpenings->count() > 1) {
+        if ($activeOpenings->count() > 0) {
             throw new TooManyOpeningsException;
         }
 
