@@ -81,4 +81,18 @@ class ProductTest extends TestCase
         $this->delete(route('products.destroy', $product))
              ->assertStatus(200);
     }
+
+    public function test_products_have_media_links()
+    {
+        /** @var Product $product */
+        $product = Product::factory()->create();
+
+        $product->addMediaFromDisk('placeholder.png', 'tests')
+                ->preservingOriginal()
+                ->toMediaCollection();
+
+        $this->get(route('products.show', $product))
+             ->assertJsonCount(1, 'data.media')
+             ->assertStatus(200);
+    }
 }

@@ -1,7 +1,7 @@
 import {CSSTransition, TransitionGroup} from "react-transition-group";
-import {Container}                      from "../../containers/Container";
-import {matchPath, Switch, useLocation} from "react-router-dom";
-import React                            from "react";
+import {Container}                                     from "../../containers/Container";
+import {matchPath, Switch, useLocation, useRouteMatch} from "react-router-dom";
+import React                                           from "react";
 
 
 export const SwitchWithTransitions: React.FC =
