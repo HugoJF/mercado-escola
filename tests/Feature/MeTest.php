@@ -18,7 +18,23 @@ class MeTest extends TestCase
         Auth::login($user);
 
         $this->get(route('me.index'))
-            ->assertJson(['user' => $user->toArray()]);
+             ->assertJson(['user' => $user->toArray()]);
+    }
+
+    public function test_me_update_route_will_update_authed_user()
+    {
+        $updatePayload = [
+            'phone' => '999999999',
+        ];
+        $user = User::factory()->create([
+            'phone' => '123123123',
+        ]);
+
+        Auth::login($user);
+
+        $this
+            ->patch(route('me.update'), $updatePayload)
+            ->assertJson(['user' => collect($user)->merge($updatePayload)->toArray()]);
     }
 
     public function test_me_route_returns_null_if_not_authed()
