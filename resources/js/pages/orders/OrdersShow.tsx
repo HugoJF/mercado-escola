@@ -10,6 +10,7 @@ import {useAddresses, useOpenings, useOrders}              from "../../selectors
 import {PriceFormatter}                                    from "../../components/ui/PriceFormatter";
 import {format, parseISO}                                  from "date-fns";
 import {ptBR}                                              from "date-fns/locale";
+import {PagePadding}                                       from "../../containers/PagePadding";
 
 const status = [{
     title: 'Pedido foi aceito',
@@ -55,7 +56,7 @@ export const OrdersShow: React.FC = ({children}) => {
 
     const address = order.address_id && addresses.addresses[order.address_id];
 
-    return <>
+    return <PagePadding>
         <div className="flex flex-col justify-around min-h-full">
             <Title>Situação</Title>
 
@@ -115,5 +116,5 @@ export const OrdersShow: React.FC = ({children}) => {
                 </p>
             </div>
         </div>
-    </>
+    </PagePadding>
 };

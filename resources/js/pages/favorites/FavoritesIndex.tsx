@@ -5,8 +5,8 @@ import {useDispatch}               from "react-redux";
 import {Dispatch}                  from "../../store";
 import {useFavorites, useProducts} from "../../selectors";
 import {ProductList}               from "../../components/product/ProductList";
-import {Archive}                   from "react-feather";
 import {Empty}                     from "../../components/ui/Empty";
+import {PagePadding}               from "../../containers/PagePadding";
 
 export const FavoritesIndex: React.FC = () => {
     const dispatch = useDispatch<Dispatch>();
@@ -18,7 +18,7 @@ export const FavoritesIndex: React.FC = () => {
         dispatch.favorites.index();
     }, []);
 
-    return <>
+    return <PagePadding>
         <div className="mx-auto container">
             <div>
                 {/* Header */}
@@ -37,5 +37,5 @@ export const FavoritesIndex: React.FC = () => {
                 <ProductList products={Object.values(products.products).filter(product => favorites.favorites.indexOf(product.id) >= 0)}/>
             </div>
         </div>
-    </>
+    </PagePadding>
 };

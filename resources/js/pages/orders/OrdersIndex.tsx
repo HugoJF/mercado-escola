@@ -5,6 +5,7 @@ import {useDispatch}        from "react-redux";
 import {Dispatch}           from "../../store";
 import {HeightTransitioner} from "../../components/ui/HeightTransitioner";
 import {OrderList}          from "../../components/orders/OrderList";
+import {PagePadding}        from "../../containers/PagePadding";
 
 
 export const OrdersIndex: React.FC = ({children}) => {
@@ -24,7 +25,7 @@ export const OrdersIndex: React.FC = ({children}) => {
         }
     }
 
-    return <>
+    return <PagePadding>
         <Title>Meus pedidos</Title>
 
         {getOrders().map(order => (
@@ -34,5 +35,5 @@ export const OrdersIndex: React.FC = ({children}) => {
                 </HeightTransitioner>
             </div>
         ))}
-    </>
+    </PagePadding>
 };

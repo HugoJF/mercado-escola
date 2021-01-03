@@ -6,6 +6,7 @@ import {Dispatch}                 from "../../store";
 import {useOpenings, useProducts} from "../../selectors";
 import {ProductList}              from "../../components/product/ProductList";
 import {Empty}                    from "../../components/ui/Empty";
+import {PagePadding}              from "../../containers/PagePadding";
 
 export const HomePage: React.FC = () => {
     const dispatch = useDispatch<Dispatch>();
@@ -17,7 +18,7 @@ export const HomePage: React.FC = () => {
         dispatch.favorites.index();
     }, []);
 
-    return <>
+    return <PagePadding>
         <div className="mx-auto container">
             {!openings.current && <Empty
                 title="Nenhuma abertura ativa!"
@@ -35,5 +36,5 @@ export const HomePage: React.FC = () => {
                 <ProductList products={Object.values(products.products)}/>
             </>}
         </div>
-    </>
+    </PagePadding>
 };

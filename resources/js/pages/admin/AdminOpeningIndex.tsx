@@ -11,6 +11,7 @@ import useConfirmMenu         from "../../hooks/useConfirmMenu";
 import {AdminOpeningListItem} from "./AdminOpeningListItem";
 import {OpeningType}          from "../../models/openings";
 import {Title}                from "../../components/ui/Title";
+import {PagePadding}          from "../../containers/PagePadding";
 
 export const AdminOpeningIndex: React.FC = () => {
     const dispatch = useDispatch<Dispatch>();
@@ -47,28 +48,30 @@ export const AdminOpeningIndex: React.FC = () => {
         }
     }
 
-    return <div className="flex flex-col space-y-4 items-stretch">
+    return <PagePadding>
+        <div className="flex flex-col space-y-4 items-stretch">
 
-        {menu}
+            {menu}
 
-        <Title>Aberturas</Title>
+            <Title>Aberturas</Title>
 
-        <div className="mt-8">
-            {getOpenings().map(opening => (
-                <AdminOpeningListItem
-                    opening={opening}
-                    open={open === opening?.id}
-                    onClick={(opening) => setOpen(open === opening.id ? null : opening.id)}
-                    onDelete={handleDelete}
-                />
-            ))}
+            <div className="mt-8">
+                {getOpenings().map(opening => (
+                    <AdminOpeningListItem
+                        opening={opening}
+                        open={open === opening?.id}
+                        onClick={(opening) => setOpen(open === opening.id ? null : opening.id)}
+                        onDelete={handleDelete}
+                    />
+                ))}
+            </div>
+
+            <FlatButton
+                onClick={() => history.push(relative('/novo'))}
+            >
+                <Plus className="text-gray-500"/>
+                <span className="ml-2 text-gray-500 text-lg font-medium">Adicionar abertura</span>
+            </FlatButton>
         </div>
-
-        <FlatButton
-            onClick={() => history.push(relative('/novo'))}
-        >
-            <Plus className="text-gray-500"/>
-            <span className="ml-2 text-gray-500 text-lg font-medium">Adicionar abertura</span>
-        </FlatButton>
-    </div>
+    </PagePadding>
 };

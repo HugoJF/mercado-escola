@@ -5,6 +5,7 @@ import {useDispatch}      from "react-redux";
 import {Dispatch}         from "../../store";
 import {useProducts}      from "../../selectors";
 import {ProductList}      from "../../components/product/ProductList";
+import {PagePadding}      from "../../containers/PagePadding";
 
 export const ProductIndex: React.FC = () => {
     const dispatch = useDispatch<Dispatch>();
@@ -15,7 +16,7 @@ export const ProductIndex: React.FC = () => {
         dispatch.favorites.index();
     }, []);
 
-    return <>
+    return <PagePadding>
         <div className="mx-auto container">
             <div>
                 {/* Header */}
@@ -28,5 +29,5 @@ export const ProductIndex: React.FC = () => {
                 <ProductList products={Object.values(products.products)}/>
             </div>
         </div>
-    </>
+    </PagePadding>
 };

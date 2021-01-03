@@ -13,6 +13,7 @@ import {OrderProductsType}                                                      
 import {QuantityTypes, QuantityTypeText}                                           from "../../components/ui/QuantityTypeText";
 import {ImageHolder}                                                               from "../../components/ui/ImageHolder";
 import classNames                                                                  from "classnames";
+import {PagePadding}                                                               from "../../containers/PagePadding";
 
 export const CartIndex: React.FC = () => {
     const dispatch = useDispatch<Dispatch>();
@@ -73,7 +74,7 @@ export const CartIndex: React.FC = () => {
 
     const address = cart.address_id && addresses.addresses[cart.address_id];
 
-    return <>
+    return <PagePadding>
         <div className="flex flex-col justify-around min-h-full">
             <Title>Carrinho</Title>
 
@@ -188,5 +189,5 @@ export const CartIndex: React.FC = () => {
                 Finalizar pedido
             </Button>
         </div>
-    </>
+    </PagePadding>
 };

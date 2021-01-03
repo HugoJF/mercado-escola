@@ -6,6 +6,7 @@ import {useDispatch}               from "react-redux";
 import {Dispatch}                  from "../../store";
 import {AddressList}               from "../../components/address/AddressList";
 import useAsyncEffect              from "../../hooks/useAsyncEffect";
+import {PagePadding}               from "../../containers/PagePadding";
 
 
 export const CartAddress: React.FC = ({children}) => {
@@ -19,7 +20,7 @@ export const CartAddress: React.FC = ({children}) => {
         setLoading(false);
     }, []);
 
-    return <>
+    return <PagePadding>
         <Title>Selecione o endereço da entrega</Title>
 
         <div className="my-8">
@@ -32,5 +33,5 @@ export const CartAddress: React.FC = ({children}) => {
                 }}
             />
         </div>
-    </>
+    </PagePadding>
 };

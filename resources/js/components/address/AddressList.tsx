@@ -21,7 +21,7 @@ export const AddressList: React.FC<AddressListParameters> = ({selected, onClick,
         }
     }
 
-    return <>
+    return <div className="divide-y divide-gray-200">
         {getAddresses().map(address => (
             <HeightTransitioner>
                 <Box
@@ -50,5 +50,5 @@ export const AddressList: React.FC<AddressListParameters> = ({selected, onClick,
                 </Box>
             </HeightTransitioner>
         ))}
-    </>
+    </div>
 };

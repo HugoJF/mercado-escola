@@ -9,6 +9,8 @@ import {Dispatch}                                                               
 import {Title}                                                                                from "../../components/ui/Title";
 import classNames                                                                             from 'classnames';
 import {Skeleton}                                                                             from "../../components/ui/Skeleton";
+import {Container}                                                                            from "../../containers/Container";
+import {PagePadding}                                                                          from "../../containers/PagePadding";
 
 export const AccountSummary: React.FC = ({children}) => {
     const dispatch = useDispatch<Dispatch>();
@@ -78,18 +80,17 @@ export const AccountSummary: React.FC = ({children}) => {
         clickable: true,
     }];
 
-    return <div className="mx-auto container">
+    return <PagePadding>
         <Title>Conta</Title>
 
-        <div className="mb-8">
+        <div className="mb-8 divide-y divide-gray-200">
             {mainSections.map(({icon: Icon, title, sub, hideSub, to, clickable}) => (
                 <DivOrLink
                     key={to}
                     isLink={clickable}
                     to={`${match.url}/${to}`}
                     className={classNames(
-                        `transition-colors duration-150 w-full px-4 py-3 flex items-center
-                        border-b last:border-b-0 border-gray-200`,
+                        `transition-colors duration-150 w-full py-3 flex items-center`,
                         {
                             'hover:bg-gray-200 cursor-pointer': clickable
                         }
@@ -99,7 +100,7 @@ export const AccountSummary: React.FC = ({children}) => {
                         <Icon className="text-primary-500"/>
                     </div>
                     <div className="flex-grow">
-                        <h3 className="text-lg font-medium">{title}</h3>
+                        <h3 className="text-lg text-gray-900 font-medium">{title}</h3>
                         {!hideSub && <p className="text-gray-500 font-light">{sub || <Skeleton className="w-3/4"/>}</p>}
                     </div>
                     {clickable && <ChevronRight className="flex-shrink-0 text-gray-500"/>}
@@ -107,11 +108,11 @@ export const AccountSummary: React.FC = ({children}) => {
             ))}
         </div>
 
-        <h2 className="text-2xl">Mais</h2>
+        <Title>Mais</Title>
 
-        <div className="mt-8">
+        <div className="mt-8 divide-y divide-gray-200">
             {secondarySections.map(({icon: Icon, title, to, clickable}) => (
-                <Link to={`${match.url}/${to}`}>
+                <Link className="block" to={`${match.url}/${to}`}>
                     <Box key={to}>
                         <div className="flex items-center justify-center w-6 mr-4">
                             <Icon className="text-primary-500"/>
@@ -124,5 +125,5 @@ export const AccountSummary: React.FC = ({children}) => {
                 </Link>
             ))}
         </div>
-    </div>
+    </PagePadding>
 };

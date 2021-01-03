@@ -4,6 +4,7 @@ import {Dispatch}    from "../../store";
 import {useHistory}  from "react-router";
 import {Title}       from "../../components/ui/Title";
 import {ProductForm} from "../../components/product/ProductForm";
+import {PagePadding} from "../../containers/PagePadding";
 
 export const AdminProductCreate: React.FC = () => {
     const dispatch = useDispatch<Dispatch>();
@@ -18,11 +19,11 @@ export const AdminProductCreate: React.FC = () => {
         }
     }
 
-    return <div className="mx-auto container">
+    return <PagePadding>
         <Title>Criando produto</Title>
 
         <ProductForm
             onSubmit={updateProduct}
         />
-    </div>
+    </PagePadding>
 };

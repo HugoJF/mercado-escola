@@ -9,7 +9,6 @@ import {AddressProperties}             from "../../models/addresses";
 import {Box}                           from "../../components/ui/Box";
 import {AddressStreetNumberActionMenu} from "../../action-menu/AdressStreetNumberActionMenu";
 import {Google}                        from "../../google";
-import {extractAddressComponents}      from "../../helpers/GoogleMapsHelpers";
 import {MapWithPing}                   from "../../components/MapWithPing";
 import {Button}                        from "../../components/ui/Button";
 
@@ -110,7 +109,7 @@ export const AddressesCreate: React.FC = ({children}) => {
                             <input
                                 {...getInputProps({
                                     placeholder: 'Digite seu endereço...',
-                                    className: 'transition-colors duration-300 block w-full mb-4 py-3 px-4 text-black bg-transparent border-PhoneInputProp border-lg',
+                                    className: 'transition-colors duration-300 block w-full mb-4 py-3 px-4 placeholder-gray-400 text-gray-900 bg-transparent border-b border-lg',
                                 })}
                             />
 
@@ -118,7 +117,7 @@ export const AddressesCreate: React.FC = ({children}) => {
                                 <Loader className="animate-spin" size={30}/>
                             </div>}
 
-                            <div>
+                            <div className="divide-y divide-gray-200">
                                 {suggestions.map(suggestion =>
                                     <Box {...getSuggestionItemProps(suggestion)}>
                                         <MapPin className="flex-shrink-0 text-gray-500"/>

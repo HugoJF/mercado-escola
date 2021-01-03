@@ -1,15 +1,16 @@
 import React, {useEffect, useState} from "react";
-import {useDispatch}                from "react-redux";
-import {Dispatch}                   from "../../store";
-import {useHistory}                 from "react-router-dom";
-import {Title}                      from "../../components/ui/Title";
-import {Loader}                     from "react-feather";
-import {useForm}                    from "react-hook-form";
-import InputMask                    from "react-input-mask";
-import classNames                   from 'classnames';
-import {UserProperties}             from "../../models/auth";
-import {useAuth}                    from "../../selectors";
-import {PhoneInput}                 from "../../components/form/PhoneInput";
+import {useDispatch}    from "react-redux";
+import {Dispatch}       from "../../store";
+import {useHistory}     from "react-router-dom";
+import {Title}          from "../../components/ui/Title";
+import {Loader}         from "react-feather";
+import {useForm}        from "react-hook-form";
+import InputMask        from "react-input-mask";
+import classNames       from 'classnames';
+import {UserProperties} from "../../models/auth";
+import {useAuth}        from "../../selectors";
+import {PhoneInput}     from "../../components/form/PhoneInput";
+import {PagePadding}    from "../../containers/PagePadding";
 
 interface PhoneUpdateForm {
     phone: string,
@@ -39,7 +40,7 @@ export const PhoneUpdate: React.FC = () => {
         history.goBack();
     }
 
-    return <>
+    return <PagePadding>
         <Title>Digite seu telefone</Title>
         <form className="mt-8 px-4 w-full" onSubmit={handleSubmit(updatePhone)}>
             <label className={classNames(
@@ -68,5 +69,5 @@ export const PhoneUpdate: React.FC = () => {
                 }
             </button>
         </form>
-    </>
+    </PagePadding>
 };

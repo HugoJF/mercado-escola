@@ -14,6 +14,7 @@ import useConfirmMenu                         from "../../hooks/useConfirmMenu";
 import classNames                             from "classnames";
 import {PriceFormatter}                       from "../../components/ui/PriceFormatter";
 import {QuantityTypeText}                     from "../../components/ui/QuantityTypeText";
+import {PagePadding}                          from "../../containers/PagePadding";
 
 export const AdminProductIndex: React.FC = () => {
     const dispatch = useDispatch<Dispatch>();
@@ -60,108 +61,105 @@ export const AdminProductIndex: React.FC = () => {
         }
     }
 
-    return <>
-        <div className="mx-auto container">
-            <Title>Lista de produtos</Title>
+    return <PagePadding>
+        <Title>Lista de produtos</Title>
 
-            {menu}
+        {menu}
 
-            <div className="mt-8">
-                {getProducts().map(product => (
-                    <div
-                        key={product.id}
-                        className="transition-colors duration-150 w-full py-3
-                                border-b last:border-b-0 border-gray-200"
-                    >
-                        <HeightTransitioner>
-                            {/* Product details */}
-                            <div
-                                onClick={() => handleClick(product.id)}
-                                className="flex items-center"
-                            >
-                                <div className="flex items-center justify-center w-6 mr-4">
-                                    <ShoppingBag className="text-primary-500"/>
-                                </div>
-
-                                <div className="flex-grow">
-                                    <h3 className="text-lg font-medium">{product.name || <Skeleton className="w-3/4"/>}</h3>
-                                    <div className="mt-1">
-                                        {/* Stats */}
-                                        <ul className="flex space-x-2 text-sm text-gray-500 tracking-tight">
-                                            {/* Product price */}
-                                            <li className="text-center">
-                                                {product?.quantity_cost ?
-                                                    <>
-                                                        <PriceFormatter cents price={product.quantity_cost}/>
-                                                        /
-                                                        <QuantityTypeText type={product?.quantity_type}/>
-                                                    </>
-                                                    :
-                                                    <Skeleton className="w-20"/>
-                                                }
-                                            </li>
-
-                                            {/* Separator */}
-                                            <span className="font-bold text-gray-300">·</span>
-
-                                            {/* Product quantity */}
-                                            <li className="text-center">
-                                                {product?.media ? `${Object.values(product.media).length} imagens` : <Skeleton className="w-20"/>}
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-
-                                {!loading && <ArrowRight className={classNames(
-                                    `transform transition-transform duration-150 ml-2 flex-shrink-0`,
-                                    {
-                                        'rotate-90 text-gray-500': open === product.id,
-                                        'text-gray-300': open !== product.id,
-                                    },
-                                )}
-                                />}
+        <div className="my-4 divide-y divide-gray-200">
+            {getProducts().map(product => (
+                <div
+                    key={product.id}
+                    className="transition-colors duration-150 w-full py-3 border-gray-200"
+                >
+                    <HeightTransitioner>
+                        {/* Product details */}
+                        <div
+                            onClick={() => handleClick(product.id)}
+                            className="flex items-center"
+                        >
+                            <div className="flex items-center justify-center w-6 mr-4">
+                                <ShoppingBag className="text-primary-500"/>
                             </div>
 
-                            {/* Reveal menu */}
-                            <div className="mt-4">
-                                {open === product.id && <div className="grid grid-cols-3 divide-x divide-gray-200">
-                                    {/* View */}
-                                    <Link
-                                        to={`/produtos/${product.id}`}
-                                        className="flex justify-center items-center py-2 px-5 text-gray-700 font-medium rounded-lg"
-                                    >
-                                        Ver
-                                    </Link>
+                            <div className="flex-grow">
+                                <h3 className="text-lg font-medium">{product.name || <Skeleton className="w-3/4"/>}</h3>
+                                <div className="mt-1">
+                                    {/* Stats */}
+                                    <ul className="flex space-x-2 text-sm text-gray-500 tracking-tight">
+                                        {/* Product price */}
+                                        <li className="text-center">
+                                            {product?.quantity_cost ?
+                                                <>
+                                                    <PriceFormatter cents price={product.quantity_cost}/>
+                                                    /
+                                                    <QuantityTypeText type={product?.quantity_type}/>
+                                                </>
+                                                :
+                                                <Skeleton className="w-20"/>
+                                            }
+                                        </li>
 
-                                    {/* Delete */}
-                                    <div
-                                        onClick={handleDelete}
-                                        className="flex justify-center items-center py-2 px-4 text-red-600 font-medium rounded-lg"
-                                    >
-                                        <Trash size={20} className="mr-1 flex-shrink-0 inline"/>
-                                        Deletar
-                                    </div>
+                                        {/* Separator */}
+                                        <span className="font-bold text-gray-300">·</span>
 
-                                    {/* Edit */}
-                                    <Link
-                                        to={relative(`/${product.id}/editar`)}
-                                        className="flex justify-center items-center py-2 px-5 text-gray-700 font-medium rounded-lg"
-                                    >
-                                        Editar
-                                    </Link>
-                                </div>}
+                                        {/* Product quantity */}
+                                        <li className="text-center">
+                                            {product?.media ? `${Object.values(product.media).length} imagens` : <Skeleton className="w-20"/>}
+                                        </li>
+                                    </ul>
+                                </div>
                             </div>
-                        </HeightTransitioner>
-                    </div>
-                ))}
-            </div>
 
-            <FlatButton
-                onClick={() => history.push(relative('/novo'))}
-            >
-                <span className="mr-4 text-lg">Adicionar produto</span>
-                <Plus/>
-            </FlatButton>
+                            {!loading && <ArrowRight className={classNames(
+                                `transform transition-transform duration-150 ml-2 flex-shrink-0`,
+                                {
+                                    'rotate-90 text-gray-500': open === product.id,
+                                    'text-gray-300': open !== product.id,
+                                },
+                            )}
+                            />}
+                        </div>
+
+                        {/* Reveal menu */}
+                        <div className="mt-4">
+                            {open === product.id && <div className="grid grid-cols-3 divide-x divide-gray-200">
+                                {/* View */}
+                                <Link
+                                    to={`/produtos/${product.id}`}
+                                    className="flex justify-center items-center py-2 px-5 text-gray-700 font-medium rounded-lg"
+                                >
+                                    Ver
+                                </Link>
+
+                                {/* Delete */}
+                                <div
+                                    onClick={handleDelete}
+                                    className="flex justify-center items-center py-2 px-4 text-red-600 font-medium rounded-lg"
+                                >
+                                    <Trash size={20} className="mr-1 flex-shrink-0 inline"/>
+                                    Deletar
+                                </div>
+
+                                {/* Edit */}
+                                <Link
+                                    to={relative(`/${product.id}/editar`)}
+                                    className="flex justify-center items-center py-2 px-5 text-gray-700 font-medium rounded-lg"
+                                >
+                                    Editar
+                                </Link>
+                            </div>}
+                        </div>
+                    </HeightTransitioner>
+                </div>
+            ))}
         </div>
-    </>
+
+        <FlatButton
+            onClick={() => history.push(relative('/novo'))}
+        >
+            <span className="mr-4 text-lg">Adicionar produto</span>
+            <Plus/>
+        </FlatButton>
+    </PagePadding>
 };

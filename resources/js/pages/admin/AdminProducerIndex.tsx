@@ -2,7 +2,7 @@ import React            from "react";
 import {WorkInProgress} from "../../components/ui/WorkInProgress";
 
 export const AdminProducerIndex: React.FC = () => {
-    return <div className="space-y-16 flex flex-col min-h-full">
+    return <div className="py-4 space-y-16 flex flex-col min-h-full">
         {/* Header */}
         <div className="text-center space-y-4">
             <h1 className="text-2xl text-gray-700 font-bold">Em desenvolvimento!</h1>

@@ -6,6 +6,7 @@ import useRelativePath                                           from "../../hoo
 import {DivOrLink}                                               from "../../components/DivOrLink";
 import classNames                                                from "classnames";
 import {Skeleton}                                                from "../../components/ui/Skeleton";
+import {PagePadding}                                             from "../../containers/PagePadding";
 
 type ButtonType = { title: string, icon: Icon, to: string }
 
@@ -26,7 +27,7 @@ const buttons: ButtonType[] = [{
 export const AdminIndex: React.FC = () => {
     const relative = useRelativePath();
 
-    return <>
+    return <PagePadding>
         <div className="mx-auto container">
             <Title>Administrativo</Title>
 
@@ -52,5 +53,5 @@ export const AdminIndex: React.FC = () => {
                 ))}
             </div>
         </div>
-    </>
+    </PagePadding>
 };

@@ -1,12 +1,12 @@
-import React, {useEffect}  from "react";
-import {useDispatch}       from "react-redux";
-import {Dispatch}          from "../../store";
-import {useProducts}       from "../../selectors";
-import {useParams}         from "react-router-dom";
-import {useHistory}        from "react-router";
-import {ProductProperties} from "../../models/products";
-import {Title}             from "../../components/ui/Title";
-import {ProductForm}       from "../../components/product/ProductForm";
+import React, {useEffect} from "react";
+import {useDispatch}      from "react-redux";
+import {Dispatch}         from "../../store";
+import {useProducts}      from "../../selectors";
+import {useParams}        from "react-router-dom";
+import {useHistory}       from "react-router";
+import {Title}            from "../../components/ui/Title";
+import {ProductForm}      from "../../components/product/ProductForm";
+import {PagePadding}      from "../../containers/PagePadding";
 
 export const AdminProductEdit: React.FC = () => {
     const dispatch = useDispatch<Dispatch>();
@@ -31,12 +31,12 @@ export const AdminProductEdit: React.FC = () => {
     }
 
     // @ts-ignore
-    return <div className="mx-auto container">
+    return <PagePadding>
         <Title>Atualizando {product?.name}</Title>
 
         <ProductForm
             product={product}
             onSubmit={updateProduct}
         />
-    </div>
+    </PagePadding>
 };

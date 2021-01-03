@@ -5,7 +5,7 @@ export const Box: React.FC<React.HTMLAttributes<HTMLDivElement>> = (
 ) => {
     return <div {...rest} className="transition-colors duration-150
         w-full py-5 flex items-center hover:bg-gray-200
-        border-b last:border-b-0 border-gray-200 cursor-pointer"
+        border-gray-200 cursor-pointer"
     >
         {children}
     </div>

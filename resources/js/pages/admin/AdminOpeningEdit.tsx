@@ -1,14 +1,13 @@
-import React, {useEffect}         from "react";
-import {useDispatch}              from "react-redux";
-import {Dispatch}                 from "../../store";
-import {useOpenings, useProducts} from "../../selectors";
-import {useParams}                from "react-router-dom";
-import {useHistory}               from "react-router";
-import {ProductProperties}        from "../../models/products";
-import {Title}                    from "../../components/ui/Title";
-import {ProductForm}              from "../../components/product/ProductForm";
-import {OpeningProperties}        from "../../models/openings";
-import {OpeningForm}              from "../../components/openings/OpeningForm";
+import React, {useEffect}  from "react";
+import {useDispatch}       from "react-redux";
+import {Dispatch}          from "../../store";
+import {useOpenings}       from "../../selectors";
+import {useParams}         from "react-router-dom";
+import {useHistory}        from "react-router";
+import {Title}             from "../../components/ui/Title";
+import {OpeningProperties} from "../../models/openings";
+import {OpeningForm}       from "../../components/openings/OpeningForm";
+import {PagePadding}       from "../../containers/PagePadding";
 
 export const AdminOpeningEdit: React.FC = () => {
     const dispatch = useDispatch<Dispatch>();
@@ -37,12 +36,12 @@ export const AdminOpeningEdit: React.FC = () => {
     }
 
     // @ts-ignore
-    return <div className="mx-auto container">
+    return <PagePadding>
         <Title>Atualizando {opening?.id}</Title>
 
         <OpeningForm
             opening={opening}
             onSubmit={updateOpening}
         />
-    </div>
+    </PagePadding>
 };

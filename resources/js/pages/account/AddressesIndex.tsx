@@ -1,15 +1,16 @@
 import React, {useState}           from "react";
-import {useDispatch}               from "react-redux";
-import {Dispatch}                  from "../../store";
-import {useHistory, useRouteMatch} from "react-router-dom";
-import {Title}                     from "../../components/ui/Title";
-import {Plus}                      from "react-feather";
-import {useAddresses, useAuth}     from "../../selectors";
-import useAsyncEffect              from "../../hooks/useAsyncEffect";
-import {AddressList}               from "../../components/address/AddressList";
-import {FlatButton}                from "../../components/ui/FlatButton";
-import {AddressType}               from "../../models/addresses";
-import {UserProperties}            from "../../models/auth";
+import {useDispatch}           from "react-redux";
+import {Dispatch}              from "../../store";
+import {useHistory}            from "react-router-dom";
+import {Title}                 from "../../components/ui/Title";
+import {Plus}                  from "react-feather";
+import {useAddresses, useAuth} from "../../selectors";
+import useAsyncEffect          from "../../hooks/useAsyncEffect";
+import {AddressList}           from "../../components/address/AddressList";
+import {FlatButton}            from "../../components/ui/FlatButton";
+import {AddressType}           from "../../models/addresses";
+import {UserProperties}        from "../../models/auth";
+import {PagePadding}           from "../../containers/PagePadding";
 
 export const AddressesIndex: React.FC = ({children}) => {
     const [loading, setLoading] = useState(true);
@@ -28,7 +29,7 @@ export const AddressesIndex: React.FC = ({children}) => {
         history.push('/conta');
     }
 
-    return <>
+    return <PagePadding>
         <Title>Selecione o seu endereço</Title>
 
         <div className="px-2 my-8">
@@ -46,5 +47,5 @@ export const AddressesIndex: React.FC = ({children}) => {
             <span className="mr-4 text-lg">Adicionar novo endereço</span>
             <Plus/>
         </FlatButton>
-    </>
+    </PagePadding>
 };
