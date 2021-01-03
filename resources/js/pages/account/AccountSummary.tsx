@@ -100,7 +100,7 @@ export const AccountSummary: React.FC = ({children}) => {
                     </div>
                     <div className="flex-grow">
                         <h3 className="text-lg font-medium">{title}</h3>
-                        {!hideSub && <p className="text-gray-500 font-thin">{sub || <Skeleton className="w-3/4"/>}</p>}
+                        {!hideSub && <p className="text-gray-500 font-light">{sub || <Skeleton className="w-3/4"/>}</p>}
                     </div>
                     {clickable && <ChevronRight className="flex-shrink-0 text-gray-500"/>}
                 </DivOrLink>
