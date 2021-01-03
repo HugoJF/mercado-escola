@@ -6,7 +6,7 @@ import {Title}                 from "../../components/ui/Title";
 import {Plus}                  from "react-feather";
 import {useAddresses, useAuth} from "../../selectors";
 import useAsyncEffect          from "../../hooks/useAsyncEffect";
-import {AddressList}           from "../../components/address/AddressList";
+import {AddressList}           from "../../components/addresses/AddressList";
 import {FlatButton}            from "../../components/ui/FlatButton";
 import {AddressType}           from "../../models/addresses";
 import {UserProperties}        from "../../models/auth";

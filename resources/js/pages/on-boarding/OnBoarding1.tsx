@@ -1,6 +1,5 @@
 import React, {useEffect, useState} from 'react';
 import classNames                   from "classnames";
-import InputMask                    from "react-input-mask";
 import {Loader}                     from "react-feather";
 import {useForm}                    from "react-hook-form";
 import {useHistory}                 from "react-router-dom";

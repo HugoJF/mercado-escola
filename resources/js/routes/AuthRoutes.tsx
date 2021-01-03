@@ -1,10 +1,6 @@
 import React                   from 'react';
-import {Route, useLocation}    from "react-router";
-import useRelativePath         from "../hooks/useRelativePath";
+import {Route}                 from "react-router";
 import {SwitchWithTransitions} from "../components/ui/SwitchWithTransition";
-import {OrdersIndex}           from "../pages/orders/OrdersIndex";
-import {OrdersShow}            from "../pages/orders/OrdersShow";
-import {OrderDoneContainer}    from "../pages/orders/OrderDoneContainer";
 import {Login}                 from "../pages/auth/Login";
 import {Register}              from "../pages/auth/Register";
 

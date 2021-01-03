@@ -1,8 +1,8 @@
 import React, {useEffect, useState} from 'react';
 import {useParams}                  from "react-router";
 import {Heart}                      from "react-feather";
-import {BackAndCart}                from "./partial/BackAndCart";
-import {HeaderWrapper}              from "./partial/HeaderWrapper";
+import {BackAndCart}                from "./partials/BackAndCart";
+import {HeaderWrapper}              from "./partials/HeaderWrapper";
 import {useFavorites, useProducts}  from "../selectors";
 import {useDispatch}                from "react-redux";
 import {Dispatch}                   from "../store";

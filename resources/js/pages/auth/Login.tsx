@@ -34,39 +34,48 @@ export const Login: React.FC<object> = () => {
     return <Container>
         <div className="mx-auto container min-h-screen flex justify-center items-center">
             <form className="px-4 w-full" onSubmit={handleSubmit(login)}>
-                <h1 className="text-5xl text-center">DiCasa</h1>
+                <h1 className="mb-10 text-center text-4xl text-gray-800 font-medium leading-none tracking-tight">
+                    MercadoEscola
+                </h1>
+
+                {failed && <div className="flex items-center space-x-3 w-full my-4 px-3 py-3 text-white text-center bg-red-500 font-medium rounded-lg">
+                    <span className="flex flex-shrink-0 items-center justify-center w-8 h-8 text-red-500 text-lg font-bold bg-white rounded-full">!</span>
+                    Email e senha inválidos! Por favor tente novamente.
+                </div>}
 
                 <div>
-                    <Input
-                        name="email"
-                        label="Email"
-                        error={errors.email}
-                        inputProps={{
-                            ref: register({required: true})
-                        }}
-                    />
-
-                    <Input
-                        name="password"
-                        label="Password"
-                        error={errors.password}
-                        inputProps={{
-                            ref: register({required: true}),
-                            type: 'password',
-                        }}
-                    />
-
-                    <div className="flex justify-end mb-16">
-                        <button className="text-right text-orange-400 font-medium">Esqueceu a sua senha?</button>
+                    <div>
+                        <Input
+                            name="email"
+                            label="Email"
+                            error={errors.email}
+                            inputProps={{
+                                ref: register({required: true})
+                            }}
+                        />
                     </div>
 
-                    {failed && <div className="w-full my-4 text-red-500 text-center text-lg font-medium">
-                        Email e senha inválidos! Por favor tente novamente.
-                    </div>}
+                    <div className="my-8">
+                        <Input
+                            name="password"
+                            label="Password"
+                            error={errors.password}
+                            inputProps={{
+                                ref: register({required: true}),
+                                type: 'password',
+                            }}
+                        />
 
-                    <Button loading={loading}>
-                        Entrar
-                    </Button>
+                        <div className="flex justify-end mt-4">
+                            <button className="text-right text-orange-500 font-medium">Esqueceu a sua senha?</button>
+                        </div>
+                    </div>
+
+                    <div className="mt-10">
+                        <Button loading={loading}>
+                            Entrar
+                        </Button>
+                    </div>
 
                     <div className="text-center mt-8">
                         <Link to="/register" className="w-full text-gray-500">

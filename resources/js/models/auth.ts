@@ -118,6 +118,8 @@ export const auth = createModel<RootModel>()({
                 await dispatch.auth.me();
             } catch (e) {
                 dispatch.auth.setFailed(true);
+                // TODO: maybe pass API message
+                throw Error('Login failed');
             }
         }
     })

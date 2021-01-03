@@ -8,7 +8,7 @@ import {useDispatch}                                                            
 import {Dispatch}                                                                  from "../../store";
 import {ProductType}                                                               from "../../models/products";
 import {PriceFormatter}                                                            from "../../components/ui/PriceFormatter";
-import {ShippingOptionActionMenu}                                                  from "../../action-menu/ShippingOptionActionMenu";
+import {ShippingOptionActionMenu}                                                  from "../../action-menus/ShippingOptionActionMenu";
 import {OrderProductsType}                                                         from "../../models/orders";
 import {QuantityTypes, QuantityTypeText}                                           from "../../components/ui/QuantityTypeText";
 import {ImageHolder}                                                               from "../../components/ui/ImageHolder";

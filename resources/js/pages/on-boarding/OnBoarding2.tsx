@@ -1,6 +1,6 @@
 import React, {useEffect} from 'react';
-import {Link, useHistory}      from "react-router-dom";
-import {useAddresses, useAuth} from "../../selectors";
+import {Link, useHistory} from "react-router-dom";
+import {useAddresses}     from "../../selectors";
 
 export const OnBoarding2: React.FC = () => {
     const addresses = useAddresses();

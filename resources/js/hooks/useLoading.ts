@@ -1,10 +1,9 @@
-import {useAuth}  from "../selectors";
 import {useState} from "react";
 
 export default function useLoading() {
     const [loading, setLoading] = useState(false);
 
-    async function load(runner: () => void|Promise<void>) {
+    async function load(runner: () => void | Promise<void>) {
         setLoading(true);
         try {
             await runner();

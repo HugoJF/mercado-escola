@@ -11,7 +11,7 @@ export type FieldWrapperType = {
 export const FieldWrapper: React.FC<FieldWrapperType> = ({name, label, error, children}) => {
     return <>
         <label
-            className={classNames({
+            className={classNames('pb-2', {
                 'text-red-500': error,
                 'text-gray-600': !error
             })}

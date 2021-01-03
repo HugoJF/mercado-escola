@@ -7,10 +7,10 @@ import {Title}                         from "../../components/ui/Title";
 import {Dispatch}                      from "../../store";
 import {AddressProperties}             from "../../models/addresses";
 import {Box}                           from "../../components/ui/Box";
-import {AddressStreetNumberActionMenu} from "../../action-menu/AdressStreetNumberActionMenu";
-import {Google}      from "../../google";
-import {MapWithPing} from "../../components/address/MapWithPing";
-import {Button}      from "../../components/ui/Button";
+import {AddressStreetNumberActionMenu} from "../../action-menus/AdressStreetNumberActionMenu";
+import {Google}                        from "../../google";
+import {MapWithPing}                   from "../../components/addresses/MapWithPing";
+import {Button}                        from "../../components/ui/Button";
 
 const fixOnBlur = (refObj: any) => {
     // Avoid clearing suggestions when input loses focus

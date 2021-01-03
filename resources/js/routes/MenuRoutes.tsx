@@ -1,13 +1,6 @@
 import React                               from "react";
-import Ripples                             from "react-ripples";
-import {useHistory, useLocation}           from "react-router-dom";
 import {Book, Heart, Home, Settings, User} from "react-feather";
-import {useAuth}                           from "../selectors";
-import classNames                          from 'classnames';
 import {Route, Switch}                     from "react-router";
-import {HomeHeader}                        from "../headers/HomeHeader";
-import {ProductHeader}                     from "../headers/ProductHeader";
-import {DefaultHeader}                     from "../headers/DefaultHeader";
 import {Menu}                              from "../Menu";
 
 const buttons = {

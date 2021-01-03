@@ -1,4 +1,4 @@
-import {ConfirmActionMenu}       from "../action-menu/ConfirmActionMenu";
+import {ConfirmActionMenu}       from "../action-menus/ConfirmActionMenu";
 import React, {useRef, useState} from "react";
 
 export type ConfirmMenuParams = {

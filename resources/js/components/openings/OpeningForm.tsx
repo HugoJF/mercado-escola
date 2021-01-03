@@ -1,11 +1,10 @@
 import React, {useEffect, useState}     from "react";
-import {Input}                          from "../../components/form/Input";
+import {Input}                          from "../form/Input";
 import {DateTimePicker}                 from "@material-ui/pickers";
-import {Button}                         from "../../components/ui/Button";
+import {Button}                         from "../ui/Button";
 import {useForm}                        from "react-hook-form";
 import {OpeningProperties, OpeningType} from "../../models/openings";
 import useLoading                       from "../../hooks/useLoading";
-import {Title}                          from "../ui/Title";
 import {FieldWrapper}                   from "../form/FieldWrapper";
 import {formatISO}                      from "date-fns";
 

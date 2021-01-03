@@ -10,8 +10,8 @@ import {useDropzone}                    from "react-dropzone";
 import {FieldWrapper}                   from "../form/FieldWrapper";
 import useConfirmMenu                   from "../../hooks/useConfirmMenu";
 import {useDispatch}                    from "react-redux";
-import {Dispatch}                                     from "../../store";
-import {QuantityTypes, QuantityTypeText, rawTypeText} from "../ui/QuantityTypeText";
+import {Dispatch}                       from "../../store";
+import {QuantityTypes, rawTypeText}     from "../ui/QuantityTypeText";
 
 type ProductFormType = {
     product?: ProductType;

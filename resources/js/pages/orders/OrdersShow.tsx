@@ -1,5 +1,4 @@
 import React, {useEffect}                                  from "react";
-import {Button}                                            from "../../components/ui/Button";
 import {Title}                                             from "../../components/ui/Title";
 import {Calendar, CheckSquare, DollarSign, MapPin, Square} from "react-feather";
 import {Box}                                               from "../../components/ui/Box";

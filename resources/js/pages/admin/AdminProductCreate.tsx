@@ -3,7 +3,7 @@ import {useDispatch} from "react-redux";
 import {Dispatch}    from "../../store";
 import {useHistory}  from "react-router";
 import {Title}       from "../../components/ui/Title";
-import {ProductForm} from "../../components/product/ProductForm";
+import {ProductForm} from "../../components/products/ProductForm";
 import {PagePadding} from "../../containers/PagePadding";
 
 export const AdminProductCreate: React.FC = () => {

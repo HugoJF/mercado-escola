@@ -4,7 +4,7 @@ import {Link}                      from "react-router-dom";
 import {useDispatch}               from "react-redux";
 import {Dispatch}                  from "../../store";
 import {useFavorites, useProducts} from "../../selectors";
-import {ProductList}               from "../../components/product/ProductList";
+import {ProductList}               from "../../components/products/ProductList";
 import {Empty}                     from "../../components/ui/Empty";
 import {PagePadding}               from "../../containers/PagePadding";
 
