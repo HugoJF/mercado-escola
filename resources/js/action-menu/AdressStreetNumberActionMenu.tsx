@@ -1,4 +1,4 @@
-import {Modal, ModalProps} from "../components/Modal";
+import {Modal, ModalProps} from "../components/ui/Modal";
 import React               from "react";
 import {Skeleton}          from "../components/ui/Skeleton";
 

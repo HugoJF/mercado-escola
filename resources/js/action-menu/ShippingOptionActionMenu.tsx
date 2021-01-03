@@ -1,5 +1,5 @@
 import {Check, ShoppingBag, User} from "react-feather";
-import {Modal, ModalProps}        from "../components/Modal";
+import {Modal, ModalProps}        from "../components/ui/Modal";
 import React                      from "react";
 
 interface ShippingOptionActionMenuProps {

@@ -1,7 +1,7 @@
 import React, {useEffect}                                                                     from "react";
 import {Link, useRouteMatch}                                                                  from "react-router-dom";
 import {Box}                                                                                  from "../../components/ui/Box";
-import {DivOrLink}                                                                            from "../../components/DivOrLink";
+import {DivOrLink}                                                                            from "../../components/ui/DivOrLink";
 import {AlertCircle, Book, ChevronRight, Flag, Heart, LogOut, Mail, MapPin, Smartphone, User} from "react-feather";
 import {useAddresses, useAuth}                                                                from "../../selectors";
 import {useDispatch}                                                                          from "react-redux";

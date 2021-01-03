@@ -2,9 +2,9 @@ import React                                                     from "react";
 import {Title}                                                   from "../../components/ui/Title";
 import {Calendar, ChevronRight, Icon, ShoppingBag, Truck, Users} from "react-feather";
 import {Link}                                                    from "react-router-dom";
-import useRelativePath                                           from "../../hooks/useRelativePath";
-import {DivOrLink}                                               from "../../components/DivOrLink";
-import classNames                                                from "classnames";
+import useRelativePath from "../../hooks/useRelativePath";
+import {DivOrLink}     from "../../components/ui/DivOrLink";
+import classNames      from "classnames";
 import {Skeleton}                                                from "../../components/ui/Skeleton";
 import {PagePadding}                                             from "../../containers/PagePadding";
 
