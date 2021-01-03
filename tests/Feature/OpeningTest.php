@@ -162,4 +162,18 @@ class OpeningTest extends TestCase
         $this->patch(route('openings.update', $opening), ['enabled_at' => now()])
              ->assertStatus(200);
     }
+
+    public function test_current_route_will_return_current_opening()
+    {
+        Opening::factory([
+            'opens_at'     => now()->subDay(),
+            'closes_at'    => now()->addDay(),
+            'enabled_at' => now()->subHour(),
+        ])->create();
+
+        $this->loginAsUser();
+
+        $this->get(route('openings.current'))
+            ->assertJsonCount(1);
+    }
 }

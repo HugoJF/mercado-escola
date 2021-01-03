@@ -26,7 +26,7 @@ Route::apiResource('products', \App\Http\Controllers\ProductController::class);
 
 Route::apiResource('addresses', \App\Http\Controllers\AddressController::class);
 
-Route::get('openings/current', [\App\Http\Controllers\OpeningController::class, 'current']);
+Route::get('openings/current', [\App\Http\Controllers\OpeningController::class, 'current'])->name('openings.current');
 Route::apiResource('openings', \App\Http\Controllers\OpeningController::class);
 
 Route::apiResource('orders', \App\Http\Controllers\OrderController::class);
