@@ -9,6 +9,7 @@ import {QuantityTypes, QuantityTypeText} from "../../components/ui/QuantityTypeT
 import {ImageHolder}                     from "../../components/ui/ImageHolder";
 import {useDispatch}                     from "react-redux";
 import {Dispatch}                        from "../../store";
+import {Link}                            from "react-router-dom";
 
 export const ProductShow: React.FC = () => {
     const dispatch = useDispatch<Dispatch>();
@@ -42,7 +43,8 @@ export const ProductShow: React.FC = () => {
             <div className="mt-8">
                 <h2 className="mb-4 text-xl tracking-wide">Descrição</h2>
 
-                <p className="px-2 text-sm text-gray-500 leading-4">{product.description}</p>
+                {product.description && <p className="px-2 text-sm text-gray-500 leading-4">{product.description}</p>}
+                {!product.description && <p className="px-2 text-sm text-gray-500 leading-4">Produto sem descrição.</p>}
             </div>
 
             {/* Price and quantities */}
@@ -62,11 +64,6 @@ export const ProductShow: React.FC = () => {
                     <div className="mx-4 text-xl font-medium">{total} {text}</div>
                 </div>}
             </div>
-
-            {/* Cart warning */}
-            {quantity && <p className="pb-2 text-sm text-center text-gray-500 tracking-tight">
-                Quantidade de items é atualizada automaticamente.
-            </p>}
 
             {/* Cart controls */}
             {!quantity ?
@@ -95,6 +92,11 @@ export const ProductShow: React.FC = () => {
                     </div>
                 </div>
             }
+
+            {/* Cart warning */}
+            {quantity && <Link to="/carrinho" className="py-4 text-center text-gray-500 tracking-tight">
+                Ver no carrinho ›
+            </Link>}
         </div>
     </>
 };
