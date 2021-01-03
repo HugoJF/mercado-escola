@@ -8,7 +8,6 @@ const loader = new Loader(process.env.MIX_GOOGLE_MAPS_KEY, {
 let instance: google|null = null;
 
 export const load = async () => {
-    console.log('env', process.env);
     instance = await loader.load();
 };
 

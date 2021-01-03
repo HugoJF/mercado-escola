@@ -39,8 +39,6 @@ export const Menu: React.FC = () => {
     const auth = useAuth();
 
     function redirect(to: string) {
-        // TODO: remove
-        console.log(to);
         history.push(to);
     }
 

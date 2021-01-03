@@ -39,21 +39,14 @@ export const AddressesCreate: React.FC = ({children}) => {
         const geocode = new (Google()).maps.Geocoder().geocode({address},
             (results, status) => {
                 if (status !== 'OK') {
-                    console.log('Geocoder returned', status);
                     return;
                 }
 
                 if (results.length === 0) {
-                    console.log('Could not find location');
                     return;
                 }
 
                 const result = results[0];
-                console.log('Found address', result);
-
-                console.log(extractAddressComponents(result.address_components, [
-                    'route', 'sublocality_level_1', 'administrative_area_level_2',
-                ]));
 
                 setCenter([
                     result.geometry.location.lat(),

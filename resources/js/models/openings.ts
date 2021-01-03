@@ -84,7 +84,6 @@ export const openings = createModel<RootModel>()({
             if (normalized.entities['openings']) {
                 let openings = Object.values(normalized.entities['openings'] as object) as OpeningType[];
                 dispatch.openings.addOpening(openings);
-                console.log(openings);
 
                 if (openings.length === 1) {
                     dispatch.openings.setCurrent(openings[0].id);
@@ -93,8 +92,8 @@ export const openings = createModel<RootModel>()({
 
             if (normalized.entities['products']) {
                 let products = Object.values(normalized.entities['products'] as object) as ProductType[];
+
                 dispatch.products.addProduct(products);
-                console.log(products);
             }
 
         },
