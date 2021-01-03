@@ -9,10 +9,9 @@ import {Dispatch}                                                               
 import {Title}                                                                                from "../../components/ui/Title";
 import classNames                                                                             from 'classnames';
 import {Skeleton}                                                                             from "../../components/ui/Skeleton";
-import {Container}                                                                            from "../../containers/Container";
 import {PagePadding}                                                                          from "../../containers/PagePadding";
 
-export const AccountSummary: React.FC = ({children}) => {
+export const AccountIndex: React.FC = ({children}) => {
     const dispatch = useDispatch<Dispatch>();
     const addresses = useAddresses();
     const match = useRouteMatch();

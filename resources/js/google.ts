@@ -1,4 +1,4 @@
-import {google, Loader, LoaderOptions} from "google-maps";
+import {google, Loader} from "google-maps";
 
 const loader = new Loader(process.env.MIX_GOOGLE_MAPS_KEY, {
     libraries: ['places'],
