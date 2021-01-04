@@ -3,9 +3,7 @@
 namespace Tests\Feature;
 
 use App\Models\Opening;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
 class OpeningTest extends TestCase
@@ -103,18 +101,53 @@ class OpeningTest extends TestCase
              ->assertStatus(201);
     }
 
-    public function test_admins_cannot_create_openings_when_an_active_one_exists()
+    public function test_admins_cannot_create_openings_when_an_overlapping_one_exists()
     {
+        $this->loginAsAdmin();
+
         Opening::factory([
-            'opens_at'     => now()->subDay(),
-            'closes_at'    => now()->addDay(),
+            'opens_at'   => now(),
+            'closes_at'  => now()->addDay(),
             'enabled_at' => now()->subHour(),
         ])->create();
 
+        $opensAtOverlapping = array_merge(Opening::factory()->make()->attributesToArray(), [
+            'opens_at'   => now()->addHour(),
+            'closes_at'  => now()->addDays(2),
+            'enabled_at' => null,
+        ]);
+
+        $closesAtOverlapping = array_merge(Opening::factory()->make()->attributesToArray(), [
+            'opens_at'   => now()->subDays(2),
+            'closes_at'  => now()->addHour(),
+            'enabled_at' => null,
+        ]);
+
+        $this->post(route('openings.store'), $opensAtOverlapping)
+             ->assertStatus(412);
+
+        $this->post(route('openings.store'), $closesAtOverlapping)
+             ->assertStatus(412);
+    }
+
+    public function test_admins_can_create_openings_when_no_overlapping_ones_exists()
+    {
+        Opening::factory([
+            'opens_at'   => now(),
+            'closes_at'  => now()->addDay(),
+            'enabled_at' => now()->subHour(),
+        ])->create();
+
+        $data = array_merge(Opening::factory()->make()->attributesToArray(), [
+            'opens_at'   => now()->addDay()->addHour(),
+            'closes_at'  => now()->addDays(2),
+            'enabled_at' => null,
+        ]);
+
         $this->loginAsAdmin();
 
-        $this->post(route('openings.store'), Opening::factory()->make()->attributesToArray())
-             ->assertStatus(412);
+        $this->post(route('openings.store'), $data)
+             ->assertStatus(201);
     }
 
     public function test_guests_cannot_see_openings_show()
@@ -166,14 +199,14 @@ class OpeningTest extends TestCase
     public function test_current_route_will_return_current_opening()
     {
         Opening::factory([
-            'opens_at'     => now()->subDay(),
-            'closes_at'    => now()->addDay(),
+            'opens_at'   => now()->subDay(),
+            'closes_at'  => now()->addDay(),
             'enabled_at' => now()->subHour(),
         ])->create();
 
         $this->loginAsUser();
 
         $this->get(route('openings.current'))
-            ->assertJsonCount(1);
+             ->assertJsonCount(1);
     }
 }

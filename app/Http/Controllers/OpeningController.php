@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Exceptions\TooManyOpeningsException;
+use App\Actions\Openings\FindOverlappingOpenings;
+use App\Exceptions\OverlappingOpeningException;
+use App\Http\Requests\OpeningStoreRequest;
 use App\Http\Resources\OpeningResource;
 use App\Models\Opening;
 use App\Models\Product;
@@ -32,7 +34,7 @@ class OpeningController extends Controller
         $openings = Opening::active()->get();
 
         if ($openings->count() > 1) {
-            throw new TooManyOpeningsException;
+            throw new OverlappingOpeningException;
         }
 
         if ($openings->isEmpty()) {
@@ -45,19 +47,26 @@ class OpeningController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param \Illuminate\Http\Request $request
+     * @param FindOverlappingOpenings $overlappingOpenings
+     * @param OpeningStoreRequest     $request
      *
-     * @return \Illuminate\Http\Response
+     * @return OpeningResource
      */
-    public function store(Request $request)
-    {
-        $activeOpenings = Opening::active()->get();
+    public function store(
+        FindOverlappingOpenings $overlappingOpenings,
+        OpeningStoreRequest $request
+    ) {
 
-        if ($activeOpenings->count() > 0) {
-            throw new TooManyOpeningsException;
+        $overlap = $overlappingOpenings->find(
+            $request->opensAt(),
+            $request->closesAt(),
+        );
+
+        if ($overlap) {
+            throw new OverlappingOpeningException;
         }
 
-        $opening = new Opening($request->all());
+        $opening = new Opening($request->validated());
         $opening->save();
 
         return new OpeningResource($opening);
@@ -103,8 +112,6 @@ class OpeningController extends Controller
         $opening->products()->detach($product);
 
         return new OpeningResource($opening);
-
-
     }
 
     /**
