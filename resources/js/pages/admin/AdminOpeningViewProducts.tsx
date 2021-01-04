@@ -9,33 +9,26 @@ import {Toggle}                     from "../../components/ui/Toggle";
 import {useDispatch}                from "react-redux";
 import {Dispatch}                   from "../../store";
 
-interface AdminOpeningViewSummary {
+interface AdminOpeningViewProducts {
     opening: OpeningType;
 }
 
-export const AdminOpeningViewProducts: React.FC<AdminOpeningViewSummary> = ({opening}) => {
+export const AdminOpeningViewProducts: React.FC<AdminOpeningViewProducts> = ({opening}) => {
     const dispatch = useDispatch<Dispatch>();
     const products = useProducts();
-    const [on, setOn] = useState(false);
 
     useEffect(() => {
         dispatch.products.index();
         dispatch.openings.index();
     }, []);
 
-    function getProducts() {
-        if (!opening) return [];
-
-        return opening.products.map(id => products.products[id]).filter(i => !!i);
-    }
-
     // TODO: fix this
-    if (!opening) return;
+    if (!opening) return <></>;
 
     return <div className="px-4 py-4 space-y-6">
         <div className="divide-y divide-gray-200">
             {Object.values(products.products).map(product => (
-                <HeightTransitioner>
+                <HeightTransitioner key={product.id}>
                     <Box
                         key={product.id}
                     >
