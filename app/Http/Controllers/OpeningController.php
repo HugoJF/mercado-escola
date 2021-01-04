@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Exceptions\TooManyOpeningsException;
 use App\Http\Resources\OpeningResource;
 use App\Models\Opening;
+use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
 
@@ -86,7 +87,24 @@ class OpeningController extends Controller
     {
         $opening->update($request->all());
 
+        // TODO: why this is not wrapped in a resource
         return $opening;
+    }
+
+    public function addProduct(Opening $opening, Product $product)
+    {
+        $opening->products()->attach($product);
+
+        return new OpeningResource($opening);
+    }
+
+    public function removeProduct(Opening $opening, Product $product)
+    {
+        $opening->products()->detach($product);
+
+        return new OpeningResource($opening);
+
+
     }
 
     /**

@@ -27,6 +27,8 @@ Route::apiResource('products', \App\Http\Controllers\ProductController::class);
 Route::apiResource('addresses', \App\Http\Controllers\AddressController::class);
 
 Route::get('openings/current', [\App\Http\Controllers\OpeningController::class, 'current'])->name('openings.current');
+Route::post('openings/{opening}/products/{product}', [\App\Http\Controllers\OpeningController::class, 'addProduct'])->name('openings.addProduct');
+Route::delete('openings/{opening}/products/{product}', [\App\Http\Controllers\OpeningController::class, 'removeProduct'])->name('openings.removeProduct');
 Route::apiResource('openings', \App\Http\Controllers\OpeningController::class);
 
 Route::apiResource('orders', \App\Http\Controllers\OrderController::class);

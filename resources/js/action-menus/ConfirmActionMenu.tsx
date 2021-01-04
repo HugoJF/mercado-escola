@@ -12,10 +12,10 @@ interface ConfirmActionMenuProps {
 export const ConfirmActionMenu: React.FC<ModalProps & ConfirmActionMenuProps> = ({open, title, description, action, onClose, onClick}) => {
     return <Modal open={open} onClose={onClose}>
         {/* Header */}
-        <h1 className="text-center text-lg font-medium">
+        <h1 className="px-2 text-center text-lg font-medium">
             {title}
         </h1>
-        {description &&<p className="text-center text-gray-500">
+        {description && <p className="text-center text-gray-500">
             {description}
         </p>}
 

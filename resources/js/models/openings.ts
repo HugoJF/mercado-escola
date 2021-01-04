@@ -29,6 +29,22 @@ export type OpeningsState = {
     current: number | null;
 };
 
+function normalizeOpening(data: object): { openings: OpeningType[], products: ProductType[] } {
+    let normalized = normalize(data, openingsSchema);
+    let openings: OpeningType[] = [];
+    let products: ProductType[] = [];
+
+    if (normalized.entities['openings']) {
+        openings = Object.values(normalized.entities['openings'] as object) as OpeningType[];
+    }
+
+    if (normalized.entities['products']) {
+        products = Object.values(normalized.entities['products'] as object) as ProductType[];
+    }
+
+    return {openings, products};
+}
+
 export const openings = createModel<RootModel>()({
     state: {
         openings: {},
@@ -79,26 +95,19 @@ export const openings = createModel<RootModel>()({
                 return;
             }
 
-            let normalized = normalize(data, openingsSchema);
+            const {openings, products} = normalizeOpening(data);
 
-            if (normalized.entities['openings']) {
-                let openings = Object.values(normalized.entities['openings'] as object) as OpeningType[];
-                dispatch.openings.addOpening(openings);
+            dispatch.openings.addOpening(openings);
+            dispatch.products.addProduct(products);
 
-                if (openings.length === 1) {
-                    dispatch.openings.setCurrent(openings[0].id);
-                }
-            }
-
-            if (normalized.entities['products']) {
-                let products = Object.values(normalized.entities['products'] as object) as ProductType[];
-
-                dispatch.products.addProduct(products);
+            if (openings.length === 1) {
+                dispatch.openings.setCurrent(openings[0].id);
             }
 
         },
         async store(payload: OpeningProperties, state: RootState): Promise<void> {
             const response = await window.axios.post('/openings', payload);
+
 
             const data = response.data.data;
 
@@ -106,17 +115,10 @@ export const openings = createModel<RootModel>()({
                 return;
             }
 
-            let normalized = normalize(data, openingsSchema);
+            const {openings, products} = normalizeOpening(data);
 
-            if (normalized.entities['openings']) {
-                let openings = Object.values(normalized.entities['openings'] as object) as OpeningType[];
-                dispatch.openings.addOpening(openings);
-            }
-
-            if (normalized.entities['products']) {
-                let products = Object.values(normalized.entities['products'] as object) as ProductType[];
-                dispatch.products.addProduct(products);
-            }
+            dispatch.openings.addOpening(openings);
+            dispatch.products.addProduct(products);
         },
         async update(payload: { id: number, data: OpeningProperties }, state: RootState): Promise<void> {
             const response = await window.axios.patch(`/openings/${payload.id}`, payload.data);
@@ -126,6 +128,34 @@ export const openings = createModel<RootModel>()({
             if (openings) {
                 dispatch.openings.addOpening(Object.values(openings));
             }
+        },
+        async addProduct(payload: { openingId: number, productId: number }, state: RootState): Promise<void> {
+            const response = await window.axios.post(`/openings/${payload.openingId}/products/${payload.productId}`);
+
+            const data = response.data.data;
+
+            if (!data) {
+                return;
+            }
+
+            const {openings, products} = normalizeOpening(data);
+
+            dispatch.openings.addOpening(openings);
+            dispatch.products.addProduct(products);
+        },
+        async removeProduct(payload: { openingId: number, productId: number }, state: RootState): Promise<void> {
+            const response = await window.axios.delete(`/openings/${payload.openingId}/products/${payload.productId}`);
+
+            const data = response.data.data;
+
+            if (!data) {
+                return;
+            }
+
+            const {openings, products} = normalizeOpening(data);
+
+            dispatch.openings.addOpening(openings);
+            dispatch.products.addProduct(products);
         },
         async destroy(payload: number, state: RootState): Promise<void> {
             const response = await window.axios.delete(`/openings/${payload}`);

@@ -33,7 +33,9 @@ export const HomePage: React.FC = () => {
                     <Link to="/produtos" className="text-gray-500">Ver todos ›</Link>
                 </div>
 
-                <ProductList products={Object.values(products.products)}/>
+                <ProductList products={
+                    openings.openings[openings.current].products.map(id => products.products[id])
+                }/>
             </>}
         </div>
     </PagePadding>

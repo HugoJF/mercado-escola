@@ -12,6 +12,7 @@ import useRelativePath              from "../../hooks/useRelativePath";
 import {SwitchWithTransitions}      from "../../components/ui/SwitchWithTransition";
 import {AdminOpeningViewSummary}    from "./AdminOpeningViewSummary";
 import {PagePadding}                from "../../containers/PagePadding";
+import {AdminOpeningViewProducts}   from "./AdminOpeningViewProducts";
 
 export const AdminOpeningView: React.FC = () => {
     const [selected, setSelected] = useState('resumo');
@@ -43,7 +44,7 @@ export const AdminOpeningView: React.FC = () => {
                 <div>
                     <Badge>PENDENTE</Badge>
                 </div>
-                <h1 className="flex-grow text-3xl font-medium">Abertura <span className="font-thin">#1</span></h1>
+                <h1 className="flex-grow text-2xl font-medium">Abertura <span className="font-thin">#1</span></h1>
                 <MoreVertical className="flex-shrink text-gray-400"/>
             </div>
 
@@ -64,7 +65,7 @@ export const AdminOpeningView: React.FC = () => {
                                 text-xl text-gray-700 font-medium cursor-pointer`}
                                 onClick={() => goTo('resumo')}
                             >
-                                <div className={classNames(`px-3 py-1 text-center font-normal`, {
+                                <div className={classNames(`px-3 py-1 text-center text-base font-normal`, {
                                     'text-gray-500': !isSelected('resumo'),
                                     'text-gray-800': isSelected('resumo'),
                                 })}>Resumo
@@ -83,7 +84,7 @@ export const AdminOpeningView: React.FC = () => {
                                 text-xl text-gray-700 font-medium cursor-pointer`}
                                 onClick={() => goTo('produtos')}
                             >
-                                <div className={classNames(`px-3 py-1 text-center font-normal`, {
+                                <div className={classNames(`px-3 py-1 text-center text-base font-normal`, {
                                     'text-gray-500': !isSelected('produtos'),
                                     'text-gray-800': isSelected('produtos'),
                                 })}>Produtos
@@ -102,7 +103,7 @@ export const AdminOpeningView: React.FC = () => {
                                 text-xl text-gray-700 font-medium cursor-pointer`}
                                 onClick={() => goTo('pedidos')}
                             >
-                                <div className={classNames(`px-3 py-1 text-center font-normal`, {
+                                <div className={classNames(`px-3 py-1 text-center text-base font-normal`, {
                                     'text-gray-500': !isSelected('pedidos'),
                                     'text-gray-800': isSelected('pedidos')
                                 })}>Pedidos
@@ -120,7 +121,7 @@ export const AdminOpeningView: React.FC = () => {
             <div className="flex-grow relative">
                 <SwitchWithTransitions>
                     <Route path={relative('/resumo')} children={<AdminOpeningViewSummary opening={opening}/>}/>
-                    <Route path={relative('/produtos')} children={<h1>produtos</h1>}/>
+                    <Route path={relative('/produtos')} children={<AdminOpeningViewProducts opening={opening}/>}/>
                     <Route path={relative('/pedidos')} children={<h1>pedidos</h1>}/>
 
                     <Redirect to={relative('/resumo')}/>
