@@ -14,8 +14,8 @@ class AddMainAddressColumnToUsersTable extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->unsignedBigInteger('main_address')->nullable();
-            $table->foreign('main_address')->references('id')->on('addresses');
+            $table->unsignedBigInteger('main_address_id')->nullable();
+            $table->foreign('main_address_id')->references('id')->on('addresses');
         });
     }
 
