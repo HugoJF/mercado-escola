@@ -1,8 +1,9 @@
 ARG PHP_VERSION=${PHP_VERSION:-7.4}
-FROM php:${PHP_VERSION}-fpm-buster AS php-system-setup
+FROM php:${PHP_VERSION}-fpm-alpine3.12 AS php-system-setup
 
 # Install system dependencies
 RUN apk add --no-cache dcron busybox-suid libcap curl zip unzip git bash
+RUN apk add  --no-cache --repository http://dl-cdn.alpinelinux.org/alpine/v3.12/main/ nodejs=12.18.4-r0 npm=12.18.4-r0
 
 # Install PHP extensions
 COPY --from=mlocati/php-extension-installer /usr/bin/install-php-extensions /usr/bin/
@@ -34,14 +35,6 @@ RUN addgroup $NON_ROOT_USER wheel
 COPY ./.deploy/config/crontab /etc/crontabs/$NON_ROOT_USER
 RUN chmod 777 /usr/sbin/crond
 RUN chown -R $NON_ROOT_USER:$NON_ROOT_GROUP /etc/crontabs/$NON_ROOT_USER && setcap cap_setgid=ep /usr/sbin/crond
-
-# Install NVM
-RUN touch ~/.bash_profile
-RUN curl --silent -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.37.2/install.sh | bash
-RUN ~/.nvm/nvm.sh
-
-RUN nvm install --lts=fermium
-RUN nvm use --lts=fermium
 
 # Switch to non-root 'app' user & install app dependencies
 COPY composer.json composer.lock ./
