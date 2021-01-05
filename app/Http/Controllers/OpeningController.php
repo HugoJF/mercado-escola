@@ -103,7 +103,7 @@ class OpeningController extends Controller
     // TODO: Consider updating this to https://laravel.com/docs/8.x/eloquent-relationships#toggling-associations
     public function addProduct(Opening $opening, Product $product)
     {
-        $opening->products()->syncWithoutDetaching([$product]);
+        $opening->products()->syncWithoutDetaching([$product->id]);
 
         return new OpeningResource($opening);
     }
