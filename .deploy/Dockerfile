@@ -1,8 +1,8 @@
 ARG PHP_VERSION=${PHP_VERSION:-7.4}
-FROM php:${PHP_VERSION}-fpm-alpine AS php-system-setup
+FROM php:${PHP_VERSION}-fpm-buster AS php-system-setup
 
 # Install system dependencies
-RUN apk add --no-cache dcron busybox-suid libcap curl zip unzip git
+RUN apk add --no-cache dcron busybox-suid libcap curl zip unzip git bash
 
 # Install PHP extensions
 COPY --from=mlocati/php-extension-installer /usr/bin/install-php-extensions /usr/bin/
@@ -35,6 +35,14 @@ COPY ./.deploy/config/crontab /etc/crontabs/$NON_ROOT_USER
 RUN chmod 777 /usr/sbin/crond
 RUN chown -R $NON_ROOT_USER:$NON_ROOT_GROUP /etc/crontabs/$NON_ROOT_USER && setcap cap_setgid=ep /usr/sbin/crond
 
+# Install NVM
+RUN touch ~/.bash_profile
+RUN curl --silent -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.37.2/install.sh | bash
+RUN ~/.nvm/nvm.sh
+
+RUN nvm install --lts=fermium
+RUN nvm use --lts=fermium
+
 # Switch to non-root 'app' user & install app dependencies
 COPY composer.json composer.lock ./
 RUN chown -R $NON_ROOT_USER:$NON_ROOT_GROUP $LARAVEL_PATH
@@ -45,6 +53,10 @@ RUN rm -rf /home/$NON_ROOT_USER/.composer
 # Copy app
 COPY --chown=$NON_ROOT_USER:$NON_ROOT_GROUP . $LARAVEL_PATH/
 COPY ./.deploy/config/php/local.ini /usr/local/etc/php/conf.d/local.ini
+
+# Transpile resources
+RUN npm install
+RUN npm run prod
 
 # Set any ENVs
 ARG APP_KEY=${APP_KEY}
