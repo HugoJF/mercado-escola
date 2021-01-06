@@ -29,7 +29,7 @@ export const SwitchWithTransitions: React.FC =
             }
         });
 
-        return <TransitionGroup className="min-h-full">
+        return <TransitionGroup className="min-h-screen">
             <CSSTransition
                 key={match?.url ?? location.pathname}
                 classNames="slide"

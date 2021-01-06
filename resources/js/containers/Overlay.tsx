@@ -4,7 +4,7 @@ import {MenuRoutes}   from "../routes/MenuRoutes";
 
 
 export const Overlay: React.FC = ({children}) => {
-    return <div className="fixed w-full h-full flex flex-col min-h-screen max-h-screen">
+    return <div className="fixed w-full h-screen flex flex-col">
         {/* Header */}
         <HeaderRoutes/>
 
