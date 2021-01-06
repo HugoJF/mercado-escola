@@ -56,3 +56,22 @@ window.axios.defaults.maxRedirects = 0;
 //     cluster: process.env.MIX_PUSHER_APP_CLUSTER,
 //     encrypted: true
 // });
+
+var customViewportCorrectionVariable = 'vh';
+
+
+function setViewportProperty(doc: any) {
+    var prevClientHeight: any;
+    var customVar = '--' + ( customViewportCorrectionVariable || 'vh' );
+    function handleResize() {
+        var clientHeight = doc.clientHeight;
+        if (clientHeight === prevClientHeight) return;
+        requestAnimationFrame(function updateViewportHeight(){
+            doc.style.setProperty(customVar, (clientHeight * 0.01) + 'px');
+            prevClientHeight = clientHeight;
+        });
+    }
+    handleResize();
+    return handleResize;
+}
+window.addEventListener('resize', setViewportProperty(document.documentElement));

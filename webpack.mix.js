@@ -17,6 +17,8 @@ mix
     .ts('resources/js/app.tsx', 'public/js')
     .postCss('resources/css/app.css', 'public/css', [
         tailwindcss('./tailwind.config.js'),
+        require('postcss-100vh-fix'),
+        require('postcss-viewport-height-correction'),
     ])
     .webpackConfig({
         resolve: {
