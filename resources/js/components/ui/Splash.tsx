@@ -17,7 +17,7 @@ export const Splash: React.FC = ({children}) => {
         setLoading(false);
     }, []);
 
-    return <TransitionGroup className="min-h-full">
+    return <TransitionGroup className="min-h-screen">
         <CSSTransition
             key={String(loading)}
             classNames="fade"
