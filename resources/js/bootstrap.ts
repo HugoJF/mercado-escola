@@ -66,7 +66,6 @@ function setViewportProperty(doc: any) {
     function handleResize() {
         var clientHeight = doc.clientHeight;
         if (clientHeight === prevClientHeight) return;
-        alert(clientHeight);
         requestAnimationFrame(function updateViewportHeight(){
             doc.style.setProperty(customVar, (clientHeight * 0.01) + 'px');
             prevClientHeight = clientHeight;
