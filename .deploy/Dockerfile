@@ -50,6 +50,9 @@ COPY ./.deploy/config/php/local.ini /usr/local/etc/php/conf.d/local.ini
 # Install NodeJS dependencies
 RUN npm install
 
+# Transpile frontend
+RUN npm run prod
+
 # Set any ENVs
 ARG APP_KEY=${APP_KEY}
 ARG APP_NAME=${APP_NAME}
