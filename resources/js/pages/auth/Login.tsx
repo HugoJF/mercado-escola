@@ -35,7 +35,7 @@ export const Login: React.FC<object> = () => {
     return <Container>
         <div className="mx-auto container min-h-screen flex justify-center items-center">
             <form className="px-4 w-full" onSubmit={handleSubmit(login)}>
-                <h1 className="mb-10 text-center text-4xl text-gray-800 font-medium leading-none tracking-tight">
+                <h1 className="mb-10 text-center text-5xl text-gray-800 font-bold leading-none tracking-tight">
                     Mercado Escola
                 </h1>
 

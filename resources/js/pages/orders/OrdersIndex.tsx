@@ -6,6 +6,7 @@ import {Dispatch}           from "../../store";
 import {HeightTransitioner} from "../../components/ui/HeightTransitioner";
 import {OrderList}          from "../../components/orders/OrderList";
 import {PagePadding}        from "../../containers/PagePadding";
+import {Empty}              from "../../components/ui/Empty";
 
 
 export const OrdersIndex: React.FC = ({children}) => {
@@ -25,10 +26,20 @@ export const OrdersIndex: React.FC = ({children}) => {
         }
     }
 
-    return <PagePadding>
+    const orderList = getOrders();
+
+    return <PagePadding className="flex flex-col">
         <Title>Meus pedidos</Title>
 
-        {getOrders().map(order => (
+        {/* Empty warning */}
+        {orderList.length === 0 && <div className="flex-grow flex flex-col justify-center">
+            {orderList.length === 0 && <Empty
+                title="Nenhum pedido!"
+                description="Você ainda não possui nenhum pedido registrado"
+            />}
+        </div>}
+
+        {orderList.length !== 0 && orderList.map(order => (
             <div key={order.id} className="border-b last:border-b-0">
                 <HeightTransitioner>
                     <OrderList key={order.id} order={order}/>

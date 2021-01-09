@@ -1,4 +1,4 @@
-import React, {useEffect}         from "react";
+import React                      from "react";
 import {Title}                    from "../../components/ui/Title";
 import {Link}                     from "react-router-dom";
 import {useDispatch}              from "react-redux";
@@ -13,30 +13,30 @@ export const HomePage: React.FC = () => {
     const openings = useOpenings();
     const products = useProducts();
 
-    useEffect(() => {
-        dispatch.openings.current();
-        dispatch.favorites.index();
-    }, []);
+    // useEffect(() => {
+    //     dispatch.openings.current();
+    //     dispatch.favorites.index();
+    // }, []);
 
-    return <PagePadding>
-        <div className="mx-auto container">
+    return <PagePadding className="flex flex-col">
+        <div className="flex-grow flex flex-col justify-center">
             {!openings.current && <Empty
                 title="Nenhuma abertura ativa!"
                 description="Não há nenhuma abertura ativa no momento. Por favor verique novamente mais tarde!"
             />}
-
-            {/* Items */}
-            {openings.current && <>
-                {/* Header */}
-                <div className="flex justify-between items-baseline mb-8">
-                    <Title>Produtos</Title>
-                    <Link to="/produtos" className="text-gray-500">Ver todos ›</Link>
-                </div>
-
-                <ProductList products={
-                    openings.openings[openings.current].products.map(id => products.products[id])
-                }/>
-            </>}
         </div>
+
+        {/* Items */}
+        {openings.current && <>
+            {/* Header */}
+            <div className="flex justify-between items-baseline mb-8">
+                <Title>Produtos</Title>
+                <Link to="/produtos" className="text-gray-500">Ver todos ›</Link>
+            </div>
+
+            <ProductList products={
+                openings.openings[openings.current].products.map(id => products.products[id])
+            }/>
+        </>}
     </PagePadding>
 };

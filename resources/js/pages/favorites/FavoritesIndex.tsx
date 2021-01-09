@@ -18,24 +18,22 @@ export const FavoritesIndex: React.FC = () => {
         dispatch.favorites.index();
     }, []);
 
-    return <PagePadding>
-        <div className="mx-auto container">
-            <div>
-                {/* Header */}
-                <div className="flex justify-between items-baseline mb-8">
-                    <Title>Favoritos</Title>
-                    <Link to="/favoritos" className="text-gray-500">Ver todos ›</Link>
-                </div>
-
-                {/* Empty warning */}
-                {Object.values(favorites.favorites).length === 0 && <Empty
-                    title="Nenhum favorito!"
-                    description="Você ainda não possui nenhum produto marcado como favorito"
-                />}
-
-                {/* Items */}
-                <ProductList products={Object.values(products.products).filter(product => favorites.favorites.indexOf(product.id) >= 0)}/>
-            </div>
+    return <PagePadding className="flex flex-col">
+        {/* Header */}
+        <div className="flex justify-between items-baseline mb-8">
+            <Title>Favoritos</Title>
+            <Link to="/favoritos" className="text-gray-500">Ver todos ›</Link>
         </div>
+
+        {/* Empty warning */}
+        <div className="flex-grow flex flex-col justify-center">
+            {Object.values(favorites.favorites).length === 0 && <Empty
+                title="Nenhum favorito!"
+                description="Você ainda não possui nenhum produto marcado como favorito"
+            />}
+        </div>
+
+        {/* Items */}
+        <ProductList products={Object.values(products.products).filter(product => favorites.favorites.indexOf(product.id) >= 0)}/>
     </PagePadding>
 };
