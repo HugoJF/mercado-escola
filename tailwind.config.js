@@ -3,6 +3,9 @@ module.exports = {
     purge: [],
     theme: {
         extend: {
+            fontFamily: {
+                sans: ['Inter', 'sans-serif'],
+            },
             spacing: {
                 '0.5': '0.125rem',
                 '1/2': '50%',
