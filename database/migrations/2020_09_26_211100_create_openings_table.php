@@ -16,8 +16,6 @@ class CreateOpeningsTable extends Migration
         Schema::create('openings', function (Blueprint $table) {
             $table->id();
 
-            $table->dateTime('enabled_at')->nullable();
-
             $table->unsignedInteger('max_delivery_orders')->default(0);
             $table->unsignedInteger('max_pickup_orders')->default(0);
 

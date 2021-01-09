@@ -9,7 +9,6 @@ import {ProductType}    from "./products";
 export type OpeningType = OpeningProperties & OpeningComputedProperties & Timestamps;
 
 export type OpeningProperties = {
-    enabled_at: string;
     max_delivery_orders: number;
     max_pickup_orders: number;
     opens_at: string;

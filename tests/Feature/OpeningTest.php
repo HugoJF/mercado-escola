@@ -30,7 +30,6 @@ class OpeningTest extends TestCase
 
         Opening::factory([
             'opens_at'   => now()->subDays(3),
-            'enabled_at' => now()->subDays(2),
             'closes_at'  => now()->subDays(1),
         ])->create();
 
@@ -44,7 +43,6 @@ class OpeningTest extends TestCase
 
         Opening::factory([
             'opens_at'   => now()->addDays(1),
-            'enabled_at' => null,
             'closes_at'  => now()->addDays(3),
         ])->create();
 
@@ -58,7 +56,6 @@ class OpeningTest extends TestCase
 
         Opening::factory([
             'opens_at'   => now()->subDay(),
-            'enabled_at' => null,
             'closes_at'  => now()->addDay(),
         ])->create();
 
@@ -72,7 +69,6 @@ class OpeningTest extends TestCase
 
         $opening = Opening::factory([
             'opens_at'   => now()->subDay(),
-            'enabled_at' => now()->subHour(),
             'closes_at'  => now()->addDay(),
         ])->create();
 
@@ -108,19 +104,16 @@ class OpeningTest extends TestCase
         Opening::factory([
             'opens_at'   => now(),
             'closes_at'  => now()->addDay(),
-            'enabled_at' => now()->subHour(),
         ])->create();
 
         $opensAtOverlapping = array_merge(Opening::factory()->make()->attributesToArray(), [
             'opens_at'   => now()->addHour(),
             'closes_at'  => now()->addDays(2),
-            'enabled_at' => null,
         ]);
 
         $closesAtOverlapping = array_merge(Opening::factory()->make()->attributesToArray(), [
             'opens_at'   => now()->subDays(2),
             'closes_at'  => now()->addHour(),
-            'enabled_at' => null,
         ]);
 
         $this->post(route('openings.store'), $opensAtOverlapping)
@@ -135,13 +128,11 @@ class OpeningTest extends TestCase
         Opening::factory([
             'opens_at'   => now(),
             'closes_at'  => now()->addDay(),
-            'enabled_at' => now()->subHour(),
         ])->create();
 
         $data = array_merge(Opening::factory()->make()->attributesToArray(), [
             'opens_at'   => now()->addDay()->addHour(),
             'closes_at'  => now()->addDays(2),
-            'enabled_at' => null,
         ]);
 
         $this->loginAsAdmin();
@@ -172,7 +163,7 @@ class OpeningTest extends TestCase
     {
         $opening = Opening::factory()->create();
 
-        $this->patch(route('openings.update', $opening), ['enabled_at' => now()])
+        $this->patch(route('openings.update', $opening))
              ->assertStatus(403);
     }
 
@@ -182,7 +173,7 @@ class OpeningTest extends TestCase
 
         $this->loginAsUser();
 
-        $this->patch(route('openings.update', $opening), ['enabled_at' => now()])
+        $this->patch(route('openings.update', $opening))
              ->assertStatus(403);
     }
 
@@ -192,7 +183,7 @@ class OpeningTest extends TestCase
 
         $this->loginAsAdmin();
 
-        $this->patch(route('openings.update', $opening), ['enabled_at' => now()])
+        $this->patch(route('openings.update', $opening))
              ->assertStatus(200);
     }
 
@@ -201,7 +192,6 @@ class OpeningTest extends TestCase
         Opening::factory([
             'opens_at'   => now()->subDay(),
             'closes_at'  => now()->addDay(),
-            'enabled_at' => now()->subHour(),
         ])->create();
 
         $this->loginAsUser();

@@ -76,7 +76,6 @@ class OrderTest extends TestCase
         $address = Address::factory(['user_id' => $user])->create();
         $products = Product::factory()->count(5)->create();
         $opening = Opening::factory([
-            'enabled_at' => now()->subDay(),
             'opens_at'   => now()->subDays(2),
             'closes_at'  => now()->addDay(),
         ])->create();

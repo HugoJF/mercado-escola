@@ -11,7 +11,6 @@ class Opening extends Model
     use HasFactory;
 
     protected $fillable = [
-        'enabled_at',
         'opens_at',
         'max_delivery_orders',
         'max_pickup_orders',
@@ -19,7 +18,7 @@ class Opening extends Model
         'delivers_at',
     ];
 
-    protected $dates = ['enabled_at', 'opens_at', 'closes_at', 'delivers_at'];
+    protected $dates = ['opens_at', 'closes_at', 'delivers_at'];
 
     public function orders()
     {
@@ -41,15 +40,9 @@ class Opening extends Model
         return $this->opens_at->isPast();
     }
 
-    public function enabled()
-    {
-        return $this->enabled_at->isPast();
-    }
-
     public function scopeActive(Builder $query)
     {
         return $query->where('opens_at', '<', now())
-                     ->where('closes_at', '>', now())
-                     ->where('enabled_at', '<', now());
+                     ->where('closes_at', '>', now());
     }
 }
