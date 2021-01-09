@@ -9,6 +9,7 @@ import {Link}             from "react-router-dom";
 import {Input}            from "../../components/form/Input";
 import {Button}           from "../../components/ui/Button";
 import {Container}        from "../../containers/Container";
+import {Error}            from "../../components/ui/Error";
 
 export const Login: React.FC<object> = () => {
     const auth = useAuth();
@@ -38,10 +39,9 @@ export const Login: React.FC<object> = () => {
                     Mercado Escola
                 </h1>
 
-                {failed && <div className="flex items-center space-x-3 w-full my-4 px-3 py-3 text-white text-center bg-red-500 font-medium rounded-lg">
-                    <span className="flex flex-shrink-0 items-center justify-center w-8 h-8 text-red-500 text-lg font-bold bg-white rounded-full">!</span>
+                {failed && <Error>
                     Email e senha inválidos! Por favor tente novamente.
-                </div>}
+                </Error>}
 
                 <div>
                     <div>
