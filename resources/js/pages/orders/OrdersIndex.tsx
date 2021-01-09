@@ -21,7 +21,7 @@ export const OrdersIndex: React.FC = ({children}) => {
         if (Object.values(orders.orders)?.length) {
             return Object.values(orders.orders)
         } else {
-            return Array.from(Array(5).keys()).map(id => ({id}));
+            return Array.from(Array(5).keys());
         }
     }
 
