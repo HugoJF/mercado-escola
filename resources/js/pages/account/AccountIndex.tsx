@@ -118,7 +118,7 @@ export const AccountIndex: React.FC = ({children}) => {
 
         <div className="mt-8 divide-y divide-gray-200">
             {secondarySections.map(({icon: Icon, title, to, clickable}) => (
-                <Link className="block" to={`${match.url}/${to}`}>
+                <Link className="block" to={`/${to}`}>
                     <Box key={to}>
                         <div className="flex items-center justify-center w-6 mr-4">
                             <Icon className="text-primary-500"/>
