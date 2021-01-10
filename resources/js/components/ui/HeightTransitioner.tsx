@@ -32,11 +32,8 @@ export const HeightTransitioner: React.FC<HeightTransitionerProps> =
                 } else {
                     setHeight(ref.current.scrollHeight);
                 }
-
-                console.log('Set to scrollHeight', ref.current.scrollHeight);
             } else {
                 setHeight('auto');
-                console.log('Set to auto');
             }
         }, [children, windowSize, ...dependencies]);
 
