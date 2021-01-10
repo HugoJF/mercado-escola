@@ -10,6 +10,12 @@ export const HeaderRoutes: React.FC = () => {
         <Route path="/login" children={null}/>
         <Route path="/register" children={null}/>
         <Route path="/on-boarding" children={null}/>
+
+        <Route exact path="/conta" children={null}/>
+        <Route exact path="/admin" children={null}/>
+        <Route exact path="/favoritos" children={null}/>
+        <Route exact path="/pedidos" children={null}/>
+
         <Route path="/produtos/:productId" children={<ProductHeader/>}/>
         <Route children={<DefaultHeader/>}/>
     </Switch>
