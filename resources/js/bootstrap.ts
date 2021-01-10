@@ -57,22 +57,27 @@ window.axios.defaults.maxRedirects = 0;
 //     encrypted: true
 // });
 
-var customViewportCorrectionVariable = 'vh';
+declare global {
+    interface Window {
+        updateViewportProperty: () => () => void;
+    }
+}
 
-
-function setViewportProperty(doc: any) {
+window.updateViewportProperty = function() {
     var prevClientHeight: any;
-    var customVar = '--' + ( customViewportCorrectionVariable || 'vh' );
+    var customVar = '--' + 'vh';
     function handleResize() {
-        var clientHeight = doc.clientHeight;
+        var clientHeight = document.documentElement.clientHeight;
         if (clientHeight === prevClientHeight) return;
+        alert(`ClientHeight ${clientHeight}px`);
         requestAnimationFrame(function updateViewportHeight(){
-            doc.style.setProperty(customVar, (clientHeight * 0.01) + 'px');
+            document.documentElement.style.setProperty(customVar, (clientHeight * 0.01) + 'px');
             prevClientHeight = clientHeight;
         });
     }
     handleResize();
     return handleResize;
-}
-window.addEventListener('resize', setViewportProperty(document.documentElement));
-window.addEventListener('DOMContentLoaded', setViewportProperty(document.documentElement));
+};
+
+window.addEventListener('resize', window.updateViewportProperty());
+window.addEventListener('DOMContentLoaded', window.updateViewportProperty());

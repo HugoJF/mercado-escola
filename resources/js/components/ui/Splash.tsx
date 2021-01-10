@@ -1,5 +1,5 @@
-import React, {useState}                from "react";
-import {Loader}                         from "react-feather";
+import React, {useEffect, useState} from "react";
+import {Loader}                     from "react-feather";
 import {CSSTransition, TransitionGroup} from "react-transition-group";
 import {useDispatch}                    from "react-redux";
 import useAsyncEffect                   from "../../hooks/useAsyncEffect";
@@ -16,6 +16,8 @@ export const Splash: React.FC = ({children}) => {
         ]);
         setLoading(false);
     }, []);
+
+    useEffect(window.updateViewportProperty());
 
     return <TransitionGroup className="min-h-full">
         <CSSTransition

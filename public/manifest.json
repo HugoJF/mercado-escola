@@ -11,6 +11,6 @@
     "description": "Loja online do Mercado Escola",
     "start_url": "/",
     "display": "standalone",
-    "background_color": "#f5f5f5",
+    "background_color": "#2f7f57",
     "theme_color": "#2f7f57"
 }
