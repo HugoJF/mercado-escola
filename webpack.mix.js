@@ -27,6 +27,8 @@ mix
             }
         }
     })
-    .sourceMaps()
-// .version()
-;
+    .sourceMaps();
+
+if (mix.inProduction()) {
+    mix.version();
+}
