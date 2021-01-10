@@ -1,6 +1,9 @@
 // tailwind.config.js
 module.exports = {
-    purge: [],
+    purge: [
+        './resources/js/**/*.tsx',
+        './resources/js/**/*.ts',
+    ],
     theme: {
         extend: {
             fontFamily: {
