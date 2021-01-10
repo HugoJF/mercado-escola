@@ -1,15 +1,15 @@
-import React, {useEffect}                                                                     from "react";
-import {Link, useRouteMatch}                                                                  from "react-router-dom";
-import {Box}                                                                                  from "../../components/ui/Box";
-import {DivOrLink}                                                                            from "../../components/ui/DivOrLink";
-import {AlertCircle, Book, ChevronRight, Flag, Heart, LogOut, Mail, MapPin, Smartphone, User} from "react-feather";
-import {useAddresses, useAuth}                                                                from "../../selectors";
-import {useDispatch}                                                                          from "react-redux";
-import {Dispatch}                                                                             from "../../store";
-import {Title}                                                                                from "../../components/ui/Title";
-import classNames                                                                             from 'classnames';
-import {Skeleton}                                                                             from "../../components/ui/Skeleton";
-import {PagePadding}                                                                          from "../../containers/PagePadding";
+import React, {useEffect}                                                                                   from "react";
+import {Link, useRouteMatch}                                                                                from "react-router-dom";
+import {Box}                                                                                                from "../../components/ui/Box";
+import {DivOrLink}                                                                                          from "../../components/ui/DivOrLink";
+import {AlertCircle, Book, ChevronRight, Flag, Heart, LogOut, Mail, MapPin, ShoppingCart, Smartphone, User} from "react-feather";
+import {useAddresses, useAuth}                                                                              from "../../selectors";
+import {useDispatch}                                                                                        from "react-redux";
+import {Dispatch}                                                                                           from "../../store";
+import {Title}                                                                                              from "../../components/ui/Title";
+import classNames                                                                                           from 'classnames';
+import {Skeleton}                                                                                           from "../../components/ui/Skeleton";
+import {PagePadding}                                                                                        from "../../containers/PagePadding";
 
 export const AccountIndex: React.FC = ({children}) => {
     const dispatch = useDispatch<Dispatch>();
@@ -58,6 +58,11 @@ export const AccountIndex: React.FC = ({children}) => {
         to: 'avisos',
         clickable: true,
     }, {
+        icon: ShoppingCart,
+        title: 'Carrinho',
+        to: 'carrinho',
+        clickable: true,
+    }, {
         icon: Book,
         title: 'Pedidos',
         to: 'pedidos',
@@ -89,20 +94,22 @@ export const AccountIndex: React.FC = ({children}) => {
                     isLink={clickable}
                     to={`${match.url}/${to}`}
                     className={classNames(
-                        `transition-colors duration-150 w-full py-3 flex items-center`,
+                        `transition-colors duration-150 w-full flex items-center`,
                         {
                             'hover:bg-gray-200 cursor-pointer': clickable
                         }
                     )}
                 >
-                    <div className="flex items-center justify-center w-6 mr-4">
-                        <Icon className="text-primary-500"/>
-                    </div>
-                    <div className="flex-grow">
-                        <h3 className="text-lg text-gray-900 font-medium">{title}</h3>
-                        {!hideSub && <p className="text-gray-500 font-light">{sub || <Skeleton className="w-3/4"/>}</p>}
-                    </div>
-                    {clickable && <ChevronRight className="flex-shrink-0 text-gray-500"/>}
+                    <Box hoverable={clickable} key={to}>
+                        <div className="flex items-center justify-center w-6 mr-4">
+                            <Icon className="text-primary-500"/>
+                        </div>
+                        <div className="flex-grow">
+                            <h3 className="text-lg text-gray-900 font-medium">{title}</h3>
+                            {!hideSub && <p className="text-gray-500 font-light">{sub || <Skeleton className="w-3/4"/>}</p>}
+                        </div>
+                        {clickable && <ChevronRight className="flex-shrink-0 text-gray-500"/>}
+                    </Box>
                 </DivOrLink>
             ))}
         </div>
