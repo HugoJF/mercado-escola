@@ -8,7 +8,7 @@ import {Link}                from "react-router-dom";
 import {Input}               from "../../components/form/Input";
 import {Button}              from "../../components/ui/Button";
 import {Title}               from "../../components/ui/Title";
-import {Container}           from "../../containers/Container";
+import {PagePadding}         from "../../containers/PagePadding";
 
 export const Register: React.FC<object> = () => {
     const dispatch = useDispatch<Dispatch>();
@@ -39,7 +39,7 @@ export const Register: React.FC<object> = () => {
     }
 
     // @ts-ignore
-    return <Container>
+    return <PagePadding>
         <div className="mx-auto container">
             <form onSubmit={handleSubmit(registerUser)}>
                 <Title>Criando uma nova conta</Title>
@@ -117,5 +117,5 @@ export const Register: React.FC<object> = () => {
                 </div>
             </form>
         </div>
-    </Container>
+    </PagePadding>
 };

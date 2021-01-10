@@ -80,7 +80,7 @@ export const AccountIndex: React.FC = ({children}) => {
     }, {
         icon: LogOut,
         title: 'Sair',
-        to: 'sair',
+        to: 'conta/sair',
         clickable: true,
     }];
 

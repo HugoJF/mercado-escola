@@ -21,7 +21,7 @@ export const OnBoarding1: React.FC = () => {
 
     useEffect(() => {
         if (auth.me?.phone) {
-            history.push('/home');
+            history.push('/on-boarding/2');
         }
     }, [history, auth.me?.phone]);
 

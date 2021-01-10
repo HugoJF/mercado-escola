@@ -19,10 +19,10 @@ export const OrdersIndex: React.FC = ({children}) => {
     }, []);
 
     function getOrders(): any[] {
-        if (Object.values(orders.orders)?.length) {
-            return Object.values(orders.orders)
-        } else {
+        if (orders.orders === null) {
             return Array.from(Array(5).keys());
+        } else {
+            return Object.values(orders.orders)
         }
     }
 
@@ -33,10 +33,10 @@ export const OrdersIndex: React.FC = ({children}) => {
 
         {/* Empty warning */}
         {orderList.length === 0 && <div className="flex-grow flex flex-col justify-center">
-            {orderList.length === 0 && <Empty
+            <Empty
                 title="Nenhum pedido!"
                 description="Você ainda não possui nenhum pedido registrado"
-            />}
+            />
         </div>}
 
         {orderList.length !== 0 && orderList.map(order => (
