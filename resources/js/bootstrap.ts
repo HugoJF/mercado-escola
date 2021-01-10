@@ -69,7 +69,6 @@ window.updateViewportProperty = function() {
     function handleResize() {
         var clientHeight = document.documentElement.clientHeight;
         if (clientHeight === prevClientHeight) return;
-        alert(`ClientHeight ${clientHeight}px`);
         requestAnimationFrame(function updateViewportHeight(){
             document.documentElement.style.setProperty(customVar, (clientHeight * 0.01) + 'px');
             prevClientHeight = clientHeight;
