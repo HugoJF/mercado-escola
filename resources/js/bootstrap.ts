@@ -75,3 +75,4 @@ function setViewportProperty(doc: any) {
     return handleResize;
 }
 window.addEventListener('resize', setViewportProperty(document.documentElement));
+window.addEventListener('DOMContentLoaded', setViewportProperty(document.documentElement));
