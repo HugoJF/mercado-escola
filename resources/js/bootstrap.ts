@@ -64,13 +64,12 @@ declare global {
 }
 
 window.updateViewportProperty = function() {
-    var prevClientHeight: any;
-    var customVar = '--' + 'vh';
+    let prevClientHeight: any;
     function handleResize() {
-        var clientHeight = document.documentElement.clientHeight;
+        const clientHeight = document.documentElement.clientHeight;
         if (clientHeight === prevClientHeight) return;
         requestAnimationFrame(function updateViewportHeight(){
-            document.documentElement.style.setProperty(customVar, (clientHeight * 0.01) + 'px');
+            document.documentElement.style.setProperty('--vh', (clientHeight * 0.01) + 'px');
             prevClientHeight = clientHeight;
         });
     }
