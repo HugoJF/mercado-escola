@@ -27,3 +27,11 @@ ReactDOM.render(
     document.getElementById("root")
 );
 
+if ('serviceWorker' in navigator) {
+    navigator.serviceWorker
+        .register('service-worker.js')
+        .then(() => console.log('Service Worker: Registered'))
+        .catch((e) => console.log('Service Worker: Failed to register', e));
+} else {
+    console.warn('Service work is not available')
+}
