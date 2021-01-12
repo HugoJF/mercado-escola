@@ -26,12 +26,14 @@ export const FavoritesIndex: React.FC = () => {
         </div>
 
         {/* Empty warning */}
-        <div className="flex-grow flex flex-col justify-center">
-            {Object.values(favorites.favorites).length === 0 && <Empty
+        {Object.values(favorites.favorites).length === 0 && <div
+            className="flex-grow flex flex-col justify-center"
+        >
+            <Empty
                 title="Nenhum favorito!"
                 description="Você ainda não possui nenhum produto marcado como favorito"
-            />}
-        </div>
+            />
+        </div>}
 
         {/* Items */}
         <ProductList products={Object.values(products.products).filter(product => favorites.favorites.indexOf(product.id) >= 0)}/>
