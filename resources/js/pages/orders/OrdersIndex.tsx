@@ -4,12 +4,14 @@ import {useOrders}          from "../../selectors";
 import {useDispatch}        from "react-redux";
 import {Dispatch}           from "../../store";
 import {HeightTransitioner} from "../../components/ui/HeightTransitioner";
-import {OrderList}          from "../../components/orders/OrderList";
+import {OrderListItem}      from "../../components/orders/OrderListItem";
 import {PagePadding}        from "../../containers/PagePadding";
 import {Empty}              from "../../components/ui/Empty";
+import {useHistory}         from "react-router";
 
 
-export const OrdersIndex: React.FC = ({children}) => {
+export const OrdersIndex: React.FC = () => {
+    const history = useHistory();
     const dispatch = useDispatch<Dispatch>();
     const orders = useOrders();
 
@@ -39,12 +41,19 @@ export const OrdersIndex: React.FC = ({children}) => {
             />
         </div>}
 
-        {orderList.length !== 0 && orderList.map(order => (
-            <div key={order.id} className="border-b last:border-b-0">
-                <HeightTransitioner>
-                    <OrderList key={order.id} order={order}/>
-                </HeightTransitioner>
-            </div>
-        ))}
+        {/* Order list */}
+        <div className="divide-gray-200 divide-y">
+            {orderList.length !== 0 && orderList.map(order => (
+                <div key={order.id}>
+                    <HeightTransitioner>
+                        <OrderListItem
+                            key={order.id}
+                            order={order}
+                            onClick={() => history.push(`/pedidos/${order.id}`)}
+                        />
+                    </HeightTransitioner>
+                </div>
+            ))}
+        </div>
     </PagePadding>
 };

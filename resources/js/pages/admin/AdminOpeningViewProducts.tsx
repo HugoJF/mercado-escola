@@ -1,13 +1,14 @@
-import React, {useEffect, useState} from "react";
-import {OpeningType}                from "../../models/openings";
-import {useProducts}                from "../../selectors";
-import {HeightTransitioner}         from "../../components/ui/HeightTransitioner";
-import {Box}                        from "../../components/ui/Box";
-import {Skeleton}                   from "../../components/ui/Skeleton";
-import {ImageHolder}                from "../../components/ui/ImageHolder";
-import {Toggle}                     from "../../components/ui/Toggle";
-import {useDispatch}                from "react-redux";
-import {Dispatch}                   from "../../store";
+import React, {useEffect}   from "react";
+import {OpeningType}        from "../../models/openings";
+import {useProducts}        from "../../selectors";
+import {HeightTransitioner} from "../../components/ui/HeightTransitioner";
+import {Box}                from "../../components/ui/Box";
+import {Skeleton}           from "../../components/ui/Skeleton";
+import {ImageHolder}        from "../../components/ui/ImageHolder";
+import {Toggle}             from "../../components/ui/Toggle";
+import {useDispatch}        from "react-redux";
+import {Dispatch}           from "../../store";
+import {Title}              from "../../components/ui/Title";
 
 interface AdminOpeningViewProducts {
     opening: OpeningType;
@@ -26,6 +27,11 @@ export const AdminOpeningViewProducts: React.FC<AdminOpeningViewProducts> = ({op
     if (!opening) return <></>;
 
     return <div className="px-4 py-4 space-y-6">
+        <div className="space-y-3">
+            <Title>Produtos habilitados na abertura</Title>
+            <Title sub>Os produtos selecionados abaixo estarão disponíveis para todos os clientes adicionarem em seus pedidos.</Title>
+        </div>
+
         <div className="divide-y divide-gray-200">
             {Object.values(products.products).map(product => (
                 <HeightTransitioner key={product.id}>

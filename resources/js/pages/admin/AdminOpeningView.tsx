@@ -1,18 +1,19 @@
-import React, {useEffect, useState} from "react";
-import {useDispatch}                from "react-redux";
-import {Dispatch}                   from "../../store";
+import React, {useEffect, useState}              from "react";
+import {useDispatch}                             from "react-redux";
+import {Dispatch}                                from "../../store";
 import {useOpenings}                             from "../../selectors";
 import {Redirect, Route, useLocation, useParams} from "react-router-dom";
 import {useHistory}                              from "react-router";
-import {AnimationBox}               from "../../components/ui/AnimationBox";
-import classNames                   from 'classnames';
-import {Badge}                      from "../../components/ui/Badge";
-import {MoreVertical}               from "react-feather";
-import useRelativePath              from "../../hooks/useRelativePath";
-import {SwitchWithTransitions}      from "../../components/ui/SwitchWithTransition";
-import {AdminOpeningViewSummary}    from "./AdminOpeningViewSummary";
-import {PagePadding}                from "../../containers/PagePadding";
-import {AdminOpeningViewProducts}   from "./AdminOpeningViewProducts";
+import {AnimationBox}                            from "../../components/ui/AnimationBox";
+import classNames                                from 'classnames';
+import {Badge}                                   from "../../components/ui/Badge";
+import {MoreVertical}                            from "react-feather";
+import useRelativePath                           from "../../hooks/useRelativePath";
+import {SwitchWithTransitions}                   from "../../components/ui/SwitchWithTransition";
+import {AdminOpeningViewSummary}                 from "./AdminOpeningViewSummary";
+import {PagePadding}                             from "../../containers/PagePadding";
+import {AdminOpeningViewProducts}                from "./AdminOpeningViewProducts";
+import {AdminOpeningViewOrders}                  from "./AdminOpeningViewOrders";
 
 export const AdminOpeningView: React.FC = () => {
     const [selected, setSelected] = useState('resumo');
@@ -52,9 +53,9 @@ export const AdminOpeningView: React.FC = () => {
     }
 
     // @ts-ignore
-    return <PagePadding className="flex flex-col min-h-full">
+    return <PagePadding className="flex flex-col space-y-4 h-full">
         {/* Header */}
-        <div className="flex items-center mb-8 space-x-4">
+        <div className="flex items-center space-x-4">
             <div>
                 <Badge>PENDENTE</Badge>
             </div>
@@ -79,7 +80,7 @@ export const AdminOpeningView: React.FC = () => {
                                 text-xl text-gray-700 font-medium cursor-pointer`}
                             onClick={() => goTo('resumo')}
                         >
-                            <div className={classNames(`px-3 py-1 text-center text-base font-normal`, {
+                            <div className={classNames(`px-3 py-2 text-center text-base font-normal`, {
                                 'text-gray-500': !isSelected('resumo'),
                                 'text-gray-800': isSelected('resumo'),
                             })}>Resumo
@@ -98,7 +99,7 @@ export const AdminOpeningView: React.FC = () => {
                                 text-xl text-gray-700 font-medium cursor-pointer`}
                             onClick={() => goTo('produtos')}
                         >
-                            <div className={classNames(`px-3 py-1 text-center text-base font-normal`, {
+                            <div className={classNames(`px-3 py-2 text-center text-base font-normal`, {
                                 'text-gray-500': !isSelected('produtos'),
                                 'text-gray-800': isSelected('produtos'),
                             })}>Produtos
@@ -117,7 +118,7 @@ export const AdminOpeningView: React.FC = () => {
                                 text-xl text-gray-700 font-medium cursor-pointer`}
                             onClick={() => goTo('pedidos')}
                         >
-                            <div className={classNames(`px-3 py-1 text-center text-base font-normal`, {
+                            <div className={classNames(`px-3 py-2 text-center text-base font-normal`, {
                                 'text-gray-500': !isSelected('pedidos'),
                                 'text-gray-800': isSelected('pedidos')
                             })}>Pedidos
@@ -136,7 +137,7 @@ export const AdminOpeningView: React.FC = () => {
             <SwitchWithTransitions>
                 <Route path={relative('/resumo')} children={<AdminOpeningViewSummary opening={opening}/>}/>
                 <Route path={relative('/produtos')} children={<AdminOpeningViewProducts opening={opening}/>}/>
-                <Route path={relative('/pedidos')} children={<h1>pedidos</h1>}/>
+                <Route path={relative('/pedidos')} children={<AdminOpeningViewOrders opening={opening}/>}/>
 
                 <Redirect to={relative('/resumo')}/>
             </SwitchWithTransitions>

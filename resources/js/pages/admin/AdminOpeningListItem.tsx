@@ -8,6 +8,7 @@ import {OpeningType}                                 from "../../models/openings
 import useRelativePath                               from "../../hooks/useRelativePath";
 import {Badge}                                       from "../../components/ui/Badge";
 import {format, isFuture, isPast, isValid, parseISO} from "date-fns";
+import {Box}                                         from "../../components/ui/Box";
 
 export type AdminOpeningListItemProps = {
     opening: OpeningType | null,
@@ -22,10 +23,9 @@ export const AdminOpeningListItem: React.FC<AdminOpeningListItemProps> = ({openi
     const opensAt = opening && parseISO(opening.opens_at);
     const closesAt = opening && parseISO(opening.closes_at);
 
-    return <div
+    return <Box
         key={opening?.id}
-        className="transition-colors duration-150 w-full py-3
-            border-b last:border-b-0 border-gray-200"
+        hoverable={false}
     >
         <HeightTransitioner>
             {/* Product details */}
@@ -65,11 +65,11 @@ export const AdminOpeningListItem: React.FC<AdminOpeningListItemProps> = ({openi
                     {/* Stats */}
                     <ul className="flex items-center justify-center text-sm text-gray-500 tracking-tight">
                         {/* Order datetime */}
-                        <li className="mx-1 text-center">
+                        <li className="text-center">
                             {opening ?
                                 `${opening.delivery_count}/${opening.max_delivery_orders} entregas`
                                 :
-                                <Skeleton className="w-20"/>
+                                <Skeleton className="w-16"/>
                             }
                         </li>
 
@@ -77,11 +77,11 @@ export const AdminOpeningListItem: React.FC<AdminOpeningListItemProps> = ({openi
                         <span className="mx-2 font-bold text-gray-300">·</span>
 
                         {/* Order cost */}
-                        <li className="mx-2 text-center">
+                        <li className="text-center">
                             {opening ?
                                 `${opening.pickup_count}/${opening.max_pickup_orders} retiradas`
                                 :
-                                <Skeleton className="w-20"/>
+                                <Skeleton className="w-16"/>
                             }
                         </li>
 
@@ -89,8 +89,8 @@ export const AdminOpeningListItem: React.FC<AdminOpeningListItemProps> = ({openi
                         <span className="mx-2 font-bold text-gray-300">·</span>
 
                         {/* Product quantity */}
-                        <li className="mx-2 text-center">
-                            {opening?.products ? `${opening.products.length} produtos` : <Skeleton className="w-20"/>}
+                        <li className="text-center">
+                            {opening?.products ? `${opening.products.length} produtos` : <Skeleton className="w-16"/>}
                         </li>
                     </ul>
                 </div>
@@ -106,12 +106,13 @@ export const AdminOpeningListItem: React.FC<AdminOpeningListItemProps> = ({openi
             </div>
 
             {/* Reveal menu */}
-            <div className="mt-4">
-                {open && <div className="grid grid-cols-3 divide-x divide-gray-200">
+            {/* This empty div is needed to avoid full unmount causing HeightTransitioner to be unable to animate */}
+            <div>
+                {open && <div className="mt-4 flex divide-x divide-gray-200">
                     {/* View */}
                     <Link
                         to={relative(`/${opening?.id}`)}
-                        className="flex justify-center items-center py-2 px-5 text-gray-700 font-medium rounded-lg"
+                        className="flex justify-center flex-grow items-center py-2 px-5 text-gray-700 font-medium"
                     >
                         Ver
                     </Link>
@@ -119,22 +120,22 @@ export const AdminOpeningListItem: React.FC<AdminOpeningListItemProps> = ({openi
                     {/* Delete */}
                     <div
                         onClick={() => opening && onDelete(opening)}
-                        className="flex justify-center items-center py-2 px-4 text-red-600 font-medium rounded-lg"
+                        className="flex justify-center flex-grow items-center py-2 px-4 text-red-600 font-medium"
                     >
-                        <Trash size={20} className="mr-1 flex-shrink-0 inline"/>
+                        <Trash size={20} className="mr-1 inline"/>
                         Deletar
                     </div>
 
                     {/* Edit */}
                     <Link
                         to={relative(`/${opening?.id}/editar`)}
-                        className="flex justify-center items-center py-2 px-5 text-gray-700 font-medium rounded-lg"
+                        className="flex justify-center flex-grow items-center py-2 px-5 text-gray-700 font-medium"
                     >
                         Editar
                     </Link>
                 </div>}
             </div>
         </HeightTransitioner>
-    </div>
+    </Box>
 
 };

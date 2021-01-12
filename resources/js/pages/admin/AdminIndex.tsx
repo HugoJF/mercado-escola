@@ -35,12 +35,17 @@ export const AdminIndex: React.FC = () => {
                     <Box
                         onClick={() => history.push(relative(to))}
                     >
+                        {/* Icon */}
                         <div className="flex items-center justify-center w-6 mr-4">
                             <Icon className="text-primary-500"/>
                         </div>
+
+                        {/* Title */}
                         <div className="flex-grow">
                             <h3 className="text-lg font-medium">{title}</h3>
                         </div>
+
+                        {/* Indicator */}
                         <ChevronRight className="flex-shrink-0 text-gray-500"/>
                     </Box>
                 ))}
