@@ -22,8 +22,8 @@ export const AdminRoutes: React.FC = () => {
         <Route exact path={relative('/produtores')} children={<AdminProducerIndex/>}/>
         <Route exact path={relative('/produtos/novo')} children={<AdminProductCreate/>}/>
         <Route exact path={relative('/aberturas/novo')} children={<AdminOpeningCreate/>}/>
-        <Route path={relative('/aberturas/:openingId')} children={<AdminOpeningView/>}/>
         <Route path={relative('/produtos/:productId/editar')} children={<AdminProductEdit/>}/>
         <Route path={relative('/aberturas/:openingId/editar')} children={<AdminOpeningEdit/>}/>
+        <Route path={relative('/aberturas/:openingId')} children={<AdminOpeningView/>}/>
     </SwitchWithTransitions>
 };

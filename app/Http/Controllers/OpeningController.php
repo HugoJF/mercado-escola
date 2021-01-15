@@ -21,7 +21,7 @@ class OpeningController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\Resources\Json\AnonymousResourceCollection
      */
     public function index()
     {
@@ -77,7 +77,7 @@ class OpeningController extends Controller
      *
      * @param \App\Models\Opening $opening
      *
-     * @return \Illuminate\Http\Response
+     * @return OpeningResource
      */
     public function show(Opening $opening)
     {
@@ -90,17 +90,15 @@ class OpeningController extends Controller
      * @param \Illuminate\Http\Request $request
      * @param \App\Models\Opening      $opening
      *
-     * @return \Illuminate\Http\Response
+     * @return OpeningResource
      */
     public function update(Request $request, Opening $opening)
     {
         $opening->update($request->all());
 
-        // TODO: why this is not wrapped in a resource
-        return $opening;
+        return new OpeningResource($opening);
     }
 
-    // TODO: Consider updating this to https://laravel.com/docs/8.x/eloquent-relationships#toggling-associations
     public function addProduct(Opening $opening, Product $product)
     {
         $opening->products()->syncWithoutDetaching([$product->id]);
