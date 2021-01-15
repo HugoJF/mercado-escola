@@ -11,6 +11,7 @@ import {AddressStreetNumberActionMenu} from "../../action-menus/AdressStreetNumb
 import {Google}                        from "../../google";
 import {MapWithPing}                   from "../../components/addresses/MapWithPing";
 import {Button}                        from "../../components/ui/Button";
+import {PagePadding}                   from "../../containers/PagePadding";
 
 const fixOnBlur = (refObj: any) => {
     // Avoid clearing suggestions when input loses focus
@@ -24,7 +25,7 @@ const fixOnBlur = (refObj: any) => {
     };
 };
 
-export const AddressesCreate: React.FC = ({children}) => {
+export const AddressesCreate: React.FC = () => {
     const dispatch = useDispatch<Dispatch>();
     const history = useHistory();
     const [numberSelectorOpen, setNumberSelectorOpen] = useState(false);
@@ -82,7 +83,7 @@ export const AddressesCreate: React.FC = ({children}) => {
 
     const ready = address && number && !numberSelectorOpen;
 
-    return <>
+    return <PagePadding className="flex flex-col">
         <AddressStreetNumberActionMenu
             address={address?.formatted_address as string}
             onNumber={number => number && setNumber(number)}
@@ -91,9 +92,11 @@ export const AddressesCreate: React.FC = ({children}) => {
             onClose={() => setNumberSelectorOpen(false)}
         />
 
-        <div className="flex flex-col pt-4 px-4 space-y-4 w-full h-full">
+        {/* Address search bar */}
+        <div className="flex flex-col flex-grow space-y-4 w-full h-full">
             {!ready && <>
-                <Title>Selecione o seu endereço</Title>
+                <Title>Adicionando novo endereço</Title>
+
                 <PlacesAutocomplete
                     value={input}
                     onChange={input => setInput(input)}
@@ -135,10 +138,13 @@ export const AddressesCreate: React.FC = ({children}) => {
 
             {/* When an address is selected */}
             {ready && <>
+                <Title>Confirme a sua localização</Title>
+                <Title sub>Mova a agulha do mapa para refinar a sua localização</Title>
+
                 {/* The address line */}
-                <div>
-                    <p className="text-xl text-center text-base text-gray-700">{address?.formatted_address}</p>
-                    <p className="text-center text-base font-medium text-gray-700">{number}</p>
+                <div className="space-y-1 bg-gray-200 px-4 py-2 rounded-lg">
+                    <p className="text-center text-sm text-gray-500 leading-4 tracking-tighter">{address?.formatted_address}</p>
+                    <p className="text-center text-sm font-medium text-gray-500 tracking-tighter">{number}</p>
                 </div>
 
                 {/* Map for fine-tuning */}
@@ -158,5 +164,5 @@ export const AddressesCreate: React.FC = ({children}) => {
                 </div>
             </>}
         </div>
-    </>
+    </PagePadding>
 };

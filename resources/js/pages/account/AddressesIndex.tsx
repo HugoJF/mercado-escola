@@ -40,7 +40,7 @@ export const AddressesIndex: React.FC = ({children}) => {
         {menu}
         <Title>Seus endereços</Title>
 
-        <div className="px-2 my-8">
+        <div className="my-4">
             <AddressList
                 loading={loading}
                 addresses={Object.values(addresses.addresses)}

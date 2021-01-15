@@ -98,7 +98,7 @@ export const openings = createModel<RootModel>()({
                 return;
             }
 
-            const {openings, products} = normalizeOpening(data, true);
+            const {openings, products} = normalizeOpening(data);
 
             dispatch.openings.addOpening(openings);
             dispatch.products.addProduct(products);
