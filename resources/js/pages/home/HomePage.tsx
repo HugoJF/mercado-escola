@@ -1,4 +1,4 @@
-import React, {useEffect}         from "react";
+import React                      from "react";
 import {Title}                    from "../../components/ui/Title";
 import {Link}                     from "react-router-dom";
 import {useDispatch}              from "react-redux";
@@ -7,22 +7,19 @@ import {useOpenings, useProducts} from "../../selectors";
 import {ProductList}              from "../../components/products/ProductList";
 import {Empty}                    from "../../components/ui/Empty";
 import {PagePadding}              from "../../containers/PagePadding";
-import useLoading                 from "../../hooks/useLoading";
 import {ProductType}              from "../../models/products";
+import useLoadEffect              from "../../hooks/useLoadEffect";
 
 export const HomePage: React.FC = () => {
     const dispatch = useDispatch<Dispatch>();
     const openings = useOpenings();
     const products = useProducts();
-    const {load, loading} = useLoading();
 
-    useEffect(() => {
-        load(async () => {
-            await Promise.all([
-                dispatch.openings.current(),
-                dispatch.favorites.index(),
-            ])
-        })
+    const loading = useLoadEffect(async () => {
+        await Promise.all([
+            dispatch.openings.current(),
+            dispatch.favorites.index(),
+        ])
     }, []);
 
     // FIXME: maybe move to productlist

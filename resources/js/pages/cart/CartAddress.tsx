@@ -8,17 +8,16 @@ import {AddressList}     from "../../components/addresses/AddressList";
 import useAsyncEffect    from "../../hooks/useAsyncEffect";
 import {PagePadding}     from "../../containers/PagePadding";
 import {ChevronRight}    from "react-feather";
+import useLoadEffect     from "../../hooks/useLoadEffect";
 
 
 export const CartAddress: React.FC = ({children}) => {
-    const [loading, setLoading] = useState(true);
     const dispatch = useDispatch<Dispatch>();
     const history = useHistory();
     const addresses = useAddresses();
 
-    useAsyncEffect(async () => {
+    const loading = useLoadEffect(async () => {
         await dispatch.addresses.index();
-        setLoading(false);
     }, []);
 
     return <PagePadding>
