@@ -1,4 +1,4 @@
-import React, {useState}           from "react";
+import React, {useState}       from "react";
 import {useDispatch}           from "react-redux";
 import {Dispatch}              from "../../store";
 import {useHistory}            from "react-router-dom";
@@ -8,9 +8,8 @@ import {useAddresses, useAuth} from "../../selectors";
 import useAsyncEffect          from "../../hooks/useAsyncEffect";
 import {AddressList}           from "../../components/addresses/AddressList";
 import {FlatButton}            from "../../components/ui/FlatButton";
-import {AddressType}           from "../../models/addresses";
-import {UserProperties}        from "../../models/auth";
 import {PagePadding}           from "../../containers/PagePadding";
+import useConfirmMenu          from "../../hooks/useConfirmMenu";
 
 export const AddressesIndex: React.FC = ({children}) => {
     const [loading, setLoading] = useState(true);
@@ -18,26 +17,34 @@ export const AddressesIndex: React.FC = ({children}) => {
     const auth = useAuth();
     const history = useHistory();
     const addresses = useAddresses();
+    const [menu, confirm] = useConfirmMenu();
 
     useAsyncEffect(async () => {
         await dispatch.addresses.index();
         setLoading(false);
     }, []);
 
-    async function handleAddressClick(address: AddressType) {
-        dispatch.auth.update({main_address_id: address.id} as UserProperties);
-        history.push('/conta');
+    async function handleOnContext() {
+        const response = await confirm({
+            title: 'Remover endereço?',
+            description: 'Deseja permanentemente remover esse endereço?',
+            action: 'Remover'
+        });
+
+        if (response) {
+            alert('Endereco removido')
+        }
     }
 
     return <PagePadding>
-        <Title>Selecione o seu endereço</Title>
+        {menu}
+        <Title>Seus endereços</Title>
 
         <div className="px-2 my-8">
             <AddressList
-                selected={auth.me?.main_address_id as number|undefined}
                 loading={loading}
                 addresses={Object.values(addresses.addresses)}
-                onClick={handleAddressClick}
+                onContext={handleOnContext}
             />
         </div>
 

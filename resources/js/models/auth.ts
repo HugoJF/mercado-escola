@@ -9,7 +9,6 @@ export type UserProperties = {
     name: string;
     email: string;
     phone: string|null;
-    main_address_id: number|null,
 }
 
 export type UserComputedProperties = {

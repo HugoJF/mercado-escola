@@ -1,28 +1,17 @@
-import React, {useEffect}                                                                                   from "react";
+import React                                                                                                from "react";
 import {Link, useRouteMatch}                                                                                from "react-router-dom";
 import {Box}                                                                                                from "../../components/ui/Box";
 import {DivOrLink}                                                                                          from "../../components/ui/DivOrLink";
 import {AlertCircle, Book, ChevronRight, Flag, Heart, LogOut, Mail, MapPin, ShoppingCart, Smartphone, User} from "react-feather";
-import {useAddresses, useAuth}                                                                              from "../../selectors";
-import {useDispatch}                                                                                        from "react-redux";
-import {Dispatch}                                                                                           from "../../store";
+import {useAuth}                                                                                            from "../../selectors";
 import {Title}                                                                                              from "../../components/ui/Title";
 import classNames                                                                                           from 'classnames';
 import {Skeleton}                                                                                           from "../../components/ui/Skeleton";
 import {PagePadding}                                                                                        from "../../containers/PagePadding";
 
 export const AccountIndex: React.FC = ({children}) => {
-    const dispatch = useDispatch<Dispatch>();
-    const addresses = useAddresses();
     const match = useRouteMatch();
     const auth = useAuth();
-
-    useEffect(() => {
-        dispatch.addresses.index();
-    }, []);
-
-    const mainAddressId = auth.me?.main_address_id;
-    const mainAddress = mainAddressId && addresses.addresses[mainAddressId];
 
     const mainSections = [{
         icon: User,
@@ -45,9 +34,9 @@ export const AccountIndex: React.FC = ({children}) => {
         clickable: true,
     }, {
         icon: MapPin,
-        title: 'Endereço principal',
-        sub: mainAddress ? mainAddress.address : null,
-        hideSub: !mainAddressId,
+        title: 'Endereços',
+        sub: null,
+        hideSub: true,
         to: 'endereco',
         clickable: true,
     }];

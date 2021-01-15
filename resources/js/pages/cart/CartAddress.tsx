@@ -7,6 +7,7 @@ import {Dispatch}        from "../../store";
 import {AddressList}     from "../../components/addresses/AddressList";
 import useAsyncEffect    from "../../hooks/useAsyncEffect";
 import {PagePadding}     from "../../containers/PagePadding";
+import {ChevronRight}    from "react-feather";
 
 
 export const CartAddress: React.FC = ({children}) => {
@@ -27,6 +28,7 @@ export const CartAddress: React.FC = ({children}) => {
             <AddressList
                 loading={loading}
                 addresses={Object.values(addresses.addresses)}
+                contextIcon={ChevronRight}
                 onClick={(address) => {
                     dispatch.cart.setAddress(address.id);
                     history.push('/carrinho')
