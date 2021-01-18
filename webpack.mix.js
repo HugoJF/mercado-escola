@@ -19,6 +19,7 @@ mix
         tailwindcss('./tailwind.config.js'),
         require('postcss-100vh-fix'),
         require('postcss-viewport-height-correction'),
+        require('postcss-hover-media-feature'),
     ])
     .webpackConfig({
         resolve: {
