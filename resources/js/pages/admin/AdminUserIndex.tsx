@@ -46,10 +46,14 @@ export const AdminUserIndex: React.FC = () => {
                                 {user.name || <Skeleton className="w-full"/>}
                             </h2>
 
-                            {user.admin ?
-                                <Badge size="small" color="danger">Admin</Badge>
+                            {user.admin === undefined ? <Skeleton className="w-1/2"/>
                                 :
-                                <Badge size="small" color="primary">Usuário</Badge>
+                                (
+                                    user.admin ?
+                                        <Badge size="small" color="danger">Admin</Badge>
+                                        :
+                                        <Badge size="small" color="primary">Usuário</Badge>
+                                )
                             }
 
                             <p className="text-xs">
