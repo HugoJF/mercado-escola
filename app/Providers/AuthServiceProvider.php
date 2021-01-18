@@ -6,10 +6,12 @@ use App\Models\Address;
 use App\Models\Favorite;
 use App\Models\Order;
 use App\Models\Product;
+use App\Models\User;
 use App\Policies\AddressPolicy;
 use App\Policies\FavoritePolicy;
 use App\Policies\OrderPolicy;
 use App\Policies\ProductPolicy;
+use App\Policies\UserPolicy;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 
 class AuthServiceProvider extends ServiceProvider
@@ -20,11 +22,11 @@ class AuthServiceProvider extends ServiceProvider
      * @var array
      */
     protected $policies = [
-        // 'App\Models\Model' => 'App\Policies\ModelPolicy',
-        Product::class => ProductPolicy::class,
-        Address::class => AddressPolicy::class,
-        Order::class => OrderPolicy::class,
         Favorite::class => FavoritePolicy::class,
+        Product::class  => ProductPolicy::class,
+        Address::class  => AddressPolicy::class,
+        Order::class    => OrderPolicy::class,
+        User::class     => UserPolicy::class,
     ];
 
     /**
@@ -35,6 +37,5 @@ class AuthServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->registerPolicies();
-        //
     }
 }

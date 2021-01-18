@@ -36,12 +36,12 @@ export const HomePage: React.FC = () => {
     }
 
     return <PagePadding className="flex flex-col">
-        <div className="flex-grow flex flex-col justify-center">
-            {!loading && !openings.current && <Empty
+        {!loading && !openings.current && <div className="flex-grow flex flex-col justify-center">
+            <Empty
                 title="Nenhuma abertura ativa!"
                 description="Não há nenhuma abertura ativa no momento. Por favor verique novamente mais tarde!"
-            />}
-        </div>
+            />
+        </div>}
 
         {/* Items */}
         {openings.current && <>

@@ -20,6 +20,10 @@ const buttons: ButtonType[] = [{
     title: 'Aberturas',
     icon: Calendar,
     to: '/aberturas',
+}, {
+    title: 'Usuários',
+    icon: Users,
+    to: '/usuarios',
 }];
 
 export const AdminIndex: React.FC = () => {
