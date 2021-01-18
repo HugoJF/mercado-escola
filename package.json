@@ -28,6 +28,8 @@
         "@rematch/core": "^2.0.0-next.5",
         "@rematch/immer": "^2.0.0-next.0",
         "@rematch/persist": "^2.0.0-next.6",
+        "@sentry/react": "^5.30.0",
+        "@sentry/tracing": "^5.30.0",
         "@types/classnames": "^2.2.11",
         "@types/google__maps": "^0.5.14",
         "@types/leaflet": "^1.5.19",

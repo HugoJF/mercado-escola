@@ -35,6 +35,7 @@ export const HomePage: React.FC = () => {
             .map(id => products.products[id]);
     }
 
+    // @ts-ignore
     return <PagePadding className="flex flex-col">
         {!loading && !openings.current && <div className="flex-grow flex flex-col justify-center">
             <Empty
@@ -46,7 +47,8 @@ export const HomePage: React.FC = () => {
         {/* Items */}
         {openings.current && <>
             {/* Header */}
-            <div className="flex justify-between items-baseline mb-8">
+            {/* @ts-ignore */}
+            <div onClick={() => alert(([1,2])[4]())} className="flex justify-between items-baseline mb-8">
                 <Title>Produtos</Title>
                 <Link to="/produtos" className="text-gray-500">Ver todos ›</Link>
             </div>
