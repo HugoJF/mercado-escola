@@ -17,6 +17,7 @@
         "laravel/sanctum": "^2.6",
         "laravel/tinker": "^2.0",
         "league/flysystem-aws-s3-v3": "~1.0",
+        "sentry/sentry-laravel": "^2.3",
         "spatie/laravel-medialibrary": "^8.0.0"
     },
     "require-dev": {
