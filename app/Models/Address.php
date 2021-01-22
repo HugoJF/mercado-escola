@@ -13,6 +13,16 @@ class Address extends Model
 
     protected $fillable = ['address', 'number', 'complement', 'latitude', 'longitude'];
 
+    public function getLatitudeAttribute(float $latitude)
+    {
+        return round($latitude, 6);
+    }
+
+    public function getLongitude(float $longitude)
+    {
+        return round($longitude, 6);
+    }
+
     public function user()
     {
         return $this->belongsTo(User::class);
