@@ -11,7 +11,7 @@ class LoginTest extends DuskTestCase
     {
         $this->browse(function (Browser $browser) {
             $browser->visit('/')
-                    ->waitForLocation('/login')
+                    ->waitForLocation('/login', 30)
                     ->assertSee('Mercado Escola');
         });
     }
