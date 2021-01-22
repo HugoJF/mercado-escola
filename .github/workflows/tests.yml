@@ -54,8 +54,25 @@ jobs:
         env:
           DB_PORT: ${{ job.services.mysql.ports[3306] }}
 
+      - name: Update ChromeDriver
+        run: php artisan dusk:chrome-driver `/opt/google/chrome/chrome --version | cut -d " " -f3 | cut -d "." -f1`
+
+      - name: Make sure Dusk binaries permissions are correct
+        run: chmod -R 0755 vendor/laravel/dusk/bin/
+
+      - name: Serve application
+        run: php artisan serve  > /dev/null 2>&1 &
+
+      - name: Run ChromeDriver
+        run: ./vendor/laravel/dusk/bin/chromedriver-linux > /dev/null 2>&1 &
+
       - name: Execute tests (Unit and Feature tests) via PHPUnit
         run: vendor/bin/phpunit --configuration phpunit.dist.xml
+        env:
+          DB_PORT: ${{ job.services.mysql.ports[3306] }}
+
+      - name: Execute Laravel Dusk
+        run: php artisan dusk
         env:
           DB_PORT: ${{ job.services.mysql.ports[3306] }}
 
