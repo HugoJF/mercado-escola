@@ -13,11 +13,6 @@ use Illuminate\Support\Collection;
 
 class OpeningController extends Controller
 {
-    public function __construct()
-    {
-        $this->authorizeResource(Opening::class);
-    }
-
     /**
      * Display a listing of the resource.
      *
