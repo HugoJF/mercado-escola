@@ -11,6 +11,11 @@ use Spatie\MediaLibrary\MediaCollections\FileAdder;
 
 class ProductController extends Controller
 {
+    public function __construct()
+    {
+        $this->authorizeResource(Product::class);
+    }
+
     public function index()
     {
         return ProductResource::collection(Product::all());

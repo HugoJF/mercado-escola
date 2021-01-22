@@ -7,6 +7,11 @@ use Illuminate\Http\Request;
 
 class AddressController extends Controller
 {
+    public function __construct()
+    {
+        $this->authorizeResource(Address::class);
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -14,6 +19,7 @@ class AddressController extends Controller
      */
     public function index()
     {
+//        return Address::all();
         return auth()->user()->addresses;
     }
 
