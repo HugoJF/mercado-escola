@@ -27,7 +27,7 @@
         crossorigin=""
     />
 </head>
-<body class="bg-gray-100">
+<body class="bg-gray-100 min-h-screen">
 @yield('content')
 <script src="{{ mix('js/app.js') }}"></script>
 </body>
