@@ -1,4 +1,5 @@
 {
+    "exclude": ["vendor"],
     "compilerOptions": {
         "target": "es5",
         "lib": [
