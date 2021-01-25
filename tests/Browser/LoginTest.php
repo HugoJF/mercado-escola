@@ -2,6 +2,7 @@
 
 namespace Tests\Browser;
 
+use App\Models\User;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Laravel\Dusk\Browser;
 use Tests\DuskTestCase;
@@ -21,6 +22,11 @@ class LoginTest extends DuskTestCase
 
     public function test_guest_is_able_to_authenticate()
     {
+        User::factory([
+            'email'    => 'asd@asd.com',
+            'password' => bcrypt('123123123'),
+        ])->create();
+
         $this->browse(function (Browser $browser) {
             $browser->visit('/login')
                     ->waitForText('Entrar')
@@ -31,8 +37,11 @@ class LoginTest extends DuskTestCase
                     ->press('Entrar')
                     ->screenshot('submitted')
                     ->pause(5000)
-                    ->screenshot('waiting');
-            $browser->assertDontSee('inválidos');
+                    ->screenshot('waiting')
+                    ->assertDontSee('inválidos')
+                    ->waitForLocation('/home')
+                ->screenshot('at home')
+                    ->assertSee('Olá');
         });
     }
 }
