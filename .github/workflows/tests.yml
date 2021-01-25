@@ -62,6 +62,8 @@ jobs:
 
       - name: Serve application
         run: php artisan serve --port=8080  > /dev/null 2>&1 &
+        env:
+          DB_PORT: ${{ job.services.mysql.ports[3306] }}
 
       - name: Run ChromeDriver
         run: ./vendor/laravel/dusk/bin/chromedriver-linux > /dev/null 2>&1 &

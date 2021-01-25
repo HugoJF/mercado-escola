@@ -23,16 +23,16 @@ class LoginTest extends DuskTestCase
     public function test_guest_is_able_to_authenticate()
     {
         User::factory([
-            'email'    => 'asd@asd.com',
-            'password' => bcrypt('123123123'),
+            'email'    => 'asd1@asd.com',
+            'password' => bcrypt('1231231231'),
         ])->create();
 
         $this->browse(function (Browser $browser) {
             $browser->visit('/login')
                     ->waitForText('Entrar')
                     ->screenshot('at login')
-                    ->type('email', 'asd@asd.com')
-                    ->type('password', '123123123')
+                    ->type('email', 'asd1@asd.com')
+                    ->type('password', '1231231231')
                     ->screenshot('form filled')
                     ->press('Entrar')
                     ->screenshot('submitted')
@@ -40,7 +40,7 @@ class LoginTest extends DuskTestCase
                     ->screenshot('waiting')
                     ->assertDontSee('inválidos')
                     ->waitForLocation('/home')
-                ->screenshot('at home')
+                    ->screenshot('at home')
                     ->assertSee('Olá');
         });
     }
