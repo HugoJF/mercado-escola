@@ -1,7 +1,7 @@
 import React from 'react';
 
-interface TitleProps {
-    sub?: boolean,
+export type TitleProps = {
+    sub?: boolean;
 }
 
 export const Title: React.FC<TitleProps> = ({sub = false, children}) => {

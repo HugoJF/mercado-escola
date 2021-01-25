@@ -10,8 +10,8 @@ import {useAuth}                    from "../../selectors";
 import {PhoneInput}                 from "../../components/form/PhoneInput";
 import {PagePadding}                from "../../containers/PagePadding";
 
-interface PhoneUpdateForm {
-    phone: string,
+type PhoneUpdateForm = {
+    phone: string;
 }
 
 export const PhoneUpdate: React.FC = () => {

@@ -3,11 +3,10 @@ import classNames from 'classnames';
 
 export type BadgeColors = 'primary' | 'secondary' | 'warning' | 'info' | 'danger' | 'default';
 export type BadgeSizes = 'small' | 'normal';
-
-export type BadgeProps = {
-    color?: BadgeColors,
-    size?: BadgeSizes,
-}
+export type BadgeProps = React.HTMLAttributes<HTMLSpanElement> & {
+    color?: BadgeColors;
+    size?: BadgeSizes;
+};
 
 const colorClasses: { [id in BadgeColors]: string } = {
     primary: 'text-primary-700 border-primary-600',
@@ -23,7 +22,7 @@ const sizeClasses: { [id in BadgeSizes]: string } = {
     normal: 'py-px px-2 border-2 text-sm font-medium',
 };
 
-export const Badge: React.FC<BadgeProps & React.HTMLAttributes<HTMLSpanElement>> = ({color = 'primary', size = 'normal', children, ...rest}) => {
+export const Badge: React.FC<BadgeProps> = ({color = 'primary', size = 'normal', children, ...rest}) => {
     return <span
         {...rest}
         className={classNames(

@@ -6,7 +6,7 @@ import {useAddresses, useOpenings, useOrders} from "../../selectors";
 import {OrderDone}                            from "./OrderDone";
 import {Loading}                              from "../../components/ui/Loading";
 
-export const OrderDoneContainer: React.FC = ({children}) => {
+export const OrderDoneContainer: React.FC = () => {
     const dispatch = useDispatch<Dispatch>();
     const params = useParams<{ orderId: string }>();
     const orders = useOrders();

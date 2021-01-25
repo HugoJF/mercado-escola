@@ -3,7 +3,7 @@ import {Link}          from "react-router-dom";
 import useRelativePath from "../../hooks/useRelativePath";
 
 // TODO: check usage and delete
-export const OrdersSummary: React.FC = ({children}) => {
+export const OrdersSummary: React.FC = () => {
     const relative = useRelativePath();
 
     return <>

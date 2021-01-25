@@ -2,9 +2,9 @@ import {ConfirmActionMenu}       from "../action-menus/ConfirmActionMenu";
 import React, {useRef, useState} from "react";
 
 export type ConfirmMenuParams = {
-    title: string,
-    description?: string,
-    action?: string
+    title: string;
+    description?: string;
+    action?: string;
 }
 
 export default function useConfirmMenu(): [React.ReactNode, (params: ConfirmMenuParams) => Promise<boolean>] {

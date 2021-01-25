@@ -1,5 +1,5 @@
 import React                   from 'react';
-import {Route, useLocation}    from "react-router";
+import {Route}    from "react-router";
 import useRelativePath         from "../hooks/useRelativePath";
 import {SwitchWithTransitions} from "../components/ui/SwitchWithTransition";
 import {OrdersIndex}           from "../pages/orders/OrdersIndex";

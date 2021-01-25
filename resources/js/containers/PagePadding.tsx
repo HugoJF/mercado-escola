@@ -1,8 +1,8 @@
 import React      from 'react';
 import classNames from 'classnames';
 
-interface PagePaddingProps {
-    className?: string,
+export type PagePaddingProps = {
+    className?: string;
 }
 
 export const PagePadding: React.FC<PagePaddingProps> = ({className = '', children}) => {

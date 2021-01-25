@@ -25,13 +25,12 @@ const status = [{
     date: '15h15 - 14/09/2020'
 },];
 
-export const OrdersShow: React.FC = ({children}) => {
+export const OrdersShow: React.FC = () => {
     const dispatch = useDispatch<Dispatch>();
     const params = useParams<{ orderId: string }>();
     const orders = useOrders();
     const addresses = useAddresses();
     const openings = useOpenings();
-
 
     useEffect(() => {
         dispatch.orders.index();

@@ -1,21 +1,21 @@
 import React, {useCallback, useEffect, useRef, useState} from 'react';
 
-interface OverlayWrapperType {
-    dependencies?: any[],
+export type OverlayWrapperProps = {
+    dependencies?: any[];
     children: (parameters: {
-        target: ReturnType<typeof useCallback>,
-        props: Record<string, unknown>,
-    }) => any
+        target: ReturnType<typeof useCallback>;
+        props: Record<string, unknown>;
+    }) => any;
 }
 
-interface OverlayWrapperData {
-    top: number,
-    left: number,
-    width: number,
-    height: number,
+type OverlayWrapperData = {
+    top: number;
+    left: number;
+    width: number;
+    height: number;
 }
 
-export const AnimationBox: React.FC<OverlayWrapperType> = ({dependencies, children}) => {
+export const AnimationBox: React.FC<OverlayWrapperProps> = ({dependencies, children}) => {
     const ref = useRef<HTMLElement>();
     const [data, setData] = useState<Partial<OverlayWrapperData>>({});
 

@@ -3,14 +3,14 @@ import {FieldError}   from "react-hook-form";
 import {FieldWrapper} from "./FieldWrapper";
 import classNames     from 'classnames';
 
-export type TextareaType = {
-    name: string,
-    label: string,
-    textAreaProps?: React.DetailedHTMLProps<React.TextareaHTMLAttributes<HTMLTextAreaElement>, HTMLTextAreaElement>,
-    error?: FieldError,
+export type TextareaProps = {
+    name: string;
+    label: string;
+    textAreaProps?: React.DetailedHTMLProps<React.TextareaHTMLAttributes<HTMLTextAreaElement>, HTMLTextAreaElement>;
+    error?: FieldError;
 }
 
-export const Textarea: React.FC<TextareaType> = ({name, label, textAreaProps, error}) => {
+export const Textarea: React.FC<TextareaProps> = ({name, label, textAreaProps, error}) => {
     return <FieldWrapper name={name} label={label} error={error}>
         <textarea
             className={classNames(

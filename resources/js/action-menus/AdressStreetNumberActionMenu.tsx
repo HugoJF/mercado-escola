@@ -2,13 +2,13 @@ import {Modal, ModalProps} from "../components/ui/Modal";
 import React               from "react";
 import {Skeleton}          from "../components/ui/Skeleton";
 
-export type AddressStreetNumberActionMenuType = {
+export type AddressStreetNumberActionMenuProps = {
     address: string;
     onNumber: (number: number) => void;
     number: number | null;
 }
 
-export const AddressStreetNumberActionMenu: React.FC<ModalProps & AddressStreetNumberActionMenuType> =
+export const AddressStreetNumberActionMenu: React.FC<ModalProps & AddressStreetNumberActionMenuProps> =
     ({onNumber, number, address, open, onClose}) => {
         return <Modal open={open} onClose={onClose}>
             <h1 className="text-center text-lg font-medium">Qual o número do endereço?</h1>

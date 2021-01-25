@@ -4,7 +4,7 @@ import classNames from 'classnames';
 
 type ButtonColors = 'default' | 'primary' | 'secondary' | 'danger';
 
-export type ButtonProps = {
+export type ButtonProps = React.HTMLAttributes<HTMLButtonElement> & {
     color?: ButtonColors;
     outline?: boolean;
     loading?: boolean;
@@ -17,7 +17,7 @@ const classes: { [id in ButtonColors]: (params: ButtonProps) => string } = {
     danger: ({outline}) => `${outline ? 'text-red-500 border-2 border-red-500' : 'bg-red-500 hover:bg-red-600 text-white'}`
 };
 
-export const Button: React.FC<ButtonProps & React.HTMLAttributes<HTMLButtonElement>> = (props) => {
+export const Button: React.FC<ButtonProps> = (props) => {
     const {loading = false, color = 'primary', outline, children, ...rest} = props;
 
     return <button

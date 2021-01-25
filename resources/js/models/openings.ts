@@ -18,9 +18,9 @@ export type OpeningProperties = {
 
 export type OpeningComputedProperties = {
     id: number;
-    products: number[]
-    pickup_count: number,
-    delivery_count: number,
+    products: number[];
+    pickup_count: number;
+    delivery_count: number;
 }
 
 export type OpeningsState = {

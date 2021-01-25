@@ -1,11 +1,12 @@
 import React, {useEffect, useState} from 'react';
 import InputMask, {Props}           from "react-input-mask";
 
-interface NewProps {
-    initialValue?: string
+type KeysToOmit = keyof { value: any, onChange: any };
+type NewProps = {
+    initialValue?: string;
 }
 
-type PhoneInputProps = Omit<Props & NewProps, keyof { value: any, onChange: any }>
+export type PhoneInputProps = Omit<Props & NewProps, KeysToOmit>
 
 export const PhoneInput: React.FC<PhoneInputProps> = React.forwardRef(({initialValue, ...rest}, ref) => {
     const [phone, setPhone] = useState(initialValue ?? '');

@@ -13,14 +13,14 @@ import {useDispatch}                    from "react-redux";
 import {Dispatch}                       from "../../store";
 import {QuantityTypes, rawTypeText}     from "../ui/QuantityTypeText";
 
-type ProductFormType = {
+export type ProductFormProps = {
     product?: ProductType;
     onSubmit: (data: FormData) => void;
 }
 
 type FileWithPreview = { file: File, preview: string };
 
-export const ProductForm: React.FC<ProductFormType>
+export const ProductForm: React.FC<ProductFormProps>
     = ({onSubmit, product}) => {
     const dispatch = useDispatch<Dispatch>();
     const [loading, setLoading] = useState(false);

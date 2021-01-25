@@ -2,7 +2,7 @@ import React      from "react";
 import {Portal}   from "./Portal";
 import classNames from 'classnames';
 
-export interface ModalProps {
+export type ModalProps = {
     open: boolean;
     onClose?: () => void;
 }

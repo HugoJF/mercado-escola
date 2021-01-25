@@ -11,7 +11,7 @@ import {FlatButton}            from "../../components/ui/FlatButton";
 import {PagePadding}           from "../../containers/PagePadding";
 import useConfirmMenu          from "../../hooks/useConfirmMenu";
 
-export const AddressesIndex: React.FC = ({children}) => {
+export const AddressesIndex: React.FC = () => {
     const [loading, setLoading] = useState(true);
     const dispatch = useDispatch<Dispatch>();
     const auth = useAuth();

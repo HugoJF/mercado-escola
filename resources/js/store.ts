@@ -3,7 +3,7 @@ import {models, RootModel}                       from "./models";
 import createImmerPlugin                         from "@rematch/immer";
 import persist                                   from '@rematch/persist';
 import storage                                   from 'redux-persist/lib/storage'
-import * as Sentry from "@sentry/react";
+import * as Sentry                               from "@sentry/react";
 
 export const store = init<RootModel>({
     models,

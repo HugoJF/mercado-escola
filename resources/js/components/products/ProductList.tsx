@@ -2,11 +2,11 @@ import React         from "react";
 import {ProductType} from "../../models/products";
 import {Product}     from "./Product";
 
-interface ProductListParameters {
+export type ProductListProps = {
     products: ProductType[];
 }
 
-export const ProductList: React.FC<ProductListParameters> = ({products}) => {
+export const ProductList: React.FC<ProductListProps> = ({products}) => {
     return <div className="grid grid-cols-1 xl:grid-cols-5 gap-8">
         {products.map(product =>
             <Product key={product.id} url={`/produtos/${product.id}`} product={product}/>

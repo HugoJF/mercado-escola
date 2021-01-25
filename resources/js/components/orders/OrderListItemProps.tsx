@@ -10,12 +10,12 @@ import {ptBR}                     from "date-fns/locale";
 import {MoreVertical}             from "react-feather";
 import {Box}                      from "../ui/Box";
 
-interface OrderListItem {
-    order: OrderType,
-    onClick?: () => void,
+export type OrderListItemProps = {
+    order: OrderType;
+    onClick?: () => void;
 }
 
-export const OrderListItem: React.FC<OrderListItem> = ({order, onClick}) => {
+export const OrderListItem: React.FC<OrderListItemProps> = ({order, onClick}) => {
     const addresses = useAddresses();
     const createdAt = order.created_at ? parseISO(order.created_at) : null;
 

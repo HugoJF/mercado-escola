@@ -10,10 +10,10 @@ import {Badge}                                   from "../../components/ui/Badge
 import {MoreVertical}                            from "react-feather";
 import useRelativePath                           from "../../hooks/useRelativePath";
 import {SwitchWithTransitions}                   from "../../components/ui/SwitchWithTransition";
-import {AdminOpeningViewSummary}                 from "./AdminOpeningViewSummary";
 import {PagePadding}                             from "../../containers/PagePadding";
 import {AdminOpeningViewProducts}                from "./AdminOpeningViewProducts";
 import {AdminOpeningViewOrders}                  from "./AdminOpeningViewOrders";
+import {AdminOpeningViewSummary}                 from "./AdminOpeningViewSummaryProps";
 
 export const AdminOpeningView: React.FC = () => {
     const [selected, setSelected] = useState('resumo');
@@ -80,10 +80,13 @@ export const AdminOpeningView: React.FC = () => {
                                 text-xl text-gray-700 font-medium cursor-pointer`}
                             onClick={() => goTo('resumo')}
                         >
-                            <div className={classNames(`px-3 py-2 text-center text-base font-normal`, {
-                                'text-gray-500': !isSelected('resumo'),
-                                'text-gray-800': isSelected('resumo'),
-                            })}>Resumo
+                            <div
+                                className={classNames(`px-3 py-2 text-center text-base font-normal`, {
+                                    'text-gray-500': !isSelected('resumo'),
+                                    'text-gray-800': isSelected('resumo'),
+                                })}
+                            >
+                                Resumo
                             </div>
                             <div
                                 className="w-full h-0.5 bg-gray-300"
@@ -99,10 +102,13 @@ export const AdminOpeningView: React.FC = () => {
                                 text-xl text-gray-700 font-medium cursor-pointer`}
                             onClick={() => goTo('produtos')}
                         >
-                            <div className={classNames(`px-3 py-2 text-center text-base font-normal`, {
-                                'text-gray-500': !isSelected('produtos'),
-                                'text-gray-800': isSelected('produtos'),
-                            })}>Produtos
+                            <div
+                                className={classNames(`px-3 py-2 text-center text-base font-normal`, {
+                                    'text-gray-500': !isSelected('produtos'),
+                                    'text-gray-800': isSelected('produtos'),
+                                })}
+                            >
+                                Produtos
                             </div>
                             <div
                                 className="w-full h-0.5 bg-gray-300"
@@ -118,10 +124,13 @@ export const AdminOpeningView: React.FC = () => {
                                 text-xl text-gray-700 font-medium cursor-pointer`}
                             onClick={() => goTo('pedidos')}
                         >
-                            <div className={classNames(`px-3 py-2 text-center text-base font-normal`, {
-                                'text-gray-500': !isSelected('pedidos'),
-                                'text-gray-800': isSelected('pedidos')
-                            })}>Pedidos
+                            <div
+                                className={classNames(`px-3 py-2 text-center text-base font-normal`, {
+                                    'text-gray-500': !isSelected('pedidos'),
+                                    'text-gray-800': isSelected('pedidos')
+                                })}
+                            >
+                                Pedidos
                             </div>
                             <div
                                 className="w-full h-0.5 bg-gray-300"

@@ -5,15 +5,15 @@ import {Box}                from "../ui/Box";
 import {Skeleton}           from "../ui/Skeleton";
 import {HeightTransitioner} from "../ui/HeightTransitioner";
 
-interface AddressListParameters {
-    addresses: AddressType[],
-    loading?: boolean,
-    onClick?: (address: AddressType) => void,
-    onContext?: (address: AddressType) => void,
-    contextIcon?: React.FC,
+export type AddressListProps = {
+    addresses: AddressType[];
+    loading?: boolean;
+    onClick?: (address: AddressType) => void;
+    onContext?: (address: AddressType) => void;
+    contextIcon?: React.FC;
 }
 
-export const AddressList: React.FC<AddressListParameters> =
+export const AddressList: React.FC<AddressListProps> =
     ({
          addresses,
          loading = false,

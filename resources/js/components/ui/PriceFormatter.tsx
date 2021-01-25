@@ -2,7 +2,7 @@ import React from "react";
 
 const formatter = new Intl.NumberFormat('pt-BR', {style: 'currency', currency: 'BRL'});
 
-interface PriceFormatterProps {
+export type PriceFormatterProps = {
     cents?: boolean;
     price: number;
 }

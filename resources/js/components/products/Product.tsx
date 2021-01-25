@@ -5,12 +5,12 @@ import {ProductType}                     from "../../models/products";
 import {QuantityTypes, QuantityTypeText} from "../ui/QuantityTypeText";
 import {ImageHolder}                     from "../ui/ImageHolder";
 
-interface ProductParameters {
-    product: ProductType
-    url: string,
+export type ProductProps = {
+    product: ProductType;
+    url: string;
 }
 
-export const Product: React.FC<ProductParameters> = ({product, url}) => {
+export const Product: React.FC<ProductProps> = ({product, url}) => {
     const {name, quantity_cost, quantity_type} = product;
 
     return <Link

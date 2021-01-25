@@ -23,7 +23,6 @@ export const AdminUserIndex: React.FC = () => {
         if (loading) {
             return Array.from(Array(4).keys()).map(id => ({id}));
         } else {
-            console.log(users)
             return Object.values(users.users);
         }
     }

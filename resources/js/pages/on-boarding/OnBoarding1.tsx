@@ -8,8 +8,8 @@ import {UserProperties}             from "../../models/auth";
 import {useDispatch}                from "react-redux";
 import {PhoneInput}                 from "../../components/form/PhoneInput";
 
-interface PhoneUpdateForm {
-    phone: string,
+type PhoneUpdateForm = {
+    phone: string;
 }
 
 export const OnBoarding1: React.FC = () => {

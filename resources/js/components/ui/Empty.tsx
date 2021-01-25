@@ -2,9 +2,9 @@ import React           from "react";
 import {Archive, Icon} from "react-feather";
 
 type EmptyProps = {
-    icon?: Icon,
-    title: string,
-    description?: string,
+    icon?: Icon;
+    title: string;
+    description?: string;
 }
 
 export const Empty: React.FC<EmptyProps> = ({children, icon: EmptyIcon = Archive, title, description}) => {

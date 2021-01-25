@@ -8,7 +8,7 @@ import useLoading                       from "../../hooks/useLoading";
 import {FieldWrapper}                   from "../form/FieldWrapper";
 import {formatISO}                      from "date-fns";
 
-type OpeningFormType = {
+export type OpeningFormType = {
     opening?: OpeningType;
     onSubmit: (data: OpeningProperties) => void;
 }

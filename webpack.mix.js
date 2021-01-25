@@ -23,6 +23,9 @@ mix
     ])
     .webpackConfig({
         resolve: {
+            plugins: [
+                require("directory-named-webpack-plugin")
+            ],
             alias: {
                 'react-dom': '@hot-loader/react-dom'
             }

@@ -3,14 +3,14 @@ import {FieldError}   from "react-hook-form";
 import {FieldWrapper} from "./FieldWrapper";
 import classNames     from 'classnames';
 
-export type InputType = {
-    name: string,
-    label: string,
-    inputProps?: React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>,
-    error?: FieldError,
+export type InputProps = {
+    name: string;
+    label: string;
+    inputProps?: React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>;
+    error?: FieldError;
 }
 
-export const Input: React.FC<InputType> = ({name, label, inputProps, error}) => {
+export const Input: React.FC<InputProps> = ({name, label, inputProps, error}) => {
     return <FieldWrapper name={name} label={label} error={error}>
         <input
             className={classNames(

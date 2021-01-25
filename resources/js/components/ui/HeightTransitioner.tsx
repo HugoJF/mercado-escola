@@ -1,9 +1,9 @@
 import React, {RefObject, useEffect, useRef, useState} from 'react';
 import AnimateHeight                                   from "react-animate-height";
 
-interface HeightTransitionerProps {
-    useFix?: boolean,
-    dependencies?: any[],
+export type HeightTransitionerProps = {
+    useFix?: boolean;
+    dependencies?: any[];
 }
 
 export const HeightTransitioner: React.FC<HeightTransitionerProps> =

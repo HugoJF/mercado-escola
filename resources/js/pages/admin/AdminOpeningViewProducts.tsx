@@ -10,11 +10,11 @@ import {useDispatch}        from "react-redux";
 import {Dispatch}           from "../../store";
 import {Title}              from "../../components/ui/Title";
 
-interface AdminOpeningViewProducts {
+export type AdminOpeningViewProductsProps = {
     opening: OpeningType;
 }
 
-export const AdminOpeningViewProducts: React.FC<AdminOpeningViewProducts> = ({opening}) => {
+export const AdminOpeningViewProducts: React.FC<AdminOpeningViewProductsProps> = ({opening}) => {
     const dispatch = useDispatch<Dispatch>();
     const products = useProducts();
 

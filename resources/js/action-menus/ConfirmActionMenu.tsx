@@ -2,7 +2,7 @@ import {Modal, ModalProps} from "../components/ui/Modal";
 import React               from "react";
 import {Button}            from "../components/ui/Button";
 
-interface ConfirmActionMenuProps {
+export type ConfirmActionMenuProps = {
     title: string;
     description?: string;
     action: string;

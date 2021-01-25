@@ -4,9 +4,9 @@ import {AnimationBox} from "./AnimationBox";
 type ButtonColors = 'default' | 'primary' | 'secondary' | 'danger';
 
 export type ButtonProps = {
-    color?: ButtonColors,
-    checked?: boolean,
-    onToggle: () => void,
+    color?: ButtonColors;
+    checked?: boolean;
+    onToggle: () => void;
 }
 
 const classes: { [id in ButtonColors]: (params: ButtonProps) => string } = {

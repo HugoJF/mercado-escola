@@ -1,8 +1,8 @@
 import React from "react";
 
-type ImageAttributes = React.DetailedHTMLProps<React.ImgHTMLAttributes<HTMLImageElement>, HTMLImageElement>
+export type ImageHolderProps = React.DetailedHTMLProps<React.ImgHTMLAttributes<HTMLImageElement>, HTMLImageElement>
 
-export const ImageHolder: React.FC<ImageAttributes> = ({children, src, ...rest}) => {
+export const ImageHolder: React.FC<ImageHolderProps> = ({children, src, ...rest}) => {
     return <div className="relative pb-3/5">
         <div className="absolute w-full h-full bg-gradient-to-b from-gray-200 to-gray-300 rounded-lg animate-pulse"/>
 

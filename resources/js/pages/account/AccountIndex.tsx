@@ -9,7 +9,7 @@ import classNames                                                               
 import {Skeleton}                                                                                           from "../../components/ui/Skeleton";
 import {PagePadding}                                                                                        from "../../containers/PagePadding";
 
-export const AccountIndex: React.FC = ({children}) => {
+export const AccountIndex: React.FC = () => {
     const match = useRouteMatch();
     const auth = useAuth();
 

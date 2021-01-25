@@ -2,11 +2,11 @@ import React         from "react";
 import {Calendar}    from "react-feather";
 import {OpeningType} from "../../models/openings";
 
-interface AdminOpeningViewSummary {
+export type AdminOpeningViewSummaryProps = {
     opening: OpeningType;
 }
 
-export const AdminOpeningViewSummary: React.FC<AdminOpeningViewSummary> = ({opening}) => {
+export const AdminOpeningViewSummary: React.FC<AdminOpeningViewSummaryProps> = () => {
     return <div className="px-4 py-4 space-y-6">
         <div className="flex items-center space-x-4">
             <Calendar className="text-gray-400"/>

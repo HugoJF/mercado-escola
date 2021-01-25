@@ -4,8 +4,8 @@ import * as QuantityConfig from "../../configs/ProductQuantityConfig";
 export type QuantityTypes = keyof typeof QuantityConfig;
 
 export type QuantityTypeTextProps = {
-    type: QuantityTypes,
-    quantity?: number,
+    type: QuantityTypes;
+    quantity?: number;
     showTotal?: boolean;
 }
 

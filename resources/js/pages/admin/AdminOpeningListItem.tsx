@@ -11,10 +11,10 @@ import {format, isFuture, isPast, isValid, parseISO} from "date-fns";
 import {Box}                                         from "../../components/ui/Box";
 
 export type AdminOpeningListItemProps = {
-    opening: OpeningType | null,
-    open?: boolean,
-    onClick: (opening: OpeningType) => void,
-    onDelete: (opening: OpeningType) => void,
+    opening: OpeningType | null;
+    open?: boolean;
+    onClick: (opening: OpeningType) => void;
+    onDelete: (opening: OpeningType) => void;
 }
 
 export const AdminOpeningListItem: React.FC<AdminOpeningListItemProps> = ({opening, open, onClick, onDelete}) => {

@@ -11,7 +11,7 @@ import {ChevronRight}    from "react-feather";
 import useLoadEffect     from "../../hooks/useLoadEffect";
 
 
-export const CartAddress: React.FC = ({children}) => {
+export const CartAddress: React.FC = () => {
     const dispatch = useDispatch<Dispatch>();
     const history = useHistory();
     const addresses = useAddresses();

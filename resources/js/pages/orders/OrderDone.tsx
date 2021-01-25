@@ -10,9 +10,9 @@ import {AddressType}      from "../../models/addresses";
 import {PagePadding}      from "../../containers/PagePadding";
 
 export type OrderDoneProps = {
-    order: OrderType,
-    opening: OpeningType,
-    address?: AddressType,
+    order: OrderType;
+    opening: OpeningType;
+    address?: AddressType;
 }
 
 export const OrderDone: React.FC<OrderDoneProps> = ({order, opening, address}) => {

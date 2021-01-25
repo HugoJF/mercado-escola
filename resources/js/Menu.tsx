@@ -65,7 +65,6 @@ export const Menu: React.FC = () => {
                     <Icon size={30} className="inline-block"/>
                     <span className="font-medium select-none">{name}</span>
                 </Ripples>
-
             })}
     </div>
 };
