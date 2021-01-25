@@ -8,12 +8,12 @@ import useLoading                       from "../../hooks/useLoading";
 import {FieldWrapper}                   from "../form/FieldWrapper";
 import {formatISO}                      from "date-fns";
 
-export type OpeningFormType = {
+export type OpeningFormProps = {
     opening?: OpeningType;
     onSubmit: (data: OpeningProperties) => void;
 }
 
-export const OpeningForm: React.FC<OpeningFormType> = ({opening, onSubmit}) => {
+export const OpeningForm: React.FC<OpeningFormProps> = ({opening, onSubmit}) => {
     const {loading, load} = useLoading();
     const [opensAt, setOpensAt] = useState(new Date);
     const [closesAt, setClosesAt] = useState(new Date);

@@ -6,13 +6,13 @@ import {PagePadding}                                      from "../../containers
 import {Box}                                              from "../../components/ui/Box";
 import {useHistory}                                       from "react-router";
 
-type ButtonType = {
+type ButtonProps = {
     title: string;
     icon: Icon;
     to: string;
 }
 
-const buttons: ButtonType[] = [{
+const buttons: ButtonProps[] = [{
     title: 'Produtos',
     icon: ShoppingBag,
     to: '/produtos',

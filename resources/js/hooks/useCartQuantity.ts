@@ -10,7 +10,7 @@ export type ProductQuantityConfig = {
     showStep?: boolean,
 }
 
-export type useProductQuantityType = [
+export type useProductQuantityProps = [
     string,
     number,
     number,
@@ -18,7 +18,7 @@ export type useProductQuantityType = [
     () => void
 ];
 
-export default function useCartQuantity(productId: number, options: ProductQuantityConfig = UNIT): useProductQuantityType {
+export default function useCartQuantity(productId: number, options: ProductQuantityConfig = UNIT): useProductQuantityProps {
     const dispatch = useDispatch<Dispatch>();
     const cart = useCart();
 
