@@ -30,17 +30,12 @@ class LoginTest extends DuskTestCase
         $this->browse(function (Browser $browser) {
             $browser->visit('/login')
                     ->waitForText('Entrar')
-                    ->screenshot('at login')
                     ->type('email', 'asd1@asd.com')
                     ->type('password', '1231231231')
-                    ->screenshot('form filled')
                     ->press('Entrar')
-                    ->screenshot('submitted')
                     ->pause(5000)
-                    ->screenshot('waiting')
                     ->assertDontSee('inválidos')
                     ->waitForLocation('/home')
-                    ->screenshot('at home')
                     ->assertSee('Olá');
         });
     }
