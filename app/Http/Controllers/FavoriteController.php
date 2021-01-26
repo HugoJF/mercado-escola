@@ -13,11 +13,11 @@ class FavoriteController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return ProductResource
+     * @return \Illuminate\Http\Resources\Json\AnonymousResourceCollection
      */
     public function index()
     {
-        return new ProductResource(auth()->user()->favorites);
+        return ProductResource::collection(auth()->user()->favorites);
     }
 
     /**
