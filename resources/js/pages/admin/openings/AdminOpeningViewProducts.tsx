@@ -1,14 +1,14 @@
 import React, {useEffect}   from "react";
-import {OpeningType}        from "../../models/openings";
-import {useProducts}        from "../../selectors";
-import {HeightTransitioner} from "../../components/ui/HeightTransitioner";
-import {Box}                from "../../components/ui/Box";
-import {Skeleton}           from "../../components/ui/Skeleton";
-import {ImageHolder}        from "../../components/ui/ImageHolder";
-import {Toggle}             from "../../components/ui/Toggle";
+import {OpeningType}        from "../../../models/openings";
+import {useProducts}        from "../../../selectors";
+import {HeightTransitioner} from "../../../components/ui/HeightTransitioner";
+import {Box}                from "../../../components/ui/Box";
+import {Skeleton}           from "../../../components/ui/Skeleton";
+import {ImageHolder}        from "../../../components/ui/ImageHolder";
+import {Toggle}             from "../../../components/ui/Toggle";
 import {useDispatch}        from "react-redux";
-import {Dispatch}           from "../../store";
-import {Title}              from "../../components/ui/Title";
+import {Dispatch}           from "../../../store";
+import {Title}              from "../../../components/ui/Title";
 
 export type AdminOpeningViewProductsProps = {
     opening: OpeningType;

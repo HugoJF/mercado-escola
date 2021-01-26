@@ -2,16 +2,16 @@ import React                   from 'react';
 import {Route}                 from "react-router";
 import useRelativePath         from "../hooks/useRelativePath";
 import {SwitchWithTransitions} from "../components/ui/SwitchWithTransition";
-import {AdminProductIndex}     from "../pages/admin/AdminProductIndex";
-import {AdminProductEdit}      from "../pages/admin/AdminProductEdit";
+import {AdminProductIndex}     from "../pages/admin/products/AdminProductIndex";
+import {AdminProductEdit}      from "../pages/admin/products/AdminProductEdit";
 import {AdminIndex}            from "../pages/admin/AdminIndex";
-import {AdminProductCreate}    from "../pages/admin/AdminProductCreate";
-import {AdminOpeningIndex}     from "../pages/admin/AdminOpeningIndex";
-import {AdminOpeningCreate}    from "../pages/admin/AdminOpeningCreate";
-import {AdminOpeningEdit}      from "../pages/admin/AdminOpeningEdit";
-import {AdminProducerIndex}    from "../pages/admin/AdminProducerIndex";
-import {AdminOpeningView}      from "../pages/admin/AdminOpeningView";
-import {AdminUserIndex}        from "../pages/admin/AdminUserIndex";
+import {AdminProductCreate}    from "../pages/admin/products/AdminProductCreate";
+import {AdminOpeningIndex}     from "../pages/admin/openings/AdminOpeningIndex";
+import {AdminOpeningCreate} from "../pages/admin/openings/AdminOpeningCreate";
+import {AdminOpeningEdit}   from "../pages/admin/openings/AdminOpeningEdit";
+import {AdminProducerIndex} from "../pages/admin/producers/AdminProducerIndex";
+import {AdminOpeningView} from "../pages/admin/openings/AdminOpeningView";
+import {AdminUserIndex}   from "../pages/admin/users/AdminUserIndex";
 
 export const AdminRoutes: React.FC = () => {
     const relative = useRelativePath();

@@ -1,11 +1,11 @@
 import React, {useEffect}   from "react";
-import {OpeningType}        from "../../models/openings";
-import {useOrders}          from "../../selectors";
-import {HeightTransitioner} from "../../components/ui/HeightTransitioner";
+import {OpeningType}        from "../../../models/openings";
+import {useOrders}          from "../../../selectors";
+import {HeightTransitioner} from "../../../components/ui/HeightTransitioner";
 import {useDispatch}        from "react-redux";
-import {Dispatch}           from "../../store";
-import {Title}              from "../../components/ui/Title";
-import {OrderListItem}      from "../../components/orders/OrderListItemProps";
+import {Dispatch}           from "../../../store";
+import {Title}              from "../../../components/ui/Title";
+import {OrderListItem}      from "../../../components/orders/OrderListItemProps";
 
 export type AdminOpeningViewOrdersProps = {
     opening: OpeningType;

@@ -1,10 +1,10 @@
 import React         from "react";
 import {useDispatch} from "react-redux";
-import {Dispatch}    from "../../store";
+import {Dispatch}    from "../../../store";
 import {useHistory}  from "react-router";
-import {Title}       from "../../components/ui/Title";
-import {ProductForm} from "../../components/products/ProductForm";
-import {PagePadding} from "../../containers/PagePadding";
+import {Title}       from "../../../components/ui/Title";
+import {ProductForm} from "../../../components/products/ProductForm";
+import {PagePadding} from "../../../containers/PagePadding";
 
 export const AdminProductCreate: React.FC = () => {
     const dispatch = useDispatch<Dispatch>();

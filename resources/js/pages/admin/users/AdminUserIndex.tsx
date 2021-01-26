@@ -1,15 +1,15 @@
 import React                from "react";
-import {Title}              from "../../components/ui/Title";
+import {Title}              from "../../../components/ui/Title";
 import {useDispatch}        from "react-redux";
-import {Dispatch}           from "../../store";
-import {useUsers}           from "../../selectors";
-import {HeightTransitioner} from "../../components/ui/HeightTransitioner";
-import {Skeleton}           from "../../components/ui/Skeleton";
-import {PagePadding}        from "../../containers/PagePadding";
-import {Box}                from "../../components/ui/Box";
-import {Toggle}             from "../../components/ui/Toggle";
-import useLoadEffect        from "../../hooks/useLoadEffect";
-import {Badge}              from "../../components/ui/Badge";
+import {Dispatch}           from "../../../store";
+import {useUsers}           from "../../../selectors";
+import {HeightTransitioner} from "../../../components/ui/HeightTransitioner";
+import {Skeleton}           from "../../../components/ui/Skeleton";
+import {PagePadding}        from "../../../containers/PagePadding";
+import {Box}                from "../../../components/ui/Box";
+import {Toggle}             from "../../../components/ui/Toggle";
+import useLoadEffect        from "../../../hooks/useLoadEffect";
+import {Badge}              from "../../../components/ui/Badge";
 
 export const AdminUserIndex: React.FC = () => {
     const dispatch = useDispatch<Dispatch>();

@@ -1,17 +1,17 @@
 import React, {useState}      from "react";
-import {FlatButton}           from "../../components/ui/FlatButton";
+import {FlatButton}           from "../../../components/ui/FlatButton";
 import {Plus}                 from "react-feather";
 import {useHistory}           from "react-router";
-import useRelativePath        from "../../hooks/useRelativePath";
-import {Dispatch}             from "../../store";
+import useRelativePath        from "../../../hooks/useRelativePath";
+import {Dispatch}             from "../../../store";
 import {useDispatch}          from "react-redux";
-import {useOpenings}          from "../../selectors";
-import useConfirmMenu         from "../../hooks/useConfirmMenu";
+import {useOpenings}          from "../../../selectors";
+import useConfirmMenu         from "../../../hooks/useConfirmMenu";
 import {AdminOpeningListItem} from "./AdminOpeningListItem";
-import {OpeningType}          from "../../models/openings";
-import {Title}                from "../../components/ui/Title";
-import {PagePadding}          from "../../containers/PagePadding";
-import useLoadEffect          from "../../hooks/useLoadEffect";
+import {OpeningType}          from "../../../models/openings";
+import {Title}                from "../../../components/ui/Title";
+import {PagePadding}          from "../../../containers/PagePadding";
+import useLoadEffect          from "../../../hooks/useLoadEffect";
 
 export const AdminOpeningIndex: React.FC = () => {
     const dispatch = useDispatch<Dispatch>();

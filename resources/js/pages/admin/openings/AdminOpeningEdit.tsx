@@ -1,13 +1,13 @@
 import React, {useEffect}  from "react";
 import {useDispatch}       from "react-redux";
-import {Dispatch}          from "../../store";
-import {useOpenings}       from "../../selectors";
+import {Dispatch}          from "../../../store";
+import {useOpenings}       from "../../../selectors";
 import {useParams}         from "react-router-dom";
 import {useHistory}        from "react-router";
-import {Title}             from "../../components/ui/Title";
-import {OpeningProperties} from "../../models/openings";
-import {OpeningForm}       from "../../components/openings/OpeningForm";
-import {PagePadding}       from "../../containers/PagePadding";
+import {Title}             from "../../../components/ui/Title";
+import {OpeningProperties} from "../../../models/openings";
+import {OpeningForm}       from "../../../components/openings/OpeningForm";
+import {PagePadding}       from "../../../containers/PagePadding";
 
 export const AdminOpeningEdit: React.FC = () => {
     const dispatch = useDispatch<Dispatch>();

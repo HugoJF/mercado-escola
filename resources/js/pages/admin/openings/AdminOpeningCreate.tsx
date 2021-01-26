@@ -1,9 +1,9 @@
 import React               from "react";
-import {OpeningProperties} from "../../models/openings";
+import {OpeningProperties} from "../../../models/openings";
 import {useDispatch}       from "react-redux";
-import {Dispatch}          from "../../store";
-import {Title}             from "../../components/ui/Title";
-import {OpeningForm}       from "../../components/openings/OpeningForm";
+import {Dispatch}          from "../../../store";
+import {Title}             from "../../../components/ui/Title";
+import {OpeningForm}       from "../../../components/openings/OpeningForm";
 import {useHistory}        from "react-router";
 
 export const AdminOpeningCreate: React.FC = () => {

@@ -1,22 +1,22 @@
 import React, {useState}                      from "react";
-import {Title}                                from "../../components/ui/Title";
+import {Title}                                from "../../../components/ui/Title";
 import {ArrowRight, Plus, ShoppingBag, Trash} from "react-feather";
-import useRelativePath                        from "../../hooks/useRelativePath";
+import useRelativePath                        from "../../../hooks/useRelativePath";
 import {useDispatch}                          from "react-redux";
-import {Dispatch}                             from "../../store";
-import {useProducts}        from "../../selectors";
-import {HeightTransitioner} from "../../components/ui/HeightTransitioner";
-import {Link, useHistory}   from "react-router-dom";
-import {FlatButton}         from "../../components/ui/FlatButton";
-import {Skeleton}           from "../../components/ui/Skeleton";
-import useAsyncEffect       from "../../hooks/useAsyncEffect";
-import useConfirmMenu       from "../../hooks/useConfirmMenu";
-import classNames           from "classnames";
-import {PriceFormatter}     from "../../components/ui/PriceFormatter";
-import {QuantityTypeText}   from "../../components/ui/QuantityTypeText";
-import {PagePadding}        from "../../containers/PagePadding";
-import useLoading           from "../../hooks/useLoading";
-import useLoadEffect        from "../../hooks/useLoadEffect";
+import {Dispatch}                             from "../../../store";
+import {useProducts}                          from "../../../selectors";
+import {HeightTransitioner}                   from "../../../components/ui/HeightTransitioner";
+import {Link, useHistory}                     from "react-router-dom";
+import {FlatButton}                           from "../../../components/ui/FlatButton";
+import {Skeleton}                             from "../../../components/ui/Skeleton";
+import useAsyncEffect                         from "../../../hooks/useAsyncEffect";
+import useConfirmMenu                         from "../../../hooks/useConfirmMenu";
+import classNames                             from "classnames";
+import {PriceFormatter}                       from "../../../components/ui/PriceFormatter";
+import {QuantityTypeText}                     from "../../../components/ui/QuantityTypeText";
+import {PagePadding}                          from "../../../containers/PagePadding";
+import useLoading                             from "../../../hooks/useLoading";
+import useLoadEffect                          from "../../../hooks/useLoadEffect";
 
 export const AdminProductIndex: React.FC = () => {
     const dispatch = useDispatch<Dispatch>();
