@@ -38,8 +38,8 @@ export const HeightTransitioner: React.FC<HeightTransitionerProps> =
         }, [children, windowSize, ...dependencies]);
 
         return (
-            <AnimateHeight height={height}>
-                <div data-mark="pog" ref={ref as RefObject<HTMLDivElement>}>
+            <AnimateHeight className="w-full" height={height}>
+                <div ref={ref as RefObject<HTMLDivElement>}>
                     {children}
                 </div>
             </AnimateHeight>

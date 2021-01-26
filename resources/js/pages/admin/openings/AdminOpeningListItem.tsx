@@ -13,8 +13,8 @@ import {Box}                                         from "../../../components/u
 export type AdminOpeningListItemProps = {
     opening: OpeningType | null;
     open?: boolean;
-    onClick: (opening: OpeningType) => void;
-    onDelete: (opening: OpeningType) => void;
+    onClick?: (opening: OpeningType) => void;
+    onDelete?: (opening: OpeningType) => void;
 }
 
 export const AdminOpeningListItem: React.FC<AdminOpeningListItemProps> = ({opening, open, onClick, onDelete}) => {
@@ -30,7 +30,7 @@ export const AdminOpeningListItem: React.FC<AdminOpeningListItemProps> = ({openi
         <HeightTransitioner>
             {/* Product details */}
             <div
-                onClick={() => opening && onClick(opening)}
+                onClick={() => opening && onClick && onClick(opening)}
                 className="flex items-center"
             >
                 <div className="flex items-center justify-center w-6 mr-4">
@@ -119,7 +119,7 @@ export const AdminOpeningListItem: React.FC<AdminOpeningListItemProps> = ({openi
 
                     {/* Delete */}
                     <div
-                        onClick={() => opening && onDelete(opening)}
+                        onClick={() => opening && onDelete && onDelete(opening)}
                         className="flex justify-center flex-grow items-center py-2 px-4 text-red-600 font-medium"
                     >
                         <Trash size={20} className="mr-1 inline"/>
