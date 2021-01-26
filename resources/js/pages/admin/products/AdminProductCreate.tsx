@@ -24,6 +24,7 @@ export const AdminProductCreate: React.FC = () => {
 
         <ProductForm
             onSubmit={updateProduct}
+            action="Criar"
         />
     </PagePadding>
 };

@@ -16,12 +16,13 @@ import {QuantityTypes, rawTypeText}     from "../ui/QuantityTypeText";
 export type ProductFormProps = {
     product?: ProductType;
     onSubmit: (data: FormData) => void;
+    action: string;
 }
 
 type FileWithPreview = { file: File, preview: string };
 
 export const ProductForm: React.FC<ProductFormProps>
-    = ({onSubmit, product}) => {
+    = ({onSubmit, product, action}) => {
     const dispatch = useDispatch<Dispatch>();
     const [loading, setLoading] = useState(false);
     const {register, handleSubmit, errors, setError, setValue} = useForm<ProductProperties>();
@@ -202,7 +203,7 @@ export const ProductForm: React.FC<ProductFormProps>
             </div>
 
             <Button loading={loading}>
-                Atualizar
+                {action}
             </Button>
         </div>
     </form>

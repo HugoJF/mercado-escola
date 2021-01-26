@@ -11,9 +11,10 @@ import {formatISO}                      from "date-fns";
 export type OpeningFormProps = {
     opening?: OpeningType;
     onSubmit: (data: OpeningProperties) => void;
+    action: string;
 }
 
-export const OpeningForm: React.FC<OpeningFormProps> = ({opening, onSubmit}) => {
+export const OpeningForm: React.FC<OpeningFormProps> = ({opening, onSubmit, action}) => {
     const {loading, load} = useLoading();
     const [opensAt, setOpensAt] = useState(new Date);
     const [closesAt, setClosesAt] = useState(new Date);
@@ -114,7 +115,7 @@ export const OpeningForm: React.FC<OpeningFormProps> = ({opening, onSubmit}) => 
         </FieldWrapper>
 
         <Button loading={loading}>
-            Criar
+            {action}
         </Button>
     </form>
 };

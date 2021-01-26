@@ -25,6 +25,7 @@ export const AdminOpeningCreate: React.FC = () => {
 
         <OpeningForm
             onSubmit={createOpening}
+            action="Criar"
         />
     </div>
 };

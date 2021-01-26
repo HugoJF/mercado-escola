@@ -37,6 +37,7 @@ export const AdminProductEdit: React.FC = () => {
         <ProductForm
             product={product}
             onSubmit={updateProduct}
+            action="Atualizar"
         />
     </PagePadding>
 };

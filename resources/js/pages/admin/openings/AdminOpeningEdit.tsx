@@ -42,6 +42,7 @@ export const AdminOpeningEdit: React.FC = () => {
         <OpeningForm
             opening={opening}
             onSubmit={updateOpening}
+            action="Atualizar"
         />
     </PagePadding>
 };
