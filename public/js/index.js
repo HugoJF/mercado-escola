@@ -93,7 +93,7 @@
 /*! no exports provided */
 /***/ (function(module, exports) {
 
-throw new Error("Module build failed (from ./node_modules/ts-loader/index.js):\nError: ENOENT: no such file or directory, open '/home/vagrant/market/resources/js/index.tsx'");
+throw new Error("Module build failed (from ./node_modules/ts-loader/index.js):\nError: ENOENT: no such file or directory, expanded '/home/vagrant/market/resources/js/index.tsx'");
 
 /***/ }),
 

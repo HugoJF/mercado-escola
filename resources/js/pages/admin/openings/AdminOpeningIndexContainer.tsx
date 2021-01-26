@@ -42,7 +42,7 @@ export const AdminOpeningIndexContainer: React.FC = () => {
 
         <AdminOpeningIndex
             openings={getOpenings()}
-            expandedOpening={expanded}
+            expanded={expanded}
             onClick={(opening) => setExpanded(opening.id)}
             onDelete={handleDelete}
         />

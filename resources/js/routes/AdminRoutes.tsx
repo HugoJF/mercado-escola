@@ -2,7 +2,6 @@ import React                   from 'react';
 import {Route}                 from "react-router";
 import useRelativePath         from "../hooks/useRelativePath";
 import {SwitchWithTransitions}      from "../components/ui/SwitchWithTransition";
-import {AdminProductIndex}          from "../pages/admin/products/AdminProductIndex";
 import {AdminProductEdit}           from "../pages/admin/products/AdminProductEdit";
 import {AdminIndex}                 from "../pages/admin/AdminIndex";
 import {AdminProductCreate}         from "../pages/admin/products/AdminProductCreate";
@@ -12,13 +11,14 @@ import {AdminProducerIndex}         from "../pages/admin/producers/AdminProducer
 import {AdminOpeningView}           from "../pages/admin/openings/AdminOpeningView";
 import {AdminUserIndex}             from "../pages/admin/users/AdminUserIndex";
 import {AdminOpeningIndexContainer} from "../pages/admin/openings/AdminOpeningIndexContainer";
+import {AdminProductIndexContainer} from "../pages/admin/products/AdminProductIndexContainer";
 
 export const AdminRoutes: React.FC = () => {
     const relative = useRelativePath();
 
     return <SwitchWithTransitions>
         <Route exact path={relative('/')} children={<AdminIndex/>}/>
-        <Route exact path={relative('/produtos')} children={<AdminProductIndex/>}/>
+        <Route exact path={relative('/produtos')} children={<AdminProductIndexContainer/>}/>
         <Route exact path={relative('/aberturas')} children={<AdminOpeningIndexContainer/>}/>
         <Route exact path={relative('/produtores')} children={<AdminProducerIndex/>}/>
         <Route exact path={relative('/usuarios')} children={<AdminUserIndex/>}/>

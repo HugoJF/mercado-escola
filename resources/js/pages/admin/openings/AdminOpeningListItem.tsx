@@ -1,7 +1,6 @@
 import {HeightTransitioner}                          from "../../../components/ui/HeightTransitioner";
-import {ArrowRight, Calendar, Trash}                 from "react-feather";
+import {Calendar, Trash}                             from "react-feather";
 import {Skeleton}                                    from "../../../components/ui/Skeleton";
-import classNames                                    from "classnames";
 import {Link}                                        from "react-router-dom";
 import React                                         from "react";
 import {OpeningType}                                 from "../../../models/openings";
@@ -9,15 +8,17 @@ import useRelativePath                               from "../../../hooks/useRel
 import {Badge}                                       from "../../../components/ui/Badge";
 import {format, isFuture, isPast, isValid, parseISO} from "date-fns";
 import {Box}                                         from "../../../components/ui/Box";
+import {RotatingArrowRight}                        from "../../../components/ui/RotatingArrowRight";
 
 export type AdminOpeningListItemProps = {
     opening: OpeningType | null;
-    open?: boolean;
+    expanded: boolean;
     onClick?: (opening: OpeningType) => void;
     onDelete?: (opening: OpeningType) => void;
 }
 
-export const AdminOpeningListItem: React.FC<AdminOpeningListItemProps> = ({opening, open, onClick, onDelete}) => {
+export const AdminOpeningListItem: React.FC<AdminOpeningListItemProps>
+    = ({opening, expanded = false, onClick, onDelete}) => {
     const relative = useRelativePath();
 
     const opensAt = opening && parseISO(opening.opens_at);
@@ -95,20 +96,13 @@ export const AdminOpeningListItem: React.FC<AdminOpeningListItemProps> = ({openi
                     </ul>
                 </div>
 
-                {opening && <ArrowRight className={classNames(
-                    `transform transition-transform duration-150 ml-2 flex-shrink-0`,
-                    {
-                        'rotate-90 text-gray-500': open,
-                        'text-gray-300': !open,
-                    },
-                )}
-                />}
+                {opening && <RotatingArrowRight rotated={expanded}/>}
             </div>
 
             {/* Reveal menu */}
             {/* This empty div is needed to avoid full unmount causing HeightTransitioner to be unable to animate */}
             <div>
-                {open && <div className="mt-4 flex divide-x divide-gray-200">
+                {expanded && <div className="mt-4 flex divide-x divide-gray-200">
                     {/* View */}
                     <Link
                         to={relative(`/${opening?.id}`)}

@@ -10,13 +10,13 @@ import {PagePadding}          from "../../../containers/PagePadding";
 
 export type AdminOpeningIndexProps = {
     openings: OpeningType[];
-    expandedOpening?: number;
+    expanded?: number;
     onClick?: (opening: OpeningType) => void;
     onDelete?: (opening: OpeningType) => void;
 }
 
 export const AdminOpeningIndex: React.FC<AdminOpeningIndexProps> =
-    ({openings, expandedOpening, onClick, onDelete}) => {
+    ({openings, expanded, onClick, onDelete}) => {
         const relative = useRelativePath();
         const history = useHistory();
 
@@ -28,7 +28,7 @@ export const AdminOpeningIndex: React.FC<AdminOpeningIndexProps> =
                     {openings.map(opening => (
                         <AdminOpeningListItem
                             opening={opening}
-                            open={opening && opening?.id === expandedOpening}
+                            expanded={opening && opening?.id === expanded}
                             onClick={onClick}
                             onDelete={onDelete}
                         />

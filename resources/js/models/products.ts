@@ -2,13 +2,14 @@ import {createModel}             from "@rematch/core";
 import {RootModel}               from "./index";
 import {RootState}               from "../store";
 import {SoftDeletes, Timestamps} from "../types";
+import {QuantityTypes}           from "../components/ui/QuantityTypeText";
 
 export type ProductType = ProductProperties & ProductComputedProperties & Timestamps & SoftDeletes;
 
 export type ProductProperties = {
     name: string;
     description: string;
-    quantity_type: string;
+    quantity_type: QuantityTypes;
     quantity_cost: number;
 }
 
