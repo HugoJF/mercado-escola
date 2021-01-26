@@ -5,6 +5,7 @@ import {Timestamps}     from "../types";
 import {normalize}      from "normalizr";
 import {openingsSchema} from "../schemas";
 import {ProductType}    from "./products";
+import {api}            from "../api";
 
 export type OpeningType = OpeningProperties & OpeningComputedProperties & Timestamps;
 
@@ -76,7 +77,7 @@ export const openings = createModel<RootModel>()({
 
     effects: (dispatch) => ({
         async index(payload, state: RootState): Promise<void> {
-            const response = await window.axios.get('/openings');
+            const response = await api.openings.index();
 
             const data = response.data.data;
 
@@ -90,7 +91,7 @@ export const openings = createModel<RootModel>()({
             dispatch.products.addProduct(products);
         },
         async current(payload, state: RootState): Promise<void> {
-            const response = await window.axios.get('/openings/current');
+            const response = await api.openings.current();
 
             const data = response.data.data;
 
@@ -108,7 +109,7 @@ export const openings = createModel<RootModel>()({
             }
         },
         async store(payload: OpeningProperties, state: RootState): Promise<void> {
-            const response = await window.axios.post('/openings', payload);
+            const response = await api.openings.store(payload);
 
             const data = response.data.data;
 
@@ -122,7 +123,7 @@ export const openings = createModel<RootModel>()({
             dispatch.products.addProduct(products);
         },
         async update(payload: { id: number, data: OpeningProperties }, state: RootState): Promise<void> {
-            const response = await window.axios.patch(`/openings/${payload.id}`, payload.data);
+            const response = await api.openings.update(payload.id, payload.data);
 
             const data = response.data.data;
 
@@ -135,7 +136,7 @@ export const openings = createModel<RootModel>()({
             dispatch.openings.addOpening(openings);
         },
         async addProduct(payload: { openingId: number, productId: number }, state: RootState): Promise<void> {
-            const response = await window.axios.post(`/openings/${payload.openingId}/products/${payload.productId}`);
+            const response = await api.openings.addProduct(payload.openingId, payload.productId);
 
             const data = response.data.data;
 
@@ -149,7 +150,7 @@ export const openings = createModel<RootModel>()({
             dispatch.products.addProduct(products);
         },
         async removeProduct(payload: { openingId: number, productId: number }, state: RootState): Promise<void> {
-            const response = await window.axios.delete(`/openings/${payload.openingId}/products/${payload.productId}`);
+            const response = await api.openings.removeProduct(payload.openingId, payload.productId);
 
             const data = response.data.data;
 
@@ -163,7 +164,7 @@ export const openings = createModel<RootModel>()({
             dispatch.products.addProduct(products);
         },
         async destroy(payload: number, state: RootState): Promise<void> {
-            const response = await window.axios.delete(`/openings/${payload}`);
+            const response = await api.openings.destroy(payload);
 
             dispatch.openings.remove(payload);
         },

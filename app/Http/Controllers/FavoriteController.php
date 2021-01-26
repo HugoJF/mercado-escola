@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\ProductResource;
 use App\Models\Favorite;
 use App\Models\Product;
 use App\Models\User;
@@ -12,11 +13,11 @@ class FavoriteController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return ProductResource
      */
     public function index()
     {
-        return auth()->user()->favorites;
+        return new ProductResource(auth()->user()->favorites);
     }
 
     /**

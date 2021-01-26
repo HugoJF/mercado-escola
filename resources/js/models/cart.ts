@@ -46,11 +46,5 @@ export const cart = createModel<RootModel>()({
                 address_id: null,
             } as CartState
         }
-    },
-
-    effects: (dispatch) => ({
-        async index(payload, state: RootState): Promise<void> {
-            //
-        },
-    })
+    }
 });

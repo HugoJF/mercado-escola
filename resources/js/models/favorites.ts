@@ -2,6 +2,7 @@ import {createModel} from "@rematch/core";
 import {RootModel}   from "./index";
 import {RootState}   from "../store";
 import {ProductType} from "./products";
+import {api}         from "../api";
 
 export type FavoritesState = {
     favorites: number[];
@@ -35,9 +36,9 @@ export const favorites = createModel<RootModel>()({
 
     effects: (dispatch) => ({
         async index(payload, state: RootState): Promise<void> {
-            const response = await window.axios.get('/favorites');
+            const response = await api.favorites.index();
 
-            let favoritesProducts = response.data as ProductType[];
+            let favoritesProducts = response.data.data;
 
             let favorites = favoritesProducts.map(product => product.id);
 
@@ -45,12 +46,12 @@ export const favorites = createModel<RootModel>()({
             dispatch.favorites.store(favorites);
         },
         async create(payload: number, state: RootState): Promise<void> {
-            const response = await window.axios.post(`/favorites/${payload}`);
+            const response = await api.favorites.store(payload);
 
             dispatch.favorites.store(payload);
         },
         async destroy(payload: number, state: RootState): Promise<void> {
-            const response = await window.axios.delete(`/favorites/${payload}`);
+            const response = await api.favorites.destroy(payload);
 
             dispatch.favorites.delete(payload);
         },

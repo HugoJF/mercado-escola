@@ -3,6 +3,7 @@ import {RootModel}               from "./index";
 import {RootState}               from "../store";
 import {SoftDeletes, Timestamps} from "../types";
 import {QuantityTypes}           from "../components/ui/QuantityTypeText";
+import {api}                     from "../api";
 
 export type ProductType = ProductProperties & ProductComputedProperties & Timestamps & SoftDeletes;
 
@@ -53,39 +54,26 @@ export const products = createModel<RootModel>()({
 
     effects: (dispatch) => ({
         async index(payload, state: RootState): Promise<void> {
-            const response = await window.axios.get('/products');
-
-            let favoritesProducts = response.data.data as ProductType[];
+            const response = await api.products.index();
 
             dispatch.products.reset();
-            dispatch.products.addProduct(favoritesProducts);
+            dispatch.products.addProduct(response.data.data);
         },
 
         async create(payload: FormData, state: RootState): Promise<void> {
-            const response = await window.axios.post('/products', payload, {
-                headers: {
-                    'Content-Type': 'multipart/form-data'
-                }
-            });
+            const response = await api.products.create(payload);
 
             dispatch.products.addProduct(response.data.data);
         },
 
         async update(payload: { id: number, data: FormData }, state: RootState): Promise<void> {
-            // https://github.com/laravel/framework/issues/13457
-            payload.data.append('_method', 'PATCH');
-
-            const response = await window.axios.post(`/products/${payload.id}`, payload.data, {
-                headers: {
-                    'Content-Type': 'multipart/form-data'
-                }
-            });
+            const response = await api.products.update(payload.id, payload.data);
 
             dispatch.products.addProduct(response.data.data);
         },
 
         async destroy(payload: number, state: RootState): Promise<void> {
-            const response = await window.axios.delete(`/products/${payload}`);
+            const response = await api.products.destroy(payload);
 
             dispatch.products.remove(payload);
         },

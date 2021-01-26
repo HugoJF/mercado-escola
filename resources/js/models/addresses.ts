@@ -2,6 +2,7 @@ import {createModel}             from "@rematch/core";
 import {RootModel}               from "./index";
 import {RootState}               from "../store";
 import {SoftDeletes, Timestamps} from "../types";
+import {api}                     from "../api";
 
 export type AddressType = AddressProperties & AddressComputedProperties & Timestamps & SoftDeletes;
 
@@ -49,7 +50,7 @@ export const addresses = createModel<RootModel>()({
     effects: (dispatch) => ({
         async index(payload, state: RootState): Promise<void> {
             try {
-                const response = await window.axios.get('/addresses');
+                const response = await api.addresses.index();
 
                 dispatch.addresses.setAddresses(response.data);
             } catch (e) {
@@ -58,7 +59,7 @@ export const addresses = createModel<RootModel>()({
         },
         async store(payload: AddressProperties, state: RootState): Promise<void> {
             try {
-                await window.axios.post('/addresses', payload);
+                await api.addresses.store(payload);
 
                 await dispatch.addresses.index();
             } catch (e) {

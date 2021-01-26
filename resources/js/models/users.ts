@@ -2,6 +2,7 @@ import {createModel}             from "@rematch/core";
 import {RootModel}               from "./index";
 import {RootState}               from "../store";
 import {SoftDeletes, Timestamps} from "../types";
+import {api}                     from "../api";
 
 export type UserType = UserProperties & UserComputedProperties & Timestamps & SoftDeletes;
 
@@ -53,15 +54,12 @@ export const users = createModel<RootModel>()({
         async index(payload, state: RootState): Promise<void> {
             const response = await window.axios.get('/users');
 
-            const users = response.data.data as UserType[];
-
             dispatch.users.reset();
-            dispatch.users.add(users);
+            dispatch.users.add(response.data.data);
         },
 
         async update(payload: { id: number, data: Partial<UserProperties> }, state: RootState): Promise<void> {
-            // https://github.com/laravel/framework/issues/13457
-            const response = await window.axios.patch(`/users/${payload.id}`, payload.data);
+            const response = await api.users.update(payload.id, payload.data);
 
             dispatch.users.add(response.data.data);
         },

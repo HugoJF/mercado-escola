@@ -5,6 +5,7 @@ import {normalize}               from "normalizr";
 import {ordersSchema}            from "../schemas";
 import {ProductType}             from "./products";
 import {SoftDeletes, Timestamps} from "../types";
+import {api}                     from "../api";
 
 export type OrderType = OrdersProperties & OrdersComputedProperties & OrderRelationshipProperties & Timestamps & SoftDeletes;
 
@@ -74,14 +75,14 @@ export const orders = createModel<RootModel>()({
 
     effects: (dispatch) => ({
         async index(payload, state: RootState): Promise<void> {
-            const response = await window.axios.get('/orders');
+            const response = await api.orders.index();
 
             dispatch.orders.add(Object.values(response.data.data));
         },
         async store(payload: OrderStore, state: RootState): Promise<OrderType> {
-            const response = await window.axios.post('/orders', payload);
-            const order = response.data.data as OrderType;
-            const normalized = normalize(order, ordersSchema); // FIXME: there's also `opening`
+            const response = await api.orders.create(payload);
+
+            const normalized = normalize(response.data.data, ordersSchema); // FIXME: there's also `opening`
 
             const orders = normalized.entities['orders'] as OrderType[];
             const products = normalized.entities['products'] as ProductType[];
@@ -89,7 +90,7 @@ export const orders = createModel<RootModel>()({
             dispatch.orders.add(Object.values(orders));
             dispatch.products.addProduct(Object.values(products));
 
-            return order;
+            return response.data.data;
         },
     })
 });
