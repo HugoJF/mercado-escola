@@ -34,7 +34,7 @@ class FavoriteTest extends TestCase
         $user->favorites()->attach($product);
 
         $this->get(route('favorites.index'))
-            ->assertJson([$product->attributesToArray()]);
+            ->assertJson(['data' => [$product->attributesToArray()]]);
     }
 
     public function test_user_can_create_favorite()
@@ -50,7 +50,7 @@ class FavoriteTest extends TestCase
             ->assertStatus(201);
 
         $this->get(route('favorites.index'))
-             ->assertJson([$product->attributesToArray()]);
+             ->assertJson(['data' => [$product->attributesToArray()]]);
     }
 
     public function test_user_can_delete_favorite()
