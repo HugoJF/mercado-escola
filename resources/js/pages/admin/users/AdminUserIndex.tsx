@@ -10,6 +10,7 @@ import {Box}                from "../../../components/ui/Box";
 import {Toggle}             from "../../../components/ui/Toggle";
 import useLoadEffect        from "../../../hooks/useLoadEffect";
 import {Badge}              from "../../../components/ui/Badge";
+import {UserType}           from "../../../models/auth";
 
 export const AdminUserIndex: React.FC = () => {
     const dispatch = useDispatch<Dispatch>();
@@ -24,6 +25,25 @@ export const AdminUserIndex: React.FC = () => {
             return Array.from(Array(4).keys()).map(id => ({id}));
         } else {
             return Object.values(users.users);
+        }
+    }
+
+    async function handleAdminToggle(user: UserType) {
+        await dispatch.users.update({
+            id: user.id,
+            data: {admin: !user.admin}
+        });
+
+        if (user.admin) {
+            dispatch.toasts.add({
+                title: 'Administrador removido!',
+                description: `${user.name} deixou de ser administrador`
+            });
+        } else {
+            dispatch.toasts.add({
+                title: 'Novo administrador!',
+                description: `${user.name} agora é um administrador`
+            });
         }
     }
 
@@ -64,7 +84,7 @@ export const AdminUserIndex: React.FC = () => {
                         <div>
                             <Toggle
                                 checked={user.admin}
-                                onToggle={() => dispatch.users.update({id: user.id, data: {admin: !user.admin}})}
+                                onToggle={() => handleAdminToggle(user)}
                             />
                         </div>
                     </Box>

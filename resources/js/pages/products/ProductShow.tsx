@@ -29,6 +29,20 @@ export const ProductShow: React.FC = () => {
 
     const [text, quantity, total, add, subtract] = useCartQuantity(productId, config);
 
+    useEffect(() => {
+        if (quantity === 1) {
+            dispatch.toasts.add({
+                title: 'Produto adicionado!',
+                description: `${product.name} foi adicionado ao carrinho`
+            });
+        } else if (!quantity) {
+            dispatch.toasts.add({
+                title: 'Produto removido!',
+                description: `${product.name} foi removido do carrinho`
+            });
+        }
+    }, [quantity]);
+
     if (!product) return null;
 
     return <PagePadding className="flex flex-col justify-around min-h-full">

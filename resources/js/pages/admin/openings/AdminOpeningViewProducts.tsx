@@ -9,6 +9,7 @@ import {Toggle}             from "../../../components/ui/Toggle";
 import {useDispatch}        from "react-redux";
 import {Dispatch}           from "../../../store";
 import {Title}              from "../../../components/ui/Title";
+import {ProductType}        from "../../../models/products";
 
 export type AdminOpeningViewProductsProps = {
     opening: OpeningType;
@@ -22,6 +23,22 @@ export const AdminOpeningViewProducts: React.FC<AdminOpeningViewProductsProps> =
         dispatch.products.index();
         dispatch.openings.index();
     }, []);
+
+    async function handleProductToggle(product: ProductType) {
+        if (opening.products.includes(product.id)) {
+            await dispatch.openings.removeProduct({openingId: opening.id, productId: product.id});
+            dispatch.toasts.add({
+                title: 'Produto removido!',
+                description: `${product.name} foi removido da abertura`
+            });
+        } else {
+            await dispatch.openings.addProduct({openingId: opening.id, productId: product.id});
+            dispatch.toasts.add({
+                title: 'Produto adicionado!',
+                description: `${product.name} foi adicionado à abertura`
+            });
+        }
+    }
 
     // TODO: fix this
     if (!opening) return <></>;
@@ -57,12 +74,7 @@ export const AdminOpeningViewProducts: React.FC<AdminOpeningViewProductsProps> =
                         <div>
                             <Toggle
                                 checked={opening.products.includes(product.id)}
-                                onToggle={() => opening.products.includes(product.id)
-                                    ?
-                                    dispatch.openings.removeProduct({openingId: opening.id, productId: product.id})
-                                    :
-                                    dispatch.openings.addProduct({openingId: opening.id, productId: product.id})
-                                }
+                                onToggle={() => handleProductToggle(product)}
                             />
                         </div>
                     </Box>
