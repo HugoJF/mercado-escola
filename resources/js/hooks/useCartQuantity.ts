@@ -14,8 +14,8 @@ export type useProductQuantityProps = [
     string,
     number,
     number,
-    () => void,
-    () => void
+    () => boolean,
+    () => boolean
 ];
 
 export default function useCartQuantity(productId: number, options: ProductQuantityConfig = UNIT): useProductQuantityProps {
@@ -26,16 +26,18 @@ export default function useCartQuantity(productId: number, options: ProductQuant
     const text = quantity === 1 ? options.singular : options.plural;
     const total = quantity * options.step;
 
-    function add() {
+    function add(): boolean {
         const newAmount = (quantity || 0) + 1;
 
         dispatch.cart.add({
             product: productId,
             amount: newAmount
         });
+
+        return !quantity && newAmount > 0;
     }
 
-    function subtract() {
+    function subtract(): boolean {
         const newAmount = Math.max(quantity - 1, 0);
 
         if (newAmount === 0) {
@@ -46,6 +48,8 @@ export default function useCartQuantity(productId: number, options: ProductQuant
                 amount: newAmount
             });
         }
+
+        return quantity > 0 && !newAmount;
     }
 
     return [text, quantity, total, add, subtract];

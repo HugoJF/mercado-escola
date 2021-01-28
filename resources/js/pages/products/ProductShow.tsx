@@ -29,19 +29,23 @@ export const ProductShow: React.FC = () => {
 
     const [text, quantity, total, add, subtract] = useCartQuantity(productId, config);
 
-    useEffect(() => {
-        if (quantity === 1) {
+    function handleAdd() {
+        if (add()) {
             dispatch.toasts.add({
                 title: 'Produto adicionado!',
                 description: `${product.name} foi adicionado ao carrinho`
             });
-        } else if (!quantity) {
+        }
+    }
+
+    function handleSubtract() {
+        if (subtract()) {
             dispatch.toasts.add({
                 title: 'Produto removido!',
                 description: `${product.name} foi removido do carrinho`
             });
         }
-    }, [quantity]);
+    }
 
     if (!product) {
         return null;
@@ -83,7 +87,7 @@ export const ProductShow: React.FC = () => {
 
         {/* Cart controls */}
         {!quantity ?
-            <Button onClick={add}>
+            <Button onClick={handleAdd}>
                 Adicionar ao carrinho
             </Button>
             :
@@ -93,7 +97,7 @@ export const ProductShow: React.FC = () => {
                             flex justify-center items-center
                             bg-primary-500 hover:bg-primary-600 text-gray-100 text-4xl font-bold
                             shadow rounded-lg cursor-pointer select-none"
-                    onClick={subtract}
+                    onClick={handleSubtract}
                 >
                     <span className="pb-1">-</span>
                 </div>
@@ -102,7 +106,7 @@ export const ProductShow: React.FC = () => {
                             flex justify-center items-center
                             bg-primary-500 hover:bg-primary-600 text-gray-100 text-4xl font-bold
                             shadow rounded-lg cursor-pointer select-none"
-                    onClick={add}
+                    onClick={handleAdd}
                 >
                     <span className="pb-1">+</span>
                 </div>
