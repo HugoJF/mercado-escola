@@ -43,7 +43,9 @@ export const ProductShow: React.FC = () => {
         }
     }, [quantity]);
 
-    if (!product) return null;
+    if (!product) {
+        return null;
+    }
 
     return <PagePadding className="flex flex-col justify-around min-h-full">
         {/* Images */}
