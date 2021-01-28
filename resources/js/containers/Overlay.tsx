@@ -1,12 +1,15 @@
-import React          from "react";
-import {HeaderRoutes} from "../routes/HeaderRoutes";
-import {MenuRoutes}   from "../routes/MenuRoutes";
+import React             from "react";
+import {HeaderRoutes}    from "../routes/HeaderRoutes";
+import {MenuRoutes}      from "../routes/MenuRoutes";
+import {X}               from "react-feather";
+import {ToastsContainer} from "../components/toasts/ToastsContainer";
 
 
 export const Overlay: React.FC = ({children}) => {
     return <div className="fixed w-full h-screen flex flex-col">
         {/* Header */}
         <HeaderRoutes/>
+
 
         {/* Content */}
         <main className="relative flex-grow overflow-hidden">
@@ -17,5 +20,8 @@ export const Overlay: React.FC = ({children}) => {
 
         {/* Bottom */}
         <MenuRoutes/>
+
+        {/* Toasts */}
+        <ToastsContainer/>
     </div>
 };

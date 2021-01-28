@@ -7,6 +7,7 @@ import {favorites} from "./favorites";
 import {cart}      from "./cart";
 import {orders}    from "./orders";
 import {users}     from "./users";
+import {toasts}     from "./toasts";
 
 export interface RootModel extends Models<RootModel> {
     // @ts-ignore
@@ -18,6 +19,7 @@ export interface RootModel extends Models<RootModel> {
     cart: typeof cart,
     orders: typeof orders,
     users: typeof users,
+    toasts: typeof toasts,
 }
 
 export const models: RootModel = {
@@ -29,4 +31,5 @@ export const models: RootModel = {
     cart,
     orders,
     users,
+    toasts,
 };

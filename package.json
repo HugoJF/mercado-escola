@@ -42,6 +42,7 @@
         "@types/react-router": "^5.1.8",
         "@types/react-router-dom": "^5.1.6",
         "@types/react-transition-group": "^4.4.0",
+        "@types/uuid": "^8.3.0",
         "classnames": "^2.2.6",
         "date-fns": "^2.16.1",
         "google-maps": "^4.3.3",
@@ -68,6 +69,7 @@
         "tailwindcss": "^1.8.10",
         "ts-loader": "^8.0.4",
         "typescript": "^4.0.5",
-        "usetimeout-react-hook": "^0.1.2"
+        "use-timeout": "^1.1.0",
+        "uuid": "^8.3.2"
     }
 }
