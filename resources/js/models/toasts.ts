@@ -10,9 +10,9 @@ export enum ToastTypes {
 }
 
 export type ToastType = {
-    title: string;
+    title: string | React.ReactNode;
     description?: string | React.ReactNode;
-    type?: ToastTypes;
+    type: ToastTypes;
     duration: number;
 }
 
@@ -20,11 +20,17 @@ export type ToastsState = {
     [id: string]: ToastType
 }
 
+const defaults: ToastType = {
+    title: '',
+    duration: 5000,
+    type: ToastTypes.SUCCESS,
+};
+
 export const toasts = createModel<RootModel>()({
     state: {} as ToastsState,
     reducers: {
-        add: (state, payload: ToastType) => {
-            state[uuid()] = payload;
+        add: (state, payload: Partial<ToastType>) => {
+            state[uuid()] = {...defaults, ...payload};
 
             return state;
         },
