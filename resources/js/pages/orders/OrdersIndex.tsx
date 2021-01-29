@@ -3,9 +3,9 @@ import {Title}              from "../../components/ui/Title";
 import {useOrders}          from "../../selectors";
 import {useDispatch}        from "react-redux";
 import {Dispatch}           from "../../store";
-import {HeightTransitioner}                from "../../components/ui/HeightTransitioner";
-import {OrderListItem, OrderListItemProps} from "../../components/orders/OrderListItemProps";
-import {PagePadding}                       from "../../containers/PagePadding";
+import {HeightTransitioner} from "../../components/ui/HeightTransitioner";
+import {OrderListItem}      from "../../components/orders/OrderListItemProps";
+import {PagePadding}        from "../../containers/PagePadding";
 import {Empty}              from "../../components/ui/Empty";
 import {useHistory}         from "react-router";
 

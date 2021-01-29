@@ -10,6 +10,10 @@ export class Bxios {
     private formData: FormData | undefined = undefined;
     private custom: AxiosRequestConfig = {};
 
+    constructor() {
+        this.headers['Accept'] = 'application/json';
+    }
+
     get(...url: (string|any)[]) {
         this.parseUrl(url);
         this.method = 'get';

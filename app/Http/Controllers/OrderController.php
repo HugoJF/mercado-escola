@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Exceptions\OrderAlreadyCancelledException;
+use App\Exceptions\OrderCannotBeCancelledException;
 use App\Http\Requests\OrderStoreRequest;
 use App\Http\Resources\OrderResource;
 use App\Mail\OrderCreated;
@@ -19,7 +21,7 @@ class OrderController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return Response
+     * @return \Illuminate\Http\Resources\Json\AnonymousResourceCollection
      */
     public function index()
     {
@@ -31,7 +33,7 @@ class OrderController extends Controller
      *
      * @param Request $request
      *
-     * @return Response
+     * @return OrderResource
      */
     public function store(OrderStoreRequest $request)
     {
@@ -62,6 +64,22 @@ class OrderController extends Controller
         $order->products()->sync($products);
 
         Mail::to(auth()->user())->send(new OrderCreated($order));
+
+        return new OrderResource($order);
+    }
+
+    public function cancel(Order $order)
+    {
+        if ($order->cancelled_at) {
+            throw new OrderAlreadyCancelledException($order);
+        }
+
+        if ($order->opening->closed()) {
+            throw new OrderCannotBeCancelledException($order);
+        }
+
+        $order->state = Order::CANCELLED;
+        $order->save();
 
         return new OrderResource($order);
     }

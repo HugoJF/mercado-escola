@@ -20,7 +20,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Order extends Model
 {
-    use HasFactory, SoftDeletes;
+    use HasFactory;
 
     public const PENDING = 'PENDING';      # Order has been registered;
     public const ACCEPTED = 'ACCEPTED';    # Order has been accepted;

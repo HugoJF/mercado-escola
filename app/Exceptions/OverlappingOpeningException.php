@@ -8,6 +8,6 @@ class OverlappingOpeningException extends HttpException
 {
     public function __construct()
     {
-        parent::__construct(412, 'Opening overlaps with an existing one!');
+        parent::__construct(412, 'Opening overlaps with an existing one.');
     }
 }

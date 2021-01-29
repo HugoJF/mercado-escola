@@ -1,62 +1,48 @@
-import React, {useEffect}                                  from "react";
+import React                                               from "react";
 import {Title}                                             from "../../components/ui/Title";
 import {Calendar, CheckSquare, DollarSign, MapPin, Square} from "react-feather";
 import {Box}                                               from "../../components/ui/Box";
-import {useParams}                                         from "react-router";
-import {useDispatch}                                       from "react-redux";
-import {Dispatch}                                          from "../../store";
-import {useAddresses, useOpenings, useOrders}              from "../../selectors";
 import {PriceFormatter}                                    from "../../components/ui/PriceFormatter";
 import {format, parseISO}                                  from "date-fns";
 import {ptBR}                                              from "date-fns/locale";
 import {PagePadding}                                       from "../../containers/PagePadding";
+import {OrderType}                                         from "../../models/orders";
+import {OpeningType}                                       from "../../models/openings";
+import {AddressType}                                       from "../../models/addresses";
+import {Button}                                            from "../../components/ui/Button";
+import useConfirmMenu                                      from "../../hooks/useConfirmMenu";
 
-const status = [{
-    title: 'Pedido foi aceito',
-    done: true,
-    date: '14h24 - 10/09/2020'
-}, {
-    title: 'Pedido está pronto',
-    done: true,
-    date: '11h01 - 11/09/2020'
-}, {
-    title: 'Pedido sendo entregue',
-    done: false,
-    date: '15h15 - 14/09/2020'
-},];
+export type OrdersShowProps = {
+    order: OrderType;
+    opening: OpeningType;
+    address?: AddressType;
+    status: any[];
+    onCancel: (order: OrderType) => void;
+}
 
-export const OrdersShow: React.FC = () => {
-    const dispatch = useDispatch<Dispatch>();
-    const params = useParams<{ orderId: string }>();
-    const orders = useOrders();
-    const addresses = useAddresses();
-    const openings = useOpenings();
-
-    useEffect(() => {
-        dispatch.orders.index();
-        dispatch.addresses.index();
-        dispatch.openings.index();
-    }, []);
-
-    const order = orders.orders[params.orderId];
-
-    if (!order) {
-        return null;
-    }
-
-    const opening = openings.openings[order.opening_id];
-
-    if (!opening) {
-        return null;
-    }
+export const OrdersShow: React.FC<OrdersShowProps> = ({order, opening, address, status, onCancel}) => {
+    const [menu, confirm] = useConfirmMenu();
 
     const deliversAt = opening.delivers_at ? parseISO(opening.delivers_at) : null;
 
-    const address = order.address_id && addresses.addresses[order.address_id];
+    async function handleOnCancel() {
+        const confirmed = await confirm({
+            title: 'Cancelar o seu pedido?',
+            description: <>
+                O cancelamento do seu pedido <span className="font-mono">#{order.id}</span> é imediato.
+            </>,
+            action: 'Cancelar',
+        });
+
+        if (confirmed) {
+            onCancel(order);
+        }
+    }
 
     return <PagePadding>
+        {menu}
         <div className="flex flex-col justify-around min-h-full">
-            <Title>Situação</Title>
+            <Title>Situação do pedido <span className="font-mono">#{order.id}</span></Title>
 
             <div className="px-2">
                 {status.map(((s, i) => (
@@ -113,6 +99,13 @@ export const OrdersShow: React.FC = () => {
                     </span>
                 </p>
             </div>
+
+            <Button
+                color="danger"
+                onClick={handleOnCancel}
+            >
+                Cancelar pedido
+            </Button>
         </div>
     </PagePadding>
 };

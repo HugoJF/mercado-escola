@@ -10,4 +10,7 @@ export const orders = {
         .post('orders')
         .body(data)
         .send<ResourceResponse<OrderType>>(),
+    cancel: (order: OrderType) => bxios()
+        .patch('orders', order.id, 'cancel')
+        .send<ResourceResponse<OrderType>>(),
 };

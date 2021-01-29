@@ -1,11 +1,11 @@
 import {Modal, ModalProps} from "../components/ui/Modal";
-import React               from "react";
+import React, {ReactNode}  from "react";
 import {Button}            from "../components/ui/Button";
 
 export type ConfirmActionMenuProps = {
-    title: string;
-    description?: string;
-    action: string;
+    title: string | ReactNode;
+    description?: string | ReactNode;
+    action: string | ReactNode;
     onClick: (confirmed: boolean) => void;
 }
 
@@ -15,7 +15,7 @@ export const ConfirmActionMenu: React.FC<ModalProps & ConfirmActionMenuProps> = 
         <h1 className="px-2 text-center text-lg font-medium">
             {title}
         </h1>
-        {description && <p className="text-center text-gray-500">
+        {description && <p className="px-4 text-center text-gray-500">
             {description}
         </p>}
 

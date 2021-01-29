@@ -1,18 +1,18 @@
-import {ConfirmActionMenu}       from "../action-menus/ConfirmActionMenu";
-import React, {useRef, useState} from "react";
+import {ConfirmActionMenu}                  from "../action-menus/ConfirmActionMenu";
+import React, {ReactNode, useRef, useState} from "react";
 
 export type ConfirmMenuParams = {
-    title: string;
-    description?: string;
-    action?: string;
+    title: string | ReactNode;
+    description?: string | ReactNode;
+    action?: string | ReactNode;
 }
 
-export default function useConfirmMenu(): [React.ReactNode, (params: ConfirmMenuParams) => Promise<boolean>] {
+export default function useConfirmMenu(): [ReactNode, (params: ConfirmMenuParams) => Promise<boolean>] {
     const [open, setOpen] = useState(false);
     const promise = useRef<(confirmed: boolean) => void>();
-    const [title, setTitle] = useState<string>('');
-    const [description, setDescription] = useState<string|undefined>('');
-    const [action, setAction] = useState<string>();
+    const [title, setTitle] = useState<string | ReactNode>('');
+    const [description, setDescription] = useState<string | ReactNode | undefined>('');
+    const [action, setAction] = useState<string | ReactNode>();
 
     function confirm({title, description, action}: ConfirmMenuParams): Promise<boolean> {
         setTitle(title);

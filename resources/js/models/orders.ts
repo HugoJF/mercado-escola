@@ -92,5 +92,18 @@ export const orders = createModel<RootModel>()({
 
             return response.data.data;
         },
+        async cancel(payload: OrderType, state: RootState): Promise<OrderType> {
+            const response = await api.orders.cancel(payload);
+
+            const normalized = normalize(response.data.data, ordersSchema); // FIXME: there's also `opening`
+
+            const orders = normalized.entities['orders'] as OrderType[];
+            const products = normalized.entities['products'] as ProductType[];
+
+            dispatch.orders.add(Object.values(orders));
+            dispatch.products.addProduct(Object.values(products));
+
+            return response.data.data;
+        },
     })
 });
