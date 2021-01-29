@@ -23,19 +23,16 @@ export const CartIndexContainer: React.FC = () => {
         dispatch.openings.current();
     }, []);
 
-    const total = useMemo(() => (cartProducts()
-            .map(({product, amount}) => (product.quantity_cost * amount))
-            .reduce((acc, value) => acc + value, 0)
-    ), [products, cart]);
+    const total = useMemo(() => {
+        const {products, amounts} = cartInformation();
 
-    function cartProducts() {
-        return Object
-            .entries(cart.items)
-            .map(([productId, amount]) => ({
-                product: products.products[parseInt(productId)],
-                amount,
-            }))
-            .filter(entry => entry.product);
+        return products.reduce((tot, product) => product.quantity_cost * amounts[product.id], 0);
+    }, [products, cart]);
+
+    function cartInformation() {
+        const cartProducts = Object.values(products.products).filter(product => cart.items[product.id]);
+
+        return {amounts: cart.items, products: cartProducts};
     }
 
     function remove(product: ProductType) {
@@ -69,11 +66,14 @@ export const CartIndexContainer: React.FC = () => {
     const address = cart.address_id ? addresses.addresses[cart.address_id] : null;
     const opening = openings.openings[openings.current];
 
+    const {products: cartProducts, amounts: cartAmounts} = cartInformation();
+
     return <>
         <CartIndex
             address={address}
             opening={opening}
-            cartProducts={cartProducts()}
+            products={cartProducts}
+            quantities={cartAmounts}
             total={total}
             onRemove={remove}
             delivery={cart.delivery}

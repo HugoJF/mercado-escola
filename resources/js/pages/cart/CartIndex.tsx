@@ -1,32 +1,23 @@
-import React, {useEffect, useMemo, useState}                                       from "react";
-import {Link, useHistory}                                                          from "react-router-dom";
+import React                                                                       from "react";
+import {Link}                                                                      from "react-router-dom";
 import {Button}                                                                    from "../../components/ui/Button";
 import {Title}                                                                     from "../../components/ui/Title";
 import {AlertTriangle, Calendar, ChevronRight, Edit, MapPin, ShoppingBag, XSquare} from "react-feather";
-import {useAddresses, useCart, useOpenings, useProducts}                           from "../../selectors";
-import {useDispatch}                     from "react-redux";
-import {Dispatch}                        from "../../store";
-import {ProductType}                     from "../../models/products";
-import {PriceFormatter}                  from "../../components/ui/PriceFormatter";
-import {ShippingOptionActionMenu}        from "../../action-menus/ShippingOptionActionMenu";
-import {OrderProductsType}               from "../../models/orders";
-import {QuantityTypes, QuantityTypeText} from "../../components/ui/QuantityTypeText";
-import {ImageHolder}                     from "../../components/ui/ImageHolder";
-import classNames                        from "classnames";
-import {PagePadding}                     from "../../containers/PagePadding";
-import {format, parseISO}                from "date-fns";
-import {AddressType}                     from "../../models/addresses";
-import {OpeningType}                     from "../../models/openings";
-
-export type CartProduct = {
-    product: ProductType;
-    amount: number;
-}
+import {ProductType}                                                               from "../../models/products";
+import {PriceFormatter}                                                            from "../../components/ui/PriceFormatter";
+import {ShippingOptionActionMenu}                                                  from "../../action-menus/ShippingOptionActionMenu";
+import classNames                                                                  from "classnames";
+import {PagePadding}                                                               from "../../containers/PagePadding";
+import {format, parseISO}                                                          from "date-fns";
+import {AddressType}                                                               from "../../models/addresses";
+import {OpeningType}                                                               from "../../models/openings";
+import {ProductListSummary}                                                        from "../../components/products/ProductListSummary";
 
 export type CartIndexProps = {
-    address: AddressType|null;
+    address: AddressType | null;
     opening: OpeningType;
-    cartProducts: CartProduct[];
+    products: ProductType[];
+    quantities: { [productId: number]: number };
     onRemove: (product: ProductType) => void;
     setShippingOptionsOpen: (open: boolean) => void;
     shippingOptionsOpen: boolean;
@@ -38,53 +29,29 @@ export type CartIndexProps = {
 }
 
 export const CartIndex: React.FC<CartIndexProps>
-    = ({address, opening, cartProducts, onRemove, handleShippingChanged, shippingOptionsOpen, setShippingOptionsOpen, total, delivery, handleOrderStore, loading}) => {
+    = ({address, opening, products, quantities, onRemove, handleShippingChanged, shippingOptionsOpen, setShippingOptionsOpen, total, delivery, handleOrderStore, loading}) => {
     return <PagePadding>
         <div className="flex flex-col justify-around min-h-full">
             <Title>Carrinho</Title>
 
             {/* Cart products */}
             <div className="border-b border-gray-200">
-                {!Object.values(cartProducts).length &&
+                {!Object.values(products).length &&
                 <h2 className="py-6 text-lg text-gray-500 text-center tracking-wide">
                     Carrinho vazio!
                 </h2>}
 
-                {cartProducts.map(({product, amount}) => (
-                    <div key={product.id} className="flex my-8 items-center">
-                        <div className="w-4/12">
-                            <ImageHolder
-                                src={Object.values(product.media)?.[0]}
-                            />
-                        </div>
-                        <div className="px-4 flex-grow">
-                            <h3 className="text-xl font-medium">{product.name}</h3>
-                            <div className="flex">
-                                <div className="flex-grow">
-                                    <p className="text-gray-500">
-                                        <QuantityTypeText
-                                            type={product.quantity_type as QuantityTypes}
-                                            quantity={amount}
-                                            showTotal
-                                        />
-                                    </p>
-                                    <p className="mt-2 text-secondary-500 font-medium">
-                                        <PriceFormatter cents price={amount * product.quantity_cost}/>
-                                    </p>
-                                </div>
-                                <div className="flex items-center space-x-4">
-                                    <Link to={`/produtos/${product.id}`}>
-                                        <Edit className="text-gray-500 cursor-pointer"/>
-                                    </Link>
-                                    <XSquare
-                                        className="text-red-600 cursor-pointer"
-                                        onClick={() => onRemove(product)}
-                                    />
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                ))}
+                <ProductListSummary products={products} quantities={quantities}>
+                    {(product, amount) => <>
+                        <Link to={`/produtos/${product.id}`}>
+                            <Edit className="text-gray-500 cursor-pointer"/>
+                        </Link>
+                        <XSquare
+                            className="text-red-600 cursor-pointer"
+                            onClick={() => onRemove(product)}
+                        />
+                    </>}
+                </ProductListSummary>
             </div>
 
             {/* Total cost */}

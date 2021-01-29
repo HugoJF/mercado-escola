@@ -1,10 +1,12 @@
-import React, {useEffect}                     from "react";
-import {useHistory, useParams}                from "react-router";
-import {useDispatch}                          from "react-redux";
-import {Dispatch}                             from "../../store";
-import {useAddresses, useOpenings, useOrders} from "../../selectors";
-import {OrdersShow}                           from "./OrdersShow";
-import {OrderType}                            from "../../models/orders";
+import React                                               from "react";
+import {useHistory, useParams}                             from "react-router";
+import {useDispatch}                                       from "react-redux";
+import {Dispatch}                                          from "../../store";
+import {useAddresses, useOpenings, useOrders, useProducts} from "../../selectors";
+import {OrdersShow}                                        from "./OrdersShow";
+import {OrderType}                                         from "../../models/orders";
+import useLoadEffect                                       from "../../hooks/useLoadEffect";
+import {Loading}                                           from "../../components/ui/Loading";
 
 const status = [{
     title: 'Pedido foi aceito',
@@ -27,11 +29,15 @@ export const OrdersShowContainer: React.FC = () => {
     const orders = useOrders();
     const addresses = useAddresses();
     const openings = useOpenings();
+    const products = useProducts();
 
-    useEffect(() => {
-        dispatch.orders.index();
-        dispatch.addresses.index();
-        dispatch.openings.index();
+    const loading = useLoadEffect(async () => {
+        await Promise.all([
+            dispatch.orders.index(),
+            dispatch.addresses.index(),
+            dispatch.openings.index(),
+            dispatch.products.index(),
+        ]);
     }, []);
 
     function handleOrderCancelled(order: OrderType) {
@@ -53,8 +59,13 @@ export const OrdersShowContainer: React.FC = () => {
 
     const address = addresses.addresses[order.address_id];
 
-    return <OrdersShow
+    const cartProducts = order.products.map(value => products.products[value]);
+    const cartQuantities = order.quantities;
+
+    return loading ? <Loading/> : <OrdersShow
         order={order}
+        products={cartProducts}
+        quantities={cartQuantities}
         opening={opening}
         address={address}
         status={status}

@@ -11,16 +11,20 @@ import {OpeningType}                                       from "../../models/op
 import {AddressType}                                       from "../../models/addresses";
 import {Button}                                            from "../../components/ui/Button";
 import useConfirmMenu                                      from "../../hooks/useConfirmMenu";
+import {ProductListSummary}                                from "../../components/products/ProductListSummary";
+import {ProductType}                                       from "../../models/products";
 
 export type OrdersShowProps = {
     order: OrderType;
+    products: ProductType[];
+    quantities: { [productId: number]: number }
     opening: OpeningType;
     address?: AddressType;
     status: any[];
     onCancel: (order: OrderType) => void;
 }
 
-export const OrdersShow: React.FC<OrdersShowProps> = ({order, opening, address, status, onCancel}) => {
+export const OrdersShow: React.FC<OrdersShowProps> = ({order, products, quantities, opening, address, status, onCancel}) => {
     const [menu, confirm] = useConfirmMenu();
 
     const deliversAt = opening.delivers_at ? parseISO(opening.delivers_at) : null;
@@ -44,7 +48,7 @@ export const OrdersShow: React.FC<OrdersShowProps> = ({order, opening, address, 
         <div className="flex flex-col justify-around min-h-full">
             <Title>Situação do pedido <span className="font-mono">#{order.id}</span></Title>
 
-            <div className="px-2">
+            <div className="px-2 my-6 divide-y">
                 {status.map(((s, i) => (
                     <Box key={i}>
                         {s.done ?
@@ -63,9 +67,18 @@ export const OrdersShow: React.FC<OrdersShowProps> = ({order, opening, address, 
 
             </div>
 
+            <Title>Produtos</Title>
+
+            <div className="my-6 px-2">
+                <ProductListSummary
+                    products={products}
+                    quantities={quantities}
+                />
+            </div>
+
             <Title>Valor total</Title>
 
-            <div className="my-8 flex items-center">
+            <div className="my-6 flex items-center">
                 <DollarSign className="mr-4 text-gray-500"/>
                 <p className="text-gray-500">
                     <span className="mr-1 text-secondary-500 font-medium">
@@ -78,7 +91,7 @@ export const OrdersShow: React.FC<OrdersShowProps> = ({order, opening, address, 
             {address && <>
                 <Title>Endereço de entrega</Title>
 
-                <div className="my-8 flex items-center">
+                <div className="my-6 flex items-center">
                     <MapPin className="mr-4 flex-shrink-0 text-gray-500"/>
                     <p className="text-gray-500">
                         {address.address} {address.complement} {address.number}
@@ -88,7 +101,7 @@ export const OrdersShow: React.FC<OrdersShowProps> = ({order, opening, address, 
 
             <Title>Data de entrega</Title>
 
-            <div className="my-8 flex items-center">
+            <div className="my-6 flex items-center">
                 <Calendar className="mr-4 text-gray-500"/>
                 <p className="text-gray-500">
                     <span className="mr-1 text-secondary-500 font-medium">

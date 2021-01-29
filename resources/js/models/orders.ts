@@ -21,7 +21,8 @@ export type OrdersComputedProperties = {
 }
 
 export type OrderRelationshipProperties = {
-    products: OrderProductsType[];
+    products: number[];
+    quantities: {[productId: number]: number}
 }
 
 export enum OrderStateEnum {
@@ -34,6 +35,7 @@ export enum OrderStateEnum {
     REJECTED = 'REJECTED',
 }
 
+// TODO: maybe replace this
 export type OrderProductsType = {
     product_id: number;
     quantity: number;
@@ -77,7 +79,13 @@ export const orders = createModel<RootModel>()({
         async index(payload, state: RootState): Promise<void> {
             const response = await api.orders.index();
 
-            dispatch.orders.add(Object.values(response.data.data));
+            const normalized = normalize(response.data.data, [ordersSchema]); // FIXME: there's also `opening`
+
+            const orders = normalized.entities['orders'] as OrderType[];
+            const products = normalized.entities['products'] as ProductType[];
+
+            dispatch.orders.add(Object.values(orders));
+            dispatch.products.addProduct(Object.values(products));
         },
         async store(payload: OrderStore, state: RootState): Promise<OrderType> {
             const response = await api.orders.create(payload);
