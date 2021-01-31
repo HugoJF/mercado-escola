@@ -8,5 +8,8 @@ export const addresses = {
     store: (data: AddressProperties) => bxios()
         .post('addresses')
         .body(data)
-        .send<AddressType>()
+        .send<AddressType>(),
+    destroy: (id: number) => bxios()
+        .delete('addresses', id)
+        .send<AddressType>(),
 };

@@ -45,6 +45,11 @@ export const addresses = createModel<RootModel>()({
 
             return state;
         },
+        delete: (state, payload: number) => {
+            delete state.addresses[payload];
+
+            return state;
+        }
     },
 
     effects: (dispatch) => ({
@@ -62,6 +67,15 @@ export const addresses = createModel<RootModel>()({
                 await api.addresses.store(payload);
 
                 await dispatch.addresses.index();
+            } catch (e) {
+                dispatch.addresses.setFailed(true);
+            }
+        },
+        async destroy(payload: number, state: RootState): Promise<void> {
+            try {
+                await api.addresses.destroy(payload);
+
+                await dispatch.addresses.delete(payload);
             } catch (e) {
                 dispatch.addresses.setFailed(true);
             }

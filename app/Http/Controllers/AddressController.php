@@ -15,11 +15,10 @@ class AddressController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Auth\Authenticatable
      */
     public function index()
     {
-//        return Address::all();
         return auth()->user()->addresses;
     }
 
@@ -28,7 +27,7 @@ class AddressController extends Controller
      *
      * @param \Illuminate\Http\Request $request
      *
-     * @return \Illuminate\Http\Response
+     * @return Address
      */
     public function store(Request $request)
     {
@@ -46,7 +45,7 @@ class AddressController extends Controller
      *
      * @param \App\Models\Address $address
      *
-     * @return \Illuminate\Http\Response
+     * @return Address
      */
     public function show(Address $address)
     {
@@ -59,7 +58,7 @@ class AddressController extends Controller
      * @param \Illuminate\Http\Request $request
      * @param \App\Models\Address      $address
      *
-     * @return \Illuminate\Http\Response
+     * @return Address
      */
     public function update(Request $request, Address $address)
     {
@@ -75,7 +74,8 @@ class AddressController extends Controller
      *
      * @param \App\Models\Address $address
      *
-     * @return \Illuminate\Http\Response
+     * @return Address
+     * @throws \Exception
      */
     public function destroy(Address $address)
     {

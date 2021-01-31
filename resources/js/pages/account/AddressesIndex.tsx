@@ -10,21 +10,21 @@ import {AddressList}           from "../../components/addresses/AddressList";
 import {FlatButton}            from "../../components/ui/FlatButton";
 import {PagePadding}           from "../../containers/PagePadding";
 import useConfirmMenu          from "../../hooks/useConfirmMenu";
+import useLoadEffect           from "../../hooks/useLoadEffect";
+import {AddressType}           from "../../models/addresses";
+import {Empty}                 from "../../components/ui/Empty";
 
 export const AddressesIndex: React.FC = () => {
-    const [loading, setLoading] = useState(true);
     const dispatch = useDispatch<Dispatch>();
-    const auth = useAuth();
     const history = useHistory();
     const addresses = useAddresses();
     const [menu, confirm] = useConfirmMenu();
 
-    useAsyncEffect(async () => {
+    const loading = useLoadEffect(async () => {
         await dispatch.addresses.index();
-        setLoading(false);
     }, []);
 
-    async function handleOnContext() {
+    async function handleOnContext(address: AddressType) {
         const response = await confirm({
             title: 'Remover endereço?',
             description: 'Deseja permanentemente remover esse endereço?',
@@ -32,13 +32,20 @@ export const AddressesIndex: React.FC = () => {
         });
 
         if (response) {
-            alert('Endereco removido')
+            dispatch.addresses.destroy(address.id);
         }
     }
 
     return <PagePadding>
         {menu}
         <Title>Seus endereços</Title>
+
+        {Object.values(addresses.addresses).length === 0 && !loading && <div className="my-8">
+            <Empty
+                title="Nenhum endereço!"
+                description="Você ainda não registrou um endereço de entrega"
+            />
+        </div>}
 
         <div className="my-4">
             <AddressList

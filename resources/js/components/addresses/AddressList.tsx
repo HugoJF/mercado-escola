@@ -66,7 +66,7 @@ export const AddressList: React.FC<AddressListProps> =
                         </div>
 
                         {/* Icon */}
-                        {ContextIcon && <ContextIcon
+                        {ContextIcon && !loading && <ContextIcon
                             className="ml-4 flex-shrink-0 text-gray-500"
                             onClick={handleOnContext.bind(this, address)}
                         />}
