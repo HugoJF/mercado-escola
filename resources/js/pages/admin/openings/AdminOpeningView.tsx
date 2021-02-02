@@ -3,17 +3,18 @@ import {useDispatch}                             from "react-redux";
 import {Dispatch}                                from "../../../store";
 import {useOpenings}                             from "../../../selectors";
 import {Redirect, Route, useLocation, useParams} from "react-router-dom";
-import {useHistory}                              from "react-router";
-import {AnimationBox}                            from "../../../components/ui/AnimationBox";
-import classNames                                from 'classnames';
-import {Badge}                                   from "../../../components/ui/Badge";
-import {MoreVertical}                            from "react-feather";
-import useRelativePath                           from "../../../hooks/useRelativePath";
-import {SwitchWithTransitions}                   from "../../../components/ui/SwitchWithTransition";
-import {PagePadding}                             from "../../../containers/PagePadding";
-import {AdminOpeningViewProducts}                from "./AdminOpeningViewProducts";
-import {AdminOpeningViewOrders}                  from "./AdminOpeningViewOrders";
-import {AdminOpeningViewSummary}                 from "./AdminOpeningViewSummaryProps";
+import {useHistory}               from "react-router";
+import {AnimationBox}             from "../../../components/ui/AnimationBox";
+import classNames                 from 'classnames';
+import {Badge}                    from "../../../components/ui/Badge";
+import {MoreVertical}             from "react-feather";
+import useRelativePath            from "../../../hooks/useRelativePath";
+import {SwitchWithTransitions}    from "../../../components/ui/SwitchWithTransition";
+import {PagePadding}              from "../../../containers/PagePadding";
+import {AdminOpeningViewProducts} from "./AdminOpeningViewProducts";
+import {AdminOpeningViewOrders}   from "./AdminOpeningViewOrders";
+import {AdminOpeningViewSummary}  from "./AdminOpeningViewSummaryProps";
+import {OpeningBadge}             from "../../../components/openings/OpeningBadge";
 
 export const AdminOpeningView: React.FC = () => {
     const [selected, setSelected] = useState('resumo');
@@ -57,7 +58,7 @@ export const AdminOpeningView: React.FC = () => {
         {/* Header */}
         <div className="flex items-center space-x-4">
             <div>
-                <Badge>PENDENTE</Badge>
+                <OpeningBadge opening={opening}/>
             </div>
             <h1 className="flex-grow text-2xl font-medium">Abertura <span className="font-thin">#1</span></h1>
             <MoreVertical className="flex-shrink text-gray-400"/>

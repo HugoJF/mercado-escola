@@ -1,14 +1,14 @@
-import {HeightTransitioner}                          from "../../../components/ui/HeightTransitioner";
-import {Calendar, Trash}                             from "react-feather";
-import {Skeleton}                                    from "../../../components/ui/Skeleton";
-import {Link}                                        from "react-router-dom";
-import React                                         from "react";
-import {OpeningType}                                 from "../../../models/openings";
-import useRelativePath                               from "../../../hooks/useRelativePath";
-import {Badge}                                       from "../../../components/ui/Badge";
-import {format, isFuture, isPast, isValid, parseISO} from "date-fns";
-import {Box}                                         from "../../../components/ui/Box";
-import {RotatingArrowRight}                        from "../../../components/ui/RotatingArrowRight";
+import {HeightTransitioner}        from "../../../components/ui/HeightTransitioner";
+import {Calendar, Trash}           from "react-feather";
+import {Skeleton}                  from "../../../components/ui/Skeleton";
+import {Link}                      from "react-router-dom";
+import React                       from "react";
+import {OpeningType}               from "../../../models/openings";
+import useRelativePath             from "../../../hooks/useRelativePath";
+import {format, isValid, parseISO} from "date-fns";
+import {Box}                       from "../../../components/ui/Box";
+import {RotatingArrowRight}        from "../../../components/ui/RotatingArrowRight";
+import {OpeningBadge}              from "../../../components/openings/OpeningBadge";
 
 export type AdminOpeningListItemProps = {
     opening: OpeningType | null;
@@ -41,15 +41,9 @@ export const AdminOpeningListItem: React.FC<AdminOpeningListItemProps>
                 <div className="flex-grow">
                     {/* Header with ID and status */}
                     <div className="flex justify-between">
-                        {opening?.id && <h3 className="flex text-lg font-medium">Abertura {opening?.id}</h3>}
+                        {opening && <h3 className="flex text-lg font-medium">Abertura {opening?.id}</h3>}
                         {!opensAt || !closesAt ? <Skeleton className="w-1/3"/> : null}
-                        {opensAt && closesAt && (
-                            isPast(opensAt) && isFuture(closesAt) && <Badge>Aberto</Badge>
-                            ||
-                            isPast(opensAt) && isPast(closesAt) && <Badge color="danger">Fechado</Badge>
-                            ||
-                            isFuture(opensAt) && isFuture(closesAt) && <Badge color="default">Pendente</Badge>
-                        )}
+                        {opening && <OpeningBadge opening={opening}/>}
                     </div>
 
                     {/* Opens at and closes at */}
