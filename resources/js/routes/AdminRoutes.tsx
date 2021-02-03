@@ -12,6 +12,7 @@ import {AdminOpeningView}           from "../pages/admin/openings/AdminOpeningVi
 import {AdminUserIndex}             from "../pages/admin/users/AdminUserIndex";
 import {AdminOpeningIndexContainer} from "../pages/admin/openings/AdminOpeningIndexContainer";
 import {AdminProductIndexContainer} from "../pages/admin/products/AdminProductIndexContainer";
+import {AdminOpeningViewContainer}  from "../pages/admin/openings/AdminOpeningViewContainer";
 
 export const AdminRoutes: React.FC = () => {
     const relative = useRelativePath();
@@ -26,6 +27,6 @@ export const AdminRoutes: React.FC = () => {
         <Route exact path={relative('/aberturas/novo')} children={<AdminOpeningCreate/>}/>
         <Route path={relative('/produtos/:productId/editar')} children={<AdminProductEdit/>}/>
         <Route path={relative('/aberturas/:openingId/editar')} children={<AdminOpeningEdit/>}/>
-        <Route path={relative('/aberturas/:openingId')} children={<AdminOpeningView/>}/>
+        <Route path={relative('/aberturas/:openingId')} children={<AdminOpeningViewContainer/>}/>
     </SwitchWithTransitions>
 };
