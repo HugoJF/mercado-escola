@@ -13,6 +13,7 @@ import {ptBR}                    from "date-fns/locale";
 import {RootRoutes}              from "./routes/RootRoutes";
 
 Sentry.init({
+    enabled: process.env.MIX_APP_ENV === 'production',
     dsn: process.env.MIX_SENTRY_DSN,
     autoSessionTracking: true,
     integrations: [
