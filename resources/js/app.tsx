@@ -12,8 +12,10 @@ import DateFnsUtils              from '@date-io/date-fns';
 import {ptBR}                    from "date-fns/locale";
 import {RootRoutes}              from "./routes/RootRoutes";
 
+const isProduction = process.env.MIX_APP_ENV === 'production';
+
 Sentry.init({
-    enabled: process.env.MIX_APP_ENV === 'production',
+    enabled: isProduction,
     dsn: process.env.MIX_SENTRY_DSN,
     autoSessionTracking: true,
     integrations: [
@@ -25,9 +27,11 @@ Sentry.init({
     tracesSampleRate: 1.0,
 });
 
-setConfig({reloadHooks: false});
-
 const WrappedRoot = hot(module)(RootRoutes);
+
+if (!isProduction) {
+    setConfig({reloadHooks: false});
+}
 
 ReactDOM.render(
     <React.StrictMode>
@@ -35,7 +39,7 @@ ReactDOM.render(
             <Provider store={store}>
                 <Router>
                     <MuiPickersUtilsProvider utils={DateFnsUtils} locale={ptBR}>
-                        <WrappedRoot/>
+                        {isProduction ? <RootRoutes/> : <WrappedRoot/>}
                     </MuiPickersUtilsProvider>
                 </Router>
             </Provider>
