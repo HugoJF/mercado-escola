@@ -70,15 +70,16 @@ export const ProductShow: React.FC = () => {
         {/* Price and quantities */}
         <div className="my-8 flex items-center justify-between">
             <div className="flex items-baseline">
-                    <span className="text-xl text-secondary-500 font-medium">
-                        <PriceFormatter cents price={product.quantity_cost}/>
-                    </span>
-                <span className="ml-px text-gray-500">
-                        /
-                        <QuantityTypeText
-                            type={product.quantity_type as QuantityTypes}
-                        />
-                    </span>
+                <span className="text-xl text-secondary-500 font-medium">
+                    <PriceFormatter cents price={product.quantity_cost * (quantity ?? 1)}/>
+                </span>
+
+                {!quantity && <span className="ml-px text-gray-500">
+                    /
+                    <QuantityTypeText
+                        type={product.quantity_type as QuantityTypes}
+                    />
+                </span>}
             </div>
             {quantity && <div className="flex items-center">
                 <div className="mx-4 text-xl font-medium">{total} {text}</div>
