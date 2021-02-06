@@ -3,7 +3,8 @@ import {Link}                            from "react-router-dom";
 import {PriceFormatter}                  from "../ui/PriceFormatter";
 import {ProductType}                     from "../../models/products";
 import {QuantityTypes, QuantityTypeText} from "../ui/QuantityTypeText";
-import {ImageHolder}                     from "../ui/ImageHolder";
+import {ImageHolder}      from "../ui/ImageHolder";
+import {Plus, PlusCircle} from "react-feather";
 
 export type ProductProps = {
     product: ProductType;
@@ -38,5 +39,10 @@ export const Product: React.FC<ProductProps> = ({product, url}) => {
                 /<QuantityTypeText type={quantity_type as QuantityTypes}/>
             </small>
         </h4>
+
+        <div className="flex justify-center mt-4 space-x-2 text-gray-400 text-sm">
+            <PlusCircle/>
+            <span>Adicionar ao carrinho</span>
+        </div>
     </Link>
 };
