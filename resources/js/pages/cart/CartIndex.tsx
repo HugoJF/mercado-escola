@@ -42,7 +42,7 @@ export const CartIndex: React.FC<CartIndexProps>
             <Title>Carrinho</Title>
 
             {/* Cart products */}
-            <div className="border-b border-gray-200">
+            <div className="pb-4 border-b border-gray-200">
                 {!Object.values(products).length &&
                 <h2 className="py-6 text-lg text-gray-500 text-center tracking-wide">
                     Carrinho vazio!
@@ -50,13 +50,13 @@ export const CartIndex: React.FC<CartIndexProps>
 
                 <ProductListSummary products={products} quantities={quantities}>
                     {(product, amount) => <>
-                        <Link to={`/produtos/${product.id}`}>
-                            <Edit className="text-gray-500 cursor-pointer"/>
-                        </Link>
                         <XSquare
                             className="text-red-600 cursor-pointer"
                             onClick={() => onRemove(product)}
                         />
+                        <Link to={`/produtos/${product.id}`}>
+                            <Edit className="text-gray-500 cursor-pointer"/>
+                        </Link>
                     </>}
                 </ProductListSummary>
             </div>
