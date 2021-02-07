@@ -1,18 +1,20 @@
 import React                                               from "react";
-import {Title}                                             from "../../components/ui/Title";
-import {Calendar, CheckSquare, DollarSign, MapPin, Square} from "react-feather";
-import {Box}                                               from "../../components/ui/Box";
-import {PriceFormatter}                                    from "../../components/ui/PriceFormatter";
-import {format, parseISO}                                  from "date-fns";
-import {ptBR}                                              from "date-fns/locale";
-import {PagePadding}                                       from "../../containers/PagePadding";
-import {OrderType}                                         from "../../models/orders";
-import {OpeningType}                                       from "../../models/openings";
-import {AddressType}                                       from "../../models/addresses";
-import {Button}                                            from "../../components/ui/Button";
-import useConfirmMenu                                      from "../../hooks/useConfirmMenu";
-import {ProductListSummary}                                from "../../components/products/ProductListSummary";
-import {ProductType}                                       from "../../models/products";
+import {Title}                                                   from "../../components/ui/Title";
+import {Calendar, CheckSquare, DollarSign, Info, MapPin, Square} from "react-feather";
+import {Box}                                                     from "../../components/ui/Box";
+import {PriceFormatter}     from "../../components/ui/PriceFormatter";
+import {format, parseISO}      from "date-fns";
+import {ptBR}                  from "date-fns/locale";
+import {PagePadding}           from "../../containers/PagePadding";
+import {OrderType}             from "../../models/orders";
+import {OpeningType}           from "../../models/openings";
+import {AddressType}           from "../../models/addresses";
+import {Button}                from "../../components/ui/Button";
+import useConfirmMenu          from "../../hooks/useConfirmMenu";
+import {ProductListSummary}    from "../../components/products/ProductListSummary";
+import {ProductType}           from "../../models/products";
+import {OrderStateBadge}       from "../../components/ui/OrderStateBadge";
+import {OrderStateDescription} from "../../components/ui/OrderStateDescription";
 
 export type OrdersShowProps = {
     order: OrderType;
@@ -46,9 +48,21 @@ export const OrdersShow: React.FC<OrdersShowProps> = ({order, products, quantiti
     return <PagePadding>
         {menu}
         <div className="flex flex-col justify-around min-h-full">
-            <Title>Situação do pedido <span className="font-mono">#{order.id}</span></Title>
+            <Title>
+                <div className="flex justify-between">
+                    <div>Pedido <span className="font-mono">#{order.id}</span> </div>
+                    <div><OrderStateBadge state={order.state}/></div>
+                </div>
+            </Title>
 
-            <div className="px-2 my-6 divide-y">
+            <div className="my-6 flex items-center">
+                <Info className="mr-4 flex-shrink-0 text-gray-500"/>
+                <p className="text-gray-500">
+                    <OrderStateDescription state={order.state}/>
+                </p>
+            </div>
+
+            {false && <div className="px-2 my-6 divide-y">
                 {status.map(((s, i) => (
                     <Box key={i}>
                         {s.done ?
@@ -65,21 +79,12 @@ export const OrdersShow: React.FC<OrdersShowProps> = ({order, products, quantiti
                     </Box>
                 )))}
 
-            </div>
-
-            <Title>Produtos</Title>
-
-            <div className="my-6 px-2">
-                <ProductListSummary
-                    products={products}
-                    quantities={quantities}
-                />
-            </div>
+            </div>}
 
             <Title>Valor total</Title>
 
             <div className="my-6 flex items-center">
-                <DollarSign className="mr-4 text-gray-500"/>
+                <DollarSign className="mr-4 flex-shrink-0 text-gray-500"/>
                 <p className="text-gray-500">
                     <span className="mr-1 text-secondary-500 font-medium">
                         <PriceFormatter price={order.cost} cents/>
@@ -102,7 +107,7 @@ export const OrdersShow: React.FC<OrdersShowProps> = ({order, products, quantiti
             <Title>Data de entrega</Title>
 
             <div className="my-6 flex items-center">
-                <Calendar className="mr-4 text-gray-500"/>
+                <Calendar className="mr-4 flex-shrink-0 text-gray-500"/>
                 <p className="text-gray-500">
                     <span className="mr-1 text-secondary-500 font-medium">
                         {deliversAt && format(deliversAt, 'dd/M/y', {locale: ptBR})}
@@ -111,6 +116,15 @@ export const OrdersShow: React.FC<OrdersShowProps> = ({order, products, quantiti
                         às {deliversAt && format(deliversAt, 'H', {locale: ptBR})}h
                     </span>
                 </p>
+            </div>
+
+            <Title>Produtos</Title>
+
+            <div className="my-6 px-2">
+                <ProductListSummary
+                    products={products}
+                    quantities={quantities}
+                />
             </div>
 
             <Button
