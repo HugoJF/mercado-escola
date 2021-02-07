@@ -68,6 +68,12 @@ export const CartIndexContainer: React.FC = () => {
 
     const {products: cartProducts, amounts: cartAmounts} = cartInformation();
 
+    function handleDeliverySelected(delivery: boolean) {
+        if (delivery) {
+            history.push('/carrinho/endereco');
+        }
+    }
+
     return <>
         <CartIndex
             address={address}
@@ -80,6 +86,7 @@ export const CartIndexContainer: React.FC = () => {
             setShippingOptionsOpen={setShippingOptionOpen}
             shippingOptionsOpen={shippingOptionOpen}
             handleShippingChanged={dispatch.cart.setDelivery}
+            onDeliverySelected={handleDeliverySelected}
             handleOrderStore={handleStoreOrder}
             loading={loading}
         />

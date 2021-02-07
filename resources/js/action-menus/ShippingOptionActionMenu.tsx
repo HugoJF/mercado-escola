@@ -44,7 +44,7 @@ export const ShippingOptionActionMenu: React.FC<ModalProps & ShippingOptionActio
                 onClick={onClose}
                 className="w-full py-3 text-white text-lg font-medium bg-primary-500"
             >
-                Atualizar
+                {isDelivery ? 'Selecionar endereço' : 'Atualizar'}
             </button>
         </div>
     </Modal>

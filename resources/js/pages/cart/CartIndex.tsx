@@ -25,11 +25,18 @@ export type CartIndexProps = {
     total: number;
     delivery: boolean;
     handleOrderStore: () => void;
+    onDeliverySelected: (isDelivery: boolean) => void;
     loading: boolean;
 }
 
 export const CartIndex: React.FC<CartIndexProps>
-    = ({address, opening, products, quantities, onRemove, handleShippingChanged, shippingOptionsOpen, setShippingOptionsOpen, total, delivery, handleOrderStore, loading}) => {
+    = ({address, opening, products, quantities, onRemove, handleShippingChanged, shippingOptionsOpen, setShippingOptionsOpen, total, delivery, onDeliverySelected, handleOrderStore, loading}) => {
+
+    function handleOnClose() {
+        setShippingOptionsOpen(false);
+        onDeliverySelected(delivery);
+    }
+
     return <PagePadding>
         <div className="flex flex-col justify-around min-h-full">
             <Title>Carrinho</Title>
@@ -78,7 +85,7 @@ export const CartIndex: React.FC<CartIndexProps>
 
             <ShippingOptionActionMenu
                 open={shippingOptionsOpen}
-                onClose={() => setShippingOptionsOpen(false)}
+                onClose={handleOnClose}
                 isDelivery={delivery}
                 onChange={handleShippingChanged}
             />
