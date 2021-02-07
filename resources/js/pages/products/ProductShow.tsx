@@ -115,8 +115,14 @@ export const ProductShow: React.FC = () => {
         }
 
         {/* Cart warning */}
-        {quantity && <Link to="/carrinho" className="py-4 text-center text-gray-500 tracking-tight">
-            Ver no carrinho ›
-        </Link>}
+        {quantity && <div className="grid grid-cols-2 items-center my-4 divide-x">
+            <Link to="/carrinho" className="py-2 px-2 text-center text-gray-500 text-sm tracking-tight">
+                Ver no carrinho
+            </Link>
+
+            <Link to="/home" className="py-2 px-2 text-center text-gray-500 text-sm tracking-tight">
+                Continuar comprando
+            </Link>
+        </div>}
     </PagePadding>
 };
