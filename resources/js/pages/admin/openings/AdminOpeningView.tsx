@@ -36,7 +36,7 @@ const AdminOpeningTabButton: React.FC<AdminOpeningTabProps> = ({onClick, selecte
         </div>
         <div
             className="w-full h-0.5 bg-gray-300"
-            ref={selected ? target : null}
+            ref={target}
         />
     </div>
 };
@@ -93,9 +93,9 @@ export const AdminOpeningView: React.FC<AdminOpeningViewProps> = ({opening}) => 
                     {/* Buttons */}
                     {Object.entries(tabs).map(([id, name]) =>
                         <AdminOpeningTabButton
-                            onClick={() => goTo('id')}
-                            selected={selected === 'id'}
-                            target={target}
+                            onClick={() => goTo(id)}
+                            selected={selected === id}
+                            target={selected === id ? target : null}
                         >
                             {name}
                         </AdminOpeningTabButton>
