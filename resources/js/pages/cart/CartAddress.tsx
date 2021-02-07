@@ -5,7 +5,6 @@ import {useAddresses}    from "../../selectors";
 import {useDispatch}     from "react-redux";
 import {Dispatch}        from "../../store";
 import {AddressList}     from "../../components/addresses/AddressList";
-import useAsyncEffect    from "../../hooks/useAsyncEffect";
 import {PagePadding}     from "../../containers/PagePadding";
 import {ChevronRight}    from "react-feather";
 import useLoadEffect     from "../../hooks/useLoadEffect";

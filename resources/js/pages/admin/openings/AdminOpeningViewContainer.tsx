@@ -27,9 +27,9 @@ export const AdminOpeningViewContainer: React.FC = () => {
     const openingId = parseInt(params.openingId);
     const opening = openings.openings[openingId];
 
-    const loading = useLoadEffect([
-        dispatch.openings.index()
-    ], []);
+    const loading = useLoadEffect(async () => {
+        await dispatch.openings.index();
+    }, []);
 
     return <Loading loading={loading}>
         <AdminOpeningView
