@@ -40,7 +40,6 @@ export enum OrderStateEnum {
 export type OrderProductsType = {
     product_id: number;
     quantity: number;
-    quantity_cost: number;
 }
 
 export type OrdersState = {
