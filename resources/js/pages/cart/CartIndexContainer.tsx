@@ -31,8 +31,15 @@ export const CartIndexContainer: React.FC = () => {
 
     function cartInformation() {
         const cartProducts = Object.values(products.products).filter(product => cart.items[product.id]);
-
-        return {amounts: cart.items, products: cartProducts};
+        const cartCosts = cartProducts.reduce((acc: {[id: number]: number}, product) => {
+            acc[product.id] = product.quantity_cost;
+            return acc;
+        }, {});
+        return {
+            products: cartProducts,
+            amounts: cart.items,
+            costs: cartCosts,
+        };
     }
 
     function remove(product: ProductType) {
@@ -66,7 +73,7 @@ export const CartIndexContainer: React.FC = () => {
     const address = cart.address_id ? addresses.addresses[cart.address_id] : null;
     const opening = openings.openings[openings.current];
 
-    const {products: cartProducts, amounts: cartAmounts} = cartInformation();
+    const cartData = cartInformation();
 
     function handleDeliverySelected(delivery: boolean) {
         if (delivery) {
@@ -78,8 +85,9 @@ export const CartIndexContainer: React.FC = () => {
         <CartIndex
             address={address}
             opening={opening}
-            products={cartProducts}
-            quantities={cartAmounts}
+            products={cartData.products}
+            quantities={cartData.amounts}
+            costs={cartData.costs}
             total={total}
             onRemove={remove}
             delivery={cart.delivery}

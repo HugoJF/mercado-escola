@@ -13,7 +13,11 @@ export const ordersSchema = new schema.Entity('orders', {
             acc[product.id] = product.pivot.quantity;
             return acc;
         }, {});
+        const costs = value.products.reduce((acc: any, product: any) =>  {
+            acc[product.id] = product.pivot.quantity_cost;
+            return acc;
+        }, {});
 
-        return {...value, quantities}
+        return {...value, quantities, costs}
     }
 });

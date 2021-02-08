@@ -19,14 +19,15 @@ import {OrderStateDescription} from "../../components/ui/OrderStateDescription";
 export type OrdersShowProps = {
     order: OrderType;
     products: ProductType[];
-    quantities: { [productId: number]: number }
+    quantities: { [productId: number]: number };
+    costs: { [productId: number]: number };
     opening: OpeningType;
     address?: AddressType;
     status: any[];
     onCancel: (order: OrderType) => void;
 }
 
-export const OrdersShow: React.FC<OrdersShowProps> = ({order, products, quantities, opening, address, status, onCancel}) => {
+export const OrdersShow: React.FC<OrdersShowProps> = ({order, products, quantities, costs, opening, address, status, onCancel}) => {
     const [menu, confirm] = useConfirmMenu();
 
     const deliversAt = opening.delivers_at ? parseISO(opening.delivers_at) : null;
@@ -124,6 +125,7 @@ export const OrdersShow: React.FC<OrdersShowProps> = ({order, products, quantiti
                 <ProductListSummary
                     products={products}
                     quantities={quantities}
+                    costs={costs}
                 />
             </div>
 

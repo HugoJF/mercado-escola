@@ -23,6 +23,7 @@ export type OrdersComputedProperties = {
 export type OrderRelationshipProperties = {
     products: number[];
     quantities: {[productId: number]: number}
+    costs: {[productId: number]: number}
 }
 
 export enum OrderStateEnum {
@@ -39,6 +40,7 @@ export enum OrderStateEnum {
 export type OrderProductsType = {
     product_id: number;
     quantity: number;
+    quantity_cost: number;
 }
 
 export type OrdersState = {

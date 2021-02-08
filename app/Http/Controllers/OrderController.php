@@ -10,6 +10,7 @@ use App\Mail\OrderCreated;
 use App\Models\Address;
 use App\Models\Opening;
 use App\Models\Order;
+use App\Models\Product;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -56,12 +57,19 @@ class OrderController extends Controller
          * Prepare product list to sync to pivot table.
          * Resulting array should be [product_id] => [pivot_attributes_array]
          */
-        $products = collect($request->input('products'))
+        $products = Product::query()->whereIn(
+            'id',
+            collect($request->input('products'))
+                ->map(fn ($i) => $i['product_id'])
+        )->get()->keyBy('id');
+
+        $productsData = collect($request->input('products'))
             ->keyBy('product_id')
             ->map(fn($product) => [
                 'quantity' => $product['quantity'],
+                'quantity_cost' => $products[$product['product_id']]['quantity_cost']
             ]);
-        $order->products()->sync($products);
+        $order->products()->sync($productsData);
 
         Mail::to(auth()->user())->send(new OrderCreated($order));
 

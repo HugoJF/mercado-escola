@@ -61,11 +61,13 @@ export const OrdersShowContainer: React.FC = () => {
 
     const cartProducts = order.products.map(value => products.products[value]);
     const cartQuantities = order.quantities;
+    const cartCosts = order.costs;
 
     return loading ? <Loading/> : <OrdersShow
         order={order}
         products={cartProducts}
         quantities={cartQuantities}
+        costs={cartCosts}
         opening={opening}
         address={address}
         status={status}

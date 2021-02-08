@@ -28,7 +28,7 @@ class OrderResource extends JsonResource
     protected function calculateCost()
     {
         return $this->products->reduce(function (int $total, Product $product) {
-            return $total + $product->quantity_cost * $product->pivot->quantity;
+            return $total + $product->pivot->quantity_cost * $product->pivot->quantity;
         }, 0);
     }
 }

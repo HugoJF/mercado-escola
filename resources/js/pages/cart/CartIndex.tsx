@@ -18,6 +18,7 @@ export type CartIndexProps = {
     opening: OpeningType;
     products: ProductType[];
     quantities: { [productId: number]: number };
+    costs: { [productId: number]: number };
     onRemove: (product: ProductType) => void;
     setShippingOptionsOpen: (open: boolean) => void;
     shippingOptionsOpen: boolean;
@@ -30,7 +31,7 @@ export type CartIndexProps = {
 }
 
 export const CartIndex: React.FC<CartIndexProps>
-    = ({address, opening, products, quantities, onRemove, handleShippingChanged, shippingOptionsOpen, setShippingOptionsOpen, total, delivery, onDeliverySelected, handleOrderStore, loading}) => {
+    = ({address, opening, products, quantities, costs, onRemove, handleShippingChanged, shippingOptionsOpen, setShippingOptionsOpen, total, delivery, onDeliverySelected, handleOrderStore, loading}) => {
 
     function handleOnClose() {
         setShippingOptionsOpen(false);
@@ -48,7 +49,7 @@ export const CartIndex: React.FC<CartIndexProps>
                     Carrinho vazio!
                 </h2>}
 
-                <ProductListSummary products={products} quantities={quantities}>
+                <ProductListSummary products={products} quantities={quantities} costs={costs}>
                     {(product, amount) => <>
                         <XSquare
                             className="text-red-600 cursor-pointer"
