@@ -24,10 +24,12 @@ class OrderTest extends TestCase
         $order = Order::factory()->create();
 
         $order->products()->attach($product1, [
-            'quantity' => 2,
+            'quantity'      => 2,
+            'quantity_cost' => 2,
         ]);
         $order->products()->attach($product2, [
-            'quantity' => 5,
+            'quantity'      => 5,
+            'quantity_cost' => 5,
         ]);
 
         $this->assertEquals(collect([
@@ -44,7 +46,7 @@ class OrderTest extends TestCase
             'user_id' => auth()->id(),
         ])->hasAttached(
             Product::factory()->count(5),
-            ['quantity' => 5]
+            ['quantity' => 5, 'quantity_cost' => 5]
         )->create();
 
         $this->get(route('orders.index'))
@@ -60,7 +62,7 @@ class OrderTest extends TestCase
             'user_id' => auth()->id(),
         ])->hasAttached(
             Product::factory()->count(5),
-            ['quantity' => 5]
+            ['quantity' => 5, 'quantity_cost' => 5]
         )->create();
 
         $this->get(route('orders.show', $order))
@@ -76,8 +78,8 @@ class OrderTest extends TestCase
         $address = Address::factory(['user_id' => $user])->create();
         $products = Product::factory()->count(5)->create();
         $opening = Opening::factory([
-            'opens_at'   => now()->subDays(2),
-            'closes_at'  => now()->addDay(),
+            'opens_at'  => now()->subDays(2),
+            'closes_at' => now()->addDay(),
         ])->create();
 
         /*
