@@ -2,7 +2,6 @@ import React                      from "react";
 import {OrderType}                from "../../models/orders";
 import {useAddresses}             from "../../selectors";
 import {formatDistance, parseISO} from "date-fns";
-import {Link}                     from "react-router-dom";
 import {Skeleton}                 from "../ui/Skeleton";
 import {OrderStateBadge}          from "../ui/OrderStateBadge";
 import {PriceFormatter}           from "../ui/PriceFormatter";

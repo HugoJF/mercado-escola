@@ -3,8 +3,8 @@ import {Link}                            from "react-router-dom";
 import {PriceFormatter}                  from "../ui/PriceFormatter";
 import {ProductType}                     from "../../models/products";
 import {QuantityTypes, QuantityTypeText} from "../ui/QuantityTypeText";
-import {ImageHolder}      from "../ui/ImageHolder";
-import {Plus, PlusCircle} from "react-feather";
+import {ImageHolder}                     from "../ui/ImageHolder";
+import {PlusCircle}                      from "react-feather";
 
 export type ProductProps = {
     product: ProductType;

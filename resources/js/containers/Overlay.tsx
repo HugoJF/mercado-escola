@@ -1,7 +1,6 @@
 import React             from "react";
 import {HeaderRoutes}    from "../routes/HeaderRoutes";
 import {MenuRoutes}      from "../routes/MenuRoutes";
-import {X}               from "react-feather";
 import {ToastsContainer} from "../components/toasts/ToastsContainer";
 
 

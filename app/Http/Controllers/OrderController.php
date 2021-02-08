@@ -13,9 +13,7 @@ use App\Models\Order;
 use App\Models\Product;
 use Exception;
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Mail;
-use Symfony\Component\HttpKernel\Exception\MethodNotAllowedHttpException;
 
 class OrderController extends Controller
 {

@@ -1,6 +1,5 @@
 import {createModel} from "@rematch/core";
 import {RootModel}   from "./index";
-import {RootState}   from "../store";
 
 export type ItemType = {
     product: number;

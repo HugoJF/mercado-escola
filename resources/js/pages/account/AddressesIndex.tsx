@@ -1,18 +1,17 @@
-import React, {useState}       from "react";
-import {useDispatch}           from "react-redux";
-import {Dispatch}              from "../../store";
-import {useHistory}            from "react-router-dom";
-import {Title}                 from "../../components/ui/Title";
-import {Plus}                  from "react-feather";
-import {useAddresses, useAuth} from "../../selectors";
-import useAsyncEffect          from "../../hooks/useAsyncEffect";
-import {AddressList}           from "../../components/addresses/AddressList";
-import {FlatButton}            from "../../components/ui/FlatButton";
-import {PagePadding}           from "../../containers/PagePadding";
-import useConfirmMenu          from "../../hooks/useConfirmMenu";
-import useLoadEffect           from "../../hooks/useLoadEffect";
-import {AddressType}           from "../../models/addresses";
-import {Empty}                 from "../../components/ui/Empty";
+import React          from "react";
+import {useDispatch}  from "react-redux";
+import {Dispatch}     from "../../store";
+import {useHistory}   from "react-router-dom";
+import {Title}        from "../../components/ui/Title";
+import {Plus}         from "react-feather";
+import {useAddresses} from "../../selectors";
+import {AddressList}  from "../../components/addresses/AddressList";
+import {FlatButton}   from "../../components/ui/FlatButton";
+import {PagePadding}  from "../../containers/PagePadding";
+import useConfirmMenu from "../../hooks/useConfirmMenu";
+import useLoadEffect  from "../../hooks/useLoadEffect";
+import {AddressType}  from "../../models/addresses";
+import {Empty}        from "../../components/ui/Empty";
 
 export const AddressesIndex: React.FC = () => {
     const dispatch = useDispatch<Dispatch>();

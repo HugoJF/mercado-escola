@@ -1,7 +1,6 @@
 import {createModel} from "@rematch/core";
 import {RootModel}   from "./index";
 import {RootState}   from "../store";
-import {ProductType} from "./products";
 import {api}         from "../api";
 
 export type FavoritesState = {

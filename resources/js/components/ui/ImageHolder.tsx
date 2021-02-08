@@ -1,6 +1,5 @@
-import React, {useEffect, useState} from "react";
-import {LazyLoadImage}              from "./Image";
-import {Breathing}       from "react-shimmer";
+import React, {useState} from "react";
+import {LazyLoadImage}   from "./Image";
 import classNames        from "classnames";
 import useTimeout        from "use-timeout";
 

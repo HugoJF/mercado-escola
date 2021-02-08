@@ -1,12 +1,12 @@
 import React, {useEffect} from "react";
-import {useDispatch} from "react-redux";
-import {Dispatch}    from "../../../store";
-import {useProducts} from "../../../selectors";
-import {useParams}   from "react-router-dom";
-import {useHistory}  from "react-router";
-import {Title}       from "../../../components/ui/Title";
-import {ProductForm} from "../../../components/products/ProductForm";
-import {PagePadding} from "../../../containers/PagePadding";
+import {useDispatch}      from "react-redux";
+import {Dispatch}         from "../../../store";
+import {useProducts}      from "../../../selectors";
+import {useParams}        from "react-router-dom";
+import {useHistory}       from "react-router";
+import {Title}            from "../../../components/ui/Title";
+import {ProductForm}      from "../../../components/products/ProductForm";
+import {PagePadding}      from "../../../containers/PagePadding";
 
 export const AdminProductEdit: React.FC = () => {
     const dispatch = useDispatch<Dispatch>();

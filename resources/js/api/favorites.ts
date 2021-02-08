@@ -1,8 +1,6 @@
-import {bxios}                 from "../bxios";
-import {ResourceResponse}      from "../types";
-import {OrderStore, OrderType} from "../models/orders";
-import {FavoritesState}        from "../models/favorites";
-import {ProductType}           from "../models/products";
+import {bxios}            from "../bxios";
+import {ResourceResponse} from "../types";
+import {ProductType}      from "../models/products";
 
 export const favorites = {
     index: () => bxios()

@@ -1,6 +1,6 @@
-import React                   from 'react';
-import {Route}                 from "react-router";
-import useRelativePath         from "../hooks/useRelativePath";
+import React                        from 'react';
+import {Route}                      from "react-router";
+import useRelativePath              from "../hooks/useRelativePath";
 import {SwitchWithTransitions}      from "../components/ui/SwitchWithTransition";
 import {AdminProductEdit}           from "../pages/admin/products/AdminProductEdit";
 import {AdminIndex}                 from "../pages/admin/AdminIndex";
@@ -8,7 +8,6 @@ import {AdminProductCreate}         from "../pages/admin/products/AdminProductCr
 import {AdminOpeningCreate}         from "../pages/admin/openings/AdminOpeningCreate";
 import {AdminOpeningEdit}           from "../pages/admin/openings/AdminOpeningEdit";
 import {AdminProducerIndex}         from "../pages/admin/producers/AdminProducerIndex";
-import {AdminOpeningView}           from "../pages/admin/openings/AdminOpeningView";
 import {AdminUserIndex}             from "../pages/admin/users/AdminUserIndex";
 import {AdminOpeningIndexContainer} from "../pages/admin/openings/AdminOpeningIndexContainer";
 import {AdminProductIndexContainer} from "../pages/admin/products/AdminProductIndexContainer";

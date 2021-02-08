@@ -1,7 +1,7 @@
 import React                        from 'react';
 import {isFuture, isPast, parseISO} from "date-fns";
 import {Badge}                      from "../ui/Badge";
-import {OpeningType}      from "../../models/openings";
+import {OpeningType}                from "../../models/openings";
 
 export type OpeningBadgeProps = {
     opening: OpeningType;

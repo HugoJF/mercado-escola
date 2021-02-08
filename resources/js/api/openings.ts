@@ -1,6 +1,5 @@
-import {bxios}                 from "../bxios";
-import {ResourceResponse}      from "../types";
-import {OrderStore, OrderType}          from "../models/orders";
+import {bxios}                          from "../bxios";
+import {ResourceResponse}               from "../types";
 import {OpeningProperties, OpeningType} from "../models/openings";
 
 export const openings = {

@@ -1,20 +1,20 @@
-import React                                               from "react";
+import React                                                     from "react";
 import {Title}                                                   from "../../components/ui/Title";
 import {Calendar, CheckSquare, DollarSign, Info, MapPin, Square} from "react-feather";
 import {Box}                                                     from "../../components/ui/Box";
-import {PriceFormatter}     from "../../components/ui/PriceFormatter";
-import {format, parseISO}      from "date-fns";
-import {ptBR}                  from "date-fns/locale";
-import {PagePadding}           from "../../containers/PagePadding";
-import {OrderType}             from "../../models/orders";
-import {OpeningType}           from "../../models/openings";
-import {AddressType}           from "../../models/addresses";
-import {Button}                from "../../components/ui/Button";
-import useConfirmMenu          from "../../hooks/useConfirmMenu";
-import {ProductListSummary}    from "../../components/products/ProductListSummary";
-import {ProductType}           from "../../models/products";
-import {OrderStateBadge}       from "../../components/ui/OrderStateBadge";
-import {OrderStateDescription} from "../../components/ui/OrderStateDescription";
+import {PriceFormatter}                                          from "../../components/ui/PriceFormatter";
+import {format, parseISO}                                        from "date-fns";
+import {ptBR}                                                    from "date-fns/locale";
+import {PagePadding}                                             from "../../containers/PagePadding";
+import {OrderType}                                               from "../../models/orders";
+import {OpeningType}                                             from "../../models/openings";
+import {AddressType}                                             from "../../models/addresses";
+import {Button}                                                  from "../../components/ui/Button";
+import useConfirmMenu                                            from "../../hooks/useConfirmMenu";
+import {ProductListSummary}                                      from "../../components/products/ProductListSummary";
+import {ProductType}                                             from "../../models/products";
+import {OrderStateBadge}                                         from "../../components/ui/OrderStateBadge";
+import {OrderStateDescription}                                   from "../../components/ui/OrderStateDescription";
 
 export type OrdersShowProps = {
     order: OrderType;

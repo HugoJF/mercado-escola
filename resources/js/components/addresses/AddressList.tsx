@@ -1,4 +1,4 @@
-import React   from "react";
+import React                from "react";
 import {AddressType}        from "../../models/addresses";
 import {X}                  from "react-feather";
 import {Box}                from "../ui/Box";

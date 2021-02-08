@@ -1,7 +1,7 @@
-import {createModel}                                      from "@rematch/core";
-import {RootModel}                                        from "./index";
-import React                                              from "react";
-import {v4 as uuid}                                       from 'uuid';
+import {createModel} from "@rematch/core";
+import {RootModel}   from "./index";
+import React         from "react";
+import {v4 as uuid}  from 'uuid';
 
 export enum ToastTypes {
     SUCCESS = 'SUCCESS',

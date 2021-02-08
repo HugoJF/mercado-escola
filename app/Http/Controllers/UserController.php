@@ -2,20 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\OrderStoreRequest;
 use App\Http\Requests\UserUpdateRequest;
-use App\Http\Resources\OrderResource;
 use App\Http\Resources\UserResource;
-use App\Mail\OrderCreated;
-use App\Models\Address;
-use App\Models\Opening;
-use App\Models\Order;
 use App\Models\User;
-use Exception;
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
-use Illuminate\Support\Facades\Mail;
-use Symfony\Component\HttpKernel\Exception\MethodNotAllowedHttpException;
 
 class UserController extends Controller
 {

@@ -1,17 +1,12 @@
-import React                                  from "react";
-import {Title}                                from "../../../components/ui/Title";
-import {ArrowRight, Plus, ShoppingBag, Trash} from "react-feather";
-import {HeightTransitioner}                   from "../../../components/ui/HeightTransitioner";
-import {Link, useHistory}                     from "react-router-dom";
-import {FlatButton}                           from "../../../components/ui/FlatButton";
-import {Skeleton}                             from "../../../components/ui/Skeleton";
-import classNames                             from "classnames";
-import {PriceFormatter}                       from "../../../components/ui/PriceFormatter";
-import {QuantityTypeText}                     from "../../../components/ui/QuantityTypeText";
-import {PagePadding}                          from "../../../containers/PagePadding";
-import {ProductType}                          from "../../../models/products";
-import useRelativePath                        from "../../../hooks/useRelativePath";
-import {AdminProductListItem}                 from "./AdminProductListItem";
+import React                  from "react";
+import {Title}                from "../../../components/ui/Title";
+import {Plus}                 from "react-feather";
+import {useHistory}           from "react-router-dom";
+import {FlatButton}           from "../../../components/ui/FlatButton";
+import {PagePadding}          from "../../../containers/PagePadding";
+import {ProductType}          from "../../../models/products";
+import useRelativePath        from "../../../hooks/useRelativePath";
+import {AdminProductListItem} from "./AdminProductListItem";
 
 export type AdminProductIndexProps = {
     products: ProductType[];

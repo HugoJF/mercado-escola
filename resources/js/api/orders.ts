@@ -1,4 +1,4 @@
-import {bxios}            from "../bxios";
+import {bxios}                 from "../bxios";
 import {ResourceResponse}      from "../types";
 import {OrderStore, OrderType} from "../models/orders";
 
