@@ -5,6 +5,7 @@ import {Dispatch}          from "../../../store";
 import {Title}             from "../../../components/ui/Title";
 import {OpeningForm}       from "../../../components/openings/OpeningForm";
 import {useHistory}        from "react-router";
+import {PagePadding}       from "../../../containers/PagePadding";
 
 export const AdminOpeningCreate: React.FC = () => {
     const dispatch = useDispatch<Dispatch>();
@@ -20,12 +21,12 @@ export const AdminOpeningCreate: React.FC = () => {
     }
 
 
-    return <div className="container mx-auto">
+    return <PagePadding>
         <Title>Formulário de abertura</Title>
 
         <OpeningForm
             onSubmit={createOpening}
             action="Criar"
         />
-    </div>
+    </PagePadding>
 };
