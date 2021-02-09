@@ -58,14 +58,14 @@ class OrderController extends Controller
         $products = Product::query()->whereIn(
             'id',
             collect($request->input('products'))
-                ->map(fn ($i) => $i['product_id'])
+                ->map(fn($i) => $i['product_id'])
         )->get()->keyBy('id');
 
         $productsData = collect($request->input('products'))
             ->keyBy('product_id')
             ->map(fn($product) => [
-                'quantity' => $product['quantity'],
-                'quantity_cost' => $products[$product['product_id']]['quantity_cost']
+                'quantity'      => $product['quantity'],
+                'quantity_cost' => $products[ $product['product_id'] ]['quantity_cost'],
             ]);
         $order->products()->sync($productsData);
 
@@ -76,11 +76,11 @@ class OrderController extends Controller
 
     public function cancel(Order $order)
     {
-        if ($order->cancelled_at) {
+        if ($order->state === Order::CANCELLED) {
             throw new OrderAlreadyCancelledException($order);
         }
 
-        if ($order->opening->closed()) {
+        if (!$order->state !== Order::PENDING || $order->opening->closed()) {
             throw new OrderCannotBeCancelledException($order);
         }
 

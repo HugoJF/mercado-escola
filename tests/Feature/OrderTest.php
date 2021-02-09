@@ -121,4 +121,14 @@ class OrderTest extends TestCase
             $order->products->pluck('id')
         );
     }
+
+    public function test_order_can_be_cancelled()
+    {
+        // TODO
+    }
+
+    public function test_order_cannot_be_cancelled_if_not_pending()
+    {
+        // TODO
+    }
 }
