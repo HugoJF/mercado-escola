@@ -4,7 +4,7 @@ import {Calendar, ChevronRight, Icon, ShoppingBag, Users} from "react-feather";
 import useRelativePath                                    from "../../hooks/useRelativePath";
 import {PagePadding}                                      from "../../containers/PagePadding";
 import {Box}                                              from "../../components/ui/Box";
-import {useHistory}                                       from "react-router";
+import useNavigation                                      from "../../hooks/useNavigation";
 
 type ButtonProps = {
     title: string;
@@ -31,7 +31,7 @@ const buttons: ButtonProps[] = [{
 }];
 
 export const AdminIndex: React.FC = () => {
-    const history = useHistory();
+    const {bindGo} = useNavigation();
     const relative = useRelativePath();
 
     return <PagePadding>
@@ -41,7 +41,7 @@ export const AdminIndex: React.FC = () => {
             <div className="mt-4 divide-y divide-gray-200">
                 {buttons.map(({icon: Icon, title, to}) => (
                     <Box
-                        onClick={() => history.push(relative(to))}
+                        onClick={bindGo(to)}
                     >
                         {/* Icon */}
                         <div className="flex items-center justify-center w-6 mr-4">

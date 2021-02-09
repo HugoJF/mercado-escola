@@ -1,12 +1,11 @@
 import React                  from "react";
 import {FlatButton}           from "../../../components/ui/FlatButton";
 import {Plus}                 from "react-feather";
-import {useHistory}           from "react-router";
-import useRelativePath        from "../../../hooks/useRelativePath";
 import {AdminOpeningListItem} from "./AdminOpeningListItem";
 import {OpeningType}          from "../../../models/openings";
 import {Title}                from "../../../components/ui/Title";
 import {PagePadding}          from "../../../containers/PagePadding";
+import useNavigation          from "../../../hooks/useNavigation";
 
 export type AdminOpeningIndexProps = {
     openings: OpeningType[];
@@ -17,8 +16,7 @@ export type AdminOpeningIndexProps = {
 
 export const AdminOpeningIndex: React.FC<AdminOpeningIndexProps> =
     ({openings, expanded, onClick, onDelete}) => {
-        const relative = useRelativePath();
-        const history = useHistory();
+        const {bindGo} = useNavigation();
 
         return <PagePadding>
             <div className="flex flex-col space-y-4 items-stretch">
@@ -36,7 +34,7 @@ export const AdminOpeningIndex: React.FC<AdminOpeningIndexProps> =
                 </div>
 
                 <FlatButton
-                    onClick={() => history.push(relative('/novo'))}
+                    onClick={bindGo('./novo')}
                 >
                     <Plus className="text-gray-500"/>
                     <span className="ml-2 text-gray-500 text-lg font-medium">Adicionar abertura</span>

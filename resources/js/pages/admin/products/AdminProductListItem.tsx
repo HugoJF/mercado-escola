@@ -72,7 +72,7 @@ export const AdminProductListItem: React.FC<AdminProductListItemProps>
                     {/* View */}
                     <Link
                         to={`/produtos/${product.id}`}
-                        className="flex justify-center items-center py-2 px-5 text-gray-700 font-medium rounded-lg"
+                        className="flex justify-center items-center py-2 px-5 text-gray-700 font-medium"
                     >
                         Ver
                     </Link>
@@ -80,7 +80,7 @@ export const AdminProductListItem: React.FC<AdminProductListItemProps>
                     {/* Delete */}
                     <div
                         onClick={() => product && onDelete && onDelete(product)}
-                        className="flex justify-center items-center py-2 px-4 text-red-600 font-medium rounded-lg"
+                        className="flex justify-center items-center py-2 px-4 text-red-600 font-medium"
                     >
                         <Trash size={20} className="mr-1 flex-shrink-0 inline"/>
                         Deletar
@@ -89,7 +89,7 @@ export const AdminProductListItem: React.FC<AdminProductListItemProps>
                     {/* Edit */}
                     <Link
                         to={relative(`/${product.id}/editar`)}
-                        className="flex justify-center items-center py-2 px-5 text-gray-700 font-medium rounded-lg"
+                        className="flex justify-center items-center py-2 px-5 text-gray-700 font-medium"
                     >
                         Editar
                     </Link>

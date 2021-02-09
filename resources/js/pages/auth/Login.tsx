@@ -2,7 +2,6 @@ import React, {useState}  from "react";
 import {useDispatch}      from "react-redux";
 import {Dispatch}         from "../../store";
 import {useAuth}          from "../../selectors";
-import {useHistory}       from "react-router";
 import {useForm}          from "react-hook-form";
 import {LoginCredentials} from "../../models/auth";
 import {Link}             from "react-router-dom";
@@ -10,11 +9,12 @@ import {Input}            from "../../components/form/Input";
 import {Button}           from "../../components/ui/Button";
 import {Container}        from "../../containers/Container";
 import {Error}            from "../../components/ui/Error";
+import useNavigation      from "../../hooks/useNavigation";
 
 export const Login: React.FC<object> = () => {
     const auth = useAuth();
     const dispatch = useDispatch<Dispatch>();
-    const history = useHistory();
+    const {go} = useNavigation();
     const [loading, setLoading] = useState(false);
     const {register, handleSubmit, errors} = useForm<LoginCredentials>();
 
@@ -22,7 +22,7 @@ export const Login: React.FC<object> = () => {
         setLoading(true);
         try {
             await dispatch.auth.login(credentials);
-            history.push('/home');
+            go('/home');
         } catch (e) {
             // TODO
         }

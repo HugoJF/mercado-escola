@@ -1,9 +1,9 @@
 import React                               from "react";
 import Ripples                             from "react-ripples";
-import {useHistory, useLocation}           from "react-router-dom";
 import {Book, Heart, Home, Settings, User} from "react-feather";
 import classNames                          from 'classnames';
 import {useAuth}                           from "./selectors";
+import useNavigation                       from "./hooks/useNavigation";
 
 const buttons = {
     Home: {
@@ -34,13 +34,8 @@ const buttons = {
 };
 
 export const Menu: React.FC = () => {
-    const history = useHistory();
-    const location = useLocation();
+    const {bindGo} = useNavigation();
     const auth = useAuth();
-
-    function redirect(to: string) {
-        history.push(to);
-    }
 
     return <div className="flex items-stretch justify-around bg-white shadow-menu">
         {Object.entries(buttons)
@@ -51,7 +46,7 @@ export const Menu: React.FC = () => {
 
                 return <Ripples
                     key={name}
-                    onClick={() => redirect(details.to)}
+                    onClick={bindGo(details.to)}
                     className={classNames(
                         `transition-colors duration-150
                         w-full flex flex-grow flex-col pt-4 pb-2 items-center justify-between

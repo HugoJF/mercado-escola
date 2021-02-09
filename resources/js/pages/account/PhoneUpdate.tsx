@@ -1,7 +1,6 @@
 import React, {useEffect, useState} from "react";
 import {useDispatch}                from "react-redux";
 import {Dispatch}                   from "../../store";
-import {useHistory}                 from "react-router-dom";
 import {Title}                      from "../../components/ui/Title";
 import {Loader}                     from "react-feather";
 import {useForm}                    from "react-hook-form";
@@ -9,6 +8,7 @@ import classNames                   from 'classnames';
 import {useAuth}                    from "../../selectors";
 import {PhoneInput}                 from "../../components/form/PhoneInput";
 import {PagePadding}                from "../../containers/PagePadding";
+import useNavigation                from "../../hooks/useNavigation";
 
 type PhoneUpdateForm = {
     phone: string;
@@ -17,7 +17,7 @@ type PhoneUpdateForm = {
 export const PhoneUpdate: React.FC = () => {
     const auth = useAuth();
     const dispatch = useDispatch<Dispatch>();
-    const history = useHistory();
+    const {goBack} = useNavigation();
     const [loading, setLoading] = useState(false);
 
     const {register, handleSubmit, errors, setValue} = useForm<PhoneUpdateForm>();
@@ -35,7 +35,7 @@ export const PhoneUpdate: React.FC = () => {
             phone: data.phone,
         });
         setLoading(false);
-        history.goBack();
+        goBack();
     }
 
     return <PagePadding>

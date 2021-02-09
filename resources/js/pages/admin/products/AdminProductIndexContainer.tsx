@@ -1,18 +1,19 @@
-import React, {useState}   from "react";
-import useRelativePath     from "../../../hooks/useRelativePath";
-import {useDispatch}       from "react-redux";
-import {Dispatch}          from "../../../store";
-import {useProducts}       from "../../../selectors";
-import {useHistory}        from "react-router-dom";
-import useConfirmMenu      from "../../../hooks/useConfirmMenu";
-import useLoadEffect       from "../../../hooks/useLoadEffect";
-import {AdminProductIndex} from "./AdminProductIndex";
-import {ProductType}       from "../../../models/products";
+import React, {useMemo, useState} from "react";
+import {useDispatch}              from "react-redux";
+import {Dispatch}                 from "../../../store";
+import {useProducts}              from "../../../selectors";
+import useConfirmMenu             from "../../../hooks/useConfirmMenu";
+import useLoadEffect              from "../../../hooks/useLoadEffect";
+import {AdminProductIndex}        from "./AdminProductIndex";
+import {ProductType}              from "../../../models/products";
+import {Empty}                    from "../../../components/ui/Empty";
+import {Title}                    from "../../../components/ui/Title";
+import {isEmpty, objectRange}     from "../../../helpers/Functions";
+import {Loading}                  from "../../../components/ui/Loading";
+import {PagePadding}              from "../../../containers/PagePadding";
 
 export const AdminProductIndexContainer: React.FC = () => {
     const dispatch = useDispatch<Dispatch>();
-    const history = useHistory();
-    const relative = useRelativePath();
     const products = useProducts();
     const [open, setOpen] = useState<number | undefined>(undefined);
     const [menu, confirm] = useConfirmMenu();
@@ -43,22 +44,35 @@ export const AdminProductIndexContainer: React.FC = () => {
         }
     }
 
-    function getProducts(): any[] {
+    const data: any[] = useMemo(() => {
         if (loading) {
-            return Array.from(Array(4).keys()).map(id => ({id}));
+            return objectRange(4);
         } else {
             return Object.values(products.products);
         }
-    }
+    }, [loading, products.products]);
 
-    return <>
-        {menu}
+    return loading
+        ?
+        <Loading/>
+        :
+        <PagePadding className="space-y-4">
+            {menu}
 
-        <AdminProductIndex
-            products={getProducts()}
-            expanded={open}
-            onClick={handleClick}
-            onDelete={handleDelete}
-        />
-    </>
+            <Title>Lista de produtos</Title>
+
+            {isEmpty(products.products) && !loading && <div>
+                <Empty
+                    title="Nenhum produto!"
+                    description="Você ainda não registrou um endereço de entrega"
+                />
+            </div>}
+
+            <AdminProductIndex
+                products={data}
+                expanded={open}
+                onClick={handleClick}
+                onDelete={handleDelete}
+            />
+        </PagePadding>
 };

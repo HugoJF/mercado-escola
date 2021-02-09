@@ -1,17 +1,16 @@
 import React, {useEffect, useState}   from "react";
 import {Redirect, Route, useLocation} from "react-router-dom";
-import {useHistory}                   from "react-router";
-import {AnimationBox}                 from "../../../components/ui/AnimationBox";
-import classNames                     from 'classnames';
-import {MoreVertical}                 from "react-feather";
-import useRelativePath                from "../../../hooks/useRelativePath";
-import {SwitchWithTransitions}        from "../../../components/ui/SwitchWithTransition";
-import {PagePadding}                  from "../../../containers/PagePadding";
-import {AdminOpeningViewProducts}     from "./AdminOpeningViewProducts";
-import {AdminOpeningViewOrders}       from "./AdminOpeningViewOrders";
-import {AdminOpeningViewSummary}      from "./AdminOpeningViewSummaryProps";
-import {OpeningBadge}                 from "../../../components/openings/OpeningBadge";
-import {OpeningType}                  from "../../../models/openings";
+import {AnimationBox}             from "../../../components/ui/AnimationBox";
+import classNames                 from 'classnames';
+import {MoreVertical}             from "react-feather";
+import {SwitchWithTransitions}    from "../../../components/ui/SwitchWithTransition";
+import {PagePadding}              from "../../../containers/PagePadding";
+import {AdminOpeningViewProducts} from "./AdminOpeningViewProducts";
+import {AdminOpeningViewOrders}   from "./AdminOpeningViewOrders";
+import {AdminOpeningViewSummary}  from "./AdminOpeningViewSummaryProps";
+import {OpeningBadge}             from "../../../components/openings/OpeningBadge";
+import {OpeningType}              from "../../../models/openings";
+import useNavigation              from "../../../hooks/useNavigation";
 
 type AdminOpeningTabProps = {
     onClick: () => void;
@@ -53,9 +52,8 @@ const tabs = {
 
 export const AdminOpeningView: React.FC<AdminOpeningViewProps> = ({opening}) => {
     const [selected, setSelected] = useState('resumo');
-    const relative = useRelativePath();
+    const {relative, bindGo} = useNavigation();
     const location = useLocation();
-    const history = useHistory();
 
     useEffect(() => {
         const allowed = Object.keys(tabs);
@@ -66,10 +64,6 @@ export const AdminOpeningView: React.FC<AdminOpeningViewProps> = ({opening}) => 
             setSelected(last);
         }
     }, [location]);
-
-    function goTo(tab: string): void {
-        history.push(relative('/' + tab));
-    }
 
     // @ts-ignore
     return <PagePadding className="flex flex-col space-y-4 h-full">
@@ -93,7 +87,7 @@ export const AdminOpeningView: React.FC<AdminOpeningViewProps> = ({opening}) => 
                     {/* Buttons */}
                     {Object.entries(tabs).map(([id, name]) =>
                         <AdminOpeningTabButton
-                            onClick={() => goTo(id)}
+                            onClick={bindGo('./' + id)}
                             selected={selected === id}
                             target={selected === id ? target : null}
                         >

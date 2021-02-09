@@ -3,15 +3,15 @@ import {useDispatch}       from "react-redux";
 import {Dispatch}          from "../../../store";
 import {useOpenings}       from "../../../selectors";
 import {useParams}         from "react-router-dom";
-import {useHistory}        from "react-router";
 import {Title}             from "../../../components/ui/Title";
 import {OpeningProperties} from "../../../models/openings";
 import {OpeningForm}       from "../../../components/openings/OpeningForm";
 import {PagePadding}       from "../../../containers/PagePadding";
+import useNavigation       from "../../../hooks/useNavigation";
 
 export const AdminOpeningEdit: React.FC = () => {
     const dispatch = useDispatch<Dispatch>();
-    const history = useHistory();
+    const {go} = useNavigation();
     const params = useParams<{ openingId: string }>();
     const openings = useOpenings();
 
@@ -25,7 +25,7 @@ export const AdminOpeningEdit: React.FC = () => {
     async function updateOpening(data: OpeningProperties) {
         try {
             await dispatch.openings.update({id: openingId, data: data});
-            history.push('/admin/aberturas');
+            go('/admin/aberturas');
         } catch (e) {
             if (e.response.data.errors)  {
                 throw {errors: e.response.data.errors};

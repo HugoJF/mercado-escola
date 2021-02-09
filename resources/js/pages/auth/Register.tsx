@@ -1,7 +1,6 @@
 import React, {useState}     from "react";
 import {useDispatch}         from "react-redux";
 import {Dispatch}            from "../../store";
-import {useHistory}          from "react-router";
 import {useForm}             from "react-hook-form";
 import {RegisterCredentials} from "../../models/auth";
 import {Link}                from "react-router-dom";
@@ -9,10 +8,11 @@ import {Input}               from "../../components/form/Input";
 import {Button}              from "../../components/ui/Button";
 import {Title}               from "../../components/ui/Title";
 import {PagePadding}         from "../../containers/PagePadding";
+import useNavigation         from "../../hooks/useNavigation";
 
 export const Register: React.FC<object> = () => {
     const dispatch = useDispatch<Dispatch>();
-    const history = useHistory();
+    const {go} = useNavigation();
     const [loading, setLoading] = useState(false);
     const {register, handleSubmit, watch, errors, setError} = useForm<RegisterCredentials>();
 
@@ -31,7 +31,7 @@ export const Register: React.FC<object> = () => {
                 email: credentials.email,
                 password: credentials.password,
             });
-            history.push('/on-boarding');
+            go('/on-boarding');
         } catch (e) {
             setErrors(e.response.data.errors);
         }

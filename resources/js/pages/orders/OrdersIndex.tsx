@@ -7,11 +7,11 @@ import {HeightTransitioner} from "../../components/ui/HeightTransitioner";
 import {OrderListItem}      from "../../components/orders/OrderListItemProps";
 import {PagePadding}        from "../../containers/PagePadding";
 import {Empty}              from "../../components/ui/Empty";
-import {useHistory}         from "react-router";
+import useNavigation        from "../../hooks/useNavigation";
 
 
 export const OrdersIndex: React.FC = () => {
-    const history = useHistory();
+    const {bindGo} = useNavigation();
     const dispatch = useDispatch<Dispatch>();
     const orders = useOrders();
 
@@ -49,7 +49,7 @@ export const OrdersIndex: React.FC = () => {
                         <OrderListItem
                             key={order.id}
                             order={order}
-                            onClick={() => history.push(`/pedidos/${order.id}`)}
+                            onClick={bindGo(`/pedidos/${order.id}`)}
                         />
                     </HeightTransitioner>
                 </div>

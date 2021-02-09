@@ -2,11 +2,11 @@ import React, {useEffect, useState} from 'react';
 import classNames                   from "classnames";
 import {Loader}                     from "react-feather";
 import {useForm}                    from "react-hook-form";
-import {useHistory}                 from "react-router-dom";
 import {useAuth}                    from "../../selectors";
 import {UserProperties}             from "../../models/auth";
 import {useDispatch}                from "react-redux";
 import {PhoneInput}                 from "../../components/form/PhoneInput";
+import useNavigation                from "../../hooks/useNavigation";
 
 type PhoneUpdateForm = {
     phone: string;
@@ -16,12 +16,12 @@ export const OnBoarding1: React.FC = () => {
     const auth = useAuth();
     const dispatch = useDispatch();
     const [loading, setLoading] = useState(false);
-    const history = useHistory();
+    const {go} = useNavigation();
     const {register, handleSubmit, errors} = useForm<PhoneUpdateForm>();
 
     useEffect(() => {
         if (auth.me?.phone) {
-            history.push('/on-boarding/2');
+            go('/on-boarding/2');
         }
     }, [history, auth.me?.phone]);
 
@@ -31,7 +31,7 @@ export const OnBoarding1: React.FC = () => {
             phone: data.phone,
         } as UserProperties);
         setLoading(false);
-        history.push('/on-boarding/2');
+        go('/on-boarding/2');
     }
 
     return <div className="px-4 bg-gradient-to-br from-primary-500 to-primary-700 min-h-screen flex flex-col justify-center bg-blue-500">

@@ -1,6 +1,5 @@
 import React, {useState}               from "react";
 import {useDispatch}                   from "react-redux";
-import {useHistory}                    from "react-router-dom";
 import {ChevronRight, Loader, MapPin}  from "react-feather";
 import PlacesAutocomplete              from 'react-places-autocomplete';
 import {Title}                         from "../../components/ui/Title";
@@ -12,6 +11,7 @@ import {Google}                        from "../../google";
 import {MapWithPing}                   from "../../components/addresses/MapWithPing";
 import {Button}                        from "../../components/ui/Button";
 import {PagePadding}                   from "../../containers/PagePadding";
+import useNavigation                   from "../../hooks/useNavigation";
 
 const fixOnBlur = (refObj: any) => {
     // Avoid clearing suggestions when input loses focus
@@ -27,7 +27,7 @@ const fixOnBlur = (refObj: any) => {
 
 export const AddressesCreate: React.FC = () => {
     const dispatch = useDispatch<Dispatch>();
-    const history = useHistory();
+    const {goBack} = useNavigation();
     const [numberSelectorOpen, setNumberSelectorOpen] = useState(false);
     const [loading, setLoading] = useState(false);
     const [input, setInput] = useState('');
@@ -78,7 +78,7 @@ export const AddressesCreate: React.FC = () => {
 
     async function storeAddress(data: AddressProperties) {
         await dispatch.addresses.store(data);
-        history.goBack();
+        goBack();
     }
 
     const ready = address && number && !numberSelectorOpen;

@@ -1,5 +1,4 @@
 import React          from "react";
-import {useHistory}   from "react-router-dom";
 import {Title}        from "../../components/ui/Title";
 import {useAddresses} from "../../selectors";
 import {useDispatch}  from "react-redux";
@@ -8,11 +7,12 @@ import {AddressList}  from "../../components/addresses/AddressList";
 import {PagePadding}  from "../../containers/PagePadding";
 import {ChevronRight} from "react-feather";
 import useLoadEffect  from "../../hooks/useLoadEffect";
+import useNavigation  from "../../hooks/useNavigation";
 
 
 export const CartAddress: React.FC = () => {
     const dispatch = useDispatch<Dispatch>();
-    const history = useHistory();
+    const {go} = useNavigation();
     const addresses = useAddresses();
 
     const loading = useLoadEffect(async () => {
@@ -29,7 +29,7 @@ export const CartAddress: React.FC = () => {
                 contextIcon={ChevronRight}
                 onClick={(address) => {
                     dispatch.cart.setAddress(address.id);
-                    history.push('/carrinho')
+                    go('/carrinho')
                 }}
             />
         </div>

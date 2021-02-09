@@ -1,5 +1,5 @@
 import React                                               from "react";
-import {useHistory, useParams}                             from "react-router";
+import {useParams}                                         from "react-router";
 import {useDispatch}                                       from "react-redux";
 import {Dispatch}                                          from "../../store";
 import {useAddresses, useOpenings, useOrders, useProducts} from "../../selectors";
@@ -7,6 +7,7 @@ import {OrdersShow}                                        from "./OrdersShow";
 import {OrderType}                                         from "../../models/orders";
 import useLoadEffect                                       from "../../hooks/useLoadEffect";
 import {Loading}                                           from "../../components/ui/Loading";
+import useNavigation                                       from "../../hooks/useNavigation";
 
 const status = [{
     title: 'Pedido foi aceito',
@@ -24,7 +25,7 @@ const status = [{
 
 export const OrdersShowContainer: React.FC = () => {
     const dispatch = useDispatch<Dispatch>();
-    const history = useHistory();
+    const {go} = useNavigation();
     const params = useParams<{ orderId: string }>();
     const orders = useOrders();
     const addresses = useAddresses();
@@ -42,7 +43,7 @@ export const OrdersShowContainer: React.FC = () => {
 
     function handleOrderCancelled(order: OrderType) {
         dispatch.orders.cancel(order);
-        history.push('/pedidos');
+        go('/pedidos');
     }
 
     const order = orders.orders[params.orderId];

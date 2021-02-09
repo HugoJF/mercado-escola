@@ -1,12 +1,9 @@
 import React                  from "react";
-import {Title}                from "../../../components/ui/Title";
 import {Plus}                 from "react-feather";
-import {useHistory}           from "react-router-dom";
 import {FlatButton}           from "../../../components/ui/FlatButton";
-import {PagePadding}          from "../../../containers/PagePadding";
 import {ProductType}          from "../../../models/products";
-import useRelativePath        from "../../../hooks/useRelativePath";
 import {AdminProductListItem} from "./AdminProductListItem";
+import useNavigation          from "../../../hooks/useNavigation";
 
 export type AdminProductIndexProps = {
     products: ProductType[];
@@ -17,13 +14,10 @@ export type AdminProductIndexProps = {
 
 export const AdminProductIndex: React.FC<AdminProductIndexProps>
     = ({products, expanded, onClick, onDelete}) => {
-    const relative = useRelativePath();
-    const history = useHistory();
+    const {bindGo} = useNavigation();
 
-    return <PagePadding>
-        <Title>Lista de produtos</Title>
-
-        <div className="my-4 divide-y divide-gray-200">
+    return <>
+        <div className="divide-y divide-gray-200">
             {products.map(product => (
                 <AdminProductListItem
                     product={product}
@@ -35,10 +29,10 @@ export const AdminProductIndex: React.FC<AdminProductIndexProps>
         </div>
 
         <FlatButton
-            onClick={() => history.push(relative('/novo'))}
+            onClick={bindGo('/novo')}
         >
             <span className="mr-4 text-lg">Adicionar produto</span>
             <Plus/>
         </FlatButton>
-    </PagePadding>
+    </>
 };

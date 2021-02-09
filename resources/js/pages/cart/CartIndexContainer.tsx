@@ -1,5 +1,4 @@
 import React, {useEffect, useMemo, useState}             from "react";
-import {useHistory}                                      from "react-router-dom";
 import {useAddresses, useCart, useOpenings, useProducts} from "../../selectors";
 import {useDispatch}                                     from "react-redux";
 import {Dispatch}                                        from "../../store";
@@ -7,10 +6,11 @@ import {ProductType}                                     from "../../models/prod
 import {OrderProductsType}                               from "../../models/orders";
 import {CartIndex}                                       from "./CartIndex";
 import {Loading}                                         from "../../components/ui/Loading";
+import useNavigation                                     from "../../hooks/useNavigation";
 
 export const CartIndexContainer: React.FC = () => {
     const dispatch = useDispatch<Dispatch>();
-    const history = useHistory();
+    const {go} = useNavigation();
     const addresses = useAddresses();
     const products = useProducts();
     const cart = useCart();
@@ -63,7 +63,7 @@ export const CartIndexContainer: React.FC = () => {
             products,
         });
         dispatch.cart.reset();
-        history.push(`/pedidos/${order.id}/finalizado`)
+        go(`/pedidos/${order.id}/finalizado`)
     }
 
     if (!openings.current) {
@@ -77,7 +77,7 @@ export const CartIndexContainer: React.FC = () => {
 
     function handleDeliverySelected(delivery: boolean) {
         if (delivery) {
-            history.push('/carrinho/endereco');
+            go('/carrinho/endereco');
         }
     }
 

@@ -1,7 +1,6 @@
 import React          from "react";
 import {useDispatch}  from "react-redux";
 import {Dispatch}     from "../../store";
-import {useHistory}   from "react-router-dom";
 import {Title}        from "../../components/ui/Title";
 import {Plus}         from "react-feather";
 import {useAddresses} from "../../selectors";
@@ -12,10 +11,11 @@ import useConfirmMenu from "../../hooks/useConfirmMenu";
 import useLoadEffect  from "../../hooks/useLoadEffect";
 import {AddressType}  from "../../models/addresses";
 import {Empty}        from "../../components/ui/Empty";
+import useNavigation  from "../../hooks/useNavigation";
 
 export const AddressesIndex: React.FC = () => {
     const dispatch = useDispatch<Dispatch>();
-    const history = useHistory();
+    const {bindGo} = useNavigation();
     const addresses = useAddresses();
     const [menu, confirm] = useConfirmMenu();
 
@@ -55,7 +55,7 @@ export const AddressesIndex: React.FC = () => {
         </div>
 
         <FlatButton
-            onClick={() => history.push('/conta/endereco/novo')}
+            onClick={bindGo('/conta/endereco/novo')}
         >
             <span className="mr-4 text-lg">Adicionar novo endereço</span>
             <Plus/>
