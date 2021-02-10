@@ -1,11 +1,13 @@
-import React                  from "react";
-import {FlatButton}           from "../../../components/ui/FlatButton";
-import {Plus}                 from "react-feather";
-import {AdminOpeningListItem} from "./AdminOpeningListItem";
-import {OpeningType}          from "../../../models/openings";
-import {Title}                from "../../../components/ui/Title";
-import {PagePadding}          from "../../../containers/PagePadding";
-import useNavigation          from "../../../hooks/useNavigation";
+import React              from "react";
+import {FlatButton}       from "../../../components/ui/FlatButton";
+import {Plus}             from "react-feather";
+import {OpeningType}      from "../../../models/openings";
+import {Title}            from "../../../components/ui/Title";
+import {PagePadding}      from "../../../containers/PagePadding";
+import useNavigation      from "../../../hooks/useNavigation";
+import {AdminOpeningList} from "./AdminOpeningList";
+import {isEmpty}          from "../../../helpers/Functions";
+import {Empty}            from "../../../components/ui/Empty";
 
 export type AdminOpeningIndexProps = {
     openings: OpeningType[];
@@ -19,25 +21,24 @@ export const AdminOpeningIndex: React.FC<AdminOpeningIndexProps> =
         const {bindGo} = useNavigation();
 
         return <PagePadding>
-            <div className="flex flex-col space-y-4 items-stretch">
-                <Title>Aberturas</Title>
+            <Title>Aberturas</Title>
 
-                <div className="mt-8">
-                    {openings.map(opening => (
-                        <AdminOpeningListItem
-                            opening={opening}
-                            expanded={opening && opening?.id === expanded}
-                            onClick={onClick}
-                            onDelete={onDelete}
-                        />
-                    ))}
-                </div>
+            {isEmpty(openings) && <Empty
+                title="Nenhuma abertura!"
+                description="Nenhuma abertura foi registrada no sistema"
+            />}
 
-                <FlatButton
-                    onClick={bindGo('./novo')}
-                    text="Adicionar abertura"
-                    icon={Plus}
-                />
-            </div>
+            <AdminOpeningList
+                openings={openings}
+                expanded={expanded}
+                onClick={onClick}
+                onDelete={onDelete}
+            />
+
+            <FlatButton
+                onClick={bindGo('./novo')}
+                text="Adicionar abertura"
+                icon={Plus}
+            />
         </PagePadding>
     };

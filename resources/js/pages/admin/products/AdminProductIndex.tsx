@@ -25,7 +25,7 @@ export const AdminProductIndex: React.FC<AdminProductIndexProps>
 
         {isEmpty(products) && <Empty
             title="Nenhum produto!"
-            description="Você ainda não registrou um endereço de entrega"
+            description="Nenhum produto foi registrado no sistema"
         />}
 
         <AdminProductList

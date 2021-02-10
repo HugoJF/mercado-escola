@@ -1,28 +1,23 @@
 import React, {useState}   from "react";
 import {Dispatch}          from "../../../store";
 import {useDispatch}       from "react-redux";
-import {useOpenings}       from "../../../selectors";
 import useConfirmMenu      from "../../../hooks/useConfirmMenu";
 import {OpeningType}       from "../../../models/openings";
-import useLoadEffect       from "../../../hooks/useLoadEffect";
 import {AdminOpeningIndex} from "./AdminOpeningIndex";
+import {useQuery}          from "react-query";
+import {api}               from "../../../api";
+import {Loading}           from "../../../components/ui/Loading";
+import useToggle           from "../../../hooks/useToggle";
 
 export const AdminOpeningIndexContainer: React.FC = () => {
     const dispatch = useDispatch<Dispatch>();
-    const openings = useOpenings();
-    const [expanded, setExpanded] = useState<number | undefined>(undefined);
+    const [expanded, setExpanded] = useToggle();
     const [menu, confirm] = useConfirmMenu();
 
-    const loading = useLoadEffect(async () => {
-        await dispatch.openings.index();
-    }, []);
+    const {status, data, error, isFetching} = useQuery('products', api.openings.index);
 
-    function getOpenings(): any[] {
-        if (loading) {
-            return Array(4).fill(null);
-        } else {
-            return Object.values(openings.openings);
-        }
+    function handleClick(opening: OpeningType) {
+        setExpanded(opening.id);
     }
 
     async function handleDelete(opening: OpeningType) {
@@ -40,11 +35,15 @@ export const AdminOpeningIndexContainer: React.FC = () => {
     return <>
         {menu}
 
-        <AdminOpeningIndex
-            openings={getOpenings()}
-            expanded={expanded}
-            onClick={(opening) => setExpanded(opening.id)}
-            onDelete={handleDelete}
-        />
+        {data ?
+            <AdminOpeningIndex
+                openings={data.data.data}
+                expanded={expanded}
+                onClick={handleClick}
+                onDelete={handleDelete}
+            />
+            :
+            <Loading/>
+        }
     </>
 };
