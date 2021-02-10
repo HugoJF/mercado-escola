@@ -6,6 +6,9 @@ export const openings = {
     index: () => bxios()
         .get('openings')
         .send<ResourceResponse<OpeningType[]>>(),
+    show: (id: number) => bxios()
+        .get('openings', id)
+        .send<ResourceResponse<OpeningType>>(),
     current: () => bxios()
         .get('openings', 'current')
         .send<ResourceResponse<OpeningType>>(),

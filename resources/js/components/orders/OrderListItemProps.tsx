@@ -1,6 +1,5 @@
 import React                      from "react";
 import {OrderType}                from "../../models/orders";
-import {useAddresses}             from "../../selectors";
 import {formatDistance, parseISO} from "date-fns";
 import {Skeleton}                 from "../ui/Skeleton";
 import {OrderStateBadge}          from "../ui/OrderStateBadge";
@@ -15,39 +14,33 @@ export type OrderListItemProps = {
 }
 
 export const OrderListItem: React.FC<OrderListItemProps> = ({order, onClick}) => {
-    const addresses = useAddresses();
-    const createdAt = order.created_at ? parseISO(order.created_at) : null;
+    const createdAt = parseISO(order.created_at);
 
-    const address = addresses.addresses[order.address_id];
+    function handleClick() {
+        if (onClick) {
+            onClick()
+        }
+    }
 
-    return <Box
-        onClick={() => onClick && onClick()}
-    >
+    return <Box onClick={handleClick}>
         <div className="w-full flex items-center">
             {/* Details */}
             <div className="flex-grow">
                 {/* Header */}
                 <div className="flex flex-grow justify-between">
                     <h2 className="flex-grow text-lg text-gray-900 font-mono tracking-tighter">
-                        {order.id ?
-                            `#${order.id}`
-                            :
-                            <Skeleton className="w-1/2"/>
-                        }
+                        #{order.id}
                     </h2>
-                    {order.state && <OrderStateBadge state={order.state}/>}
+
+                    <OrderStateBadge state={order.state}/>
                 </div>
 
                 {/* Address line */}
                 <p className="my-2 text-sm text-gray-400">
-                    {order?.id ?
-                        (!order.address_id ?
-                                <>Pedido para retirada</>
-                                :
-                                address?.address
-                        )
+                    {!order.address_id ?
+                        <>Pedido para retirada</>
                         :
-                        <Skeleton className="w-2/3"/>
+                        order.address?.address
                     }
                 </p>
 
@@ -55,11 +48,7 @@ export const OrderListItem: React.FC<OrderListItemProps> = ({order, onClick}) =>
                 <ul className="flex text-sm text-gray-500">
                     {/* Order datetime */}
                     <li>
-                        {createdAt ?
-                            formatDistance(createdAt, new Date(), {addSuffix: true, locale: ptBR})
-                            :
-                            <Skeleton className="w-8"/>
-                        }
+                        {formatDistance(createdAt, new Date(), {addSuffix: true, locale: ptBR})}
                     </li>
 
                     {/* Separator */}
@@ -68,8 +57,8 @@ export const OrderListItem: React.FC<OrderListItemProps> = ({order, onClick}) =>
                     {/* Order cost */}
                     <li>
                         <span className="inline-block text-secondary-600 font-medium">
-                            {order.cost ?
-                                <PriceFormatter cents price={order.cost}/>
+                            {order.total ?
+                                <PriceFormatter cents price={order.total}/>
                                 :
                                 <Skeleton className="w-8"/>
                             }

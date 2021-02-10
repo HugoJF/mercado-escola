@@ -31,6 +31,10 @@ class Order extends Model
 
     public $incrementing = false;
 
+    protected $with = ['products', 'address'];
+
+    protected $appends = ['total'];
+
     public function opening()
     {
         return $this->belongsTo(Opening::class);

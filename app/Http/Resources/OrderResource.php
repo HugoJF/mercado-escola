@@ -20,7 +20,7 @@ class OrderResource extends JsonResource
             parent::toArray($request),
             [
                 'products' => ProductResource::collection($this->products),
-                'cost' => $this->calculateCost(),
+                'total' => $this->calculateCost(),
             ]
         );
     }

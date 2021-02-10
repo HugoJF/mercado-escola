@@ -6,8 +6,9 @@ import {normalize}      from "normalizr";
 import {openingsSchema} from "../schemas";
 import {ProductType}    from "./products";
 import {api}            from "../api";
+import {OrderType}      from "./orders";
 
-export type OpeningType = OpeningProperties & OpeningComputedProperties & Timestamps;
+export type OpeningType = OpeningProperties & OpeningComputedProperties & OpeningRelationshipProperties & Timestamps;
 
 export type OpeningProperties = {
     max_delivery_orders: number;
@@ -22,6 +23,11 @@ export type OpeningComputedProperties = {
     products: number[];
     pickup_count: number;
     delivery_count: number;
+}
+
+export type OpeningRelationshipProperties = {
+    products: ProductType[];
+    orders: OrderType[];
 }
 
 export type OpeningsState = {

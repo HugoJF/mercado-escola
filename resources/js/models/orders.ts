@@ -6,6 +6,7 @@ import {ordersSchema}            from "../schemas";
 import {ProductType}             from "./products";
 import {SoftDeletes, Timestamps} from "../types";
 import {api}                     from "../api";
+import {AddressType}             from "./addresses";
 
 export type OrderType = OrdersProperties & OrdersComputedProperties & OrderRelationshipProperties & Timestamps & SoftDeletes;
 
@@ -17,11 +18,12 @@ export type OrdersProperties = {
 
 export type OrdersComputedProperties = {
     id: string;
-    cost: number;
+    total: number;
 }
 
 export type OrderRelationshipProperties = {
     products: number[];
+    address: AddressType;
     quantities: {[productId: number]: number}
     costs: {[productId: number]: number}
 }

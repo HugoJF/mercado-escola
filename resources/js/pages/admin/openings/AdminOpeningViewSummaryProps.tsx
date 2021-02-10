@@ -6,6 +6,7 @@ export type AdminOpeningViewSummaryProps = {
     opening: OpeningType;
 }
 
+// TODO
 export const AdminOpeningViewSummary: React.FC<AdminOpeningViewSummaryProps> = () => {
     return <div className="px-4 py-4 space-y-6">
         <div className="flex items-center space-x-4">

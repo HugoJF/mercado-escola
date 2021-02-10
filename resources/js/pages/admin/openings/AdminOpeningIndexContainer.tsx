@@ -14,7 +14,7 @@ export const AdminOpeningIndexContainer: React.FC = () => {
     const [expanded, setExpanded] = useToggle();
     const [menu, confirm] = useConfirmMenu();
 
-    const {status, data, error, isFetching} = useQuery('products', api.openings.index);
+    const {status, data, error, isFetching} = useQuery('openings', api.openings.index);
 
     function handleClick(opening: OpeningType) {
         setExpanded(opening.id);
