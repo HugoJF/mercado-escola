@@ -1,9 +1,13 @@
-import React                  from "react";
-import {Plus}                 from "react-feather";
-import {FlatButton}           from "../../../components/ui/FlatButton";
-import {ProductType}          from "../../../models/products";
-import {AdminProductListItem} from "./AdminProductListItem";
-import useNavigation          from "../../../hooks/useNavigation";
+import React              from "react";
+import {Plus}             from "react-feather";
+import {FlatButton}       from "../../../components/ui/FlatButton";
+import {ProductType}      from "../../../models/products";
+import useNavigation      from "../../../hooks/useNavigation";
+import {AdminProductList} from "./AdminProductList";
+import {Empty}            from "../../../components/ui/Empty";
+import {Title}            from "../../../components/ui/Title";
+import {PagePadding}      from "../../../containers/PagePadding";
+import {isEmpty}          from "../../../helpers/Functions";
 
 export type AdminProductIndexProps = {
     products: ProductType[];
@@ -16,23 +20,25 @@ export const AdminProductIndex: React.FC<AdminProductIndexProps>
     = ({products, expanded, onClick, onDelete}) => {
     const {bindGo} = useNavigation();
 
-    return <>
-        <div className="divide-y divide-gray-200">
-            {products.map(product => (
-                <AdminProductListItem
-                    product={product}
-                    expanded={product && expanded === product?.id}
-                    onClick={onClick}
-                    onDelete={onDelete}
-                />
-            ))}
-        </div>
+    return <PagePadding className="space-y-4">
+        <Title>Lista de produtos</Title>
+
+        {isEmpty(products) && <Empty
+            title="Nenhum produto!"
+            description="Você ainda não registrou um endereço de entrega"
+        />}
+
+        <AdminProductList
+            products={products}
+            expanded={expanded}
+            onClick={onClick}
+            onDelete={onDelete}
+        />
 
         <FlatButton
-            onClick={bindGo('/novo')}
-        >
-            <span className="mr-4 text-lg">Adicionar produto</span>
-            <Plus/>
-        </FlatButton>
-    </>
+            onClick={bindGo('./novo')}
+            text="Adicionar produto"
+            icon={Plus}
+        />
+    </PagePadding>
 };

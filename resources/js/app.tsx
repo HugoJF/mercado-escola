@@ -11,6 +11,8 @@ import {MuiPickersUtilsProvider} from '@material-ui/pickers';
 import DateFnsUtils              from '@date-io/date-fns';
 import {ptBR}                    from "date-fns/locale";
 import {RootRoutes}              from "./routes/RootRoutes";
+import {ReactQueryDevtools}               from 'react-query/devtools'
+import {QueryClient, QueryClientProvider} from "react-query";
 
 const isProduction = process.env.MIX_APP_ENV === 'production';
 
@@ -33,16 +35,22 @@ if (!isProduction) {
     setConfig({reloadHooks: false});
 }
 
+// Create a client
+const queryClient = new QueryClient();
+
 ReactDOM.render(
     <React.StrictMode>
         <Sentry.ErrorBoundary fallback={"An error has occurred"}>
-            <Provider store={store}>
-                <Router>
-                    <MuiPickersUtilsProvider utils={DateFnsUtils} locale={ptBR}>
-                        {isProduction ? <RootRoutes/> : <WrappedRoot/>}
-                    </MuiPickersUtilsProvider>
-                </Router>
-            </Provider>
+            <QueryClientProvider client={queryClient}>
+                <Provider store={store}>
+                    <Router>
+                        <MuiPickersUtilsProvider utils={DateFnsUtils} locale={ptBR}>
+                            {isProduction ? <RootRoutes/> : <WrappedRoot/>}
+                        </MuiPickersUtilsProvider>
+                    </Router>
+                </Provider>
+                <ReactQueryDevtools initialIsOpen={false}/>
+            </QueryClientProvider>
         </Sentry.ErrorBoundary>
     </React.StrictMode>,
     document.getElementById("root")

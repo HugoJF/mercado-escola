@@ -1,6 +1,10 @@
-export function isEmpty(object: object) {
+export function isEmpty(object: object|any[]) {
     if (!object) {
         return true;
+    }
+
+    if (Array.isArray(object)) {
+        return object.length === 0;
     }
 
     return Object.values(object).length === 0;

@@ -35,10 +35,9 @@ export const AdminOpeningIndex: React.FC<AdminOpeningIndexProps> =
 
                 <FlatButton
                     onClick={bindGo('./novo')}
-                >
-                    <Plus className="text-gray-500"/>
-                    <span className="ml-2 text-gray-500 text-lg font-medium">Adicionar abertura</span>
-                </FlatButton>
+                    text="Adicionar abertura"
+                    icon={Plus}
+                />
             </div>
         </PagePadding>
     };

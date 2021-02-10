@@ -56,9 +56,8 @@ export const AddressesIndex: React.FC = () => {
 
         <FlatButton
             onClick={bindGo('/conta/endereco/novo')}
-        >
-            <span className="mr-4 text-lg">Adicionar novo endereço</span>
-            <Plus/>
-        </FlatButton>
+            text="Adicionar novo endereço"
+            icon={Plus}
+        />
     </PagePadding>
 };

@@ -1,11 +1,11 @@
-import {bxios}            from "../bxios";
-import {ResourceResponse} from "../types";
-import {ProductType}      from "../models/products";
+import {bxios}                                       from "../bxios";
+import {PaginatedResourceResponse, ResourceResponse} from "../types";
+import {ProductType}                                 from "../models/products";
 
 export const products = {
     index: () => bxios()
         .get('products')
-        .send<ResourceResponse<ProductType[]>>(),
+        .send<PaginatedResourceResponse<ProductType[]>>(),
     create: (data: FormData) => bxios()
         .post('products')
         .body(data)

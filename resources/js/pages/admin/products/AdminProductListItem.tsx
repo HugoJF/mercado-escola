@@ -1,6 +1,5 @@
 import {HeightTransitioner} from "../../../components/ui/HeightTransitioner";
 import {ShoppingBag, Trash} from "react-feather";
-import {Skeleton}           from "../../../components/ui/Skeleton";
 import {PriceFormatter}     from "../../../components/ui/PriceFormatter";
 import {QuantityTypeText}   from "../../../components/ui/QuantityTypeText";
 import {Link}               from "react-router-dom";
@@ -20,14 +19,25 @@ export const AdminProductListItem: React.FC<AdminProductListItemProps>
     = ({product, expanded = false, onClick, onDelete}) => {
     const relative = useRelativePath();
 
+    function handleClick() {
+        if (onClick) {
+            onClick(product)
+        }
+    }
+
+    function handleDelete() {
+        if (onDelete) {
+            onDelete(product)
+        }
+    }
+
     return <div
-        key={product.id}
         className="transition-colors duration-150 w-full py-3 border-gray-200"
     >
         <HeightTransitioner>
             {/* Product details */}
             <div
-                onClick={() => product && onClick && onClick(product)}
+                onClick={handleClick}
                 className="flex items-center"
             >
                 <div className="flex items-center justify-center w-6 mr-4">
@@ -35,21 +45,15 @@ export const AdminProductListItem: React.FC<AdminProductListItemProps>
                 </div>
 
                 <div className="flex-grow">
-                    <h3 className="text-lg font-medium">{product.name || <Skeleton className="w-3/4"/>}</h3>
+                    <h3 className="text-lg font-medium">{product.name}</h3>
                     <div className="mt-1">
                         {/* Stats */}
                         <ul className="flex space-x-2 text-sm text-gray-500 tracking-tight">
                             {/* Product price */}
                             <li className="text-center">
-                                {product?.quantity_cost ?
-                                    <>
-                                        <PriceFormatter cents price={product.quantity_cost}/>
-                                        /
-                                        <QuantityTypeText type={product?.quantity_type}/>
-                                    </>
-                                    :
-                                    <Skeleton className="w-20"/>
-                                }
+                                <PriceFormatter cents price={product.quantity_cost}/>
+                                /
+                                <QuantityTypeText type={product.quantity_type}/>
                             </li>
 
                             {/* Separator */}
@@ -57,13 +61,13 @@ export const AdminProductListItem: React.FC<AdminProductListItemProps>
 
                             {/* Product quantity */}
                             <li className="text-center">
-                                {product?.media ? `${Object.values(product.media).length} imagens` : <Skeleton className="w-20"/>}
+                                {Object.values(product.media).length} imagens
                             </li>
                         </ul>
                     </div>
                 </div>
 
-                {product && <RotatingArrowRight rotated={expanded}/>}
+                <RotatingArrowRight rotated={expanded}/>
             </div>
 
             {/* Reveal menu */}
@@ -72,15 +76,15 @@ export const AdminProductListItem: React.FC<AdminProductListItemProps>
                     {/* View */}
                     <Link
                         to={`/produtos/${product.id}`}
-                        className="flex justify-center items-center py-2 px-5 text-gray-700 font-medium"
+                        className="flex justify-center items-center py-2 px-5 text-gray-700 font-medium cursor-pointer"
                     >
                         Ver
                     </Link>
 
                     {/* Delete */}
                     <div
-                        onClick={() => product && onDelete && onDelete(product)}
-                        className="flex justify-center items-center py-2 px-4 text-red-600 font-medium"
+                        onClick={handleDelete}
+                        className="flex justify-center items-center py-2 px-4 text-red-600 font-medium cursor-pointer"
                     >
                         <Trash size={20} className="mr-1 flex-shrink-0 inline"/>
                         Deletar
@@ -89,7 +93,7 @@ export const AdminProductListItem: React.FC<AdminProductListItemProps>
                     {/* Edit */}
                     <Link
                         to={relative(`/${product.id}/editar`)}
-                        className="flex justify-center items-center py-2 px-5 text-gray-700 font-medium"
+                        className="flex justify-center items-center py-2 px-5 text-gray-700 font-medium cursor-pointer"
                     >
                         Editar
                     </Link>
@@ -97,4 +101,4 @@ export const AdminProductListItem: React.FC<AdminProductListItemProps>
             </div>
         </HeightTransitioner>
     </div>
-}
+};

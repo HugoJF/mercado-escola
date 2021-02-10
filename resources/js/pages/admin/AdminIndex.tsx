@@ -15,19 +15,19 @@ type ButtonProps = {
 const buttons: ButtonProps[] = [{
     title: 'Produtos',
     icon: ShoppingBag,
-    to: '/produtos',
+    to: './produtos',
 }, {
     title: 'Produtores',
     icon: Users,
-    to: '/produtores',
+    to: './produtores',
 }, {
     title: 'Aberturas',
     icon: Calendar,
-    to: '/aberturas',
+    to: './aberturas',
 }, {
     title: 'Usuários',
     icon: Users,
-    to: '/usuarios',
+    to: './usuarios',
 }];
 
 export const AdminIndex: React.FC = () => {

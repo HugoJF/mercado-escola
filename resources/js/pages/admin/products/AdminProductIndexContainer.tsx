@@ -1,26 +1,20 @@
-import React, {useMemo, useState} from "react";
-import {useDispatch}              from "react-redux";
-import {Dispatch}                 from "../../../store";
-import {useProducts}              from "../../../selectors";
-import useConfirmMenu             from "../../../hooks/useConfirmMenu";
-import useLoadEffect              from "../../../hooks/useLoadEffect";
-import {AdminProductIndex}        from "./AdminProductIndex";
-import {ProductType}              from "../../../models/products";
-import {Empty}                    from "../../../components/ui/Empty";
-import {Title}                    from "../../../components/ui/Title";
-import {isEmpty, objectRange}     from "../../../helpers/Functions";
-import {Loading}                  from "../../../components/ui/Loading";
-import {PagePadding}              from "../../../containers/PagePadding";
+import React, {useState}   from "react";
+import {useDispatch}       from "react-redux";
+import {Dispatch}          from "../../../store";
+import useConfirmMenu      from "../../../hooks/useConfirmMenu";
+import {AdminProductIndex} from "./AdminProductIndex";
+import {ProductType}       from "../../../models/products";
+import {Loading}           from "../../../components/ui/Loading";
+import {useQuery}          from "react-query";
+import {api}               from "../../../api";
 
 export const AdminProductIndexContainer: React.FC = () => {
     const dispatch = useDispatch<Dispatch>();
-    const products = useProducts();
     const [open, setOpen] = useState<number | undefined>(undefined);
     const [menu, confirm] = useConfirmMenu();
 
-    const loading = useLoadEffect(async () => {
-        await dispatch.products.index();
-    }, []);
+    // Queries
+    const {status, data, error, isFetching} = useQuery('products', api.products.index);
 
     function handleClick(product: ProductType) {
         if (open === product.id) {
@@ -31,7 +25,9 @@ export const AdminProductIndexContainer: React.FC = () => {
     }
 
     async function handleDelete() {
-        if (!open) return;
+        if (!open) {
+            return;
+        }
 
         const confirmed = await confirm({
             title: 'Deletar produto?',
@@ -44,35 +40,22 @@ export const AdminProductIndexContainer: React.FC = () => {
         }
     }
 
-    const data: any[] = useMemo(() => {
-        if (loading) {
-            return objectRange(4);
-        } else {
-            return Object.values(products.products);
-        }
-    }, [loading, products.products]);
+    if (!data) {
+        return <Loading/>
+    }
 
-    return loading
-        ?
-        <Loading/>
-        :
-        <PagePadding className="space-y-4">
-            {menu}
+    return <>
+        {menu}
 
-            <Title>Lista de produtos</Title>
-
-            {isEmpty(products.products) && !loading && <div>
-                <Empty
-                    title="Nenhum produto!"
-                    description="Você ainda não registrou um endereço de entrega"
-                />
-            </div>}
-
+        {data ?
             <AdminProductIndex
-                products={data}
+                products={data.data.data}
                 expanded={open}
                 onClick={handleClick}
                 onDelete={handleDelete}
             />
-        </PagePadding>
+            :
+            <Loading/>
+        }
+    </>
 };
