@@ -88,7 +88,7 @@ export const OrdersShow: React.FC<OrdersShowProps> = ({order, products, quantiti
                 <DollarSign className="mr-4 flex-shrink-0 text-gray-500"/>
                 <p className="text-gray-500">
                     <span className="mr-1 text-secondary-500 font-medium">
-                        <PriceFormatter price={order.cost} cents/>
+                        <PriceFormatter price={order.total} cents/>
                     </span>
                     em {order.products.length} {order.products.length === 1 ? 'item' : 'items'}
                 </p>

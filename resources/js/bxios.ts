@@ -62,6 +62,12 @@ export class Bxios {
         this.url = url;
     }
 
+    setCustom(data: AxiosRequestConfig) {
+        this.custom = data;
+
+        return this;
+    }
+
     setData(data: any) {
         if (data instanceof FormData) {
             this.formData = data;
@@ -87,7 +93,6 @@ export class Bxios {
 
         return this;
     }
-
 
     send<T>() {
         return window.axios.request<T>({

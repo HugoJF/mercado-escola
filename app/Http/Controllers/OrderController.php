@@ -24,7 +24,7 @@ class OrderController extends Controller
      */
     public function index()
     {
-        return OrderResource::collection(auth()->user()->orders);
+        return OrderResource::collection(auth()->user()->orders()->paginate());
     }
 
     /**

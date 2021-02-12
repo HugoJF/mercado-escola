@@ -1,11 +1,12 @@
-import {bxios}                 from "../bxios";
-import {ResourceResponse}      from "../types";
-import {OrderStore, OrderType} from "../models/orders";
+import {bxios}                                       from "../bxios";
+import {PaginatedResourceResponse, ResourceResponse} from "../types";
+import {OrderStore, OrderType}                       from "../models/orders";
 
 export const orders = {
-    index: () => bxios()
+    index: (page = 1) => bxios()
         .get('orders')
-        .send<ResourceResponse<OrderType[]>>(),
+        .setCustom({params: {page}})
+        .send<PaginatedResourceResponse<OrderType[]>>(),
     create: (data: OrderStore) => bxios()
         .post('orders')
         .body(data)

@@ -1,4 +1,4 @@
-export function isEmpty(object: object|any[]) {
+export function isEmpty(object: object|null|undefined|any[]) {
     if (!object) {
         return true;
     }

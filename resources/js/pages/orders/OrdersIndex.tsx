@@ -1,40 +1,27 @@
-import React, {useEffect}   from "react";
-import {Title}              from "../../components/ui/Title";
-import {useOrders}          from "../../selectors";
-import {useDispatch}        from "react-redux";
-import {Dispatch}           from "../../store";
-import {HeightTransitioner} from "../../components/ui/HeightTransitioner";
-import {OrderListItem}      from "../../components/orders/OrderListItemProps";
-import {PagePadding}        from "../../containers/PagePadding";
-import {Empty}              from "../../components/ui/Empty";
-import useNavigation        from "../../hooks/useNavigation";
+import React         from "react";
+import {Title}       from "../../components/ui/Title";
+import {PagePadding} from "../../containers/PagePadding";
+import {Empty}       from "../../components/ui/Empty";
+import {isEmpty}     from "../../helpers/Functions";
+import {OrderType}   from "../../models/orders";
+import {OrderList}   from "./OrderList";
+import usePagination from "../../hooks/usePagination";
+import {Pagination}  from "../../components/ui/Pagination";
 
+export type OrdersIndexProps = {
+    orders: OrderType[];
+    currentPage: number;
+    lastPage: number;
+}
 
-export const OrdersIndex: React.FC = () => {
-    const {bindGo} = useNavigation();
-    const dispatch = useDispatch<Dispatch>();
-    const orders = useOrders();
-
-    useEffect(() => {
-        dispatch.orders.index();
-        dispatch.addresses.index();
-    }, []);
-
-    function getOrders(): any[] {
-        if (orders.orders === null) {
-            return Array.from(Array(5).keys());
-        } else {
-            return Object.values(orders.orders)
-        }
-    }
-
-    const orderList = getOrders();
+export const OrdersIndex: React.FC<OrdersIndexProps> = ({orders, currentPage, lastPage}) => {
+    const pagination = usePagination();
 
     return <PagePadding className="flex flex-col">
         <Title>Meus pedidos</Title>
 
         {/* Empty warning */}
-        {orderList.length === 0 && <div className="flex-grow flex flex-col justify-center">
+        {isEmpty(orders) && <div className="flex-grow flex flex-col justify-center">
             <Empty
                 title="Nenhum pedido!"
                 description="Você ainda não possui nenhum pedido registrado"
@@ -42,18 +29,14 @@ export const OrdersIndex: React.FC = () => {
         </div>}
 
         {/* Order list */}
-        <div className="divide-gray-200 divide-y">
-            {orderList.length !== 0 && orderList.map(order => (
-                <div key={order.id}>
-                    <HeightTransitioner>
-                        <OrderListItem
-                            key={order.id}
-                            order={order}
-                            onClick={bindGo(`/pedidos/${order.id}`)}
-                        />
-                    </HeightTransitioner>
-                </div>
-            ))}
-        </div>
+        <OrderList
+            orders={orders}
+        />
+
+        {!isEmpty(orders) && <Pagination
+            current={currentPage}
+            onClick={pagination.goToPage}
+            last={lastPage}
+        />}
     </PagePadding>
 };
