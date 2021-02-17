@@ -9,7 +9,7 @@ import {AdminOpeningViewProducts} from "./AdminOpeningViewProducts";
 import {AdminOpeningViewOrders}   from "./AdminOpeningViewOrders";
 import {AdminOpeningViewSummary}  from "./AdminOpeningViewSummaryProps";
 import {OpeningBadge}             from "../../../components/openings/OpeningBadge";
-import {OpeningType}              from "../../../models/openings";
+import {OpeningType}              from "../../../types/openings";
 import useNavigation              from "../../../hooks/useNavigation";
 
 type AdminOpeningTabProps = {

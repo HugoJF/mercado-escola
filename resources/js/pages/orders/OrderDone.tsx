@@ -4,9 +4,9 @@ import {Approve}          from "../../svg/approve";
 import {Link}             from "react-router-dom";
 import {format, parseISO} from "date-fns";
 import {ptBR}             from "date-fns/locale";
-import {OrderType}        from "../../models/orders";
-import {OpeningType}      from "../../models/openings";
-import {AddressType}      from "../../models/addresses";
+import {OrderType}        from "../../types/orders";
+import {OpeningType}      from "../../types/openings";
+import {AddressType}      from "../../types/addresses";
 import {PagePadding}      from "../../containers/PagePadding";
 
 export type OrderDoneProps = {

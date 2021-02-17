@@ -3,7 +3,7 @@ import {Input}                          from "../form/Input";
 import {DateTimePicker}                 from "@material-ui/pickers";
 import {Button}                         from "../ui/Button";
 import {useForm}                        from "react-hook-form";
-import {OpeningProperties, OpeningType} from "../../models/openings";
+import {OpeningProperties, OpeningType} from "../../types/openings";
 import useLoading                       from "../../hooks/useLoading";
 import {FieldWrapper}                   from "../form/FieldWrapper";
 import {formatISO}                      from "date-fns";

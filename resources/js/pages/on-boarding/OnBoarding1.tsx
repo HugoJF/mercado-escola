@@ -3,7 +3,7 @@ import classNames                   from "classnames";
 import {Loader}                     from "react-feather";
 import {useForm}                    from "react-hook-form";
 import {useAuth}                    from "../../selectors";
-import {UserProperties}             from "../../models/auth";
+import {UserProperties}             from "../../types/auth";
 import {useDispatch}                from "react-redux";
 import {PhoneInput}                 from "../../components/form/PhoneInput";
 import useNavigation                from "../../hooks/useNavigation";

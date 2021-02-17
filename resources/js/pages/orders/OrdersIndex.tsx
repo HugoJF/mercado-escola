@@ -3,7 +3,7 @@ import {Title}       from "../../components/ui/Title";
 import {PagePadding} from "../../containers/PagePadding";
 import {Empty}       from "../../components/ui/Empty";
 import {isEmpty}     from "../../helpers/Functions";
-import {OrderType}   from "../../models/orders";
+import {OrderType}   from "../../types/orders";
 import {OrderList}   from "./OrderList";
 import usePagination from "../../hooks/usePagination";
 import {Pagination}  from "../../components/ui/Pagination";

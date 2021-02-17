@@ -3,7 +3,7 @@ import {useDispatch}       from "react-redux";
 import {Dispatch}          from "../../../store";
 import useConfirmMenu      from "../../../hooks/useConfirmMenu";
 import {AdminProductIndex} from "./AdminProductIndex";
-import {ProductType}       from "../../../models/products";
+import {ProductType}       from "../../../types/products";
 import {Loading}           from "../../../components/ui/Loading";
 import {useQuery}          from "react-query";
 import {api}               from "../../../api";

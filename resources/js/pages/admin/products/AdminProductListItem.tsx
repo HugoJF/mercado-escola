@@ -4,7 +4,7 @@ import {PriceFormatter}     from "../../../components/ui/PriceFormatter";
 import {QuantityTypeText}   from "../../../components/ui/QuantityTypeText";
 import {Link}               from "react-router-dom";
 import React                from "react";
-import {ProductType}        from "../../../models/products";
+import {ProductType}        from "../../../types/products";
 import useRelativePath      from "../../../hooks/useRelativePath";
 import {RotatingArrowRight} from "../../../components/ui/RotatingArrowRight";
 

@@ -1,5 +1,5 @@
 import {bxios}                          from "../bxios";
-import {AddressProperties, AddressType} from "../models/addresses";
+import {AddressProperties, AddressType} from "../types/addresses";
 
 export const addresses = {
     index: () => bxios()

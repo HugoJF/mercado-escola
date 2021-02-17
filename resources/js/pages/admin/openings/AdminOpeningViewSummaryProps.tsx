@@ -1,6 +1,6 @@
 import React         from "react";
 import {Calendar}    from "react-feather";
-import {OpeningType} from "../../../models/openings";
+import {OpeningType} from "../../../types/openings";
 
 export type AdminOpeningViewSummaryProps = {
     opening: OpeningType;

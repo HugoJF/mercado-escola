@@ -1,5 +1,5 @@
 import React, {useEffect}   from "react";
-import {OpeningType}        from "../../../models/openings";
+import {OpeningType}        from "../../../types/openings";
 import {useProducts}        from "../../../selectors";
 import {HeightTransitioner} from "../../../components/ui/HeightTransitioner";
 import {Box}                from "../../../components/ui/Box";
@@ -9,7 +9,7 @@ import {Toggle}             from "../../../components/ui/Toggle";
 import {useDispatch}        from "react-redux";
 import {Dispatch}           from "../../../store";
 import {Title}              from "../../../components/ui/Title";
-import {ProductType}        from "../../../models/products";
+import {ProductType}        from "../../../types/products";
 
 export type AdminOpeningViewProductsProps = {
     opening: OpeningType;

@@ -1,5 +1,5 @@
 import React               from "react";
-import {OpeningProperties} from "../../../models/openings";
+import {OpeningProperties} from "../../../types/openings";
 import {useDispatch}       from "react-redux";
 import {Dispatch}          from "../../../store";
 import {Title}             from "../../../components/ui/Title";

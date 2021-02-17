@@ -10,7 +10,7 @@ import {Box}                from "../../../components/ui/Box";
 import {Toggle}             from "../../../components/ui/Toggle";
 import useLoadEffect        from "../../../hooks/useLoadEffect";
 import {Badge}              from "../../../components/ui/Badge";
-import {UserType}           from "../../../models/auth";
+import {UserType}           from "../../../types/auth";
 
 export const AdminUserIndex: React.FC = () => {
     const dispatch = useDispatch<Dispatch>();

@@ -2,7 +2,7 @@ import React, {useState}   from "react";
 import {Dispatch}          from "../../../store";
 import {useDispatch}       from "react-redux";
 import useConfirmMenu      from "../../../hooks/useConfirmMenu";
-import {OpeningType}       from "../../../models/openings";
+import {OpeningType}       from "../../../types/openings";
 import {AdminOpeningIndex} from "./AdminOpeningIndex";
 import {useQuery}          from "react-query";
 import {api}               from "../../../api";

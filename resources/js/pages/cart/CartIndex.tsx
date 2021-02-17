@@ -3,14 +3,14 @@ import {Link}                                                                   
 import {Button}                                                                    from "../../components/ui/Button";
 import {Title}                                                                     from "../../components/ui/Title";
 import {AlertTriangle, Calendar, ChevronRight, Edit, MapPin, ShoppingBag, XSquare} from "react-feather";
-import {ProductType}                                                               from "../../models/products";
+import {ProductType}                                                               from "../../types/products";
 import {PriceFormatter}                                                            from "../../components/ui/PriceFormatter";
 import {ShippingOptionActionMenu}                                                  from "../../action-menus/ShippingOptionActionMenu";
 import classNames                                                                  from "classnames";
 import {PagePadding}                                                               from "../../containers/PagePadding";
 import {format, parseISO}                                                          from "date-fns";
-import {AddressType}                                                               from "../../models/addresses";
-import {OpeningType}                                                               from "../../models/openings";
+import {AddressType}                                                               from "../../types/addresses";
+import {OpeningType}                                                               from "../../types/openings";
 import {ProductListSummary}                                                        from "../../components/products/ProductListSummary";
 
 export type CartIndexProps = {

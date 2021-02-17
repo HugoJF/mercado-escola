@@ -1,5 +1,5 @@
 import React                from "react";
-import {OpeningType}        from "../../../models/openings";
+import {OpeningType}        from "../../../types/openings";
 import {HeightTransitioner} from "../../../components/ui/HeightTransitioner";
 import {Title}              from "../../../components/ui/Title";
 import {OrderListItem}      from "../../../components/orders/OrderListItemProps";

@@ -4,7 +4,7 @@ import {Dispatch}          from "../../../store";
 import {useOpenings}       from "../../../selectors";
 import {useParams}         from "react-router-dom";
 import {Title}             from "../../../components/ui/Title";
-import {OpeningProperties} from "../../../models/openings";
+import {OpeningProperties} from "../../../types/openings";
 import {OpeningForm}       from "../../../components/openings/OpeningForm";
 import {PagePadding}       from "../../../containers/PagePadding";
 import useNavigation       from "../../../hooks/useNavigation";

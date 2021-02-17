@@ -1,7 +1,7 @@
 import React                   from 'react';
 import {useDispatch}           from "react-redux";
 import {Dispatch}              from "../../store";
-import {ToastType, ToastTypes} from "../../models/toasts";
+import {ToastType, ToastTypes} from "../../types/toasts";
 import classNames              from "classnames";
 import useTimeout              from 'use-timeout'
 

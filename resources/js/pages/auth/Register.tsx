@@ -2,7 +2,7 @@ import React, {useState}     from "react";
 import {useDispatch}         from "react-redux";
 import {Dispatch}            from "../../store";
 import {useForm}             from "react-hook-form";
-import {RegisterCredentials} from "../../models/auth";
+import {RegisterCredentials} from "../../types/auth";
 import {Link}                from "react-router-dom";
 import {Input}               from "../../components/form/Input";
 import {Button}              from "../../components/ui/Button";

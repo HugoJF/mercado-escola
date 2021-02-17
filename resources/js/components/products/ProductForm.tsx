@@ -1,7 +1,7 @@
 import React, {useEffect, useState}     from "react";
 import {useForm}                        from "react-hook-form";
 import * as QuantityConfig              from "../../configs/ProductQuantityConfig";
-import {ProductProperties, ProductType} from "../../models/products";
+import {ProductProperties, ProductType} from "../../types/products";
 import {Input}                          from "../form/Input";
 import {Textarea}                       from "../form/Textarea";
 import {Select}                         from "../form/Select";

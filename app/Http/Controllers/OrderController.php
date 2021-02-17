@@ -24,7 +24,7 @@ class OrderController extends Controller
      */
     public function index()
     {
-        return OrderResource::collection(auth()->user()->orders()->paginate());
+        return OrderResource::collection(auth()->user()->orders()->latest()->paginate());
     }
 
     /**
@@ -99,6 +99,12 @@ class OrderController extends Controller
      */
     public function show(Order $order)
     {
+        $order->loadMissing([
+            'address',
+            'opening',
+            'products',
+        ]);
+
         return new OrderResource($order);
     }
 

@@ -5,7 +5,11 @@ import {SoftDeletes, Timestamps} from "../types";
 import {QuantityTypes}           from "../components/ui/QuantityTypeText";
 import {api}                     from "../api";
 
-export type ProductType = ProductProperties & ProductComputedProperties & Timestamps & SoftDeletes;
+export type ProductType<T = {}> = T &
+    ProductProperties &
+    ProductComputedProperties &
+    Timestamps &
+    SoftDeletes;
 
 export type ProductProperties = {
     name: string;
@@ -16,7 +20,7 @@ export type ProductProperties = {
 
 export type ProductComputedProperties = {
     id: number;
-    media: {[id: number]: string};
+    media: { [id: number]: string };
 }
 
 export type ProductsState = {
@@ -78,7 +82,7 @@ export const products = createModel<RootModel>()({
             dispatch.products.remove(payload);
         },
 
-        async destroyMedia(payload: {productId: number, mediaId: number}, state: RootState): Promise<void> {
+        async destroyMedia(payload: { productId: number, mediaId: number }, state: RootState): Promise<void> {
             const response = await window.axios.delete(`/products/${payload.productId}/media/${payload.mediaId}`);
 
             dispatch.products.addProduct(response.data.data);

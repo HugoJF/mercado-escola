@@ -2,7 +2,7 @@ import {HeightTransitioner} from "../../../components/ui/HeightTransitioner";
 import {Calendar, Trash}    from "react-feather";
 import {Link}               from "react-router-dom";
 import React                from "react";
-import {OpeningType}        from "../../../models/openings";
+import {OpeningType}        from "../../../types/openings";
 import useRelativePath      from "../../../hooks/useRelativePath";
 import {format, parseISO}   from "date-fns";
 import {Box}                from "../../../components/ui/Box";

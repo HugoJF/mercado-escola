@@ -1,7 +1,7 @@
 import React                             from "react";
 import {Link}                            from "react-router-dom";
 import {PriceFormatter}                  from "../ui/PriceFormatter";
-import {ProductType}                     from "../../models/products";
+import {ProductType}                     from "../../types/products";
 import {QuantityTypes, QuantityTypeText} from "../ui/QuantityTypeText";
 import {ImageHolder}                     from "../ui/ImageHolder";
 import {PlusCircle}                      from "react-feather";

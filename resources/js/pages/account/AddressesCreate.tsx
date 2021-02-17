@@ -4,7 +4,7 @@ import {ChevronRight, Loader, MapPin}  from "react-feather";
 import PlacesAutocomplete              from 'react-places-autocomplete';
 import {Title}                         from "../../components/ui/Title";
 import {Dispatch}                      from "../../store";
-import {AddressProperties}             from "../../models/addresses";
+import {AddressProperties}             from "../../types/addresses";
 import {Box}                           from "../../components/ui/Box";
 import {AddressStreetNumberActionMenu} from "../../action-menus/AdressStreetNumberActionMenu";
 import {Google}                        from "../../google";

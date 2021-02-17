@@ -1,5 +1,5 @@
 import React                from "react";
-import {OrderStateEnum}     from "../../models/orders";
+import {OrderStateEnum}     from "../../types/orders";
 import {Badge, BadgeColors} from "./Badge";
 import {OrderStateText}     from "./OrderStateText";
 

@@ -3,7 +3,7 @@ import {useDispatch}      from "react-redux";
 import {Dispatch}         from "../../store";
 import {useAuth}          from "../../selectors";
 import {useForm}          from "react-hook-form";
-import {LoginCredentials} from "../../models/auth";
+import {LoginCredentials} from "../../types/auth";
 import {Link}             from "react-router-dom";
 import {Input}            from "../../components/form/Input";
 import {Button}           from "../../components/ui/Button";

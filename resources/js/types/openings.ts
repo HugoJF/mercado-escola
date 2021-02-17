@@ -8,7 +8,11 @@ import {ProductType}    from "./products";
 import {api}            from "../api";
 import {OrderType}      from "./orders";
 
-export type OpeningType = OpeningProperties & OpeningComputedProperties & OpeningRelationshipProperties & Timestamps;
+export type OpeningType =
+    & OpeningProperties
+    & OpeningComputedProperties
+    & OpeningRelationshipProperties
+    & Timestamps;
 
 export type OpeningProperties = {
     max_delivery_orders: number;

@@ -1,5 +1,5 @@
 import React                      from "react";
-import {OrderType}                from "../../models/orders";
+import {OrderType}                from "../../types/orders";
 import {formatDistance, parseISO} from "date-fns";
 import {Skeleton}                 from "../ui/Skeleton";
 import {OrderStateBadge}          from "../ui/OrderStateBadge";

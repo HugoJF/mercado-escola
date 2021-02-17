@@ -9,7 +9,7 @@ import {FlatButton}   from "../../components/ui/FlatButton";
 import {PagePadding}  from "../../containers/PagePadding";
 import useConfirmMenu from "../../hooks/useConfirmMenu";
 import useLoadEffect  from "../../hooks/useLoadEffect";
-import {AddressType}  from "../../models/addresses";
+import {AddressType}  from "../../types/addresses";
 import {Empty}        from "../../components/ui/Empty";
 import useNavigation  from "../../hooks/useNavigation";
 

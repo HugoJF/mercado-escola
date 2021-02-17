@@ -1,5 +1,5 @@
 import React                from "react";
-import {AddressType}        from "../../models/addresses";
+import {AddressType}        from "../../types/addresses";
 import {X}                  from "react-feather";
 import {Box}                from "../ui/Box";
 import {Skeleton}           from "../ui/Skeleton";

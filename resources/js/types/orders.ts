@@ -8,7 +8,12 @@ import {SoftDeletes, Timestamps} from "../types";
 import {api}                     from "../api";
 import {AddressType}             from "./addresses";
 
-export type OrderType = OrdersProperties & OrdersComputedProperties & OrderRelationshipProperties & Timestamps & SoftDeletes;
+export type OrderType<T = {}> = T &
+    OrdersProperties &
+    OrdersComputedProperties &
+    OrderRelationshipProperties &
+    Timestamps &
+    SoftDeletes;
 
 export type OrdersProperties = {
     state: OrderStateEnum;
@@ -103,6 +108,9 @@ export const orders = createModel<RootModel>()({
 
             return response.data.data;
         },
+        /**
+         * @deprecated
+         */
         async cancel(payload: OrderType, state: RootState): Promise<OrderType> {
             const response = await api.orders.cancel(payload);
 
