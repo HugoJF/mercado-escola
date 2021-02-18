@@ -1,52 +1,19 @@
 import React                from "react";
 import {Title}              from "../../../components/ui/Title";
-import {useDispatch}        from "react-redux";
-import {Dispatch}           from "../../../store";
-import {useUsers}           from "../../../selectors";
 import {HeightTransitioner} from "../../../components/ui/HeightTransitioner";
 import {Skeleton}           from "../../../components/ui/Skeleton";
 import {PagePadding}        from "../../../containers/PagePadding";
 import {Box}                from "../../../components/ui/Box";
 import {Toggle}             from "../../../components/ui/Toggle";
-import useLoadEffect        from "../../../hooks/useLoadEffect";
 import {Badge}              from "../../../components/ui/Badge";
 import {UserType}           from "../../../types/auth";
 
-export const AdminUserIndex: React.FC = () => {
-    const dispatch = useDispatch<Dispatch>();
-    const users = useUsers();
+export type AdminUserIndexProps = {
+    users: UserType[];
+    onAdminToggle: (user: UserType) => void;
+}
 
-    const loading = useLoadEffect(async () => {
-        await dispatch.users.index();
-    }, []);
-
-    function getUsers(): any[] {
-        if (loading) {
-            return Array.from(Array(4).keys()).map(id => ({id}));
-        } else {
-            return Object.values(users.users);
-        }
-    }
-
-    async function handleAdminToggle(user: UserType) {
-        await dispatch.users.update({
-            id: user.id,
-            data: {admin: !user.admin}
-        });
-
-        if (user.admin) {
-            dispatch.toasts.add({
-                title: 'Administrador removido!',
-                description: `${user.name} deixou de ser administrador`
-            });
-        } else {
-            dispatch.toasts.add({
-                title: 'Novo administrador!',
-                description: `${user.name} agora é um administrador`
-            });
-        }
-    }
-
+export const AdminUserIndex: React.FC<AdminUserIndexProps> = ({users, onAdminToggle}) => {
     return <PagePadding>
         <div className="space-y-3">
             <Title>Usuários</Title>
@@ -54,7 +21,7 @@ export const AdminUserIndex: React.FC = () => {
         </div>
 
         <div className="divide-y divide-gray-200">
-            {getUsers().map(user => (
+            {users.map(user => (
                 <HeightTransitioner key={user.id}>
                     <Box
                         key={user.id}
@@ -84,7 +51,7 @@ export const AdminUserIndex: React.FC = () => {
                         <div>
                             <Toggle
                                 checked={user.admin}
-                                onToggle={() => handleAdminToggle(user)}
+                                onToggle={() => onAdminToggle(user)}
                             />
                         </div>
                     </Box>

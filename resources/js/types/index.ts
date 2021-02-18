@@ -12,24 +12,24 @@ import {toasts}    from "./toasts";
 export interface RootModel extends Models<RootModel> {
     // @ts-ignore
     auth: typeof auth,
-    addresses: typeof addresses,
-    openings: typeof openings,
-    products: typeof products,
-    favorites: typeof favorites,
+    // addresses: typeof addresses,
+    // openings: typeof openings,
+    // products: typeof products,
+    // favorites: typeof favorites,
     cart: typeof cart,
-    orders: typeof orders,
-    users: typeof users,
+    // orders: typeof orders,
+    // users: typeof users,
     toasts: typeof toasts,
 }
 
 export const models: RootModel = {
     auth,
-    addresses,
-    openings,
-    products,
-    favorites,
+    // addresses,
+    // openings,
+    // products,
+    // favorites,
     cart,
-    orders,
-    users,
+    // orders,
+    // users,
     toasts,
 };

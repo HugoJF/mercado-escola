@@ -1,6 +1,6 @@
 import {bxios}                          from "../bxios";
-import {ResourceResponse}               from "../types";
-import {OpeningProperties, OpeningType} from "../types/openings";
+import {ResourceResponse}                                    from "../types";
+import {OpeningProperties, OpeningType, OpeningWithProducts} from "../types/openings";
 
 export const openings = {
     index: () => bxios()
@@ -8,10 +8,10 @@ export const openings = {
         .send<ResourceResponse<OpeningType[]>>(),
     show: (id: number) => bxios()
         .get('openings', id)
-        .send<ResourceResponse<OpeningType>>(),
+        .send<ResourceResponse<OpeningType<OpeningWithProducts>>>(),
     current: () => bxios()
         .get('openings', 'current')
-        .send<ResourceResponse<OpeningType>>(),
+        .send<ResourceResponse<OpeningType<OpeningWithProducts>>>(),
     store: (data: OpeningProperties) => bxios()
         .post('openings')
         .body(data)

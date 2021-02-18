@@ -11,6 +11,10 @@ export type ResourceResponse<T> = {
     data: T
 }
 
+export type Pivot<T> = {
+    pivot: T
+}
+
 export type PaginatedResourceResponse<T> = ResourceResponse<T> & {
     links: {
         first: string;

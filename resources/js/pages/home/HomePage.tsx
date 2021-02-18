@@ -1,7 +1,6 @@
 import React         from "react";
 import {Title}       from "../../components/ui/Title";
 import {Link}        from "react-router-dom";
-import {useOpenings} from "../../selectors";
 import {ProductList} from "../../components/products/ProductList";
 import {Empty}       from "../../components/ui/Empty";
 import {PagePadding} from "../../containers/PagePadding";

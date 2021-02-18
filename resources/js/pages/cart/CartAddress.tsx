@@ -1,6 +1,9 @@
+
+export {}
+
+/*
 import React          from "react";
 import {Title}        from "../../components/ui/Title";
-import {useAddresses} from "../../selectors";
 import {useDispatch}  from "react-redux";
 import {Dispatch}     from "../../store";
 import {AddressList}  from "../../components/addresses/AddressList";
@@ -35,3 +38,4 @@ export const CartAddress: React.FC = () => {
         </div>
     </PagePadding>
 };
+*/

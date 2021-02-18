@@ -15,12 +15,5 @@ export const HomeHeader: React.FC = () => {
             </h2>
             <Cart/>
         </div>
-        {/*<div className="px-6">*/}
-        {/*    <input*/}
-        {/*        placeholder="Pesquisar produtos..."*/}
-        {/*        className="w-full py-3 px-6 rounded-full bg-primary-100 bg-opacity-50 placeholder-white font-medium"*/}
-        {/*        type="text"*/}
-        {/*    />*/}
-        {/*</div>*/}
     </HeaderWrapper>
 };

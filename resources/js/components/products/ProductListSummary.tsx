@@ -3,10 +3,10 @@ import {ProductType}                     from "../../types/products";
 import {ImageHolder}                     from "../ui/ImageHolder";
 import {QuantityTypes, QuantityTypeText} from "../ui/QuantityTypeText";
 import {PriceFormatter}                  from "../ui/PriceFormatter";
-import {OrderProductPivot}               from "../../api/orders";
+import {PivotOrderProduct}               from "../../types/orders";
 
 export type ProductListSummaryProps = {
-    products: ProductType<OrderProductPivot>[];
+    products: ProductType<PivotOrderProduct>[];
     children?: (product: ProductType, amount: number) => string|React.ReactNode;
 }
 
@@ -16,7 +16,7 @@ export const ProductListSummary: React.FC<ProductListSummaryProps> = ({products,
             <div key={product.id} className="flex items-center">
                 <div className="w-4/12">
                     <ImageHolder
-                        src={Object.values(product.media)?.[0]}
+                        src={product.media?.[0]}
                     />
                 </div>
                 <div className="px-4 flex-grow">

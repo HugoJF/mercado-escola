@@ -1,20 +1,14 @@
-import React, {useEffect} from "react";
-import {Title}            from "../../components/ui/Title";
-import {Link}             from "react-router-dom";
-import {useDispatch}      from "react-redux";
-import {Dispatch}         from "../../store";
-import {useProducts}      from "../../selectors";
-import {ProductList}      from "../../components/products/ProductList";
-import {PagePadding}      from "../../containers/PagePadding";
+import React         from "react";
+import {Title}       from "../../components/ui/Title";
+import {Link}        from "react-router-dom";
+import {ProductList} from "../../components/products/ProductList";
+import {PagePadding} from "../../containers/PagePadding";
+import {useQuery}    from "react-query";
+import {api}         from "../../api";
+import {Loading}     from "../../components/ui/Loading";
 
 export const ProductIndex: React.FC = () => {
-    const dispatch = useDispatch<Dispatch>();
-    const products = useProducts();
-
-    useEffect(() => {
-        dispatch.openings.index();
-        dispatch.favorites.index();
-    }, []);
+    const {status, data, error, isFetching} = useQuery('products', api.products.index);
 
     return <PagePadding>
         <div className="mx-auto container">
@@ -26,7 +20,12 @@ export const ProductIndex: React.FC = () => {
                 </div>
 
                 {/* Items */}
-                <ProductList products={Object.values(products.products)}/>
+                {data
+                    ?
+                    <ProductList products={data.data.data}/>
+                    :
+                    <Loading/>
+                }
             </div>
         </div>
     </PagePadding>

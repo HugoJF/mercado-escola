@@ -1,12 +1,23 @@
-import {createModel}             from "@rematch/core";
-import {RootModel}               from "./index";
-import {RootState}               from "../store";
-import {normalize}               from "normalizr";
-import {ordersSchema}            from "../schemas";
-import {ProductType}             from "./products";
-import {SoftDeletes, Timestamps} from "../types";
-import {api}                     from "../api";
-import {AddressType}             from "./addresses";
+import {createModel}                    from "@rematch/core";
+import {RootModel}                      from "./index";
+import {RootState}                      from "../store";
+import {normalize}                      from "normalizr";
+import {ordersSchema}                   from "../schemas";
+import {ProductType}                    from "./products";
+import {Pivot, SoftDeletes, Timestamps} from "../types";
+import {api}                            from "../api";
+import {AddressType}                    from "./addresses";
+import {OpeningType}                    from "./openings";
+
+export type OrderWithAddress = { address?: AddressType };
+export type OrderWithOpening = { opening: OpeningType };
+export type OrderWithProducts = { products: ProductType<PivotOrderProduct>[] };
+export type PivotOrderProduct = Pivot<{
+    order_id: string;
+    product_id: number;
+    quantity: number;
+    quantity_cost: number;
+}>
 
 export type OrderType<T = {}> = T &
     OrdersProperties &
@@ -29,8 +40,8 @@ export type OrdersComputedProperties = {
 export type OrderRelationshipProperties = {
     products: number[];
     address: AddressType;
-    quantities: {[productId: number]: number}
-    costs: {[productId: number]: number}
+    quantities: { [productId: number]: number }
+    costs: { [productId: number]: number }
 }
 
 export enum OrderStateEnum {

@@ -1,43 +1,17 @@
-import React, {useEffect, useState} from 'react';
-import {useParams}                  from "react-router";
-import {Heart}                      from "react-feather";
-import {BackAndCart}                from "./partials/BackAndCart";
-import {HeaderWrapper}              from "./partials/HeaderWrapper";
-import {useFavorites, useProducts}  from "../selectors";
-import {useDispatch}                from "react-redux";
-import {Dispatch}                   from "../store";
-import classNames                   from 'classnames';
+import React           from 'react';
+import {Heart}         from "react-feather";
+import {BackAndCart}   from "./partials/BackAndCart";
+import {HeaderWrapper} from "./partials/HeaderWrapper";
+import classNames      from 'classnames';
+import {ProductType}   from "../types/products";
 
-export const ProductHeader: React.FC = () => {
-    const dispatch = useDispatch<Dispatch>();
-    const [favorite, setFavorite] = useState(false);
-    const favorites = useFavorites();
-    const params = useParams<{ productId: string }>();
-    const products = useProducts();
+export type ProductHeaderProps = {
+    product: ProductType;
+    favorite: boolean;
+    onToggleFavorite: () => void;
+}
 
-    const productId = parseInt(params.productId);
-    const product = products.products[productId];
-
-    useEffect(() => {
-        dispatch.favorites.index();
-    }, []);
-
-    useEffect(() => {
-        setFavorite(favorites.favorites.indexOf(productId) >= 0);
-    }, [favorites.favorites]);
-
-    async function toggleFavorite() {
-        setFavorite(!favorite);
-
-        if (favorite) {
-            dispatch.favorites.destroy(productId);
-        } else {
-            dispatch.favorites.create(productId);
-        }
-    }
-
-    if (!product) return null;
-
+export const ProductHeader: React.FC<ProductHeaderProps> = ({product, favorite, onToggleFavorite}) => {
     return <HeaderWrapper>
         <BackAndCart/>
 
@@ -50,7 +24,7 @@ export const ProductHeader: React.FC = () => {
                         'text-red-500 ': favorite,
                     }
                 )}
-                onClick={toggleFavorite}
+                onClick={onToggleFavorite}
             >
                 <Heart
                     className="transition-colors duration-150 fill-current"

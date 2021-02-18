@@ -1,55 +1,25 @@
-import React, {useEffect}                from 'react';
+import React                             from 'react';
 import {Button}                          from "../../components/ui/Button";
-import {useParams}                       from "react-router";
-import {useProducts}                     from "../../selectors";
 import {PriceFormatter}                  from "../../components/ui/PriceFormatter";
-import useCartQuantity                   from "../../hooks/useCartQuantity";
 import * as ProductQuantityConfig        from "../../configs/ProductQuantityConfig";
 import {QuantityTypes, QuantityTypeText} from "../../components/ui/QuantityTypeText";
 import {ImageHolder}                     from "../../components/ui/ImageHolder";
-import {useDispatch}                     from "react-redux";
-import {Dispatch}                        from "../../store";
 import {Link}                            from "react-router-dom";
 import {PagePadding}                     from "../../containers/PagePadding";
+import {ProductType}                     from "../../types/products";
 
-export const ProductShow: React.FC = () => {
-    const dispatch = useDispatch<Dispatch>();
-    const params = useParams<{ productId: string }>();
-    const products = useProducts();
+export type ProductShowProps = {
+    product: ProductType;
+    quantity: number;
+    total: number;
+    text: string;
+    handleAdd: () => void;
+    handleSubtract: () => void;
+}
 
-    useEffect(() => {
-        dispatch.products.index();
-    }, []);
-
-    const productId = parseInt(params.productId);
-    const product = products.products[productId];
-
+export const ProductShow: React.FC<ProductShowProps> = ({product, quantity, total, text, handleAdd, handleSubtract}) => {
     type typeKey = keyof typeof ProductQuantityConfig;
     const config = ProductQuantityConfig[product?.quantity_type as typeKey];
-
-    const [text, quantity, total, add, subtract] = useCartQuantity(productId, config);
-
-    function handleAdd() {
-        if (add()) {
-            dispatch.toasts.add({
-                title: 'Produto adicionado!',
-                description: `${product.name} foi adicionado ao carrinho`
-            });
-        }
-    }
-
-    function handleSubtract() {
-        if (subtract()) {
-            dispatch.toasts.add({
-                title: 'Produto removido!',
-                description: `${product.name} foi removido do carrinho`
-            });
-        }
-    }
-
-    if (!product) {
-        return null;
-    }
 
     return <PagePadding className="flex flex-col justify-around min-h-full">
         {/* Images */}

@@ -1,42 +1,21 @@
-import React, {useEffect} from "react";
-import {useDispatch}      from "react-redux";
-import {Dispatch}         from "../../../store";
-import {useProducts}      from "../../../selectors";
-import {useParams}        from "react-router-dom";
-import {Title}            from "../../../components/ui/Title";
-import {ProductForm}      from "../../../components/products/ProductForm";
-import {PagePadding}      from "../../../containers/PagePadding";
-import useNavigation      from "../../../hooks/useNavigation";
+import React         from "react";
+import {Title}       from "../../../components/ui/Title";
+import {ProductForm} from "../../../components/products/ProductForm";
+import {PagePadding} from "../../../containers/PagePadding";
+import {ProductType} from "../../../types/products";
 
-export const AdminProductEdit: React.FC = () => {
-    const dispatch = useDispatch<Dispatch>();
-    const {go} = useNavigation();
-    const params = useParams<{ productId: string }>();
-    const products = useProducts();
+export type AdminProductEditProps = {
+    product: ProductType;
+    onSubmit: (data: FormData) => void;
+}
 
-    const productId = parseInt(params.productId);
-    const product = products.products[productId];
-
-    useEffect(() => {
-        dispatch.products.index();
-    }, []);
-
-    async function updateProduct(data: FormData) {
-        try {
-            await dispatch.products.update({id: productId, data: data});
-            go('/admin/produtos');
-        } catch (e) {
-            throw {errors: e.response.data.errors};
-        }
-    }
-
-    // @ts-ignore
+export const AdminProductEdit: React.FC<AdminProductEditProps> = ({product, onSubmit}) => {
     return <PagePadding>
         <Title>Atualizando {product?.name}</Title>
 
         <ProductForm
             product={product}
-            onSubmit={updateProduct}
+            onSubmit={onSubmit}
             action="Atualizar"
         />
     </PagePadding>

@@ -2,7 +2,6 @@ import React                from "react";
 import {AddressType}        from "../../types/addresses";
 import {X}                  from "react-feather";
 import {Box}                from "../ui/Box";
-import {Skeleton}           from "../ui/Skeleton";
 import {HeightTransitioner} from "../ui/HeightTransitioner";
 
 export type AddressListProps = {
@@ -16,19 +15,10 @@ export type AddressListProps = {
 export const AddressList: React.FC<AddressListProps> =
     ({
          addresses,
-         loading = false,
          onClick,
          onContext,
          contextIcon: ContextIcon = X,
      }) => {
-        function getAddresses(): any[] {
-            if (loading) {
-                return Array.from(Array(3).keys()).map(id => ({id}));
-            } else {
-                return addresses
-            }
-        }
-
         function handleOnClick(address: AddressType, e: React.MouseEvent<HTMLDivElement>) {
             if (onClick) {
                 onClick(address);
@@ -43,7 +33,7 @@ export const AddressList: React.FC<AddressListProps> =
         }
 
         return <div className="divide-y divide-gray-200">
-            {getAddresses().map(address => (
+            {addresses.map(address => (
                 <HeightTransitioner>
                     <Box
                         key={address.id}
@@ -53,20 +43,17 @@ export const AddressList: React.FC<AddressListProps> =
                         {/* Address information */}
                         <div className="flex-grow">
                             <h2 className="text-sm">
-                                {address.address || <Skeleton className="w-full"/>}
+                                {address.address}
                             </h2>
                             <p className="text-sm text-gray-600">
-                                {address.address
-                                    ?
+                                {
                                     [address.number, address.complement].filter(i => !!i).join(' - ')
-                                    :
-                                    <Skeleton className="w-1/2"/>
                                 }
                             </p>
                         </div>
 
                         {/* Icon */}
-                        {ContextIcon && !loading && <ContextIcon
+                        {ContextIcon && <ContextIcon
                             className="ml-4 flex-shrink-0 text-gray-500"
                             onClick={handleOnContext.bind(this, address)}
                         />}

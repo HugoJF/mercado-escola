@@ -3,43 +3,29 @@ import {useDispatch}  from "react-redux";
 import {Dispatch}     from "../../store";
 import {Title}        from "../../components/ui/Title";
 import {Plus}         from "react-feather";
-import {useAddresses} from "../../selectors";
 import {AddressList}  from "../../components/addresses/AddressList";
 import {FlatButton}   from "../../components/ui/FlatButton";
 import {PagePadding}  from "../../containers/PagePadding";
 import useConfirmMenu from "../../hooks/useConfirmMenu";
-import useLoadEffect  from "../../hooks/useLoadEffect";
 import {AddressType}  from "../../types/addresses";
 import {Empty}        from "../../components/ui/Empty";
 import useNavigation  from "../../hooks/useNavigation";
+import {useQuery}     from "react-query";
+import {api}          from "../../api";
+import {isEmpty}      from "../../helpers/Functions";
 
-export const AddressesIndex: React.FC = () => {
-    const dispatch = useDispatch<Dispatch>();
+export type AddressesIndexProps = {
+    addresses: AddressType[];
+    handleOnContext: (address: AddressType) => void;
+}
+
+export const AddressesIndex: React.FC<AddressesIndexProps> = ({addresses, handleOnContext}) => {
     const {bindGo} = useNavigation();
-    const addresses = useAddresses();
-    const [menu, confirm] = useConfirmMenu();
-
-    const loading = useLoadEffect(async () => {
-        await dispatch.addresses.index();
-    }, []);
-
-    async function handleOnContext(address: AddressType) {
-        const response = await confirm({
-            title: 'Remover endereço?',
-            description: 'Deseja permanentemente remover esse endereço?',
-            action: 'Remover'
-        });
-
-        if (response) {
-            dispatch.addresses.destroy(address.id);
-        }
-    }
 
     return <PagePadding>
-        {menu}
         <Title>Seus endereços</Title>
 
-        {Object.values(addresses.addresses).length === 0 && !loading && <div className="my-8">
+        {isEmpty(addresses) && <div className="my-8">
             <Empty
                 title="Nenhum endereço!"
                 description="Você ainda não registrou um endereço de entrega"
@@ -48,8 +34,7 @@ export const AddressesIndex: React.FC = () => {
 
         <div className="my-4">
             <AddressList
-                loading={loading}
-                addresses={Object.values(addresses.addresses)}
+                addresses={addresses}
                 onContext={handleOnContext}
             />
         </div>

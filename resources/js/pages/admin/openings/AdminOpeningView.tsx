@@ -8,9 +8,9 @@ import {PagePadding}              from "../../../containers/PagePadding";
 import {AdminOpeningViewProducts} from "./AdminOpeningViewProducts";
 import {AdminOpeningViewOrders}   from "./AdminOpeningViewOrders";
 import {AdminOpeningViewSummary}  from "./AdminOpeningViewSummaryProps";
-import {OpeningBadge}             from "../../../components/openings/OpeningBadge";
-import {OpeningType}              from "../../../types/openings";
-import useNavigation              from "../../../hooks/useNavigation";
+import {OpeningBadge}                     from "../../../components/openings/OpeningBadge";
+import {OpeningType, OpeningWithProducts} from "../../../types/openings";
+import useNavigation                      from "../../../hooks/useNavigation";
 
 type AdminOpeningTabProps = {
     onClick: () => void;
@@ -41,7 +41,7 @@ const AdminOpeningTabButton: React.FC<AdminOpeningTabProps> = ({onClick, selecte
 };
 
 export type AdminOpeningViewProps = {
-    opening: OpeningType;
+    opening: OpeningType<OpeningWithProducts>;
 }
 
 const tabs = {

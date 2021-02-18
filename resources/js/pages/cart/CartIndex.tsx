@@ -49,17 +49,17 @@ export const CartIndex: React.FC<CartIndexProps>
                     Carrinho vazio!
                 </h2>}
 
-                <ProductListSummary products={products} quantities={quantities} costs={costs}>
-                    {(product, amount) => <>
-                        <XSquare
-                            className="text-red-600 cursor-pointer"
-                            onClick={() => onRemove(product)}
-                        />
-                        <Link to={`/produtos/${product.id}`}>
-                            <Edit className="text-gray-500 cursor-pointer"/>
-                        </Link>
-                    </>}
-                </ProductListSummary>
+                {/*<ProductListSummary products={products} quantities={quantities} costs={costs}>*/}
+                {/*    {(product, amount) => <>*/}
+                {/*        <XSquare*/}
+                {/*            className="text-red-600 cursor-pointer"*/}
+                {/*            onClick={() => onRemove(product)}*/}
+                {/*        />*/}
+                {/*        <Link to={`/produtos/${product.id}`}>*/}
+                {/*            <Edit className="text-gray-500 cursor-pointer"/>*/}
+                {/*        </Link>*/}
+                {/*    </>}*/}
+                {/*</ProductListSummary>*/}
             </div>
 
             {/* Total cost */}

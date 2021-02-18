@@ -4,13 +4,12 @@ import {Calendar, DollarSign, Info, MapPin}                    from "react-feath
 import {PriceFormatter}                                        from "../../components/ui/PriceFormatter";
 import {format, parseISO}                                      from "date-fns";
 import {ptBR}                                                  from "date-fns/locale";
-import {PagePadding}                                           from "../../containers/PagePadding";
-import {OrderType}                                             from "../../types/orders";
-import {Button}                                                from "../../components/ui/Button";
+import {PagePadding}                                                      from "../../containers/PagePadding";
+import {OrderType, OrderWithAddress, OrderWithOpening, OrderWithProducts} from "../../types/orders";
+import {Button}                                                           from "../../components/ui/Button";
 import useConfirmMenu                                          from "../../hooks/useConfirmMenu";
 import {OrderStateBadge}                                       from "../../components/ui/OrderStateBadge";
 import {OrderStateDescription}                                 from "../../components/ui/OrderStateDescription";
-import {OrderWithAddress, OrderWithOpening, OrderWithProducts} from "../../api/orders";
 import {ProductListSummary}                                    from "../../components/products/ProductListSummary";
 
 export type OrdersShowProps = {

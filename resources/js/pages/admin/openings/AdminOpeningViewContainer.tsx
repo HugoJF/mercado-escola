@@ -9,7 +9,10 @@ export const AdminOpeningViewContainer: React.FC = () => {
     const params = useParams<{ openingId: string }>();
     const openingId = parseInt(params.openingId);
 
-    const {status, data, error, isFetching} = useQuery(['opening', openingId], () => api.openings.show(openingId));
+    const {status, data, error, isFetching} = useQuery(
+        ['opening', openingId],
+        () => api.openings.show(openingId)
+    );
 
     return data ?
         <AdminOpeningView

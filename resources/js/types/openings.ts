@@ -1,14 +1,20 @@
 import {createModel}    from "@rematch/core";
 import {RootModel}      from "./index";
-import {RootState}      from "../store";
-import {Timestamps}     from "../types";
-import {normalize}      from "normalizr";
+import {RootState}         from "../store";
+import {Pivot, Timestamps} from "../types";
+import {normalize}         from "normalizr";
 import {openingsSchema} from "../schemas";
 import {ProductType}    from "./products";
 import {api}            from "../api";
 import {OrderType}      from "./orders";
 
-export type OpeningType =
+export type OpeningWithProducts = { products: ProductType<PivotOpeningProduct>[] };
+export type PivotOpeningProduct = Pivot<{
+    opening_id: number;
+    product_id: number;
+}>
+
+export type OpeningType<T = {}> = T
     & OpeningProperties
     & OpeningComputedProperties
     & OpeningRelationshipProperties

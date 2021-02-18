@@ -1,27 +1,31 @@
-import React, {useEffect, useMemo, useState}             from "react";
-import {useAddresses, useCart, useOpenings, useProducts} from "../../selectors";
-import {useDispatch}                                     from "react-redux";
-import {Dispatch}                                        from "../../store";
-import {ProductType}                                     from "../../types/products";
-import {OrderProductsType}                               from "../../types/orders";
-import {CartIndex}                                       from "./CartIndex";
-import {Loading}                                         from "../../components/ui/Loading";
-import useNavigation                                     from "../../hooks/useNavigation";
+export {}
 
-export const CartIndexContainer: React.FC = () => {
+/*
+
+import React, {useEffect, useMemo, useState} from "react";
+import {useCart}                             from "../../selectors";
+import {useDispatch}                         from "react-redux";
+import {Dispatch}                            from "../../store";
+import {ProductType}                         from "../../types/products";
+import {OrderProductsType}                   from "../../types/orders";
+import {CartIndex}                           from "./CartIndex";
+import {Loading}                             from "../../components/ui/Loading";
+import useNavigation                         from "../../hooks/useNavigation";
+import {useQuery}                            from "react-query";
+import {api}                              from "../../api";
+import {OpeningType, OpeningWithProducts} from "../../types/openings";
+
+export type CartIndexContainerProps = {
+    opening: OpeningType<OpeningWithProducts>;
+}
+
+export const CartIndexContainer: React.FC<CartIndexContainerProps> = () => {
     const dispatch = useDispatch<Dispatch>();
     const {go} = useNavigation();
-    const addresses = useAddresses();
-    const products = useProducts();
     const cart = useCart();
-    const openings = useOpenings();
     const [loading, setLoading] = useState(false);
     const [shippingOptionOpen, setShippingOptionOpen] = useState(false);
 
-    useEffect(() => {
-        dispatch.products.index();
-        dispatch.openings.current();
-    }, []);
 
     const total = useMemo(() => {
         const {products, amounts} = cartInformation();
@@ -31,10 +35,11 @@ export const CartIndexContainer: React.FC = () => {
 
     function cartInformation() {
         const cartProducts = Object.values(products.products).filter(product => cart.items[product.id]);
-        const cartCosts = cartProducts.reduce((acc: {[id: number]: number}, product) => {
+        const cartCosts = cartProducts.reduce((acc: { [id: number]: number }, product) => {
             acc[product.id] = product.quantity_cost;
             return acc;
         }, {});
+
         return {
             products: cartProducts,
             amounts: cart.items,
@@ -59,7 +64,7 @@ export const CartIndexContainer: React.FC = () => {
 
         let order = await dispatch.orders.store({
             address_id: cart.address_id as number,
-            opening_id: openings.current as number,
+            opening_id: opening.data.data.data.id,
             products,
         });
         dispatch.cart.reset();
@@ -100,3 +105,4 @@ export const CartIndexContainer: React.FC = () => {
         />
     </>
 };
+*/

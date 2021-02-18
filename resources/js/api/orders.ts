@@ -1,22 +1,9 @@
 import {bxios}                                       from "../bxios";
-import {PaginatedResourceResponse, ResourceResponse} from "../types";
-import {OrderStore, OrderType}                       from "../types/orders";
-import {OpeningType}                                 from "../types/openings";
+import {PaginatedResourceResponse, ResourceResponse}                                  from "../types";
+import {OrderStore, OrderType, OrderWithAddress, OrderWithOpening, OrderWithProducts} from "../types/orders";
+import {OpeningType}                                                                  from "../types/openings";
 import {ProductType}                                 from "../types/products";
 import {AddressType}                                 from "../types/addresses";
-
-export type OrderProductPivot = {
-    pivot: {
-        order_id: string;
-        product_id: number;
-        quantity: number;
-        quantity_cost: number;
-    }
-}
-
-export type OrderWithAddress = { address?: AddressType };
-export type OrderWithOpening = { opening: OpeningType };
-export type OrderWithProducts = { products: ProductType<OrderProductPivot>[] };
 
 export const orders = {
     index: (page = 1) => bxios()

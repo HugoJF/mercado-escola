@@ -1,17 +1,23 @@
 import React, {useEffect} from 'react';
 import {Link}             from "react-router-dom";
-import {useAddresses}     from "../../selectors";
 import useNavigation      from "../../hooks/useNavigation";
+import {useQuery}         from "react-query";
+import {api}              from "../../api";
 
 export const OnBoarding2: React.FC = () => {
-    const addresses = useAddresses();
     const {go, bindGo} = useNavigation();
+    const {status, data, error, isFetching} = useQuery(
+        'addresses',
+        api.addresses.index
+    );
 
     useEffect(() => {
-        if (Object.values(addresses.addresses).length > 0) {
+        const count = data?.data?.length;
+
+        if (count && count > 0) {
             go('/home');
         }
-    }, [addresses.addresses]);
+    }, [data]);
 
     return <div className="px-4 bg-gradient-to-br from-primary-500 to-primary-700 min-h-screen flex flex-col justify-center bg-blue-500">
         <h1 className="text-5xl text-white text-center font-bold">Último passo</h1>

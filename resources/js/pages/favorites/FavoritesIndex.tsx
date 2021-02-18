@@ -1,23 +1,19 @@
-import React, {useEffect}          from "react";
-import {Title}                     from "../../components/ui/Title";
-import {Link}                      from "react-router-dom";
-import {useDispatch}               from "react-redux";
-import {Dispatch}                  from "../../store";
-import {useFavorites, useProducts} from "../../selectors";
-import {ProductList}               from "../../components/products/ProductList";
-import {Empty}                     from "../../components/ui/Empty";
-import {PagePadding}               from "../../containers/PagePadding";
+import React         from "react";
+import {Title}       from "../../components/ui/Title";
+import {Link}        from "react-router-dom";
+import {ProductList} from "../../components/products/ProductList";
+import {Empty}       from "../../components/ui/Empty";
+import {PagePadding} from "../../containers/PagePadding";
+import {useQuery}    from "react-query";
+import {api}         from "../../api";
+import {ProductType} from "../../types/products";
+import {isEmpty}     from "../../helpers/Functions";
 
-export const FavoritesIndex: React.FC = () => {
-    const dispatch = useDispatch<Dispatch>();
-    const favorites = useFavorites();
-    const products = useProducts();
+export type FavoritesIndexProps = {
+    favorites: ProductType[];
+}
 
-    useEffect(() => {
-        dispatch.openings.index();
-        dispatch.favorites.index();
-    }, []);
-
+export const FavoritesIndex: React.FC<FavoritesIndexProps> = ({favorites}) => {
     return <PagePadding className="flex flex-col">
         {/* Header */}
         <div className="flex justify-between items-baseline mb-8">
@@ -26,7 +22,7 @@ export const FavoritesIndex: React.FC = () => {
         </div>
 
         {/* Empty warning */}
-        {Object.values(favorites.favorites).length === 0 && <div
+        {isEmpty(favorites) && <div
             className="flex-grow flex flex-col justify-center"
         >
             <Empty
@@ -36,6 +32,8 @@ export const FavoritesIndex: React.FC = () => {
         </div>}
 
         {/* Items */}
-        <ProductList products={Object.values(products.products).filter(product => favorites.favorites.indexOf(product.id) >= 0)}/>
+        <ProductList
+            products={favorites}
+        />
     </PagePadding>
 };

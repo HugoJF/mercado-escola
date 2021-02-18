@@ -81,6 +81,10 @@ class OpeningController extends Controller
      */
     public function show(Opening $opening)
     {
+        $opening->loadMissing([
+            'products',
+        ]);
+
         return new OpeningResource($opening);
     }
 
