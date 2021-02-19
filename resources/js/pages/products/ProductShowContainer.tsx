@@ -1,12 +1,11 @@
-import React                      from 'react';
-import {useParams}                from "react-router";
-import useCartQuantity            from "../../hooks/useCartQuantity";
-import * as ProductQuantityConfig from "../../configs/ProductQuantityConfig";
-import {useDispatch}              from "react-redux";
-import {Dispatch}                 from "../../store";
-import {Loading}                  from "../../components/ui/Loading";
-import {ProductShow}              from "./ProductShow";
-import {useProduct}               from "../../queries/useProduct";
+import React           from 'react';
+import {useParams}     from "react-router";
+import useCartQuantity from "../../hooks/useCartQuantity";
+import {useDispatch}   from "react-redux";
+import {Dispatch}      from "../../store";
+import {Loading}       from "../../components/ui/Loading";
+import {ProductShow}   from "./ProductShow";
+import {useProduct}    from "../../queries/useProduct";
 
 type Params = {
     productId: string;
@@ -18,11 +17,7 @@ export const ProductShowContainer: React.FC = () => {
     const productId = parseInt(params.productId);
 
     const {status, data, error, isFetching} = useProduct(productId);
-
-    type typeKey = keyof typeof ProductQuantityConfig;
-    const config = ProductQuantityConfig[data?.data.data.quantity_type as typeKey];
-
-    const [text, quantity, total, add, subtract] = useCartQuantity(productId, config);
+    const [text, quantity, total, add, subtract] = useCartQuantity(data?.data.data);
 
     if (!data) {
         return <Loading/>;

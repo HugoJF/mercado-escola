@@ -1,7 +1,9 @@
-import {useCart}     from "../selectors";
-import {useDispatch} from "react-redux";
-import {Dispatch}    from "../store";
-import {UNIT}        from "../configs/ProductQuantityConfig";
+import {useCart}                   from "../selectors";
+import {useDispatch}               from "react-redux";
+import {Dispatch}                  from "../store";
+import * as ProductQuantityConfigs from "../configs/ProductQuantityConfig";
+import {UNIT}                      from "../configs/ProductQuantityConfig";
+import {ProductType}               from "../types/products";
 
 export type ProductQuantityConfig = {
     singular: string;
@@ -18,19 +20,24 @@ export type useProductQuantityProps = [
     () => boolean
 ];
 
-export default function useCartQuantity(productId: number, options: ProductQuantityConfig = UNIT): useProductQuantityProps {
+export default function useCartQuantity(product?: ProductType): useProductQuantityProps {
     const dispatch = useDispatch<Dispatch>();
     const cart = useCart();
 
-    const quantity = cart.items[productId];
+    const options = product ? ProductQuantityConfigs[product.quantity_type] : UNIT;
+    const quantity = product ? cart.items[product.id] : 0;
     const text = quantity === 1 ? options.singular : options.plural;
     const total = quantity * options.step;
 
     function add(): boolean {
+        if (!product) {
+            return false;
+        }
+
         const newAmount = (quantity || 0) + 1;
 
         dispatch.cart.add({
-            product: productId,
+            product: product.id,
             amount: newAmount
         });
 
@@ -38,13 +45,17 @@ export default function useCartQuantity(productId: number, options: ProductQuant
     }
 
     function subtract(): boolean {
+        if (!product) {
+            return false;
+        }
+        
         const newAmount = Math.max(quantity - 1, 0);
 
         if (newAmount === 0) {
-            dispatch.cart.remove(productId);
+            dispatch.cart.remove(product.id);
         } else {
             dispatch.cart.add({
-                product: productId,
+                product: product.id,
                 amount: newAmount
             });
         }
