@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Traits\HasProducts;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -20,6 +21,7 @@ use Illuminate\Database\Eloquent\Model;
 class Order extends Model
 {
     use HasFactory;
+    use HasProducts;
 
     public const PENDING = 'PENDING';      # Order has been registered;
     public const ACCEPTED = 'ACCEPTED';    # Order has been accepted;
@@ -43,11 +45,6 @@ class Order extends Model
     public function user()
     {
         return $this->belongsTo(User::class);
-    }
-
-    public function products()
-    {
-        return $this->belongsToMany(Product::class)->withPivot('quantity', 'quantity_cost');
     }
 
     public function address()
