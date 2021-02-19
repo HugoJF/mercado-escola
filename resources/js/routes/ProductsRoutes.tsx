@@ -1,7 +1,6 @@
 import React                   from 'react';
 import {Route}                 from "react-router";
 import useRelativePath         from "../hooks/useRelativePath";
-import {ProductShow}           from "../pages/products/ProductShow";
 import {SwitchWithTransitions} from "../components/ui/SwitchWithTransition";
 import {ProductIndex}          from "../pages/products/ProductIndex";
 import {ProductShowContainer}  from "../pages/products/ProductShowContainer";

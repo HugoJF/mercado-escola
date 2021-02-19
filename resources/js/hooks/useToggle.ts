@@ -1,8 +1,4 @@
-import {useCart}     from "../selectors";
-import {useDispatch} from "react-redux";
-import {Dispatch}    from "../store";
-import {UNIT}        from "../configs/ProductQuantityConfig";
-import {useState}    from "react";
+import {useState} from "react";
 
 export type useToggleProps = [
     number|undefined,

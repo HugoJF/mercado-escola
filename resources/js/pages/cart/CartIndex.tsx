@@ -1,17 +1,16 @@
-import React                                                                       from "react";
-import {Link}                                                                      from "react-router-dom";
-import {Button}                                                                    from "../../components/ui/Button";
-import {Title}                                                                     from "../../components/ui/Title";
-import {AlertTriangle, Calendar, ChevronRight, Edit, MapPin, ShoppingBag, XSquare} from "react-feather";
-import {ProductType}                                                               from "../../types/products";
-import {PriceFormatter}                                                            from "../../components/ui/PriceFormatter";
-import {ShippingOptionActionMenu}                                                  from "../../action-menus/ShippingOptionActionMenu";
-import classNames                                                                  from "classnames";
-import {PagePadding}                                                               from "../../containers/PagePadding";
-import {format, parseISO}                                                          from "date-fns";
-import {AddressType}                                                               from "../../types/addresses";
-import {OpeningType}                                                               from "../../types/openings";
-import {ProductListSummary}                                                        from "../../components/products/ProductListSummary";
+import React                                                        from "react";
+import {Link}                                                       from "react-router-dom";
+import {Button}                                                     from "../../components/ui/Button";
+import {Title}                                                      from "../../components/ui/Title";
+import {AlertTriangle, Calendar, ChevronRight, MapPin, ShoppingBag} from "react-feather";
+import {ProductType}                                                from "../../types/products";
+import {PriceFormatter}                                             from "../../components/ui/PriceFormatter";
+import {ShippingOptionActionMenu}                                   from "../../action-menus/ShippingOptionActionMenu";
+import classNames                                                   from "classnames";
+import {PagePadding}                                                from "../../containers/PagePadding";
+import {format, parseISO}                                           from "date-fns";
+import {AddressType}                                                from "../../types/addresses";
+import {OpeningType}                                                from "../../types/openings";
 
 export type CartIndexProps = {
     address: AddressType | null;

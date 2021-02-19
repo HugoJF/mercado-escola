@@ -1,6 +1,4 @@
 import {useMutation} from "react-query";
-import {useDispatch} from "react-redux";
-import {Dispatch}    from "../../store";
 import {OrderType}   from "../../types/orders";
 import {api}         from "../../api";
 

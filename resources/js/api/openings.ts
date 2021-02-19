@@ -1,4 +1,4 @@
-import {bxios}                          from "../bxios";
+import {bxios}                                               from "../bxios";
 import {ResourceResponse}                                    from "../types";
 import {OpeningProperties, OpeningType, OpeningWithProducts} from "../types/openings";
 

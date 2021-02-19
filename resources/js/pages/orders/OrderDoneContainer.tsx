@@ -1,8 +1,8 @@
 import React       from "react";
 import {useParams} from "react-router";
 import {OrderDone} from "./OrderDone";
-import {Loading}  from "../../components/ui/Loading";
-import {useOrder} from "../../queries/useOrder";
+import {Loading}   from "../../components/ui/Loading";
+import {useOrder}  from "../../queries/useOrder";
 
 export const OrderDoneContainer: React.FC = () => {
     const params = useParams<{ orderId: string }>();

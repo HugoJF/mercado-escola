@@ -1,6 +1,4 @@
 import React              from "react";
-import {useDispatch}      from "react-redux";
-import {Dispatch}         from "../../../store";
 import {useParams}        from "react-router-dom";
 import useNavigation      from "../../../hooks/useNavigation";
 import {AdminProductEdit} from "./AdminProductEdit";

@@ -1,16 +1,16 @@
 import "./bootstrap";
-import React                     from "react";
-import ReactDOM                  from "react-dom";
-import * as Sentry               from "@sentry/react";
-import {store}                   from "./store";
-import {BrowserRouter as Router} from "react-router-dom";
-import {Integrations}            from "@sentry/tracing";
-import {Provider}                from "react-redux";
-import {hot, setConfig}          from "react-hot-loader";
-import {MuiPickersUtilsProvider} from '@material-ui/pickers';
-import DateFnsUtils              from '@date-io/date-fns';
-import {ptBR}                    from "date-fns/locale";
-import {RootRoutes}              from "./routes/RootRoutes";
+import React                              from "react";
+import ReactDOM                           from "react-dom";
+import * as Sentry                        from "@sentry/react";
+import {store}                            from "./store";
+import {BrowserRouter as Router}          from "react-router-dom";
+import {Integrations}                     from "@sentry/tracing";
+import {Provider}                         from "react-redux";
+import {hot, setConfig}                   from "react-hot-loader";
+import {MuiPickersUtilsProvider}          from '@material-ui/pickers';
+import DateFnsUtils                       from '@date-io/date-fns';
+import {ptBR}                             from "date-fns/locale";
+import {RootRoutes}                       from "./routes/RootRoutes";
 import {ReactQueryDevtools}               from 'react-query/devtools'
 import {QueryClient, QueryClientProvider} from "react-query";
 

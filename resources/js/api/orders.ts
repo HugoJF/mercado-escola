@@ -1,9 +1,6 @@
-import {bxios}                                       from "../bxios";
+import {bxios}                                                                        from "../bxios";
 import {PaginatedResourceResponse, ResourceResponse}                                  from "../types";
 import {OrderStore, OrderType, OrderWithAddress, OrderWithOpening, OrderWithProducts} from "../types/orders";
-import {OpeningType}                                                                  from "../types/openings";
-import {ProductType}                                 from "../types/products";
-import {AddressType}                                 from "../types/addresses";
 
 export const orders = {
     index: (page = 1) => bxios()

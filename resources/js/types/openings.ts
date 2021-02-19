@@ -1,12 +1,12 @@
-import {createModel}    from "@rematch/core";
-import {RootModel}      from "./index";
+import {createModel}       from "@rematch/core";
+import {RootModel}         from "./index";
 import {RootState}         from "../store";
 import {Pivot, Timestamps} from "../types";
 import {normalize}         from "normalizr";
-import {openingsSchema} from "../schemas";
-import {ProductType}    from "./products";
-import {api}            from "../api";
-import {OrderType}      from "./orders";
+import {openingsSchema}    from "../schemas";
+import {ProductType}       from "./products";
+import {api}               from "../api";
+import {OrderType}         from "./orders";
 
 export type OpeningWithProducts = { products: ProductType<PivotOpeningProduct>[] };
 export type PivotOpeningProduct = Pivot<{

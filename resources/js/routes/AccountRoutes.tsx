@@ -2,7 +2,6 @@ import React                     from 'react';
 import {Route}                   from "react-router";
 import useRelativePath           from "../hooks/useRelativePath";
 import {AccountIndex}            from "../pages/account/AccountIndex";
-import {AddressesIndex}          from "../pages/account/AddressesIndex";
 import {AddressesCreate}         from "../pages/account/AddressesCreate";
 import {SwitchWithTransitions}   from "../components/ui/SwitchWithTransition";
 import {PhoneUpdate}             from "../pages/account/PhoneUpdate";

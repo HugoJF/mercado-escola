@@ -1,7 +1,7 @@
-import React           from 'react';
-import {Route, Switch} from "react-router";
-import {HomeHeader}    from "../headers/HomeHeader";
-import {DefaultHeader} from "../headers/DefaultHeader";
+import React                    from 'react';
+import {Route, Switch}          from "react-router";
+import {HomeHeader}             from "../headers/HomeHeader";
+import {DefaultHeader}          from "../headers/DefaultHeader";
 import {ProductHeaderContainer} from "../headers/ProductHeaderContainer";
 
 export const HeaderRoutes: React.FC = () => {
