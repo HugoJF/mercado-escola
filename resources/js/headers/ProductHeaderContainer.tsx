@@ -8,10 +8,14 @@ import {ProductHeader}              from "./ProductHeader";
 import {useProduct}                 from "../queries/useProduct";
 import {useFavorites}               from "../queries/useFavorites";
 
+type Params = {
+    productId: string;
+}
+
 export const ProductHeaderContainer: React.FC = () => {
     const dispatch = useDispatch<Dispatch>();
     const [favorite, setFavorite] = useState(false);
-    const params = useParams<{ productId: string }>();
+    const params = useParams<Params>();
     const productId = parseInt(params.productId);
 
     const product = useProduct(productId);

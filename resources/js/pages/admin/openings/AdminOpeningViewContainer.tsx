@@ -4,8 +4,12 @@ import {Loading}          from "../../../components/ui/Loading";
 import {AdminOpeningView} from "./AdminOpeningView";
 import {useOpening}       from "../../../queries/useOpening";
 
+type Params = {
+    openingId: string;
+}
+
 export const AdminOpeningViewContainer: React.FC = () => {
-    const params = useParams<{ openingId: string }>();
+    const params = useParams<Params>();
 
     const {status, data, error, isFetching} = useOpening(params.openingId);
 

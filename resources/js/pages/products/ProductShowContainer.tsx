@@ -8,9 +8,13 @@ import {Loading}                  from "../../components/ui/Loading";
 import {ProductShow}              from "./ProductShow";
 import {useProduct}               from "../../queries/useProduct";
 
+type Params = {
+    productId: string;
+}
+
 export const ProductShowContainer: React.FC = () => {
     const dispatch = useDispatch<Dispatch>();
-    const params = useParams<{ productId: string }>();
+    const params = useParams<Params>();
     const productId = parseInt(params.productId);
 
     const {status, data, error, isFetching} = useProduct(productId);

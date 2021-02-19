@@ -6,9 +6,13 @@ import {Loading}          from "../../../components/ui/Loading";
 import {useProduct}       from "../../../queries/useProduct";
 import {useProductUpdate} from "../../../queries/mutations/useProductUpdate";
 
+type Params = {
+    productId: string;
+}
+
 export const AdminProductEditContainer: React.FC = () => {
     const {go} = useNavigation();
-    const params = useParams<{ productId: string }>();
+    const params = useParams<Params>();
     const productId = parseInt(params.productId);
 
     const {status, data, error, isFetching} = useProduct(productId);

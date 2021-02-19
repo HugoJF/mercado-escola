@@ -7,9 +7,13 @@ import useNavigation    from "../../hooks/useNavigation";
 import {useOrder}       from "../../queries/useOrder";
 import {useOrderCancel} from "../../queries/mutations/useOrderCancel";
 
+type Params = {
+    orderId: string;
+}
+
 export const OrdersShowContainer: React.FC = () => {
     const {go} = useNavigation();
-    const params = useParams<{ orderId: string }>();
+    const params = useParams<Params>();
 
     const {status, data, error, isFetching} = useOrder(params.orderId);
 

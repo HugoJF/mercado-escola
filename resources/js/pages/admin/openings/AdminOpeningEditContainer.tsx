@@ -8,10 +8,14 @@ import {Loading}           from "../../../components/ui/Loading";
 import {AdminOpeningEdit}  from "./AdminOpeningEdit";
 import {useOpening}        from "../../../queries/useOpening";
 
+type Params = {
+    openingId: string;
+}
+
 export const AdminOpeningEditContainer: React.FC = () => {
     const dispatch = useDispatch<Dispatch>();
     const {go} = useNavigation();
-    const params = useParams<{ openingId: string }>();
+    const params = useParams<Params>();
     const openingId = parseInt(params.openingId);
 
     const {status, data, error, isFetching} = useOpening(openingId);

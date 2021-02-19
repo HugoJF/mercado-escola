@@ -4,8 +4,12 @@ import {OrderDone} from "./OrderDone";
 import {Loading}   from "../../components/ui/Loading";
 import {useOrder}  from "../../queries/useOrder";
 
+type Params = {
+    orderId: string;
+}
+
 export const OrderDoneContainer: React.FC = () => {
-    const params = useParams<{ orderId: string }>();
+    const params = useParams<Params>();
 
     const {status, data, error, isFetching} = useOrder(params.orderId);
 
