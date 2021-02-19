@@ -4,8 +4,6 @@ import {Link}        from "react-router-dom";
 import {ProductList} from "../../components/products/ProductList";
 import {Empty}       from "../../components/ui/Empty";
 import {PagePadding} from "../../containers/PagePadding";
-import {useQuery}    from "react-query";
-import {api}         from "../../api";
 import {ProductType} from "../../types/products";
 import {isEmpty}     from "../../helpers/Functions";
 

@@ -3,12 +3,11 @@ import {Title}       from "../../components/ui/Title";
 import {Link}        from "react-router-dom";
 import {ProductList} from "../../components/products/ProductList";
 import {PagePadding} from "../../containers/PagePadding";
-import {useQuery}    from "react-query";
-import {api}         from "../../api";
 import {Loading}     from "../../components/ui/Loading";
+import {useProducts} from "../../queries/useProducts";
 
 export const ProductIndex: React.FC = () => {
-    const {status, data, error, isFetching} = useQuery('products', api.products.index);
+    const {status, data, error, isFetching} = useProducts();
 
     return <PagePadding>
         <div className="mx-auto container">

@@ -1,20 +1,19 @@
-import React, {useState}   from "react";
+import React               from "react";
 import {Dispatch}          from "../../../store";
 import {useDispatch}       from "react-redux";
 import useConfirmMenu      from "../../../hooks/useConfirmMenu";
 import {OpeningType}       from "../../../types/openings";
 import {AdminOpeningIndex} from "./AdminOpeningIndex";
-import {useQuery}          from "react-query";
-import {api}               from "../../../api";
 import {Loading}           from "../../../components/ui/Loading";
 import useToggle           from "../../../hooks/useToggle";
+import {useOpenings}       from "../../../queries/useOpenings";
 
 export const AdminOpeningIndexContainer: React.FC = () => {
     const dispatch = useDispatch<Dispatch>();
     const [expanded, setExpanded] = useToggle();
     const [menu, confirm] = useConfirmMenu();
 
-    const {status, data, error, isFetching} = useQuery('openings', api.openings.index);
+    const {status, data, error, isFetching} = useOpenings();
 
     function handleClick(opening: OpeningType) {
         setExpanded(opening.id);

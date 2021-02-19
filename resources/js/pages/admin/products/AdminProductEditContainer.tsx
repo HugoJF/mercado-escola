@@ -1,28 +1,21 @@
-import React                   from "react";
-import {useDispatch}           from "react-redux";
-import {Dispatch}              from "../../../store";
-import {useParams}             from "react-router-dom";
-import useNavigation           from "../../../hooks/useNavigation";
-import {useMutation, useQuery} from "react-query";
-import {api}                   from "../../../api";
-import {AdminProductEdit}      from "./AdminProductEdit";
-import {Loading}               from "../../../components/ui/Loading";
+import React              from "react";
+import {useDispatch}      from "react-redux";
+import {Dispatch}         from "../../../store";
+import {useParams}        from "react-router-dom";
+import useNavigation      from "../../../hooks/useNavigation";
+import {AdminProductEdit} from "./AdminProductEdit";
+import {Loading}          from "../../../components/ui/Loading";
+import {useProduct}       from "../../../queries/useProduct";
+import {useProductUpdate} from "../../../queries/mutations/useProductUpdate";
 
 export const AdminProductEditContainer: React.FC = () => {
-    const dispatch = useDispatch<Dispatch>();
     const {go} = useNavigation();
     const params = useParams<{ productId: string }>();
     const productId = parseInt(params.productId);
 
-    const {status, data, error, isFetching} = useQuery(
-        ['product', params.productId],
-        () => api.products.show(productId)
-    );
+    const {status, data, error, isFetching} = useProduct(productId);
 
-    const mutation = useMutation((data: FormData) => dispatch.products.update({
-        id: productId,
-        data: data,
-    }));
+    const mutation = useProductUpdate(productId);
 
     async function handleOnSubmit(data: FormData) {
         try {

@@ -1,17 +1,13 @@
 import React       from "react";
 import {useParams} from "react-router";
 import {OrderDone} from "./OrderDone";
-import {Loading}   from "../../components/ui/Loading";
-import {useQuery}  from "react-query";
-import {api}       from "../../api";
+import {Loading}  from "../../components/ui/Loading";
+import {useOrder} from "../../queries/useOrder";
 
 export const OrderDoneContainer: React.FC = () => {
     const params = useParams<{ orderId: string }>();
 
-    const {status, data, error, isFetching} = useQuery(
-        ['order', params.orderId],
-        () => api.orders.show(params.orderId)
-    );
+    const {status, data, error, isFetching} = useOrder(params.orderId);
 
     if (!data) {
         return <Loading/>

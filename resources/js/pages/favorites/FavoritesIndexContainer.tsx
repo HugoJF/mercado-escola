@@ -1,14 +1,10 @@
 import React            from "react";
-import {useQuery}       from "react-query";
-import {api}            from "../../api";
 import {Loading}        from "../../components/ui/Loading";
 import {FavoritesIndex} from "./FavoritesIndex";
+import {useFavorites}   from "../../queries/useFavorites";
 
 export const FavoritesIndexContainer: React.FC = () => {
-    const {status, data, error, isFetching} = useQuery(
-        'favorites',
-        api.favorites.index
-    );
+    const {status, data, error, isFetching} = useFavorites();
 
     return data
         ?

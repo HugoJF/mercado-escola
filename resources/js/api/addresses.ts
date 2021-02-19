@@ -9,7 +9,7 @@ export const addresses = {
         .post('addresses')
         .body(data)
         .send<AddressType>(),
-    destroy: (id: number) => bxios()
+    destroy: (id: Id) => bxios()
         .delete('addresses', id)
         .send<AddressType>(),
 };

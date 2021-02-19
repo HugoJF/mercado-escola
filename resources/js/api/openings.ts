@@ -6,7 +6,7 @@ export const openings = {
     index: () => bxios()
         .get('openings')
         .send<ResourceResponse<OpeningType[]>>(),
-    show: (id: number) => bxios()
+    show: (id: Id) => bxios()
         .get('openings', id)
         .send<ResourceResponse<OpeningType<OpeningWithProducts>>>(),
     current: () => bxios()
@@ -16,17 +16,17 @@ export const openings = {
         .post('openings')
         .body(data)
         .send<ResourceResponse<OpeningType>>(),
-    update: (id: number, data: Partial<OpeningProperties>) => bxios()
+    update: (id: Id, data: Partial<OpeningProperties>) => bxios()
         .patch('openings', id)
         .body(data)
         .send<ResourceResponse<OpeningType>>(),
-    addProduct: (openingId: number, productId: number) => bxios()
+    addProduct: (openingId: Id, productId: Id) => bxios()
         .post('openings', openingId, 'products', productId)
         .send<ResourceResponse<OpeningType>>(),
-    removeProduct: (openingId: number, productId: number) => bxios()
+    removeProduct: (openingId: Id, productId: Id) => bxios()
         .delete('openings', openingId, 'products', productId)
         .send<ResourceResponse<OpeningType>>(),
-    destroy: (id: number) => bxios()
+    destroy: (id: Id) => bxios()
         .delete('openings', id)
         .send<ResourceResponse<OpeningType>>(),
 };

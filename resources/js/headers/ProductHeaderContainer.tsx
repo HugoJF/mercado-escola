@@ -2,11 +2,11 @@ import React, {useEffect, useState} from 'react';
 import {useParams}                  from "react-router";
 import {useDispatch}                from "react-redux";
 import {Dispatch}                   from "../store";
-import {useQuery}                   from "react-query";
-import {api}                        from "../api";
 import {isEmpty}                    from "../helpers/Functions";
 import {Loading}                    from "../components/ui/Loading";
 import {ProductHeader}              from "./ProductHeader";
+import {useProduct}                 from "../queries/useProduct";
+import {useFavorites}               from "../queries/useFavorites";
 
 export const ProductHeaderContainer: React.FC = () => {
     const dispatch = useDispatch<Dispatch>();
@@ -14,15 +14,8 @@ export const ProductHeaderContainer: React.FC = () => {
     const params = useParams<{ productId: string }>();
     const productId = parseInt(params.productId);
 
-    const product = useQuery(
-        ['product', productId],
-        () => api.products.show(productId)
-    );
-
-    const favorites = useQuery(
-        'favorites',
-        api.favorites.index
-    );
+    const product = useProduct(productId);
+    const favorites = useFavorites();
 
     useEffect(() => {
         const items = favorites?.data?.data?.data.filter(favorite => favorite.id === productId);

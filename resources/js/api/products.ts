@@ -11,18 +11,18 @@ export const products = {
         .body(data)
         .multipartFormData()
         .send<ResourceResponse<ProductType>>(),
-    show: (id: number) => bxios()
+    show: (id: Id) => bxios()
         .get('products', id)
         .send<ResourceResponse<ProductType>>(),
-    update: (id: number, data: FormData) => bxios()
+    update: (id: Id, data: FormData) => bxios()
         .patch('products', id)
         .body(data)
         .patchFormDataFix()
         .send<ResourceResponse<ProductType>>(),
-    destroy: (id: number) => bxios()
+    destroy: (id: Id) => bxios()
         .delete('products', id)
         .send<ResourceResponse<ProductType>>(),
-    destroyMedia: (productId: number, mediaId: number) => bxios()
+    destroyMedia: (productId: Id, mediaId: Id) => bxios()
         .delete('products', productId, 'media', mediaId)
         .send<ResourceResponse<ProductType>>()
 };

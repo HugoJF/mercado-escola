@@ -1,15 +1,12 @@
 import React, {useEffect} from 'react';
 import {Link}             from "react-router-dom";
 import useNavigation      from "../../hooks/useNavigation";
-import {useQuery}         from "react-query";
-import {api}              from "../../api";
+import {useAddresses}     from "../../queries/useAddresses";
 
 export const OnBoarding2: React.FC = () => {
     const {go, bindGo} = useNavigation();
-    const {status, data, error, isFetching} = useQuery(
-        'addresses',
-        api.addresses.index
-    );
+
+    const {status, data, error, isFetching} = useAddresses();
 
     useEffect(() => {
         const count = data?.data?.length;

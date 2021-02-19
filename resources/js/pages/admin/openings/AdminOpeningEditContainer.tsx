@@ -4,10 +4,9 @@ import {Dispatch}          from "../../../store";
 import {useParams}         from "react-router-dom";
 import {OpeningProperties} from "../../../types/openings";
 import useNavigation       from "../../../hooks/useNavigation";
-import {useQuery}          from "react-query";
-import {api}               from "../../../api";
 import {Loading}           from "../../../components/ui/Loading";
 import {AdminOpeningEdit}  from "./AdminOpeningEdit";
+import {useOpening}        from "../../../queries/useOpening";
 
 export const AdminOpeningEditContainer: React.FC = () => {
     const dispatch = useDispatch<Dispatch>();
@@ -15,10 +14,7 @@ export const AdminOpeningEditContainer: React.FC = () => {
     const params = useParams<{ openingId: string }>();
     const openingId = parseInt(params.openingId);
 
-    const {status, data, error, isFetching} = useQuery(
-        ['opening', openingId],
-        () => api.openings.show(openingId)
-    );
+    const {status, data, error, isFetching} = useOpening(openingId);
 
     async function handleOnSubmit(data: OpeningProperties) {
         try {

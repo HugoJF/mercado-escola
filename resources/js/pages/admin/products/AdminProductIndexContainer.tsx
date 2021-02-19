@@ -1,20 +1,19 @@
-import React, {useState}   from "react";
+import React               from "react";
 import {useDispatch}       from "react-redux";
 import {Dispatch}          from "../../../store";
 import useConfirmMenu      from "../../../hooks/useConfirmMenu";
 import {AdminProductIndex} from "./AdminProductIndex";
 import {ProductType}       from "../../../types/products";
 import {Loading}           from "../../../components/ui/Loading";
-import {useQuery}          from "react-query";
-import {api}               from "../../../api";
 import useToggle           from "../../../hooks/useToggle";
+import {useProducts}       from "../../../queries/useProducts";
 
 export const AdminProductIndexContainer: React.FC = () => {
     const dispatch = useDispatch<Dispatch>();
     const [expanded, setExpanded] = useToggle();
     const [menu, confirm] = useConfirmMenu();
 
-    const {status, data, error, isFetching} = useQuery('products', api.products.index);
+    const {status, data, error, isFetching} = useProducts();
 
     function handleClick(product: ProductType) {
         setExpanded(product.id);

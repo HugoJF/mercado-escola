@@ -1,27 +1,15 @@
-import React                from "react";
-import {Title}              from "../../../components/ui/Title";
-import {useDispatch}        from "react-redux";
-import {Dispatch}           from "../../../store";
-import {HeightTransitioner} from "../../../components/ui/HeightTransitioner";
-import {Skeleton}           from "../../../components/ui/Skeleton";
-import {PagePadding}        from "../../../containers/PagePadding";
-import {Box}                from "../../../components/ui/Box";
-import {Toggle}             from "../../../components/ui/Toggle";
-import useLoadEffect        from "../../../hooks/useLoadEffect";
-import {Badge}              from "../../../components/ui/Badge";
-import {UserType}           from "../../../types/auth";
-import {useQuery}           from "react-query";
-import {api}                from "../../../api";
-import {Loading}            from "../../../components/ui/Loading";
-import {AdminUserIndex}     from "./AdminUserIndex";
+import React            from "react";
+import {useDispatch}    from "react-redux";
+import {Dispatch}       from "../../../store";
+import {UserType}       from "../../../types/auth";
+import {Loading}        from "../../../components/ui/Loading";
+import {AdminUserIndex} from "./AdminUserIndex";
+import {useUsers}       from "../../../queries/useUsers";
 
 export const AdminUserIndexContainer: React.FC = () => {
     const dispatch = useDispatch<Dispatch>();
 
-    const {status, data, error, isFetching} = useQuery(
-        'users',
-        api.users.index
-    );
+    const {status, data, error, isFetching} = useUsers();
 
     async function handleOnAdminToggle(user: UserType) {
         await dispatch.users.update({
@@ -48,6 +36,6 @@ export const AdminUserIndexContainer: React.FC = () => {
             users={data.data.data}
             onAdminToggle={handleOnAdminToggle}
         />
-    :
+        :
         <Loading/>
 };

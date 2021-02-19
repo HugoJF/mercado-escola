@@ -6,10 +6,10 @@ export const favorites = {
     index: () => bxios()
         .get('favorites')
         .send<ResourceResponse<ProductType[]>>(),
-    store: (productId: number) => bxios()
+    store: (productId: Id) => bxios()
         .post('favorites', productId)
         .send<ResourceResponse<null>>(),
-    destroy: (productId: number) => bxios()
+    destroy: (productId: Id) => bxios()
         .delete('favorites', productId)
         .send<ResourceResponse<null>>(),
 };

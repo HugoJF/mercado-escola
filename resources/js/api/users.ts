@@ -6,7 +6,7 @@ export const users = {
     index: () => bxios()
         .get('users')
         .send<ResourceResponse<UserType[]>>(),
-    update: (id: number, data: Partial<UserProperties>) => bxios()
+    update: (id: Id, data: Partial<UserProperties>) => bxios()
         .patch('users', id)
         .body(data)
         .send<ResourceResponse<UserType>>(),

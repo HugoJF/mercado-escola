@@ -14,7 +14,7 @@ export const orders = {
         .post('orders')
         .body(data)
         .send<ResourceResponse<OrderType>>(),
-    show: (id: string) => bxios()
+    show: (id: Id) => bxios()
         .get('orders', id)
         .send<ResourceResponse<OrderType<OrderWithAddress & OrderWithOpening & OrderWithProducts>>>(),
     cancel: (order: OrderType) => bxios()

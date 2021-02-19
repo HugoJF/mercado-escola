@@ -1,19 +1,13 @@
-import React, {useState} from "react";
-import {Title}           from "../../components/ui/Title";
-import useNavigation     from "../../hooks/useNavigation";
-import {useQuery}        from "react-query";
-import {api}             from "../../api";
-import {OrdersIndex}     from "./OrdersIndex";
-import {Loading}         from "../../components/ui/Loading";
-import usePagination     from "../../hooks/usePagination";
+import React         from "react";
+import {OrdersIndex} from "./OrdersIndex";
+import {Loading}     from "../../components/ui/Loading";
+import usePagination from "../../hooks/usePagination";
+import {useOrders}   from "../../queries/useOrders";
 
 export const OrdersIndexContainer: React.FC = () => {
     const pagination = usePagination();
 
-    const {status, data, error, isFetching} = useQuery(
-        ['orders', pagination.page],
-        () => api.orders.index(pagination.page)
-    );
+    const {status, data, error, isFetching} = useOrders(pagination.page);
 
     return <>
         {data ?
