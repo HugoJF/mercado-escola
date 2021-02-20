@@ -15,12 +15,14 @@ type OverlayWrapperData = {
     height: number;
 }
 
-export const AnimationBox: React.FC<OverlayWrapperProps> = ({dependencies, children}) => {
+export const AnimationBox: React.FC<OverlayWrapperProps> = ({dependencies = [], children}) => {
     const ref = useRef<HTMLElement>();
     const [data, setData] = useState<Partial<OverlayWrapperData>>({});
 
     const target = useCallback((node) => {
-        if (!node) return;
+        if (!node) {
+            return;
+        }
 
         ref.current = node;
 
@@ -28,10 +30,12 @@ export const AnimationBox: React.FC<OverlayWrapperProps> = ({dependencies, child
     }, []);
 
     useEffect(() => {
-        if (!ref.current) return;
+        if (!ref.current) {
+            return;
+        }
 
         update(ref.current);
-    }, dependencies || []);
+    }, dependencies);
 
     function update(element: HTMLElement) {
         setData({

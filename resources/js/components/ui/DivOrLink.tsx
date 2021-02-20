@@ -6,7 +6,7 @@ export type DivOrLinkProps = React.HTMLAttributes<HTMLDivElement> & {
     isLink: boolean;
 }
 
-export const DivOrLink: React.FC<DivOrLinkProps> = ({children, className, to, isLink, ...rest}) => {
+export const DivOrLink: React.FC<DivOrLinkProps> = ({children, className, to, isLink}) => {
     if (isLink) {
         return <Link className={className} to={to}>
             {children}

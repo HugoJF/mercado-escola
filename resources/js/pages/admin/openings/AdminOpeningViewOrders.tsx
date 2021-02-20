@@ -18,7 +18,7 @@ export const AdminOpeningViewOrders: React.FC<AdminOpeningViewOrdersProps> = ({o
         <div className="divide-y divide-gray-200">
             {opening.orders.map(order => (
                 <HeightTransitioner key={order.id}>
-                    <OrderListItem key={order.id} order={order}/>
+                    <OrderListItem order={order}/>
                 </HeightTransitioner>
             ))}
         </div>

@@ -20,13 +20,13 @@ type AdminOpeningTabProps = {
 
 const AdminOpeningTabButton: React.FC<AdminOpeningTabProps> = ({onClick, selected, target, children}) => {
     return <div
-        className={`transition-colors duration-150
+        className="transition-colors duration-150
                     flex-col flex-grow items-center bg-gray-100 hover:bg-gray-200
-                    text-xl text-gray-700 font-medium cursor-pointer`}
+                    text-xl text-gray-700 font-medium cursor-pointer"
         onClick={onClick}
     >
         <div
-            className={classNames(`px-3 py-2 text-center text-base font-normal`, {
+            className={classNames('px-3 py-2 text-center text-base font-normal', {
                 'text-gray-500': !selected,
                 'text-gray-800': selected,
             })}

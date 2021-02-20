@@ -41,12 +41,17 @@ export const PhoneUpdate: React.FC = () => {
     return <PagePadding>
         <Title>Digite seu telefone</Title>
         <form className="mt-8 px-4 w-full" onSubmit={handleSubmit(updatePhone)}>
-            <label className={classNames(
-                {
-                    'text-red-500': errors.phone,
-                    'text-gray-500': !errors.phone,
-                }
-            )} htmlFor="#phone">Telefone</label>
+            <label
+                htmlFor="#phone"
+                className={classNames(
+                    {
+                        'text-red-500': errors.phone,
+                        'text-gray-500': !errors.phone,
+                    }
+                )}
+            >
+                Telefone
+            </label>
             <PhoneInput
                 className={`transition-colors duration-300 block w-full mb-8 py-3 px-4 text-black bg-transparent border-b border-lg${errors.phone ? ' border-red-500' : ''}`}
                 id="phone"

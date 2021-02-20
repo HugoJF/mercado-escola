@@ -39,12 +39,15 @@ export const OnBoarding1: React.FC = () => {
         <h3 className="px-10 text-primary-100 text-center tracking-tight">Precisamos de um meio de entrar em contato quando necessário!</h3>
 
         <form className="mt-8 w-full" onSubmit={handleSubmit(updatePhone)}>
-            <label className={classNames(
-                {
+            <label
+                htmlFor="#phone"
+                className={classNames({
                     'text-red-500': errors.phone,
                     'text-primary-100': !errors.phone,
-                }
-            )} htmlFor="#phone">Telefone</label>
+                })}
+            >
+                Telefone
+            </label>
             <PhoneInput
                 className={`transition-colors duration-300 block w-full mb-8 py-3 px-4 text-white bg-transparent border-b border-lg${errors.phone ? ' border-red-500' : ''}`}
                 id="phone"

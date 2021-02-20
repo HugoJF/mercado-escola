@@ -32,7 +32,6 @@ const buttons: ButtonProps[] = [{
 
 export const AdminIndex: React.FC = () => {
     const {bindGo} = useNavigation();
-    const relative = useRelativePath();
 
     return <PagePadding>
         <div className="mx-auto container">

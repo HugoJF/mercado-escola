@@ -14,6 +14,7 @@ export const AdminOpeningList: React.FC<AdminOpeningListProps>
     return <div className="divide-y divide-gray-200">
         {openings.map(opening => (
             <AdminOpeningListItem
+                key={opening.id}
                 opening={opening}
                 expanded={opening && opening?.id === expanded}
                 onClick={onClick}

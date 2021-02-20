@@ -24,4 +24,4 @@ export const OrderList: React.FC<OrderListProps> = ({orders}) => {
             </div>
         ))}
     </div>
-}
+};

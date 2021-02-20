@@ -83,7 +83,7 @@ export const AccountIndex: React.FC = () => {
                     isLink={clickable}
                     to={`${match.url}/${to}`}
                     className={classNames(
-                        `transition-colors duration-150 w-full flex items-center`,
+                        'transition-colors duration-150 w-full flex items-center',
                         {
                             'hover:bg-gray-200 cursor-pointer': clickable
                         }
@@ -107,8 +107,8 @@ export const AccountIndex: React.FC = () => {
 
         <div className="mt-8 divide-y divide-gray-200">
             {secondarySections.map(({icon: Icon, title, to, clickable}) => (
-                <Link className="block" to={`/${to}`}>
-                    <Box key={to}>
+                <Link key={to} className="block" to={`/${to}`}>
+                    <Box>
                         <div className="flex items-center justify-center w-6 mr-4">
                             <Icon className="text-primary-500"/>
                         </div>

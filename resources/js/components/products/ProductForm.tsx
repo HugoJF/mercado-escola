@@ -90,7 +90,13 @@ export const ProductForm: React.FC<ProductFormProps>
         const removedFiles: FileWithPreview[] = [];
         const filteredFiles: FileWithPreview[] = [];
 
-        uploadingFiles.forEach(file => file.file.name === remove.file.name ? removedFiles.push(file) : filteredFiles.push(file));
+        uploadingFiles.forEach(file => {
+            if (file.file.name === remove.file.name) {
+                removedFiles.push(file);
+            } else {
+                filteredFiles.push(file);
+            }
+        });
 
         for (const file of removedFiles) {
             URL.revokeObjectURL(file.preview);
@@ -107,8 +113,10 @@ export const ProductForm: React.FC<ProductFormProps>
             <FieldWrapper label="Imagens" name="images">
                 <div
                     {...getRootProps()}
-                    className="flex items-center justify-center mt-2 mb-8 px-8 py-8 bg-gray-200 text-gray-400 text-center
-                        border-2 border-dashed border-gray-400 focus:border-primary-500 h-32 rounded-lg"
+                    className="flex items-center justify-center
+                        mt-2 mb-8 px-8 py-8 bg-gray-200 text-gray-400
+                        text-center border-2 border-dashed border-gray-400
+                        focus:border-primary-500 h-32 rounded-lg"
                 >
                     <input
                         name="images"
@@ -118,28 +126,32 @@ export const ProductForm: React.FC<ProductFormProps>
                 </div>
 
                 <ul className="grid grid-cols-4 gap-4 mb-4">
-                    {Object.entries(product?.media ?? {}).map(([id, url]) => <li className="relative flex items-center justify-center
-                        border-4 border-gray-300 rounded-lg"
-                    >
-                        <img
-                            className="rounded"
-                            onClick={() => removeExistingImage(parseInt(id))}
-                            src={url}
-                            alt={product?.name}
-                        />
-                    </li>)}
+                    {Object.entries(product?.media ?? {}).map(([id, url]) =>
+                        <li
+                            className="relative flex items-center justify-center
+                                border-4 border-gray-300 rounded-lg"
+                        >
+                            <img
+                                className="rounded"
+                                onClick={() => removeExistingImage(parseInt(id))}
+                                src={url}
+                                alt={product?.name}
+                            />
+                        </li>
+                    )}
 
-                    {uploadingFiles.map(file => <li className="relative flex items-center justify-center p-1
-                        bg-gray-200 border border-gray-300 shadow-inner rounded-lg"
-                    >
-                        <div className="transform translate-x-1/2 -translate-y-1/2 absolute top-0 right-0 h-2 w-2 bg-red-500 rounded-full animate-bounce"/>
-                        <img
-                            onClick={() => removeFile(file)}
-                            key={file.file.name}
-                            src={file.preview}
-                            alt={file.file.name}
-                        />
-                    </li>)}
+                    {uploadingFiles.map(file =>
+                        <li className="relative flex items-center justify-center p-1
+                            bg-gray-200 border border-gray-300 shadow-inner rounded-lg"
+                        >
+                            <div className="transform translate-x-1/2 -translate-y-1/2 absolute top-0 right-0 h-2 w-2 bg-red-500 rounded-full animate-bounce"/>
+                            <img
+                                onClick={() => removeFile(file)}
+                                key={file.file.name}
+                                src={file.preview}
+                                alt={file.file.name}
+                            />
+                        </li>)}
                 </ul>
             </FieldWrapper>
 

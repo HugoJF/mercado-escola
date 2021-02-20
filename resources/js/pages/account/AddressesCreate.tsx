@@ -122,7 +122,7 @@ export const AddressesCreate: React.FC = () => {
 
                             <div className="divide-y divide-gray-200">
                                 {suggestions.map(suggestion =>
-                                    <Box {...getSuggestionItemProps(suggestion)}>
+                                    <Box id={suggestion} {...getSuggestionItemProps(suggestion)}>
                                         <MapPin className="flex-shrink-0 text-gray-500"/>
 
                                         <p className="flex-grow mx-4 tracking-tight">{suggestion.description}</p>
