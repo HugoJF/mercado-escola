@@ -1,9 +1,7 @@
 import React, {useState}               from "react";
-import {useDispatch}                   from "react-redux";
 import {ChevronRight, Loader, MapPin}  from "react-feather";
 import PlacesAutocomplete              from 'react-places-autocomplete';
 import {Title}                         from "../../components/ui/Title";
-import {Dispatch}                      from "../../store";
 import {AddressProperties}             from "../../types/addresses";
 import {Box}                           from "../../components/ui/Box";
 import {AddressStreetNumberActionMenu} from "../../action-menus/AdressStreetNumberActionMenu";
@@ -11,7 +9,8 @@ import {Google}                        from "../../google";
 import {MapWithPing}                   from "../../components/addresses/MapWithPing";
 import {Button}                        from "../../components/ui/Button";
 import {PagePadding}                   from "../../containers/PagePadding";
-import useNavigation                   from "../../hooks/useNavigation";
+import useNavigation      from "../../hooks/useNavigation";
+import {useAddressCreate} from "../../mutations/useAddressCreate";
 
 const fixOnBlur = (refObj: any) => {
     // Avoid clearing suggestions when input loses focus
@@ -26,7 +25,6 @@ const fixOnBlur = (refObj: any) => {
 };
 
 export const AddressesCreate: React.FC = () => {
-    const dispatch = useDispatch<Dispatch>();
     const {goBack} = useNavigation();
     const [numberSelectorOpen, setNumberSelectorOpen] = useState(false);
     const [loading, setLoading] = useState(false);
@@ -34,6 +32,7 @@ export const AddressesCreate: React.FC = () => {
     const [address, setAddress] = useState<google.maps.GeocoderResult | null>(null);
     const [number, setNumber] = useState<number | null>(null);
     const [center, setCenter] = useState<[number, number] | null>(null);
+    const addressCreate = useAddressCreate();
 
     async function handleAddressSelection(address: string) {
         const geocode = new (Google()).maps.Geocoder().geocode({address},
@@ -77,7 +76,7 @@ export const AddressesCreate: React.FC = () => {
     }
 
     async function storeAddress(data: AddressProperties) {
-        await dispatch.addresses.store(data);
+        await addressCreate.mutateAsync(data);
         goBack();
     }
 

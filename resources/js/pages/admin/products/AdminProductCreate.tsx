@@ -1,18 +1,17 @@
-import React         from "react";
-import {useDispatch} from "react-redux";
-import {Dispatch}    from "../../../store";
-import {Title}       from "../../../components/ui/Title";
-import {ProductForm} from "../../../components/products/ProductForm";
-import {PagePadding} from "../../../containers/PagePadding";
-import useNavigation from "../../../hooks/useNavigation";
+import React              from "react";
+import {Title}            from "../../../components/ui/Title";
+import {ProductForm}      from "../../../components/products/ProductForm";
+import {PagePadding}      from "../../../containers/PagePadding";
+import useNavigation      from "../../../hooks/useNavigation";
+import {useProductCreate} from "../../../mutations/useProductCreate";
 
 export const AdminProductCreate: React.FC = () => {
-    const dispatch = useDispatch<Dispatch>();
     const {go} = useNavigation();
+    const productCreate = useProductCreate();
 
     async function updateProduct(data: FormData) {
         try {
-            await dispatch.products.create(data);
+            await productCreate.mutateAsync(data);
             go('/admin/produtos');
         } catch (e) {
             throw {errors: e.response.data.errors};

@@ -1,18 +1,20 @@
 import React            from "react";
 import {useDispatch}    from "react-redux";
 import {Dispatch}       from "../../../store";
-import {UserType}       from "../../../types/auth";
 import {Loading}        from "../../../components/ui/Loading";
 import {AdminUserIndex} from "./AdminUserIndex";
 import {useUsers}       from "../../../queries/useUsers";
+import {useUserUpdate}  from "../../../mutations/useUserUpdate";
+import {UserType}       from "../../../types/users";
 
 export const AdminUserIndexContainer: React.FC = () => {
     const dispatch = useDispatch<Dispatch>();
 
     const {status, data, error, isFetching} = useUsers();
+    const userUpdate = useUserUpdate();
 
     async function handleOnAdminToggle(user: UserType) {
-        await dispatch.users.update({
+        await userUpdate.mutateAsync({
             id: user.id,
             data: {admin: !user.admin}
         });

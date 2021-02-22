@@ -1,25 +1,27 @@
 import React, {useEffect, useState} from 'react';
 import {useParams}                  from "react-router";
-import {useDispatch}                from "react-redux";
-import {Dispatch}                   from "../store";
 import {isEmpty}                    from "../helpers/Functions";
 import {Loading}                    from "../components/ui/Loading";
 import {ProductHeader}              from "./ProductHeader";
 import {useProduct}                 from "../queries/useProduct";
-import {useFavorites}               from "../queries/useFavorites";
+import {useFavorites}       from "../queries/useFavorites";
+import {useFavoriteCreate}  from "../mutations/useFavoriteCreate";
+import {useFavoriteDestroy} from "../mutations/useFavoriteDestroy";
 
 type Params = {
     productId: string;
 }
 
 export const ProductHeaderContainer: React.FC = () => {
-    const dispatch = useDispatch<Dispatch>();
     const [favorite, setFavorite] = useState(false);
     const params = useParams<Params>();
     const productId = parseInt(params.productId);
 
     const product = useProduct(productId);
     const favorites = useFavorites();
+
+    const favoriteCreate = useFavoriteCreate();
+    const favoriteDestroy = useFavoriteDestroy();
 
     useEffect(() => {
         const items = favorites?.data?.data?.data.filter(favorite => favorite.id === productId);
@@ -30,9 +32,9 @@ export const ProductHeaderContainer: React.FC = () => {
         setFavorite(!favorite);
 
         if (favorite) {
-            dispatch.favorites.destroy(productId);
+            favoriteDestroy.mutate(productId);
         } else {
-            dispatch.favorites.create(productId);
+            favoriteCreate.mutate(productId);
         }
     }
 

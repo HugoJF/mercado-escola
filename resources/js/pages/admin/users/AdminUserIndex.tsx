@@ -6,7 +6,7 @@ import {PagePadding}        from "../../../containers/PagePadding";
 import {Box}                from "../../../components/ui/Box";
 import {Toggle}             from "../../../components/ui/Toggle";
 import {Badge}              from "../../../components/ui/Badge";
-import {UserType}           from "../../../types/auth";
+import {UserType}           from "../../../types/users";
 
 export type AdminUserIndexProps = {
     users: UserType[];

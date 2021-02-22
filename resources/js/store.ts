@@ -1,5 +1,5 @@
 import {init, RematchDispatch, RematchRootState} from "@rematch/core";
-import {models, RootModel}                       from "./types/";
+import {models, RootModel}                       from "./stores/";
 import createImmerPlugin                         from "@rematch/immer";
 import persist                                   from '@rematch/persist';
 import storage                                   from 'redux-persist/lib/storage'

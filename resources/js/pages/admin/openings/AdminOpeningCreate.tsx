@@ -6,14 +6,15 @@ import {Title}             from "../../../components/ui/Title";
 import {OpeningForm}       from "../../../components/openings/OpeningForm";
 import {PagePadding}       from "../../../containers/PagePadding";
 import useNavigation       from "../../../hooks/useNavigation";
+import {useOpeningsCreate} from "../../../mutations/useOpeningsCreate";
 
 export const AdminOpeningCreate: React.FC = () => {
-    const dispatch = useDispatch<Dispatch>();
     const {go} = useNavigation();
+    const openingCreate = useOpeningsCreate();
 
     async function createOpening(data: OpeningProperties) {
         try {
-            await dispatch.openings.store(data);
+            await openingCreate.mutateAsync(data);
             go('/admin/aberturas');
         } catch (e) {
             throw {errors: e.response.data.errors};

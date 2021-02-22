@@ -8,7 +8,9 @@ import {Toggle}                           from "../../../components/ui/Toggle";
 import {useDispatch}                      from "react-redux";
 import {Dispatch}                         from "../../../store";
 import {Title}                            from "../../../components/ui/Title";
-import {ProductType}                      from "../../../types/products";
+import {ProductType}              from "../../../types/products";
+import {useOpeningsAddProduct}    from "../../../mutations/useOpeningsAddProduct";
+import {useOpeningsRemoveProduct} from "../../../mutations/useOpeningsRemoveProduct";
 
 export type AdminOpeningViewProductsProps = {
     opening: OpeningType<OpeningWithProducts>;
@@ -16,16 +18,18 @@ export type AdminOpeningViewProductsProps = {
 
 export const AdminOpeningViewProducts: React.FC<AdminOpeningViewProductsProps> = ({opening}) => {
     const dispatch = useDispatch<Dispatch>();
+    const openingAddProduct = useOpeningsAddProduct();
+    const openingRemoveProduct = useOpeningsRemoveProduct();
 
     async function handleProductToggle(product: ProductType) {
         if (opening.products.includes(product.id)) {
-            await dispatch.openings.removeProduct({openingId: opening.id, productId: product.id});
+            await openingRemoveProduct.mutateAsync({openingId: opening.id, productId: product.id});
             dispatch.toasts.add({
                 title: 'Produto removido!',
                 description: `${product.name} foi removido da abertura`
             });
         } else {
-            await dispatch.openings.addProduct({openingId: opening.id, productId: product.id});
+            await openingAddProduct.mutateAsync({openingId: opening.id, productId: product.id});
             dispatch.toasts.add({
                 title: 'Produto adicionado!',
                 description: `${product.name} foi adicionado à abertura`

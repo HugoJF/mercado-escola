@@ -4,7 +4,7 @@ import useNavigation      from "../../../hooks/useNavigation";
 import {AdminProductEdit} from "./AdminProductEdit";
 import {Loading}          from "../../../components/ui/Loading";
 import {useProduct}       from "../../../queries/useProduct";
-import {useProductUpdate} from "../../../queries/mutations/useProductUpdate";
+import {useProductUpdate} from "../../../mutations/useProductUpdate";
 
 type Params = {
     productId: string;

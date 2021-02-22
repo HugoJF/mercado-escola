@@ -3,13 +3,13 @@ import {useDispatch}      from "react-redux";
 import {Dispatch}         from "../../store";
 import {useAuth}          from "../../selectors";
 import {useForm}          from "react-hook-form";
-import {LoginCredentials} from "../../types/auth";
 import {Link}             from "react-router-dom";
 import {Input}            from "../../components/form/Input";
 import {Button}           from "../../components/ui/Button";
 import {Container}        from "../../containers/Container";
 import {Error}            from "../../components/ui/Error";
 import useNavigation      from "../../hooks/useNavigation";
+import {LoginCredentials} from "../../types/auth";
 
 export const Login: React.FC<object> = () => {
     const auth = useAuth();

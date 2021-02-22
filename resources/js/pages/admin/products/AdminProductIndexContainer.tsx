@@ -7,13 +7,14 @@ import {ProductType}       from "../../../types/products";
 import {Loading}           from "../../../components/ui/Loading";
 import useToggle           from "../../../hooks/useToggle";
 import {useProducts}       from "../../../queries/useProducts";
+import {useProductDestroy} from "../../../mutations/useProductDestroy";
 
 export const AdminProductIndexContainer: React.FC = () => {
-    const dispatch = useDispatch<Dispatch>();
     const [expanded, setExpanded] = useToggle();
     const [menu, confirm] = useConfirmMenu();
 
     const {status, data, error, isFetching} = useProducts();
+    const productDestroy = useProductDestroy();
 
     function handleClick(product: ProductType) {
         setExpanded(product.id);
@@ -27,7 +28,7 @@ export const AdminProductIndexContainer: React.FC = () => {
         });
 
         if (confirmed) {
-            dispatch.products.destroy(product.id);
+            productDestroy.mutate(product.id);
         }
     }
 

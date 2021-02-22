@@ -3,10 +3,10 @@ import clsx                         from 'clsx';
 import {Loader}                     from "react-feather";
 import {useForm}                    from "react-hook-form";
 import {useAuth}                    from "../../selectors";
-import {UserProperties}             from "../../types/auth";
 import {useDispatch}                from "react-redux";
 import {PhoneInput}                 from "../../components/form/PhoneInput";
 import useNavigation                from "../../hooks/useNavigation";
+import {UserProperties}             from "../../types/users";
 
 type PhoneUpdateForm = {
     phone: string;

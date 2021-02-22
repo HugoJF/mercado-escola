@@ -1,17 +1,18 @@
-import React               from "react";
-import {Dispatch}          from "../../../store";
-import {useDispatch}       from "react-redux";
-import useConfirmMenu      from "../../../hooks/useConfirmMenu";
-import {OpeningType}       from "../../../types/openings";
-import {AdminOpeningIndex} from "./AdminOpeningIndex";
-import {Loading}           from "../../../components/ui/Loading";
-import useToggle           from "../../../hooks/useToggle";
-import {useOpenings}       from "../../../queries/useOpenings";
+import React                from "react";
+import {Dispatch}           from "../../../store";
+import {useDispatch}        from "react-redux";
+import useConfirmMenu       from "../../../hooks/useConfirmMenu";
+import {OpeningType}        from "../../../types/openings";
+import {AdminOpeningIndex}  from "./AdminOpeningIndex";
+import {Loading}            from "../../../components/ui/Loading";
+import useToggle            from "../../../hooks/useToggle";
+import {useOpenings}        from "../../../queries/useOpenings";
+import {useOpeningsDestroy} from "../../../mutations/useOpeningsDestroy";
 
 export const AdminOpeningIndexContainer: React.FC = () => {
-    const dispatch = useDispatch<Dispatch>();
     const [expanded, setExpanded] = useToggle();
     const [menu, confirm] = useConfirmMenu();
+    const openingsDestroy = useOpeningsDestroy();
 
     const {status, data, error, isFetching} = useOpenings();
 
@@ -27,7 +28,7 @@ export const AdminOpeningIndexContainer: React.FC = () => {
         });
 
         if (confirmed) {
-            dispatch.openings.destroy(opening.id);
+            openingsDestroy.mutate(opening.id);
         }
     }
 

@@ -2,13 +2,13 @@ import React, {useState}     from "react";
 import {useDispatch}         from "react-redux";
 import {Dispatch}            from "../../store";
 import {useForm}             from "react-hook-form";
-import {RegisterCredentials} from "../../types/auth";
 import {Link}                from "react-router-dom";
 import {Input}               from "../../components/form/Input";
 import {Button}              from "../../components/ui/Button";
 import {Title}               from "../../components/ui/Title";
 import {PagePadding}         from "../../containers/PagePadding";
 import useNavigation         from "../../hooks/useNavigation";
+import {RegisterCredentials} from "../../types/auth";
 
 export const Register: React.FC<object> = () => {
     const dispatch = useDispatch<Dispatch>();

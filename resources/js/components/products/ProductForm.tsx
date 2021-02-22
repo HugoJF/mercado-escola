@@ -9,9 +9,8 @@ import {Button}                         from "../ui/Button";
 import {useDropzone}                    from "react-dropzone";
 import {FieldWrapper}                   from "../form/FieldWrapper";
 import useConfirmMenu                   from "../../hooks/useConfirmMenu";
-import {useDispatch}                    from "react-redux";
-import {Dispatch}                       from "../../store";
-import {QuantityTypes, rawTypeText}     from "../ui/QuantityTypeText";
+import {QuantityTypes, rawTypeText} from "../ui/QuantityTypeText";
+import {useProductDestroyMedia}     from "../../mutations/useProductDestroyMedia";
 
 export type ProductFormProps = {
     product?: ProductType;
@@ -23,7 +22,6 @@ type FileWithPreview = { file: File, preview: string };
 
 export const ProductForm: React.FC<ProductFormProps>
     = ({onSubmit, product, action}) => {
-    const dispatch = useDispatch<Dispatch>();
     const [loading, setLoading] = useState(false);
     const {register, handleSubmit, errors, setError, setValue} = useForm<ProductProperties>();
     const [menu, confirm] = useConfirmMenu();
@@ -38,6 +36,8 @@ export const ProductForm: React.FC<ProductFormProps>
             setUploadingFiles([...uploadingFiles, ...filesWithPreview]);
         }
     });
+    // TODO: move to container
+    const productDestroyMedia = useProductDestroyMedia();
 
     useEffect(() => {
         if (!product) {
@@ -87,7 +87,10 @@ export const ProductForm: React.FC<ProductFormProps>
         const remove = await confirm({title: 'Deseja remover essa imagem?', action: 'Remover'});
 
         if (remove) {
-            dispatch.products.destroyMedia({productId: product.id, mediaId: id});
+            productDestroyMedia.mutate({
+                productId: product.id,
+                mediaId: id,
+            })
         }
     }
 

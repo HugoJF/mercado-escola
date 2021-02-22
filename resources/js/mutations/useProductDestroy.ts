@@ -1,15 +1,15 @@
 import {useMutation, useQueryClient} from "react-query";
-import {OrderType}                   from "../../types/orders";
-import {api}                         from "../../api";
+import {api}                         from "../api";
 
-export function useOrderCancel() {
+export function useProductDestroy() {
     const queryClient = useQueryClient();
 
     return useMutation(
-        (order: OrderType) => api.orders.cancel(order),
+        (id: Id) => api.products.destroy(id),
         {
             onSuccess: () => {
                 queryClient.invalidateQueries()
             }
-        })
+        }
+    );
 }
