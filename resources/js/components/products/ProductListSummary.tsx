@@ -16,7 +16,7 @@ export const ProductListSummary: React.FC<ProductListSummaryProps> = ({products,
             <div key={product.id} className="flex items-center">
                 <div className="w-4/12">
                     <ImageHolder
-                        src={product.media?.[0]}
+                        src={Object.values(product.media ?? {})[0]}
                     />
                 </div>
                 <div className="px-4 flex-grow">

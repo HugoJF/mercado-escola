@@ -1,16 +1,17 @@
-import React                              from "react";
+import React, {useMemo}                   from "react";
 import {OpeningType, OpeningWithProducts} from "../../../types/openings";
 import {HeightTransitioner}               from "../../../components/ui/HeightTransitioner";
 import {Box}                              from "../../../components/ui/Box";
-import {Skeleton}                         from "../../../components/ui/Skeleton";
 import {ImageHolder}                      from "../../../components/ui/ImageHolder";
 import {Toggle}                           from "../../../components/ui/Toggle";
 import {useDispatch}                      from "react-redux";
 import {Dispatch}                         from "../../../store";
 import {Title}                            from "../../../components/ui/Title";
-import {ProductType}              from "../../../types/products";
-import {useOpeningsAddProduct}    from "../../../mutations/useOpeningsAddProduct";
-import {useOpeningsRemoveProduct} from "../../../mutations/useOpeningsRemoveProduct";
+import {ProductType}                      from "../../../types/products";
+import {useOpeningsAddProduct}            from "../../../mutations/useOpeningsAddProduct";
+import {useOpeningsRemoveProduct}         from "../../../mutations/useOpeningsRemoveProduct";
+import {useProducts}                      from "../../../queries/useProducts";
+import {Loading}                          from "../../../components/ui/Loading";
 
 export type AdminOpeningViewProductsProps = {
     opening: OpeningType<OpeningWithProducts>;
@@ -21,8 +22,11 @@ export const AdminOpeningViewProducts: React.FC<AdminOpeningViewProductsProps> =
     const openingAddProduct = useOpeningsAddProduct();
     const openingRemoveProduct = useOpeningsRemoveProduct();
 
+    const products = useProducts();
+    const productIds = useMemo(() => opening.products.map(product => +product.id), [opening]);
+
     async function handleProductToggle(product: ProductType) {
-        if (opening.products.includes(product.id)) {
+        if (productIds.includes(product.id)) {
             await openingRemoveProduct.mutateAsync({openingId: opening.id, productId: product.id});
             dispatch.toasts.add({
                 title: 'Produto removido!',
@@ -44,36 +48,42 @@ export const AdminOpeningViewProducts: React.FC<AdminOpeningViewProductsProps> =
         </div>
 
         <div className="divide-y divide-gray-200">
-            {opening.products.map(product => (
-                <HeightTransitioner key={product.id}>
-                    <Box
-                        key={product.id}
-                    >
-                        {/* Thumbnail of first image */}
-                        <div className="w-1/4 mr-4">
-                            <ImageHolder
-                                src={Object.values(product.media ?? [])?.[0]}
-                                alt={product.name}
-                            />
-                        </div>
+            {
+                products.data
+                    ?
+                    products.data.data.data.map(product => (
+                        <HeightTransitioner key={product.id}>
+                            <Box
+                                key={product.id}
+                            >
+                                {/* Thumbnail of first image */}
+                                <div className="w-1/4 mr-4">
+                                    <ImageHolder
+                                        src={Object.values(product.media ?? [])[0]}
+                                        alt={product.name}
+                                    />
+                                </div>
 
-                        {/* Name */}
-                        <div className="flex-grow">
-                            <h2 className="text-sm">
-                                {product.name || <Skeleton className="w-full"/>}
-                            </h2>
-                        </div>
+                                {/* Name */}
+                                <div className="flex-grow">
+                                    <h2 className="text-sm">
+                                        {product.name}
+                                    </h2>
+                                </div>
 
-                        {/* Selected toggle */}
-                        <div>
-                            <Toggle
-                                checked={opening.products.includes(product.id)}
-                                onToggle={() => handleProductToggle(product)}
-                            />
-                        </div>
-                    </Box>
-                </HeightTransitioner>
-            ))}
+                                {/* Selected toggle */}
+                                <div>
+                                    <Toggle
+                                        checked={productIds.includes(+product.id)}
+                                        onToggle={() => handleProductToggle(product)}
+                                    />
+                                </div>
+                            </Box>
+                        </HeightTransitioner>
+                    ))
+                    :
+                    <Loading/>
+            }
         </div>
     </div>
 };
