@@ -14,9 +14,9 @@ export const Textarea: React.FC<TextareaProps> = ({name, label, textAreaProps, e
     return <FieldWrapper name={name} label={label} error={error}>
         <textarea
             className={clsx(
-                `transition-colors duration-300
-                block w-full py-3 px-4 text-black
-                bg-transparent border-b border-lg`,
+                'transition-colors duration-300',
+                'block w-full py-3 px-4 text-black',
+                'bg-transparent border-b border-lg',
                 {'border-red-500': error}
             )}
             id={name}

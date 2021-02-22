@@ -14,8 +14,8 @@ export const Input: React.FC<InputProps> = ({name, label, inputProps, error}) =>
     return <FieldWrapper name={name} label={label} error={error}>
         <input
             className={clsx(
-                'transition-colors duration-300' +
-                'block w-full py-3 px-4 text-black placeholder-gray-400' +
+                'transition-colors duration-300',
+                'block w-full py-3 px-4 text-black placeholder-gray-400',
                 'bg-transparent border-b border-lg',
                 {'border-red-500': error}
             )}

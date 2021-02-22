@@ -48,8 +48,8 @@ export const Menu: React.FC = () => {
                     key={name}
                     onClick={bindGo(details.to)}
                     className={clsx(
-                        'transition-colors duration-150' +
-                        'w-full flex flex-grow flex-col pt-4 pb-2 items-center justify-between' +
+                        'transition-colors duration-150',
+                        'w-full flex flex-grow flex-col pt-4 pb-2 items-center justify-between',
                         'hover:bg-gray-100 cursor-pointer', {
                             'text-secondary-600': isIn,
                             'text-gray-400': !isIn,

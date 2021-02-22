@@ -27,7 +27,7 @@ export const Toast: React.FC<ToastProps> = ({id, toast}) => {
         {/* Little exclamation */}
         <div
             className={clsx(
-                'flex flex-shrink-0 items-center justify-center w-8 h-8 ' +
+                'flex flex-shrink-0 items-center justify-center w-8 h-8',
                 'text-xl text-white font-bold rounded-full', {
                     'bg-green-500': toast.type === ToastTypes.SUCCESS,
                     'bg-red-500': toast.type === ToastTypes.ERROR,

@@ -40,7 +40,9 @@ export const ProductForm: React.FC<ProductFormProps>
     });
 
     useEffect(() => {
-        if (!product) return;
+        if (!product) {
+            return;
+        }
 
         for (let prop of Object.keys(product)) {
             // @ts-ignore
@@ -65,19 +67,22 @@ export const ProductForm: React.FC<ProductFormProps>
             }
 
             uploadingFiles.forEach((value) => {
-                form.append(`images[]`, value.file);
+                form.append('images[]', value.file);
             });
 
             await onSubmit(form);
         } catch (e) {
             // TODO: type check this
             setErrors(e.errors);
+            throw e;
         }
         setLoading(false);
     }
 
     async function removeExistingImage(id: number) {
-        if (!product) return;
+        if (!product) {
+            return;
+        }
 
         const remove = await confirm({title: 'Deseja remover essa imagem?', action: 'Remover'});
 

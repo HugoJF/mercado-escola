@@ -19,7 +19,7 @@ export const ProductHeader: React.FC<ProductHeaderProps> = ({product, favorite, 
             <h2 className="text-2xl font-medium truncate leading-none">{product.name}</h2>
             <div
                 className={clsx(
-                    `transition-colors duration-50`, {
+                    'transition-colors duration-50', {
                         'text-red-500 ': favorite,
                     }
                 )}

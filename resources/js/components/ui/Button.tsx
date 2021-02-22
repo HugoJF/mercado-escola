@@ -24,7 +24,7 @@ export const Button: React.FC<ButtonProps> = (props) => {
         {...rest}
         className={clsx(
             classes[color](props),
-            'transition-all duration-150 py-3 w-full text-center text-xl' +
+            'transition-all duration-150 py-3 w-full text-center text-xl',
             'font-medium rounded-lg border-box hover:shadow'
         )}
     >

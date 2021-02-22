@@ -1,11 +1,6 @@
 import {useMutation} from "react-query";
-import {useDispatch} from "react-redux";
-import {Dispatch}    from "../../store";
+import {api}         from "../../api";
 
 export function useProductUpdate(id: Id) {
-    const dispatch = useDispatch<Dispatch>();
-
-    return useMutation((data: FormData) => dispatch.products.update({
-        id, data,
-    }))
+    return useMutation((data: FormData) => api.products.update(id, data));
 }

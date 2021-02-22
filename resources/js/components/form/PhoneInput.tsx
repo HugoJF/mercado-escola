@@ -20,6 +20,7 @@ export const PhoneInput: React.FC<PhoneInputProps> = React.forwardRef(({initialV
     return <InputMask
         value={phone}
         onChange={(e) => setPhone(e.currentTarget.value)}
+        maskPlaceholder=" "
         /* @ts-ignore */
         ref={ref}
         {...rest}

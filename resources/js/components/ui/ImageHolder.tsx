@@ -32,7 +32,7 @@ export const ImageHolder: React.FC<ImageHolderProps> = ({src}) => {
             fallback={<></>}
             NativeImgProps={{
                 className: clsx(
-                    'transition-all duration-150 absolute w-full h-full mb-4' +
+                    'transition-all duration-150 absolute w-full h-full mb-4',
                     'rounded-lg shadow-md object-cover', {
                         'opacity-0': !visible,
                         'opacity-100': visible,
