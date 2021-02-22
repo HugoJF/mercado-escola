@@ -1,6 +1,6 @@
 import React        from 'react';
 import {FieldError} from "react-hook-form";
-import classNames   from 'classnames';
+import clsx         from 'clsx';
 
 export type FieldWrapperProps = {
     name: string;
@@ -11,11 +11,13 @@ export type FieldWrapperProps = {
 export const FieldWrapper: React.FC<FieldWrapperProps> = ({name, label, error, children}) => {
     return <>
         <label
-            className={classNames('pb-2', {
-                'text-red-500': error,
-                'text-gray-600': !error
-            })}
             htmlFor={`#${name}`}
+            className={clsx(
+                'pb-2', {
+                    'text-red-500': error,
+                    'text-gray-600': !error
+                }
+            )}
         >
             {label}
         </label>

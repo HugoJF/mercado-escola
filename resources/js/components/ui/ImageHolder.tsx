@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import {LazyLoadImage}   from "./Image";
-import classNames        from "classnames";
+import clsx              from 'clsx';
 import useTimeout        from "use-timeout";
 
 export type ImageHolderProps = React.DetailedHTMLProps<React.ImgHTMLAttributes<HTMLImageElement>, HTMLImageElement>
@@ -31,10 +31,12 @@ export const ImageHolder: React.FC<ImageHolderProps> = ({src}) => {
             src={src}
             fallback={<></>}
             NativeImgProps={{
-                className: classNames("transition-all duration-150 absolute w-full h-full mb-4 rounded-lg shadow-md object-cover", {
-                    'opacity-0': !visible,
-                    'opacity-100': visible,
-                })
+                className: clsx(
+                    'transition-all duration-150 absolute w-full h-full mb-4' +
+                    'rounded-lg shadow-md object-cover', {
+                        'opacity-0': !visible,
+                        'opacity-100': visible,
+                    })
             }}
         />}
     </div>

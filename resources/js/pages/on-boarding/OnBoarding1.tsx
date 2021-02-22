@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import classNames                   from "classnames";
+import clsx                         from 'clsx';
 import {Loader}                     from "react-feather";
 import {useForm}                    from "react-hook-form";
 import {useAuth}                    from "../../selectors";
@@ -41,7 +41,7 @@ export const OnBoarding1: React.FC = () => {
         <form className="mt-8 w-full" onSubmit={handleSubmit(updatePhone)}>
             <label
                 htmlFor="#phone"
-                className={classNames({
+                className={clsx({
                     'text-red-500': errors.phone,
                     'text-primary-100': !errors.phone,
                 })}

@@ -4,8 +4,8 @@ import {Dispatch}                   from "../../store";
 import {Title}                      from "../../components/ui/Title";
 import {Loader}                     from "react-feather";
 import {useForm}                    from "react-hook-form";
-import classNames                   from 'classnames';
 import {useAuth}                    from "../../selectors";
+import clsx                         from "clsx";
 import {PhoneInput}                 from "../../components/form/PhoneInput";
 import {PagePadding}                from "../../containers/PagePadding";
 import useNavigation                from "../../hooks/useNavigation";
@@ -43,12 +43,10 @@ export const PhoneUpdate: React.FC = () => {
         <form className="mt-8 px-4 w-full" onSubmit={handleSubmit(updatePhone)}>
             <label
                 htmlFor="#phone"
-                className={classNames(
-                    {
-                        'text-red-500': errors.phone,
-                        'text-gray-500': !errors.phone,
-                    }
-                )}
+                className={clsx({
+                    'text-red-500': errors.phone,
+                    'text-gray-500': !errors.phone,
+                })}
             >
                 Telefone
             </label>

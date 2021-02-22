@@ -1,5 +1,5 @@
 import React, {useMemo} from 'react';
-import classNames       from "classnames";
+import clsx             from 'clsx';
 
 export type PaginationProps = {
     current?: number;
@@ -30,9 +30,11 @@ export const Pagination: React.FC<PaginationProps> = ({current = 1, delta = 2, l
             {pages.map(page => (
                 <div
                     onClick={() => onClick(page)}
-                    className={classNames('px-5 py-3 text-center cursor-pointer', {
-                        'bg-gray-200': current === page
-                    })}
+                    className={clsx(
+                        'px-5 py-3 text-center cursor-pointer', {
+                            'bg-gray-200': current === page
+                        }
+                    )}
                 >
                     {page}
                 </div>

@@ -1,7 +1,7 @@
 import React, {useEffect, useState}       from "react";
 import {Redirect, Route, useLocation}     from "react-router-dom";
 import {AnimationBox}                     from "../../../components/ui/AnimationBox";
-import classNames                         from 'classnames';
+import clsx                               from 'clsx';
 import {MoreVertical}                     from "react-feather";
 import {SwitchWithTransitions}            from "../../../components/ui/SwitchWithTransition";
 import {PagePadding}                      from "../../../containers/PagePadding";
@@ -26,10 +26,11 @@ const AdminOpeningTabButton: React.FC<AdminOpeningTabProps> = ({onClick, selecte
         onClick={onClick}
     >
         <div
-            className={classNames('px-3 py-2 text-center text-base font-normal', {
-                'text-gray-500': !selected,
-                'text-gray-800': selected,
-            })}
+            className={clsx(
+                'px-3 py-2 text-center text-base font-normal', {
+                    'text-gray-500': !selected,
+                    'text-gray-800': selected,
+                })}
         >
             {children}
         </div>

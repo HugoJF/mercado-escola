@@ -5,7 +5,7 @@ import {DivOrLink}                                                              
 import {AlertCircle, Book, ChevronRight, Flag, Heart, LogOut, Mail, MapPin, ShoppingCart, Smartphone, User} from "react-feather";
 import {useAuth}                                                                                            from "../../selectors";
 import {Title}                                                                                              from "../../components/ui/Title";
-import classNames                                                                                           from 'classnames';
+import clsx                                                                                                 from 'clsx';
 import {Skeleton}                                                                                           from "../../components/ui/Skeleton";
 import {PagePadding}                                                                                        from "../../containers/PagePadding";
 
@@ -82,9 +82,8 @@ export const AccountIndex: React.FC = () => {
                     key={to}
                     isLink={clickable}
                     to={`${match.url}/${to}`}
-                    className={classNames(
-                        'transition-colors duration-150 w-full flex items-center',
-                        {
+                    className={clsx(
+                        'transition-colors duration-150 w-full flex items-center', {
                             'hover:bg-gray-200 cursor-pointer': clickable
                         }
                     )}

@@ -1,5 +1,5 @@
-import React      from "react";
-import classNames from 'classnames';
+import React from "react";
+import clsx  from 'clsx';
 
 export type BadgeColors = 'primary' | 'secondary' | 'warning' | 'info' | 'danger' | 'default';
 export type BadgeSizes = 'small' | 'normal';
@@ -25,10 +25,10 @@ const sizeClasses: { [id in BadgeSizes]: string } = {
 export const Badge: React.FC<BadgeProps> = ({color = 'primary', size = 'normal', children, ...rest}) => {
     return <span
         {...rest}
-        className={classNames(
+        className={clsx(
             colorClasses[color],
             sizeClasses[size],
-            'inline-block  rounded-lg'
+            'inline-block rounded-lg'
         )}
     >
         {children}

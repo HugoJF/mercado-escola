@@ -1,7 +1,7 @@
 import React          from 'react';
 import {FieldError}   from "react-hook-form";
 import {FieldWrapper} from "./FieldWrapper";
-import classNames     from 'classnames';
+import clsx           from 'clsx';
 
 export type TextareaProps = {
     name: string;
@@ -13,7 +13,7 @@ export type TextareaProps = {
 export const Textarea: React.FC<TextareaProps> = ({name, label, textAreaProps, error}) => {
     return <FieldWrapper name={name} label={label} error={error}>
         <textarea
-            className={classNames(
+            className={clsx(
                 `transition-colors duration-300
                 block w-full py-3 px-4 text-black
                 bg-transparent border-b border-lg`,

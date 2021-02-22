@@ -2,7 +2,7 @@ import React           from 'react';
 import {Heart}         from "react-feather";
 import {BackAndCart}   from "./partials/BackAndCart";
 import {HeaderWrapper} from "./partials/HeaderWrapper";
-import classNames      from 'classnames';
+import clsx            from 'clsx';
 import {ProductType}   from "../types/products";
 
 export type ProductHeaderProps = {
@@ -18,9 +18,8 @@ export const ProductHeader: React.FC<ProductHeaderProps> = ({product, favorite, 
         <div className="flex justify-between items-center mt-12 px-6">
             <h2 className="text-2xl font-medium truncate leading-none">{product.name}</h2>
             <div
-                className={classNames(
-                    `transition-colors duration-50`,
-                    {
+                className={clsx(
+                    `transition-colors duration-50`, {
                         'text-red-500 ': favorite,
                     }
                 )}

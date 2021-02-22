@@ -1,9 +1,9 @@
 import React                               from "react";
 import Ripples                             from "react-ripples";
 import {Book, Heart, Home, Settings, User} from "react-feather";
-import classNames                          from 'classnames';
 import {useAuth}                           from "./selectors";
 import useNavigation                       from "./hooks/useNavigation";
+import clsx                                from "clsx";
 
 const buttons = {
     Home: {
@@ -47,11 +47,10 @@ export const Menu: React.FC = () => {
                 return <Ripples
                     key={name}
                     onClick={bindGo(details.to)}
-                    className={classNames(
-                        `transition-colors duration-150
-                        w-full flex flex-grow flex-col pt-4 pb-2 items-center justify-between
-                        hover:bg-gray-100 cursor-pointer`,
-                        {
+                    className={clsx(
+                        'transition-colors duration-150' +
+                        'w-full flex flex-grow flex-col pt-4 pb-2 items-center justify-between' +
+                        'hover:bg-gray-100 cursor-pointer', {
                             'text-secondary-600': isIn,
                             'text-gray-400': !isIn,
                         }

@@ -1,6 +1,6 @@
-import React      from "react";
-import {Loader}   from "react-feather";
-import classNames from 'classnames';
+import React    from "react";
+import {Loader} from "react-feather";
+import clsx     from 'clsx';
 
 type ButtonColors = 'default' | 'primary' | 'secondary' | 'danger';
 
@@ -22,10 +22,10 @@ export const Button: React.FC<ButtonProps> = (props) => {
 
     return <button
         {...rest}
-        className={classNames(
+        className={clsx(
             classes[color](props),
-            `transition-all duration-150 py-3 w-full
-            text-center text-xl font-medium rounded-lg border-box hover:shadow`
+            'transition-all duration-150 py-3 w-full text-center text-xl' +
+            'font-medium rounded-lg border-box hover:shadow'
         )}
     >
         {loading ?

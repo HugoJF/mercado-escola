@@ -6,7 +6,7 @@ import {AlertTriangle, Calendar, ChevronRight, MapPin, ShoppingBag} from "react-
 import {ProductType}                                                from "../../types/products";
 import {PriceFormatter}                                             from "../../components/ui/PriceFormatter";
 import {ShippingOptionActionMenu}                                   from "../../action-menus/ShippingOptionActionMenu";
-import classNames                                                   from "classnames";
+import clsx                                                         from 'clsx';
 import {PagePadding}                                                from "../../containers/PagePadding";
 import {format, parseISO}                                           from "date-fns";
 import {AddressType}                                                from "../../types/addresses";
@@ -94,11 +94,14 @@ export const CartIndex: React.FC<CartIndexProps>
             {delivery && <>
                 <Title>Endereço de entrega</Title>
 
-                <Link to="/carrinho/endereco" className={
-                    classNames('mt-2 mb-8 py-2 flex items-center', {
-                        'text-gray-500': address,
-                    })
-                }>
+                <Link
+                    to="/carrinho/endereco"
+                    className={clsx(
+                        'mt-2 mb-8 py-2 flex items-center', {
+                            'text-gray-500': address,
+                        }
+                    )}
+                >
                     {address ?
                         <MapPin className="mr-3 flex flex-shrink-0 text-gray-500"/>
                         :
