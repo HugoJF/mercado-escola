@@ -53,6 +53,7 @@ export class Bxios {
             url = [url];
         }
 
+        url = ['api', ...url];
         url = url.join('/');
 
         if (!url.startsWith('/')) {

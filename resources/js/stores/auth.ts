@@ -22,7 +22,7 @@ export const auth = createModel<RootModel>()({
 
         async me(): Promise<object> {
             await dispatch.auth.csrf();
-            let response = await window.axios.get('/me');
+            let response = await window.axios.get('/api/me');
 
             const user = response.data.user;
 
@@ -42,7 +42,7 @@ export const auth = createModel<RootModel>()({
         },
 
         async update(payload: Partial<UserProperties>): Promise<void> {
-            const response = await window.axios.patch('/me', payload);
+            const response = await window.axios.patch('/api/me', payload);
 
             const user = response.data.user;
 
