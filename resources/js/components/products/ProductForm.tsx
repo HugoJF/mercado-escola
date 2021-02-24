@@ -9,8 +9,8 @@ import {Button}                         from "../ui/Button";
 import {useDropzone}                    from "react-dropzone";
 import {FieldWrapper}                   from "../form/FieldWrapper";
 import useConfirmMenu                   from "../../hooks/useConfirmMenu";
-import {QuantityTypes, rawTypeText} from "../ui/QuantityTypeText";
-import {useProductDestroyMedia}     from "../../mutations/useProductDestroyMedia";
+import {QuantityTypes, rawTypeText}     from "../ui/QuantityTypeText";
+import {useProductDestroyMedia}         from "../../mutations/useProductDestroyMedia";
 
 export type ProductFormProps = {
     product?: ProductType;
@@ -119,23 +119,10 @@ export const ProductForm: React.FC<ProductFormProps>
         <div>
             {/* Images */}
             <FieldWrapper label="Imagens" name="images">
-                <div
-                    {...getRootProps()}
-                    className="flex items-center justify-center
-                        mt-2 mb-8 px-8 py-8 bg-gray-200 text-gray-400
-                        text-center border-2 border-dashed border-gray-400
-                        focus:border-primary-500 h-32 rounded-lg"
-                >
-                    <input
-                        name="images"
-                        {...getInputProps()}
-                    />
-                    <p>Arraste fotos do produto aqui ou clique para selecioná-los</p>
-                </div>
-
-                <ul className="grid grid-cols-4 gap-4 mb-4">
+                <ul className="grid grid-cols-4 gap-4 mb-4 pt-2">
                     {Object.entries(product?.media ?? {}).map(([id, url]) =>
                         <li
+                            key={id}
                             className="relative flex items-center justify-center
                                 border-4 border-gray-300 rounded-lg"
                         >
@@ -149,8 +136,10 @@ export const ProductForm: React.FC<ProductFormProps>
                     )}
 
                     {uploadingFiles.map(file =>
-                        <li className="relative flex items-center justify-center p-1
-                            bg-gray-200 border border-gray-300 shadow-inner rounded-lg"
+                        <li
+                            key={file.file.name}
+                            className="relative flex items-center justify-center p-1
+                                bg-gray-200 border border-gray-300 shadow-inner rounded-lg"
                         >
                             <div className="transform translate-x-1/2 -translate-y-1/2 absolute top-0 right-0 h-2 w-2 bg-red-500 rounded-full animate-bounce"/>
                             <img
@@ -161,6 +150,20 @@ export const ProductForm: React.FC<ProductFormProps>
                             />
                         </li>)}
                 </ul>
+
+                <div
+                    {...getRootProps()}
+                    className="flex items-center justify-center
+                        mb-8 px-8 py-8 bg-gray-200 text-gray-400
+                        text-center border-2 border-dashed border-gray-400
+                        focus:border-primary-500 h-32 rounded-lg"
+                >
+                    <input
+                        name="images"
+                        {...getInputProps()}
+                    />
+                    <p>Arraste fotos do produto aqui ou clique para selecioná-los</p>
+                </div>
             </FieldWrapper>
 
             {/* Title */}

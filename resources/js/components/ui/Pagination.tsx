@@ -29,6 +29,7 @@ export const Pagination: React.FC<PaginationProps> = ({current = 1, delta = 2, l
         <div className="flex border rounded-lg divide-x">
             {pages.map(page => (
                 <div
+                    key={page}
                     onClick={() => onClick(page)}
                     className={clsx(
                         'px-5 py-3 text-center cursor-pointer', {

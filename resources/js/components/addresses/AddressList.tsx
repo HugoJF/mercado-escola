@@ -12,53 +12,55 @@ export type AddressListProps = {
     contextIcon?: React.FC;
 }
 
-export const AddressList: React.FC<AddressListProps> =
-    ({
-         addresses,
-         onClick,
-         onContext,
-         contextIcon: ContextIcon = X,
-     }) => {
-        function handleOnClick(address: AddressType, e: React.MouseEvent<HTMLDivElement>) {
-            if (onClick) {
-                onClick(address);
-            }
+export const AddressList: React.FC<AddressListProps> = (
+    {
+        addresses,
+        onClick,
+        onContext,
+        contextIcon: ContextIcon = X,
+    }
+) => {
+    function handleOnClick(address: AddressType, e: React.MouseEvent<HTMLDivElement>) {
+        if (onClick) {
+            onClick(address);
         }
+    }
 
-        function handleOnContext(address: AddressType, e: React.MouseEvent<SVGElement>) {
-            if (onContext) {
-                e.stopPropagation();
-                onContext(address)
-            }
+    function handleOnContext(address: AddressType, e: React.MouseEvent<SVGElement>) {
+        if (onContext) {
+            e.stopPropagation();
+            onContext(address)
         }
+    }
 
-        return <div className="divide-y divide-gray-200">
-            {addresses.map(address => (
-                <HeightTransitioner>
-                    <Box
-                        key={address.id}
-                        onClick={handleOnClick.bind(this, address)}
-                        hoverable={!!onClick}
-                    >
-                        {/* Address information */}
-                        <div className="flex-grow">
-                            <h2 className="text-sm">
-                                {address.address}
-                            </h2>
-                            <p className="text-sm text-gray-600">
-                                {
-                                    [address.number, address.complement].filter(i => !!i).join(' - ')
-                                }
-                            </p>
-                        </div>
+    return <div className="divide-y divide-gray-200">
+        {addresses.map(address => (
+            <HeightTransitioner
+                key={address.id}
+            >
+                <Box
+                    onClick={handleOnClick.bind(this, address)}
+                    hoverable={!!onClick}
+                >
+                    {/* Address information */}
+                    <div className="flex-grow">
+                        <h2 className="text-sm">
+                            {address.address}
+                        </h2>
+                        <p className="text-sm text-gray-600">
+                            {
+                                [address.number, address.complement].filter(i => !!i).join(' - ')
+                            }
+                        </p>
+                    </div>
 
-                        {/* Icon */}
-                        {ContextIcon && <ContextIcon
-                            className="ml-4 flex-shrink-0 text-gray-500"
-                            onClick={handleOnContext.bind(this, address)}
-                        />}
-                    </Box>
-                </HeightTransitioner>
-            ))}
-        </div>
-    };
+                    {/* Icon */}
+                    {ContextIcon && <ContextIcon
+                        className="ml-4 flex-shrink-0 text-gray-500"
+                        onClick={handleOnContext.bind(this, address)}
+                    />}
+                </Box>
+            </HeightTransitioner>
+        ))}
+    </div>
+};
