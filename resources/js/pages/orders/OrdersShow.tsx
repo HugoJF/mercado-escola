@@ -2,8 +2,6 @@ import React                                                              from "
 import {Title}                                                            from "../../components/ui/Title";
 import {Calendar, DollarSign, Info, MapPin}                               from "react-feather";
 import {PriceFormatter}                                                   from "../../components/ui/PriceFormatter";
-import {format, parseISO}                                                 from "date-fns";
-import {ptBR}                                                             from "date-fns/locale";
 import {PagePadding}                                                      from "../../containers/PagePadding";
 import {OrderType, OrderWithAddress, OrderWithOpening, OrderWithProducts} from "../../types/orders";
 import {Button}                                                           from "../../components/ui/Button";
@@ -11,6 +9,7 @@ import useConfirmMenu                                                     from "
 import {OrderStateBadge}                                                  from "../../components/ui/OrderStateBadge";
 import {OrderStateDescription}                                            from "../../components/ui/OrderStateDescription";
 import {ProductListSummary}                                               from "../../components/products/ProductListSummary";
+import {Date}                                                             from "../../components/ui/Date";
 
 export type OrdersShowProps = {
     order: OrderType<OrderWithAddress & OrderWithOpening & OrderWithProducts>;
@@ -19,8 +18,6 @@ export type OrdersShowProps = {
 
 export const OrdersShow: React.FC<OrdersShowProps> = ({order, onCancel}) => {
     const [menu, confirm] = useConfirmMenu();
-
-    const deliversAt = order.opening.delivers_at ? parseISO(order.opening.delivers_at) : null;
 
     async function handleOnCancel() {
         const confirmed = await confirm({
@@ -82,10 +79,10 @@ export const OrdersShow: React.FC<OrdersShowProps> = ({order, onCancel}) => {
                 <Calendar className="mr-4 flex-shrink-0 text-gray-500"/>
                 <p className="text-gray-500">
                     <span className="mr-1 text-secondary-500 font-medium">
-                        {deliversAt && format(deliversAt, 'dd/M/y', {locale: ptBR})}
+                        {order.opening.delivers_at && <Date input={order.opening.delivers_at} format="dd/M/y"/>}
                     </span>
                     <span>
-                        às {deliversAt && format(deliversAt, 'H', {locale: ptBR})}h
+                        às {order.opening.delivers_at && <Date input={order.opening.delivers_at} format="H'h'"/>}
                     </span>
                 </p>
             </div>

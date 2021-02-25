@@ -8,7 +8,6 @@ import {PriceFormatter}                                                   from "
 import {ShippingOptionActionMenu}                                         from "../../action-menus/ShippingOptionActionMenu";
 import clsx                                                               from 'clsx';
 import {PagePadding}                                                      from "../../containers/PagePadding";
-import {format, parseISO}                                                 from "date-fns";
 import {AddressType}                                                      from "../../types/addresses";
 import {OpeningType}                                                      from "../../types/openings";
 import {PivotCartProductsUser}                                            from "../../types/cart";
@@ -127,7 +126,7 @@ export const CartIndex: React.FC<CartIndexProps>
                 <Calendar className="mr-4 text-gray-500"/>
                 <p className="text-gray-500">
                     <span className="mr-1 text-secondary-500 font-medium">
-                        {format(parseISO(opening.delivers_at), 'dd/LL/yyyy')}
+                        <Date input={opening.delivers_at} format="dd/LL/yyyy"/>
                     </span>
                     a partir das
                     <Date input={opening.delivers_at} format="HH'h'mm'm'"/>

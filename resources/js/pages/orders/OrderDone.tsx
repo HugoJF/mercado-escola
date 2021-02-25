@@ -1,13 +1,12 @@
-import React              from "react";
-import {Button}           from "../../components/ui/Button";
-import {Approve}          from "../../svg/approve";
-import {Link}             from "react-router-dom";
-import {format, parseISO} from "date-fns";
-import {ptBR}             from "date-fns/locale";
-import {OrderType}        from "../../types/orders";
-import {OpeningType}      from "../../types/openings";
-import {AddressType}      from "../../types/addresses";
-import {PagePadding}      from "../../containers/PagePadding";
+import React         from "react";
+import {Button}      from "../../components/ui/Button";
+import {Approve}     from "../../svg/approve";
+import {Link}        from "react-router-dom";
+import {OrderType}   from "../../types/orders";
+import {OpeningType} from "../../types/openings";
+import {AddressType} from "../../types/addresses";
+import {PagePadding} from "../../containers/PagePadding";
+import {Date}        from "../../components/ui/Date";
 
 export type OrderDoneProps = {
     order: OrderType;
@@ -16,8 +15,6 @@ export type OrderDoneProps = {
 }
 
 export const OrderDone: React.FC<OrderDoneProps> = ({order, opening, address}) => {
-    const deliversAt = opening.delivers_at ? parseISO(opening.delivers_at) : null;
-
     return <PagePadding className="flex flex-col justify-around min-h-full text-center">
         {/* Header */}
         <div className="space-y-4">
@@ -42,24 +39,24 @@ export const OrderDone: React.FC<OrderDoneProps> = ({order, opening, address}) =
                     }
 
                     <span className="mr-1 text-secondary-500 font-medium">
-                            {deliversAt && format(deliversAt, 'dd/M/y', {locale: ptBR})}
+                        {opening.delivers_at && <Date input={opening.delivers_at} format="dd/M/y"/>}
                         </span>
                     <span>às </span>
                     <span className="mr-1 text-secondary-500 font-medium">
-                            {deliversAt && format(deliversAt, 'H', {locale: ptBR})}h
-                        </span>
+                        {opening.delivers_at && <Date input={opening.delivers_at} format="H"/>}
+                    </span>
                     <span>no endereço:</span>
                 </p>
                 :
                 <p className="text-gray-500">
                     <span>Seu pedido estará disponível para retirada no dia </span>
                     <span className="mr-1 text-secondary-500 font-medium">
-                            {deliversAt && format(deliversAt, 'dd/M/y', {locale: ptBR})}
-                        </span>
+                        {opening.delivers_at && <Date input={opening.delivers_at} format="dd/M/y"/>}
+                    </span>
                     <span>às </span>
                     <span className="mr-1 text-secondary-500 font-medium">
-                            {deliversAt && format(deliversAt, 'H', {locale: ptBR})}h
-                        </span>
+                        {opening.delivers_at && <Date input={opening.delivers_at} format="H'h'"/>}
+                    </span>
                 </p>
             }
 

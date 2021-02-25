@@ -4,10 +4,10 @@ import {Link}               from "react-router-dom";
 import React                from "react";
 import {OpeningType}        from "../../../types/openings";
 import useRelativePath      from "../../../hooks/useRelativePath";
-import {format, parseISO}   from "date-fns";
 import {Box}                from "../../../components/ui/Box";
 import {RotatingArrowRight} from "../../../components/ui/RotatingArrowRight";
 import {OpeningBadge}       from "../../../components/openings/OpeningBadge";
+import {Date}               from "../../../components/ui/Date";
 
 export type AdminOpeningListItemProps = {
     opening: OpeningType;
@@ -19,9 +19,6 @@ export type AdminOpeningListItemProps = {
 export const AdminOpeningListItem: React.FC<AdminOpeningListItemProps>
     = ({opening, expanded = false, onClick, onDelete}) => {
     const relative = useRelativePath();
-
-    const opensAt = opening && parseISO(opening.opens_at);
-    const closesAt = opening && parseISO(opening.closes_at);
 
     function handleClick() {
         if (onClick) {
@@ -58,11 +55,11 @@ export const AdminOpeningListItem: React.FC<AdminOpeningListItemProps>
                     {/* Opens at and closes at */}
                     <div className="my-2 flex items-center">
                         <span className="text-gray-700 tracking-tight">
-                            {format(opensAt, 'dd MMM yy')}
+                            <Date input={opening.opens_at} format="dd MMM yy"/>
                         </span>
                         <span className="mx-4 border-b-2 border-gray-200 border-dashed flex-grow"/>
                         <span className="text-gray-700 tracking-tight">
-                            {format(closesAt, 'dd MMM yy')}
+                            <Date input={opening.closes_at} format="dd MMM yy"/>
                         </span>
                     </div>
 
