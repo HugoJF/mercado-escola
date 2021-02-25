@@ -11,15 +11,14 @@ import {ProductType}                     from "../../types/products";
 export type ProductShowProps = {
     product: ProductType;
     quantity: number;
-    total: number;
-    text: string;
     handleAdd: () => void;
     handleSubtract: () => void;
 }
 
-export const ProductShow: React.FC<ProductShowProps> = ({product, quantity, total, text, handleAdd, handleSubtract}) => {
-    type typeKey = keyof typeof ProductQuantityConfig;
-    const config = ProductQuantityConfig[product?.quantity_type as typeKey];
+export const ProductShow: React.FC<ProductShowProps> = ({product, quantity, handleAdd, handleSubtract}) => {
+    const config = ProductQuantityConfig[product.quantity_type];
+    const total = quantity * config.step;
+    const text = total === 1 ? config.singular : config.plural;
 
     return <PagePadding className="flex flex-col justify-around min-h-full">
         {/* Images */}
@@ -51,7 +50,7 @@ export const ProductShow: React.FC<ProductShowProps> = ({product, quantity, tota
                     />
                 </span>}
             </div>
-            {quantity && <div className="flex items-center">
+            {!!quantity && <div className="flex items-center">
                 <div className="mx-4 text-xl font-medium">{total} {text}</div>
             </div>}
         </div>
@@ -85,7 +84,7 @@ export const ProductShow: React.FC<ProductShowProps> = ({product, quantity, tota
         }
 
         {/* Cart warning */}
-        {quantity && <div className="grid grid-cols-2 items-center my-4 divide-x">
+        {!!quantity && <div className="grid grid-cols-2 items-center my-4 divide-x">
             <Link to="/carrinho" className="py-2 px-2 text-center text-gray-500 text-sm tracking-tight">
                 Ver no carrinho
             </Link>

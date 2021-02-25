@@ -122,7 +122,7 @@ export const CartIndex: React.FC<CartIndexProps>
                     <span className="mr-1 text-secondary-500 font-medium">
                         {format(parseISO(opening.delivers_at), 'dd/LL/yyyy')}
                     </span>
-                    a partir das {format(parseISO(opening.delivers_at), 'HH:mm')}
+                    a partir das {format(parseISO(opening.delivers_at), "HH'h'mm'min'")}
                 </p>
             </div>
 

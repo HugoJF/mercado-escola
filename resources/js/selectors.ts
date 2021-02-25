@@ -8,7 +8,3 @@ export function useToasts() {
 export function useAuth() {
     return useSelector((state: RootState) => state.auth);
 }
-
-export function useCart() {
-    return useSelector((state: RootState) => state.cart);
-}

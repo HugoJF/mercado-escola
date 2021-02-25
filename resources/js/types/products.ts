@@ -10,6 +10,7 @@ export type WithQuantityPivot = Pivot<{
     quantity_cost: number;
 }>
 
+// TODO: missing media property
 export type ProductType<T = {}> = T &
     ProductProperties &
     ProductComputedProperties &

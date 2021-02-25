@@ -1,15 +1,7 @@
-import {bxios}    from "../bxios";
-import {CartType} from "../types/cart";
-
-// adicionar produtos
-// atualizar api de adicionar produtos para permitir quantidades
-// validar se produto esta na opening
-// validar endereco
-// remover produtos
-// remover produtos da tela do carrinho
-// finalizar o pedido
-// atualizar a selecao de enderecos
-// validar adicao de produtos
+import {bxios}                           from "../bxios";
+import {CartType, PivotCartProductsUser} from "../types/cart";
+import {ProductType}                     from "../types/products";
+import {ResourceResponse}                from "../types";
 
 export const cart = {
     index: () => bxios()
@@ -19,10 +11,14 @@ export const cart = {
         .patch('cart', 'address')
         .body({address_id: addressId})
         .send<CartType>(),
-    addProduct: (id: Id) => bxios()
-        .post('cart', id)
+    product: (id: Id) => bxios()
+        .get('cart', 'products', id)
+        .send<ResourceResponse<null|ProductType<PivotCartProductsUser>>>(),
+    addProduct: (id: Id, quantity: number) => bxios()
+        .post('cart', 'products', id)
+        .body({quantity})
         .send<CartType>(),
     removeProduct: (id: Id) => bxios()
-        .delete('cart', id)
+        .delete('cart', 'products', id)
         .send<CartType>(),
 };

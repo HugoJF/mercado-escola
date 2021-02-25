@@ -6,12 +6,10 @@ import {toasts} from "./toasts";
 export interface RootModel extends Models<RootModel> {
     // @ts-ignore
     auth: typeof auth,
-    cart: typeof cart,
     toasts: typeof toasts,
 }
 
 export const models: RootModel = {
     auth,
-    cart,
     toasts,
 };

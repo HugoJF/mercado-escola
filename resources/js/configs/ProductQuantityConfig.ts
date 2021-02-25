@@ -1,4 +1,9 @@
-import {ProductQuantityConfig} from "../hooks/useCartQuantity";
+export type ProductQuantityConfig = {
+    singular: string;
+    plural: string;
+    step: number;
+    showStep?: boolean,
+}
 
 export const UNIT: ProductQuantityConfig = {
     singular: 'unidade',
