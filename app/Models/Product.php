@@ -5,14 +5,28 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Collection;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
 class Product extends Model implements HasMedia
 {
     use SoftDeletes, HasFactory, InteractsWithMedia;
 
     protected $fillable = ['name', 'description', 'quantity_type', 'quantity_cost'];
+
+    protected $appends = ['media_links'];
+
+    public function getMediaLinksAttribute()
+    {
+        /** @var Collection $media */
+        $media = $this->getMedia();
+
+        return $media->mapWithKeys(fn(Media $m) => [
+            $m->id => $m->getFullUrl(),
+        ])->toArray();
+    }
 
     public function openings()
     {

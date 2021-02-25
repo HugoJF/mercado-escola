@@ -61,7 +61,7 @@ export const AdminProductListItem: React.FC<AdminProductListItemProps>
 
                             {/* Product quantity */}
                             <li className="text-center">
-                                {Object.values(product.media).length} imagens
+                                {Object.values(product.media_links).length} imagens
                             </li>
                         </ul>
                     </div>

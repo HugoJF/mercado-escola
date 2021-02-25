@@ -1,4 +1,4 @@
-import React                                                        from "react";
+import React, {useMemo}                                             from "react";
 import {Link}                                                       from "react-router-dom";
 import {Button}                                                     from "../../components/ui/Button";
 import {Title}                                                      from "../../components/ui/Title";
@@ -11,26 +11,29 @@ import {PagePadding}                                                from "../../
 import {format, parseISO}                                           from "date-fns";
 import {AddressType}                                                from "../../types/addresses";
 import {OpeningType}                                                from "../../types/openings";
+import {PivotCartProductsUser}                                      from "../../types/cart";
+import {ProductListSummary}                                         from "../../components/products/ProductListSummary";
 
 export type CartIndexProps = {
     address: AddressType | null;
     opening: OpeningType;
-    products: ProductType[];
-    quantities: { [productId: number]: number };
-    costs: { [productId: number]: number };
+    products: ProductType<PivotCartProductsUser>[];
     onRemove: (product: ProductType) => void;
     setShippingOptionsOpen: (open: boolean) => void;
     shippingOptionsOpen: boolean;
-    handleShippingChanged: (delivery: boolean) => void;
-    total: number;
-    delivery: boolean;
-    handleOrderStore: () => void;
+    onShippingChanged: (delivery: boolean) => void;
     onDeliverySelected: (isDelivery: boolean) => void;
-    loading: boolean;
+    onOrderStore: () => void;
+    pending: boolean;
+    delivery: boolean;
 }
 
 export const CartIndex: React.FC<CartIndexProps>
-    = ({address, opening, products, quantities, costs, onRemove, handleShippingChanged, shippingOptionsOpen, setShippingOptionsOpen, total, delivery, onDeliverySelected, handleOrderStore, loading}) => {
+    = ({address, opening, products, onRemove, delivery, onShippingChanged, shippingOptionsOpen, setShippingOptionsOpen, onDeliverySelected, onOrderStore, pending}) => {
+
+    const total = useMemo(() => products.reduce((value, product) => (
+        value + product.pivot.quantity * product.pivot.quantity_cost
+    ), 0), [products]);
 
     function handleOnClose() {
         setShippingOptionsOpen(false);
@@ -48,17 +51,9 @@ export const CartIndex: React.FC<CartIndexProps>
                     Carrinho vazio!
                 </h2>}
 
-                {/*<ProductListSummary products={products} quantities={quantities} costs={costs}>*/}
-                {/*    {(product, amount) => <>*/}
-                {/*        <XSquare*/}
-                {/*            className="text-red-600 cursor-pointer"*/}
-                {/*            onClick={() => onRemove(product)}*/}
-                {/*        />*/}
-                {/*        <Link to={`/produtos/${product.id}`}>*/}
-                {/*            <Edit className="text-gray-500 cursor-pointer"/>*/}
-                {/*        </Link>*/}
-                {/*    </>}*/}
-                {/*</ProductListSummary>*/}
+                <ProductListSummary
+                    products={products}
+                />
             </div>
 
             {/* Total cost */}
@@ -87,7 +82,7 @@ export const CartIndex: React.FC<CartIndexProps>
                 open={shippingOptionsOpen}
                 onClose={handleOnClose}
                 isDelivery={delivery}
-                onChange={handleShippingChanged}
+                onChange={onShippingChanged}
             />
 
             {/* Delivery address */}
@@ -131,7 +126,7 @@ export const CartIndex: React.FC<CartIndexProps>
                 </p>
             </div>
 
-            <Button loading={loading} onClick={handleOrderStore}>
+            <Button loading={pending} onClick={onOrderStore}>
                 Finalizar pedido
             </Button>
         </div>

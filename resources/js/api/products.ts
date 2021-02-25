@@ -6,6 +6,10 @@ export const products = {
     index: () => bxios()
         .get('products')
         .send<PaginatedResourceResponse<ProductType[]>>(),
+    ids: (ids: Id[]) => bxios()
+        .get('products')
+        .setCustom({params: {ids}})
+        .send<ResourceResponse<ProductType[]>>(),
     create: (data: FormData) => bxios()
         .post('products')
         .body(data)

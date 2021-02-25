@@ -1,41 +1,38 @@
-
-export {}
-
-/*
-import React          from "react";
-import {Title}        from "../../components/ui/Title";
-import {useDispatch}  from "react-redux";
-import {Dispatch}     from "../../store";
-import {AddressList}  from "../../components/addresses/AddressList";
-import {PagePadding}  from "../../containers/PagePadding";
-import {ChevronRight} from "react-feather";
-import useLoadEffect  from "../../hooks/useLoadEffect";
-import useNavigation  from "../../hooks/useNavigation";
-
+import React            from "react";
+import {Title}          from "../../components/ui/Title";
+import {AddressList}    from "../../components/addresses/AddressList";
+import {PagePadding}    from "../../containers/PagePadding";
+import {ChevronRight}   from "react-feather";
+import useNavigation    from "../../hooks/useNavigation";
+import {useAddresses}   from "../../queries/useAddresses";
+import {Loading}        from "../../components/ui/Loading";
+import {AddressType}    from "../../types/addresses";
+import {useCartAddress} from "../../mutations/useCartAddress";
 
 export const CartAddress: React.FC = () => {
-    const dispatch = useDispatch<Dispatch>();
     const {go} = useNavigation();
-    const addresses = useAddresses();
 
-    const loading = useLoadEffect(async () => {
-        await dispatch.addresses.index();
-    }, []);
+    const addresses = useAddresses();
+    const updateCartAddress = useCartAddress();
+
+    if (!addresses.data) {
+        return <Loading/>
+    }
+
+    function handleClick(address: AddressType) {
+        updateCartAddress.mutate(address.id);
+        go('/carrinho')
+    }
 
     return <PagePadding>
         <Title>Selecione o endereço da entrega</Title>
 
         <div className="my-8">
             <AddressList
-                loading={loading}
-                addresses={Object.values(addresses.addresses)}
+                addresses={addresses.data.data}
                 contextIcon={ChevronRight}
-                onClick={(address) => {
-                    dispatch.cart.setAddress(address.id);
-                    go('/carrinho')
-                }}
+                onClick={handleClick}
             />
         </div>
     </PagePadding>
 };
-*/

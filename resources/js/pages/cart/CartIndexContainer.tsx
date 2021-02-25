@@ -1,108 +1,62 @@
-export {}
+import React, {useEffect, useState} from "react";
+import useNavigation                from "../../hooks/useNavigation";
+import {useCart}         from "../../queries/useCart";
+import {Loading}         from "../../components/ui/Loading";
+import {CartIndex}       from "./CartIndex";
+import {useMutation}     from "react-query";
+import {api}             from "../../api";
+import {useCartAddress}  from "../../mutations/useCartAddress";
 
-/*
-
-import React, {useEffect, useMemo, useState} from "react";
-import {useCart}                             from "../../selectors";
-import {useDispatch}                         from "react-redux";
-import {Dispatch}                            from "../../store";
-import {ProductType}                         from "../../types/products";
-import {OrderProductsType}                   from "../../types/orders";
-import {CartIndex}                           from "./CartIndex";
-import {Loading}                             from "../../components/ui/Loading";
-import useNavigation                         from "../../hooks/useNavigation";
-import {useQuery}                            from "react-query";
-import {api}                              from "../../api";
-import {OpeningType, OpeningWithProducts} from "../../types/openings";
-
-export type CartIndexContainerProps = {
-    opening: OpeningType<OpeningWithProducts>;
-}
-
-export const CartIndexContainer: React.FC<CartIndexContainerProps> = () => {
-    const dispatch = useDispatch<Dispatch>();
+export const CartIndexContainer: React.FC = () => {
     const {go} = useNavigation();
+    const [delivery, setDelivery] = useState(false);
+    const [deliveryOptions, setDeliveryOptions] = useState(false);
+
     const cart = useCart();
-    const [loading, setLoading] = useState(false);
-    const [shippingOptionOpen, setShippingOptionOpen] = useState(false);
+    const create = useMutation(() => api.favorites.index()); // FIXME
+    const updateCartAddress = useCartAddress();
 
-
-    const total = useMemo(() => {
-        const {products, amounts} = cartInformation();
-
-        return products.reduce((tot, product) => product.quantity_cost * amounts[product.id], 0);
-    }, [products, cart]);
-
-    function cartInformation() {
-        const cartProducts = Object.values(products.products).filter(product => cart.items[product.id]);
-        const cartCosts = cartProducts.reduce((acc: { [id: number]: number }, product) => {
-            acc[product.id] = product.quantity_cost;
-            return acc;
-        }, {});
-
-        return {
-            products: cartProducts,
-            amounts: cart.items,
-            costs: cartCosts,
-        };
-    }
-
-    function remove(product: ProductType) {
-        dispatch.cart.remove(product.id);
-    }
-
-    async function handleStoreOrder() {
-        const products: OrderProductsType[] = [];
-        setLoading(true);
-
-        for (let [productId, quantity] of Object.entries(cart.items)) {
-            products.push({
-                product_id: parseInt(productId),
-                quantity,
-            })
+    useEffect(() => {
+        if (!cart.data) {
+            return;
         }
+        setDelivery(!!cart.data.data.address)
+    }, [cart.data]);
 
-        let order = await dispatch.orders.store({
-            address_id: cart.address_id as number,
-            opening_id: opening.data.data.data.id,
-            products,
-        });
-        dispatch.cart.reset();
-        go(`/pedidos/${order.id}/finalizado`)
+    function handleOnShoppingChanged(isDelivery: boolean) {
+        setDelivery(isDelivery);
     }
 
-    if (!openings.current) {
-        return <Loading/>;
-    }
-
-    const address = cart.address_id ? addresses.addresses[cart.address_id] : null;
-    const opening = openings.openings[openings.current];
-
-    const cartData = cartInformation();
-
-    function handleDeliverySelected(delivery: boolean) {
+    function handleOnDeliverySelected() {
+        setDeliveryOptions(false);
         if (delivery) {
-            go('/carrinho/endereco');
+            go('/carrinho/endereco')
+        }
+        if (!delivery) {
+            updateCartAddress.mutate(null);
         }
     }
 
-    return <>
+    function handleSetShippingOptionsOpen() {
+        setDeliveryOptions(true);
+    }
+
+    return cart.data
+        ?
         <CartIndex
-            address={address}
-            opening={opening}
-            products={cartData.products}
-            quantities={cartData.amounts}
-            costs={cartData.costs}
-            total={total}
-            onRemove={remove}
-            delivery={cart.delivery}
-            setShippingOptionsOpen={setShippingOptionOpen}
-            shippingOptionsOpen={shippingOptionOpen}
-            handleShippingChanged={dispatch.cart.setDelivery}
-            onDeliverySelected={handleDeliverySelected}
-            handleOrderStore={handleStoreOrder}
-            loading={loading}
+            address={cart.data.data.address}
+            products={cart.data.data.products}
+            opening={cart.data.data.opening}
+            pending={create.isLoading}
+            onDeliverySelected={handleOnDeliverySelected}
+            onOrderStore={() => {}}
+            onRemove={() => {}}
+            onShippingChanged={handleOnShoppingChanged}
+            setShippingOptionsOpen={handleSetShippingOptionsOpen}
+            delivery={delivery}
+            shippingOptionsOpen={deliveryOptions}
         />
-    </>
+        :
+        <Loading/>
+
 };
-*/

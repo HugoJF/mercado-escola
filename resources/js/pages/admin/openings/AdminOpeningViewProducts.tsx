@@ -59,7 +59,7 @@ export const AdminOpeningViewProducts: React.FC<AdminOpeningViewProductsProps> =
                                 {/* Thumbnail of first image */}
                                 <div className="w-1/4 mr-4">
                                     <ImageHolder
-                                        src={Object.values(product.media ?? [])[0]}
+                                        src={Object.values(product.media_links ?? [])[0]}
                                         alt={product.name}
                                     />
                                 </div>

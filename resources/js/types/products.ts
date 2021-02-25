@@ -1,9 +1,14 @@
 import {createModel} from "@rematch/core";
 import {RootModel}   from "../stores";
-import {RootState}   from "../store";
-import {SoftDeletes, Timestamps} from "../types";
-import {QuantityTypes}           from "../components/ui/QuantityTypeText";
+import {RootState}                      from "../store";
+import {Pivot, SoftDeletes, Timestamps} from "../types";
+import {QuantityTypes}                  from "../components/ui/QuantityTypeText";
 import {api}                     from "../api";
+
+export type WithQuantityPivot = Pivot<{
+    quantity: number;
+    quantity_cost: number;
+}>
 
 export type ProductType<T = {}> = T &
     ProductProperties &
@@ -20,5 +25,5 @@ export type ProductProperties = {
 
 export type ProductComputedProperties = {
     id: number;
-    media: { [id: number]: string };
+    media_links: {[id: number]: string};
 }

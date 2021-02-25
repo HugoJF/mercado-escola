@@ -120,9 +120,9 @@ export const ProductForm: React.FC<ProductFormProps>
             {/* Images */}
             <FieldWrapper label="Imagens" name="images">
                 <ul className="grid grid-cols-4 gap-4 mb-4 pt-2">
-                    {Object.entries(product?.media ?? {}).map(([id, url]) =>
+                    {Object.entries(product?.media_links ?? {}).map(([id, url]) =>
                         <li
-                            key={id}
+                            key={url}
                             className="relative flex items-center justify-center
                                 border-4 border-gray-300 rounded-lg"
                         >

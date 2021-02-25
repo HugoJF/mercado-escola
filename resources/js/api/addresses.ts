@@ -9,6 +9,9 @@ export const addresses = {
         .post('addresses')
         .body(data)
         .send<AddressType>(),
+    show: (id: Id) => bxios()
+        .get('address', id)
+        .send<AddressType>(),
     destroy: (id: Id) => bxios()
         .delete('addresses', id)
         .send<AddressType>(),

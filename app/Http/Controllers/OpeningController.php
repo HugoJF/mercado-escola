@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Actions\Openings\FindCurrentOpening;
 use App\Actions\Openings\FindOverlappingOpenings;
 use App\Exceptions\OverlappingOpeningException;
 use App\Http\Requests\OpeningStoreRequest;
@@ -28,20 +29,9 @@ class OpeningController extends Controller
         return OpeningResource::collection(Opening::all());
     }
 
-    public function current()
+    public function current(FindCurrentOpening $currentOpening)
     {
-        /** @var Collection $openings */
-        $openings = Opening::active()->get();
-
-        if ($openings->count() > 1) {
-            throw new OverlappingOpeningException;
-        }
-
-        if ($openings->isEmpty()) {
-            return null;
-        }
-
-        return new OpeningResource($openings->first());
+        return new OpeningResource($currentOpening->find());
     }
 
     /**

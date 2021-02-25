@@ -25,7 +25,7 @@ export const ProductShow: React.FC<ProductShowProps> = ({product, quantity, tota
         {/* Images */}
         <div className="lg:px-48 xl:px-64 w-full">
             <ImageHolder
-                src={Object.values(product.media ?? [])?.[0]}
+                src={Object.values(product.media_links ?? [])?.[0]}
             />
         </div>
 

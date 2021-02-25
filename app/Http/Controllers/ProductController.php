@@ -16,9 +16,13 @@ class ProductController extends Controller
         $this->authorizeResource(Product::class);
     }
 
-    public function index()
+    public function index(Request $request)
     {
-        return ProductResource::collection(Product::paginate());
+        if ($ids = $request->input('id')) {
+            return ProductResource::collection(Product::query()->findMany($ids));
+        } else {
+            return ProductResource::collection(Product::paginate());
+        }
     }
 
     public function store(Request $request)

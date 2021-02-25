@@ -19,16 +19,6 @@ class ProductResource extends JsonResource
      */
     public function toArray($request)
     {
-        /** @var Collection $media */
-        $media = $this->getMedia();
-
-        return array_merge(
-            parent::toArray($request),
-            [
-                'media' => $media->mapWithKeys(fn(Media $m) => [
-                    $m->id => $m->getFullUrl()
-                ])->toArray(),
-            ]
-        );
+        return parent::toArray($request);
     }
 }

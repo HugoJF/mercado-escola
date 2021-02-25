@@ -83,3 +83,17 @@ Route::prefix('favorites')->group(function () {
 
 Route::get('me', [\App\Http\Controllers\MeController::class, 'index'])->name('me.index');
 Route::patch('me', [\App\Http\Controllers\MeController::class, 'update'])->name('me.update');
+
+
+/*
+|--------------------------------------------------------------------------
+| Cart routes
+|--------------------------------------------------------------------------
+*/
+
+Route::prefix('cart')->group(function () {
+    Route::get('/', [\App\Http\Controllers\CartController::class, 'index'])->name('cart.index');
+    Route::patch('address', [\App\Http\Controllers\CartController::class, 'updateAddress'])->name('cart.index');
+    Route::post('{product}', [\App\Http\Controllers\CartController::class, 'addProduct'])->name('cart.add');
+    Route::delete('{product}', [\App\Http\Controllers\CartController::class, 'removeProduct'])->name('cart.remove');
+});
