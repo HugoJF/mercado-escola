@@ -1,18 +1,20 @@
-import React, {useMemo}                                             from "react";
-import {Link}                                                       from "react-router-dom";
-import {Button}                                                     from "../../components/ui/Button";
-import {Title}                                                      from "../../components/ui/Title";
-import {AlertTriangle, Calendar, ChevronRight, MapPin, ShoppingBag} from "react-feather";
-import {ProductType}                                                from "../../types/products";
-import {PriceFormatter}                                             from "../../components/ui/PriceFormatter";
-import {ShippingOptionActionMenu}                                   from "../../action-menus/ShippingOptionActionMenu";
-import clsx                                                         from 'clsx';
-import {PagePadding}                                                from "../../containers/PagePadding";
-import {format, parseISO}                                           from "date-fns";
-import {AddressType}                                                from "../../types/addresses";
-import {OpeningType}                                                from "../../types/openings";
-import {PivotCartProductsUser}                                      from "../../types/cart";
-import {ProductListSummary}                                         from "../../components/products/ProductListSummary";
+import React, {useMemo}                                                   from "react";
+import {Link}                                                             from "react-router-dom";
+import {Button}                                                           from "../../components/ui/Button";
+import {Title}                                                            from "../../components/ui/Title";
+import {AlertTriangle, Calendar, ChevronRight, Edit, MapPin, ShoppingBag} from "react-feather";
+import {ProductType}                                                      from "../../types/products";
+import {PriceFormatter}                                                   from "../../components/ui/PriceFormatter";
+import {ShippingOptionActionMenu}                                         from "../../action-menus/ShippingOptionActionMenu";
+import clsx                                                               from 'clsx';
+import {PagePadding}                                                      from "../../containers/PagePadding";
+import {format, parseISO}                                                 from "date-fns";
+import {AddressType}                                                      from "../../types/addresses";
+import {OpeningType}                                                      from "../../types/openings";
+import {PivotCartProductsUser}                                            from "../../types/cart";
+import {ProductListSummary}                                               from "../../components/products/ProductListSummary";
+import {Date}                                                             from "../../components/ui/Date";
+import useNavigation                                                      from "../../hooks/useNavigation";
 
 export type CartIndexProps = {
     address: AddressType | null;
@@ -30,7 +32,7 @@ export type CartIndexProps = {
 
 export const CartIndex: React.FC<CartIndexProps>
     = ({address, opening, products, onRemove, delivery, onShippingChanged, shippingOptionsOpen, setShippingOptionsOpen, onDeliverySelected, onOrderStore, pending}) => {
-
+    const {go} = useNavigation();
     const total = useMemo(() => products.reduce((value, product) => (
         value + product.pivot.quantity * product.pivot.quantity_cost
     ), 0), [products]);
@@ -53,7 +55,12 @@ export const CartIndex: React.FC<CartIndexProps>
 
                 <ProductListSummary
                     products={products}
-                />
+                >
+                    {(product) => <Edit
+                        className="text-gray-400"
+                        onClick={() => go(`/produtos/${product.id}`)}
+                    />}
+                </ProductListSummary>
             </div>
 
             {/* Total cost */}
@@ -122,7 +129,8 @@ export const CartIndex: React.FC<CartIndexProps>
                     <span className="mr-1 text-secondary-500 font-medium">
                         {format(parseISO(opening.delivers_at), 'dd/LL/yyyy')}
                     </span>
-                    a partir das {format(parseISO(opening.delivers_at), "HH'h'mm'min'")}
+                    a partir das
+                    <Date input={opening.delivers_at} format="HH'h'mm'm'"/>
                 </p>
             </div>
 

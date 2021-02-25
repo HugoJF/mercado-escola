@@ -1,6 +1,7 @@
 import {Check, ShoppingBag, User} from "react-feather";
 import {Modal, ModalProps}        from "../components/ui/Modal";
 import React                      from "react";
+import {Button}                   from "../components/ui/Button";
 
 export type ShippingOptionActionMenuProps = {
     isDelivery: boolean;
@@ -40,12 +41,9 @@ export const ShippingOptionActionMenu: React.FC<ModalProps & ShippingOptionActio
 
         {/* Close button */}
         <div className="mt-4 px-2">
-            <button
-                onClick={onClose}
-                className="w-full py-3 text-white text-lg font-medium bg-primary-500"
-            >
+            <Button onClick={onClose}>
                 {isDelivery ? 'Selecionar endereço' : 'Atualizar'}
-            </button>
+            </Button>
         </div>
     </Modal>
 };

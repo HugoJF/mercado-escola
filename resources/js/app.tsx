@@ -49,7 +49,7 @@ ReactDOM.render(
                         </MuiPickersUtilsProvider>
                     </Router>
                 </Provider>
-                <ReactQueryDevtools initialIsOpen={false}/>
+                {!isProduction && <ReactQueryDevtools initialIsOpen={false}/>}
             </QueryClientProvider>
         </Sentry.ErrorBoundary>
     </React.StrictMode>,
