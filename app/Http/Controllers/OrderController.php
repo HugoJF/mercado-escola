@@ -2,15 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Actions\Openings\FindCurrentOpening;
 use App\Exceptions\OrderAlreadyCancelledException;
 use App\Exceptions\OrderCannotBeCancelledException;
-use App\Http\Requests\OrderStoreRequest;
 use App\Http\Resources\OrderResource;
 use App\Mail\OrderCreated;
 use App\Models\Address;
-use App\Models\Opening;
 use App\Models\Order;
 use App\Models\Product;
+use App\Models\User;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
@@ -33,21 +33,26 @@ class OrderController extends Controller
      * @param Request $request
      *
      * @return OrderResource
+     * @throws Exception
      */
-    public function store(OrderStoreRequest $request)
+    public function store(FindCurrentOpening $currentOpening, Request $request)
     {
-        $opening = Opening::query()
-                          ->findOrFail($request->input('opening_id'));
+        /** @var User $user */
+        $user = auth()->user();
+        $opening = $currentOpening->find();
 
-        $address = Address::query()
-                          ->find($request->input('address_id'));
+        if (!$opening) {
+            throw new Exception('There are no active openings right now');
+        }
+
+        $address = $user->cartAddress;
 
         $order = new Order;
 
         $order->state = Order::PENDING;
         $order->address()->associate($address);
         $order->opening()->associate($opening);
-        $order->user()->associate(auth()->user());
+        $order->user()->associate($user);
 
         $order->save();
 
@@ -55,21 +60,20 @@ class OrderController extends Controller
          * Prepare product list to sync to pivot table.
          * Resulting array should be [product_id] => [pivot_attributes_array]
          */
-        $products = Product::query()->whereIn(
-            'id',
-            collect($request->input('products'))
-                ->map(fn($i) => $i['product_id'])
-        )->get()->keyBy('id');
-
-        $productsData = collect($request->input('products'))
-            ->keyBy('product_id')
+        $productsData = $user
+            ->products
+            ->keyBy('id')
             ->map(fn($product) => [
-                'quantity'      => $product['quantity'],
-                'quantity_cost' => $products[ $product['product_id'] ]['quantity_cost'],
+                'quantity'      => $product['pivot']['quantity'],
+                'quantity_cost' => $product->quantity_cost,
             ]);
         $order->products()->sync($productsData);
 
-        Mail::to(auth()->user())->send(new OrderCreated($order));
+        // Clear cart
+        $user->products()->sync([]);
+        $user->cartAddress()->dissociate();
+
+        Mail::to($user)->send(new OrderCreated($order));
 
         return new OrderResource($order);
     }
