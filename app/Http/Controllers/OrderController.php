@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Actions\Openings\FindCurrentOpening;
+use App\Actions\Orders\CreateNewOrder;
 use App\Exceptions\OrderAlreadyCancelledException;
 use App\Exceptions\OrderCannotBeCancelledException;
 use App\Http\Resources\OrderResource;
@@ -35,47 +36,9 @@ class OrderController extends Controller
      * @return OrderResource
      * @throws Exception
      */
-    public function store(FindCurrentOpening $currentOpening, Request $request)
+    public function store(CreateNewOrder $newOrder)
     {
-        /** @var User $user */
-        $user = auth()->user();
-        $opening = $currentOpening->find();
-
-        if (!$opening) {
-            throw new Exception('There are no active openings right now');
-        }
-
-        $address = $user->cartAddress;
-
-        $order = new Order;
-
-        $order->state = Order::PENDING;
-        $order->address()->associate($address);
-        $order->opening()->associate($opening);
-        $order->user()->associate($user);
-
-        $order->save();
-
-        /*
-         * Prepare product list to sync to pivot table.
-         * Resulting array should be [product_id] => [pivot_attributes_array]
-         */
-        $productsData = $user
-            ->products
-            ->keyBy('id')
-            ->map(fn($product) => [
-                'quantity'      => $product['pivot']['quantity'],
-                'quantity_cost' => $product->quantity_cost,
-            ]);
-        $order->products()->sync($productsData);
-
-        // Clear cart
-        $user->products()->sync([]);
-        $user->cartAddress()->dissociate();
-
-        Mail::to($user)->send(new OrderCreated($order));
-
-        return new OrderResource($order);
+        return new OrderResource($newOrder->create());
     }
 
     public function cancel(Order $order)
