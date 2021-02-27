@@ -5,6 +5,7 @@ import {ProductType}                     from "../../types/products";
 import {QuantityTypes, QuantityTypeText} from "../ui/QuantityTypeText";
 import {ImageHolder}                     from "../ui/ImageHolder";
 import {PlusCircle}                      from "react-feather";
+import {ProductQuantityCost}             from "../ui/ProductQuantityCost";
 
 export type ProductProps = {
     product: ProductType;
@@ -32,12 +33,16 @@ export const Product: React.FC<ProductProps> = ({product, url}) => {
         </h3>
 
         <h4 className="text-lg">
-            <span className="text-secondary-400 text-xl font-medium">
-                <PriceFormatter cents price={quantity_cost}/>
-            </span>
-            <small className="ml-px text-gray-500 tracking-tight">
-                /<QuantityTypeText type={quantity_type as QuantityTypes}/>
-            </small>
+            <ProductQuantityCost product={product}>
+                {(cost, text) => <>
+                    <span className="text-secondary-400 text-xl font-medium">
+                        <PriceFormatter cents price={cost}/>
+                    </span>
+                    <small className="ml-px text-gray-500 tracking-tight">
+                        /{text}
+                    </small>
+                </>}
+            </ProductQuantityCost>
         </h4>
 
         <div className="flex justify-center mt-4 space-x-2 text-gray-400 text-sm">
