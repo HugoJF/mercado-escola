@@ -17,12 +17,12 @@ class HomeTest extends TestCase
 
         Auth::login($user);
 
-        $this->get(route('home'))
+        $this->get('/')
              ->assertStatus(200);
     }
     public function test_home_redirects_guests()
     {
-        $this->get(route('home'))
+        $this->get('/')
              ->assertStatus(302);
     }
 }

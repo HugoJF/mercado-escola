@@ -6,7 +6,9 @@ use App\Models\Address;
 use App\Models\Opening;
 use App\Models\Order;
 use App\Models\Product;
+use App\Models\User;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
+use Illuminate\Support\Collection;
 use Tests\TestCase;
 
 class OrderTest extends TestCase
@@ -51,7 +53,7 @@ class OrderTest extends TestCase
 
         $this->get(route('orders.index'))
              ->assertStatus(200)
-             ->assertJsonCount(1);
+             ->assertJsonCount(1, 'data');
     }
 
     public function test_order_show()
@@ -74,36 +76,30 @@ class OrderTest extends TestCase
     {
         $this->loginAsUser();
 
+        /** @var User $user */
         $user = auth()->user();
+        /** @var Address $address */
         $address = Address::factory(['user_id' => $user])->create();
+        /** @var Collection $products */
         $products = Product::factory()->count(5)->create();
+        /** @var Opening $opening */
         $opening = Opening::factory([
             'opens_at'  => now()->subDays(2),
             'closes_at' => now()->addDay(),
         ])->create();
 
-        /*
-         * Prepare request product list
-         * Product array should be a list of [product_id, quantity]
-         */
-        $body = [
-            'products'   => $products
-                ->pluck('id')
-                ->map(fn($id) => [
-                    'product_id' => $id,
-                    'quantity'   => random_int(1, 10),
-                ])
-                ->toArray(),
-            'opening_id' => $opening->id,
-            'address_id' => $address->id,
-        ];
+        $opening->products()->sync($products->pluck('id'));
 
-        $response = $this->post(route('orders.store'), $body, [
+        $user->cartAddress()->associate($address);
+        $user->products()->sync($products->keyBy('id')->map(fn ($id) => [
+            'quantity' => 5,
+            'quantity_cost' => 30
+        ]));
+
+        $response = $this->post(route('orders.store'), [], [
             // Avoid redirects and just return error bag
             'Accept' => 'application/json',
         ]);
-
-        // dump($response->content());
 
         // Assert order was created
         $response->assertStatus(201);
