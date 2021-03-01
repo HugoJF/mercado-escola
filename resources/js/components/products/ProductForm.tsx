@@ -11,6 +11,7 @@ import {FieldWrapper}                   from "../form/FieldWrapper";
 import useConfirmMenu                   from "../../hooks/useConfirmMenu";
 import {QuantityTypes, rawTypeText}     from "../ui/QuantityTypeText";
 import {useProductDestroyMedia}         from "../../mutations/useProductDestroyMedia";
+import useLoading                       from "../../hooks/useLoading";
 
 export type ProductFormProps = {
     product?: ProductType;
@@ -22,7 +23,7 @@ type FileWithPreview = { file: File, preview: string };
 
 export const ProductForm: React.FC<ProductFormProps>
     = ({onSubmit, product, action}) => {
-    const [loading, setLoading] = useState(false);
+    const {loading, load} = useLoading();
     const {register, handleSubmit, errors, setError, setValue} = useForm<ProductProperties>();
     const [menu, confirm] = useConfirmMenu();
     const [uploadingFiles, setUploadingFiles] = useState<FileWithPreview[]>([]);
@@ -58,28 +59,28 @@ export const ProductForm: React.FC<ProductFormProps>
     }
 
     async function submit(data: ProductProperties) {
-        setLoading(true);
-        try {
-            const form = new FormData();
+        load(async () => {
+            try {
+                const form = new FormData;
 
-            // Deal with API price format being cents
-            data.quantity_cost = data.quantity_cost * 100;
+                // Deal with API price format being cents
+                data.quantity_cost = data.quantity_cost * 100;
 
-            for (const [key, value] of Object.entries(data)) {
-                form.append(key, String(value));
+                for (const [key, value] of Object.entries(data)) {
+                    form.append(key, String(value));
+                }
+
+                uploadingFiles.forEach((value) => {
+                    form.append('images[]', value.file);
+                });
+
+                await onSubmit(form);
+            } catch (e) {
+                // TODO: type check this
+                setErrors(e.errors);
+                throw e;
             }
-
-            uploadingFiles.forEach((value) => {
-                form.append('images[]', value.file);
-            });
-
-            await onSubmit(form);
-        } catch (e) {
-            // TODO: type check this
-            setErrors(e.errors);
-            throw e;
-        }
-        setLoading(false);
+        });
     }
 
     async function removeExistingImage(id: number) {

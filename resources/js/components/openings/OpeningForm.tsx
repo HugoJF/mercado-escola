@@ -5,8 +5,8 @@ import {Button}                         from "../ui/Button";
 import {useForm}                        from "react-hook-form";
 import {OpeningProperties, OpeningType} from "../../types/openings";
 import useLoading                       from "../../hooks/useLoading";
-import {FieldWrapper}                   from "../form/FieldWrapper";
-import {formatISO}                      from "date-fns";
+import {FieldWrapper}        from "../form/FieldWrapper";
+import {formatISO, parseISO} from "date-fns";
 
 export type OpeningFormProps = {
     opening?: OpeningType;
@@ -32,17 +32,25 @@ export const OpeningForm: React.FC<OpeningFormProps> = ({opening, onSubmit, acti
                 });
             } catch (e) {
                 setErrors(e.errors);
+                throw e;
             }
         })
     }
 
     useEffect(() => {
-        if (!opening) return;
+        if (!opening) {
+            return;
+        }
 
         for (let prop of Object.keys(opening)) {
             // @ts-ignore
             setValue(prop, opening[prop]);
         }
+
+        // Manually updates dates that are not handled by react-hook-form
+        setOpensAt(parseISO(opening.opens_at));
+        setClosesAt(parseISO(opening.closes_at));
+        setDeliversAt(parseISO(opening.delivers_at));
     }, [setValue, opening]);
 
     function setErrors(errors: object) {
