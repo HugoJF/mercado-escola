@@ -32,7 +32,13 @@ export const OrderListItem: React.FC<OrderListItemProps> = ({order, onClick}) =>
                         #{order.id}
                     </h2>
 
-                    <OrderStateBadge state={order.state}/>
+                    <div className="flex items-center">
+                        <OrderStateBadge state={order.state}/>
+
+                        <div className="flex flex-grow justify-end text-gray-600">
+                            <MoreVertical/>
+                        </div>
+                    </div>
                 </div>
 
                 {/* Address line */}
@@ -79,10 +85,6 @@ export const OrderListItem: React.FC<OrderListItemProps> = ({order, onClick}) =>
                         :
                         <Skeleton className="w-16"/>
                     }
-
-                    <div className="flex flex-grow justify-end text-gray-600">
-                        <MoreVertical/>
-                    </div>
                 </ul>
             </div>
         </div>

@@ -11,7 +11,7 @@ export const Box: React.FC<BoxProps> = (
     return <div
         {...rest}
         className={clsx(
-            'transition-colors duration-150 w-full px-2 py-5 flex items-center border-gray-200', {
+            'transition-colors duration-150 w-full px-1 py-4 flex items-center border-gray-200', {
                 'cursor-pointer hover:bg-gray-200': hoverable
             }
         )}
