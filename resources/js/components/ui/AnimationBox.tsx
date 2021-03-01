@@ -17,7 +17,7 @@ type OverlayWrapperData = {
 
 export const AnimationBox: React.FC<OverlayWrapperProps> = ({dependencies = [], children}) => {
     const ref = useRef<HTMLElement>();
-    const [data, setData] = useState<Partial<OverlayWrapperData>>({});
+    const [data, setData] = useState<Partial<OverlayWrapperData|null>>(null);
 
     const target = useCallback((node) => {
         if (!node) {
@@ -46,15 +46,27 @@ export const AnimationBox: React.FC<OverlayWrapperProps> = ({dependencies = [], 
         });
     }
 
+    // Fixes initial transition from 0,0
+    let style;
+    if (data) {
+        style = {
+            left: (data.left) + 'px',
+            top: (data.top) + 'px',
+            height: (data.height) + 'px',
+            width: (data.width) + 'px'
+        }
+    } else {
+        style = {
+            display: 'none',
+        }
+    }
+
     return children({
         target,
         props: {
             style: {
                 position: 'absolute',
-                left: (data.left ?? 0) + 'px',
-                top: (data.top ?? 0) + 'px',
-                height: (data.height ?? 0) + 'px',
-                width: (data.width ?? 0) + 'px'
+                ...style,
             }
         }
     });
