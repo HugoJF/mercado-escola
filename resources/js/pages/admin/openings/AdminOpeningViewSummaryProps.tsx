@@ -1,7 +1,8 @@
-import React         from "react";
-import {Calendar}    from "react-feather";
-import {OpeningType} from "../../../types/openings";
-import {Date}        from "../../../components/ui/Date";
+import React                         from "react";
+import {Calendar, Plus, ShoppingBag} from "react-feather";
+import {OpeningType}                 from "../../../types/openings";
+import {Date}                  from "../../../components/ui/Date";
+import {FlatButton}            from "../../../components/ui/FlatButton";
 
 export type AdminOpeningViewSummaryProps = {
     opening: OpeningType;
@@ -51,5 +52,27 @@ export const AdminOpeningViewSummary: React.FC<AdminOpeningViewSummaryProps> = (
                 </p>
             </div>
         </div>
+
+        <div className="flex items-center space-x-4">
+            <ShoppingBag className="text-gray-400"/>
+            <div className="space-y-1">
+                <h2 className="text-gray-700 text-lg">Pedidos para entrega</h2>
+                <p className="text-gray-400">
+                    {opening.delivery_count} / {opening.max_delivery_orders}
+                </p>
+            </div>
+        </div>
+
+        <div className="flex items-center space-x-4">
+            <ShoppingBag className="text-gray-400"/>
+            <div className="space-y-1">
+                <h2 className="text-gray-700 text-lg">Data para retirada</h2>
+                <p className="text-gray-400">
+                    {opening.pickup_count} / {opening.max_pickup_orders}
+                </p>
+            </div>
+        </div>
+
+        <FlatButton>Mais informações</FlatButton>
     </div>
 };
