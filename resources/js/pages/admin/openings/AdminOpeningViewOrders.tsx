@@ -3,6 +3,7 @@ import {OpeningType}        from "../../../types/openings";
 import {HeightTransitioner} from "../../../components/ui/HeightTransitioner";
 import {Title}              from "../../../components/ui/Title";
 import {OrderListItem}      from "../../../components/orders/OrderListItemProps";
+import {Empty}              from "../../../components/ui/Empty";
 
 export type AdminOpeningViewOrdersProps = {
     opening: OpeningType;
@@ -16,6 +17,12 @@ export const AdminOpeningViewOrders: React.FC<AdminOpeningViewOrdersProps> = ({o
         </div>
 
         <div className="divide-y divide-gray-200">
+            {opening.orders.length === 0 && <Empty
+                title="Nenhum pedido"
+                description="Nenhum pedido foi realizado durante essa abertura"
+                iconSize={48}
+            />}
+
             {opening.orders.map(order => (
                 <HeightTransitioner key={order.id}>
                     <OrderListItem order={order}/>

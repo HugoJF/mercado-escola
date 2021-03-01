@@ -5,11 +5,12 @@ type EmptyProps = {
     icon?: Icon;
     title: string;
     description?: string;
+    iconSize?: number;
 }
 
-export const Empty: React.FC<EmptyProps> = ({icon: EmptyIcon = Archive, title, description}) => {
+export const Empty: React.FC<EmptyProps> = ({icon: EmptyIcon = Archive, iconSize = 64, title, description}) => {
     return <div className="flex flex-col h-full justify-center items-center">
-        <EmptyIcon size={64} className="text-gray-400"/>
+        <EmptyIcon size={iconSize} className="text-gray-400"/>
 
         <h2 className="mt-4 text-lg">
             {title}

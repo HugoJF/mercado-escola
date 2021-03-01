@@ -1,17 +1,18 @@
 import React, {useMemo}                   from "react";
 import {OpeningType, OpeningWithProducts} from "../../../types/openings";
 import {HeightTransitioner}               from "../../../components/ui/HeightTransitioner";
-import {Box}                              from "../../../components/ui/Box";
-import {ImageHolder}                      from "../../../components/ui/ImageHolder";
-import {Toggle}                           from "../../../components/ui/Toggle";
-import {useDispatch}                      from "react-redux";
-import {Dispatch}                         from "../../../store";
-import {Title}                            from "../../../components/ui/Title";
-import {ProductType}                      from "../../../types/products";
-import {useOpeningsAddProduct}            from "../../../mutations/useOpeningsAddProduct";
-import {useOpeningsRemoveProduct}         from "../../../mutations/useOpeningsRemoveProduct";
-import {useProducts}                      from "../../../queries/useProducts";
-import {Loading}                          from "../../../components/ui/Loading";
+import {Box}                      from "../../../components/ui/Box";
+import {ImageHolder}              from "../../../components/ui/ImageHolder";
+import {Toggle}                   from "../../../components/ui/Toggle";
+import {useDispatch}              from "react-redux";
+import {Dispatch}                 from "../../../store";
+import {Title}                    from "../../../components/ui/Title";
+import {ProductType}              from "../../../types/products";
+import {useOpeningsAddProduct}    from "../../../mutations/useOpeningsAddProduct";
+import {useOpeningsRemoveProduct} from "../../../mutations/useOpeningsRemoveProduct";
+import {useProducts}              from "../../../queries/useProducts";
+import {Loading}                  from "../../../components/ui/Loading";
+import {Empty}                    from "../../../components/ui/Empty";
 
 export type AdminOpeningViewProductsProps = {
     opening: OpeningType<OpeningWithProducts>;
@@ -51,36 +52,44 @@ export const AdminOpeningViewProducts: React.FC<AdminOpeningViewProductsProps> =
             {
                 products.data
                     ?
-                    products.data.data.data.map(product => (
-                        <HeightTransitioner key={product.id}>
-                            <Box
-                                key={product.id}
-                            >
-                                {/* Thumbnail of first image */}
-                                <div className="w-1/4 mr-4">
-                                    <ImageHolder
-                                        src={Object.values(product.media_links ?? [])[0]}
-                                        alt={product.name}
-                                    />
-                                </div>
+                    <>
+                        {products.data.data.data.length === 0 && <Empty
+                            title="Nenhum produto"
+                            description="Nenhum produto foi registrado no sistema"
+                            iconSize={48}
+                        />}
 
-                                {/* Name */}
-                                <div className="flex-grow">
-                                    <h2 className="text-sm">
-                                        {product.name}
-                                    </h2>
-                                </div>
+                        {products.data.data.data.map(product => (
+                            <HeightTransitioner key={product.id}>
+                                <Box
+                                    key={product.id}
+                                >
+                                    {/* Thumbnail of first image */}
+                                    <div className="w-1/4 mr-4">
+                                        <ImageHolder
+                                            src={Object.values(product.media_links ?? [])[0]}
+                                            alt={product.name}
+                                        />
+                                    </div>
 
-                                {/* Selected toggle */}
-                                <div>
-                                    <Toggle
-                                        checked={productIds.includes(+product.id)}
-                                        onToggle={() => handleProductToggle(product)}
-                                    />
-                                </div>
-                            </Box>
-                        </HeightTransitioner>
-                    ))
+                                    {/* Name */}
+                                    <div className="flex-grow">
+                                        <h2 className="text-sm">
+                                            {product.name}
+                                        </h2>
+                                    </div>
+
+                                    {/* Selected toggle */}
+                                    <div>
+                                        <Toggle
+                                            checked={productIds.includes(+product.id)}
+                                            onToggle={() => handleProductToggle(product)}
+                                        />
+                                    </div>
+                                </Box>
+                            </HeightTransitioner>
+                        ))}
+                    </>
                     :
                     <Loading/>
             }
