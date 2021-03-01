@@ -62,6 +62,9 @@ export const ProductForm: React.FC<ProductFormProps>
         try {
             const form = new FormData();
 
+            // Deal with API price format being cents
+            data.quantity_cost = data.quantity_cost * 100;
+
             for (const [key, value] of Object.entries(data)) {
                 form.append(key, String(value));
             }
@@ -113,7 +116,6 @@ export const ProductForm: React.FC<ProductFormProps>
         setUploadingFiles(filteredFiles);
     }
 
-    // @ts-ignore
     return <form onSubmit={handleSubmit(submit)}>
         {menu}
         <div>
@@ -214,13 +216,13 @@ export const ProductForm: React.FC<ProductFormProps>
             <div className="mb-8">
                 <Input
                     name="quantity_cost"
-                    label="Preço da quantidade (em centavos)"
+                    label="Preço da quantidade"
                     error={errors.quantity_cost}
                     inputProps={{
                         ref: register({required: 'Digite o preço (em R$) de 1 unidade do produto'}),
                         type: 'number',
                         min: 0,
-                        step: 1,
+                        step: 0.01,
                     }}
                 />
             </div>
