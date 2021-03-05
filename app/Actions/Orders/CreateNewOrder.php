@@ -50,7 +50,7 @@ class CreateNewOrder
      */
     protected function clearCart(User $user): void
     {
-        $user->products()->sync([]);
+        $user->products()->detach();
         $user->cartAddress()->dissociate();
     }
 
