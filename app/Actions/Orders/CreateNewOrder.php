@@ -50,7 +50,9 @@ class CreateNewOrder
      */
     protected function clearCart(User $user): void
     {
-        $user->products()->detach();
+        $user->products()->detach(
+            $user->products->pluck('id')->map(fn ($id) => (string) $id)
+        );
         $user->cartAddress()->dissociate();
     }
 
