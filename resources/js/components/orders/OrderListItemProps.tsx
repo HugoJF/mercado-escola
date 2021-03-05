@@ -5,7 +5,6 @@ import {Skeleton}                 from "../ui/Skeleton";
 import {OrderStateBadge}          from "../ui/OrderStateBadge";
 import {PriceFormatter}           from "../ui/PriceFormatter";
 import {ptBR}                     from "date-fns/locale";
-import {MoreVertical}             from "react-feather";
 import {Box}                      from "../ui/Box";
 
 export type OrderListItemProps = {
@@ -32,13 +31,7 @@ export const OrderListItem: React.FC<OrderListItemProps> = ({order, onClick}) =>
                         #{order.id}
                     </h2>
 
-                    <div className="flex items-center">
-                        <OrderStateBadge state={order.state}/>
-
-                        <div className="flex flex-grow justify-end text-gray-600">
-                            <MoreVertical/>
-                        </div>
-                    </div>
+                    <OrderStateBadge state={order.state}/>
                 </div>
 
                 {/* Address line */}

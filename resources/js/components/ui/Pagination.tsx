@@ -32,7 +32,7 @@ export const Pagination: React.FC<PaginationProps> = ({current = 1, delta = 2, l
                     key={page}
                     onClick={() => onClick(page)}
                     className={clsx(
-                        'px-5 py-3 text-center cursor-pointer', {
+                        'px-4 py-2 text-center cursor-pointer', {
                             'bg-gray-200': current === page
                         }
                     )}

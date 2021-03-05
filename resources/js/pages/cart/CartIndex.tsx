@@ -125,10 +125,10 @@ export const CartIndex: React.FC<CartIndexProps>
             <div className="mt-2 mb-8 py-2 flex items-center">
                 <Calendar className="mr-4 text-gray-500"/>
                 <p className="text-gray-500">
-                    <span className="mr-1 text-secondary-500 font-medium">
+                    <span className="text-secondary-500 font-medium">
                         <Date input={opening.delivers_at} format="dd/LL/yyyy"/>
                     </span>
-                    a partir das
+                    {' '}a partir das{' '}
                     <Date input={opening.delivers_at} format="HH'h'mm'm'"/>
                 </p>
             </div>
