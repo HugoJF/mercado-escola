@@ -84,16 +84,18 @@ class OrderTest extends TestCase
         $products = Product::factory()->count(5)->create();
         /** @var Opening $opening */
         $opening = Opening::factory([
-            'opens_at'  => now()->subDays(2),
-            'closes_at' => now()->addDay(),
+            'opens_at'            => now()->subDays(2),
+            'closes_at'           => now()->addDay(),
+            'max_delivery_orders' => 50,
+            'max_pickup_orders'   => 50,
         ])->create();
 
         $opening->products()->sync($products->pluck('id'));
 
         $user->cartAddress()->associate($address);
-        $user->products()->sync($products->keyBy('id')->map(fn ($id) => [
-            'quantity' => 5,
-            'quantity_cost' => 30
+        $user->products()->sync($products->keyBy('id')->map(fn($id) => [
+            'quantity'      => 5,
+            'quantity_cost' => 30,
         ]));
 
         $response = $this->post(route('orders.store'), [], [
