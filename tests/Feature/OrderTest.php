@@ -103,6 +103,8 @@ class OrderTest extends TestCase
             'Accept' => 'application/json',
         ]);
 
+        dump($response->content());
+
         // Assert order was created
         $response->assertStatus(201);
         $this->assertDatabaseHas('orders', [
