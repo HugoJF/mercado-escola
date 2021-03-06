@@ -2,19 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Actions\Openings\FindCurrentOpening;
 use App\Actions\Orders\CreateNewOrder;
 use App\Exceptions\OrderAlreadyCancelledException;
 use App\Exceptions\OrderCannotBeCancelledException;
 use App\Http\Resources\OrderResource;
-use App\Mail\OrderCreated;
-use App\Models\Address;
 use App\Models\Order;
-use App\Models\Product;
-use App\Models\User;
 use Exception;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Mail;
 
 class OrderController extends Controller
 {
@@ -71,6 +65,15 @@ class OrderController extends Controller
             'opening',
             'products',
         ]);
+
+        return new OrderResource($order);
+    }
+
+    // TODO: check policies
+    public function update(Request $request, Order $order)
+    {
+        $order->state = $request->input('state');
+        $order->save();
 
         return new OrderResource($order);
     }
