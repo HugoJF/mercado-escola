@@ -1,16 +1,16 @@
-import React, {useState}               from "react";
-import {ChevronRight, Loader, MapPin}  from "react-feather";
-import PlacesAutocomplete              from 'react-places-autocomplete';
-import {Title}                         from "../../components/ui/Title";
-import {AddressProperties}             from "../../types/addresses";
-import {Box}                           from "../../components/ui/Box";
-import {AddressStreetNumberActionMenu} from "../../action-menus/AdressStreetNumberActionMenu";
-import {Google}                        from "../../google";
-import {MapWithPing}                   from "../../components/addresses/MapWithPing";
-import {Button}                        from "../../components/ui/Button";
-import {PagePadding}                   from "../../containers/PagePadding";
-import useNavigation      from "../../hooks/useNavigation";
-import {useAddressCreate} from "../../mutations/useAddressCreate";
+import React, {useState}              from "react";
+import {ChevronRight, Loader, MapPin} from "react-feather";
+import PlacesAutocomplete             from 'react-places-autocomplete';
+import {Title}                        from "../../components/ui/Title";
+import {AddressProperties}            from "../../types/addresses";
+import {Box}                          from "../../components/ui/Box";
+import {Google}                       from "../../google";
+import {MapWithPing}                  from "../../components/addresses/MapWithPing";
+import {Button}                       from "../../components/ui/Button";
+import {PagePadding}                  from "../../containers/PagePadding";
+import useNavigation                  from "../../hooks/useNavigation";
+import {useAddressCreate}             from "../../mutations/useAddressCreate";
+import {AddressDetailsActionMenu}     from "../../action-menus/AddressDetailsActionMenu";
 
 const fixOnBlur = (refObj: any) => {
     // Avoid clearing suggestions when input loses focus
@@ -31,6 +31,7 @@ export const AddressesCreate: React.FC = () => {
     const [input, setInput] = useState('');
     const [address, setAddress] = useState<google.maps.GeocoderResult | null>(null);
     const [number, setNumber] = useState<number | null>(null);
+    const [complement, setComplement] = useState<string | null>(null);
     const [center, setCenter] = useState<[number, number] | null>(null);
     const addressCreate = useAddressCreate();
 
@@ -71,6 +72,7 @@ export const AddressesCreate: React.FC = () => {
             address: address.formatted_address,
             latitude: address.geometry.location.lat(),
             longitude: address.geometry.location.lng(),
+            complement: complement ?? undefined,
             number: number,
         });
     }
@@ -83,10 +85,12 @@ export const AddressesCreate: React.FC = () => {
     const ready = address && number && !numberSelectorOpen;
 
     return <PagePadding className="flex flex-col">
-        <AddressStreetNumberActionMenu
+        <AddressDetailsActionMenu
             address={address?.formatted_address as string}
-            onNumber={number => number && setNumber(number)}
+            onNumber={number => setNumber(number)}
             number={number}
+            onComplement={complement => setComplement(complement)}
+            complement={complement}
             open={numberSelectorOpen}
             onClose={() => setNumberSelectorOpen(false)}
         />
@@ -121,7 +125,7 @@ export const AddressesCreate: React.FC = () => {
 
                             <div className="divide-y divide-gray-200">
                                 {suggestions.map(suggestion =>
-                                    <Box id={suggestion} {...getSuggestionItemProps(suggestion)}>
+                                    <Box {...getSuggestionItemProps(suggestion)}>
                                         <MapPin className="flex-shrink-0 text-gray-500"/>
 
                                         <p className="flex-grow mx-4 text-sm">{suggestion.description}</p>
@@ -144,6 +148,7 @@ export const AddressesCreate: React.FC = () => {
                 <div className="space-y-1 bg-gray-200 px-4 py-2 rounded-lg">
                     <p className="text-center text-sm text-gray-500 leading-4 tracking-tighter">{address?.formatted_address}</p>
                     <p className="text-center text-sm font-medium text-gray-500 tracking-tighter">{number}</p>
+                    {complement && <p className="mt-2 text-center text-sm font-medium text-gray-500 tracking-tighter">{complement}</p>}
                 </div>
 
                 {/* Map for fine-tuning */}
@@ -155,7 +160,7 @@ export const AddressesCreate: React.FC = () => {
                     <Button
                         loading={loading}
                         color="primary"
-                        onClick={() => handleSave()}
+                        onClick={handleSave}
                         className="mt-4"
                     >
                         Salvar
