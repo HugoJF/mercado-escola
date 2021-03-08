@@ -1,27 +1,44 @@
-import React                             from 'react';
-import {Button}                          from "../../components/ui/Button";
-import {PriceFormatter}                  from "../../components/ui/PriceFormatter";
-import * as ProductQuantityConfig        from "../../configs/ProductQuantityConfig";
-import {QuantityTypes, QuantityTypeText} from "../../components/ui/QuantityTypeText";
-import {ImageHolder}                     from "../../components/ui/ImageHolder";
-import {Link}                            from "react-router-dom";
-import {PagePadding}                     from "../../containers/PagePadding";
-import {ProductType}                     from "../../types/products";
-import {ProductQuantityCost}             from "../../components/ui/ProductQuantityCost";
+import React, {useState}           from 'react';
+import {Button}                    from "../../components/ui/Button";
+import {PriceFormatter}            from "../../components/ui/PriceFormatter";
+import * as ProductQuantityConfig  from "../../configs/ProductQuantityConfig";
+import {ImageHolder}               from "../../components/ui/ImageHolder";
+import {Link}                      from "react-router-dom";
+import {PagePadding}               from "../../containers/PagePadding";
+import {ProductType}               from "../../types/products";
+import {ProductQuantityCost}       from "../../components/ui/ProductQuantityCost";
+import {ProductQuantityActionMenu} from "../../action-menus/ProductQuantityActionMenu";
 
 export type ProductShowProps = {
     product: ProductType;
     quantity: number;
-    handleAdd: () => void;
-    handleSubtract: () => void;
+    onQuantityChange: (quantity: number) => void;
 }
 
-export const ProductShow: React.FC<ProductShowProps> = ({product, quantity, handleAdd, handleSubtract}) => {
+export const ProductShow: React.FC<ProductShowProps> = ({product, quantity, onQuantityChange}) => {
+    const [adding, setAdding] = useState(false);
+
     const config = ProductQuantityConfig[product.quantity_type];
     const total = quantity * config.step;
     const text = total === 1 ? config.singular : config.plural;
 
+    function handleOnAdd() {
+        setAdding(true);
+    }
+
+    function handleOnClose() {
+        setAdding(false);
+    }
+
     return <PagePadding className="flex flex-col justify-around min-h-full">
+        <ProductQuantityActionMenu
+            product={product}
+            currentQuantity={quantity}
+            onQuantityChange={onQuantityChange}
+            open={adding}
+            onClose={handleOnClose}
+        />
+
         {/* Images */}
         <div className="lg:px-48 xl:px-64 w-full">
             <ImageHolder
@@ -61,32 +78,9 @@ export const ProductShow: React.FC<ProductShowProps> = ({product, quantity, hand
         </div>
 
         {/* Cart controls */}
-        {!quantity ?
-            <Button onClick={handleAdd}>
-                Adicionar ao carrinho
-            </Button>
-            :
-            <div className="grid grid-cols-2 gap-8">
-                <div
-                    className="transition-colors duration-150
-                            flex justify-center items-center
-                            bg-primary-500 hover:bg-primary-600 text-gray-100 text-4xl font-bold
-                            shadow rounded-lg cursor-pointer select-none"
-                    onClick={handleSubtract}
-                >
-                    <span className="pb-1">-</span>
-                </div>
-                <div
-                    className="transition-colors duration-150
-                            flex justify-center items-center
-                            bg-primary-500 hover:bg-primary-600 text-gray-100 text-4xl font-bold
-                            shadow rounded-lg cursor-pointer select-none"
-                    onClick={handleAdd}
-                >
-                    <span className="pb-1">+</span>
-                </div>
-            </div>
-        }
+        <Button onClick={handleOnAdd}>
+            {quantity > 0 ? 'Modificar carrinho' : 'Adicionar ao carrinho'}
+        </Button>
 
         {/* Cart warning */}
         {!!quantity && <div className="grid grid-cols-2 items-center my-4 divide-x">
