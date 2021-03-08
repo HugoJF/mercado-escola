@@ -48,6 +48,19 @@ class OrderPolicy
     }
 
     /**
+     * Determine whether the user can update the model.
+     *
+     * @param \App\Models\User $user
+     * @param Order            $order
+     *
+     * @return mixed
+     */
+    public function update(User $user, Order $order)
+    {
+        return $user->admin;
+    }
+
+    /**
      * Determine whether the user can delete the model.
      *
      * @param \App\Models\User  $user

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Actions\Orders\CreateNewOrder;
 use App\Exceptions\OrderAlreadyCancelledException;
 use App\Exceptions\OrderCannotBeCancelledException;
+use App\Http\Requests\OrderUpdateRequest;
 use App\Http\Resources\OrderResource;
 use App\Models\Order;
 use Exception;
@@ -12,6 +13,11 @@ use Illuminate\Http\Request;
 
 class OrderController extends Controller
 {
+    public function __construct()
+    {
+        $this->authorizeResource(Order::class);
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -70,7 +76,7 @@ class OrderController extends Controller
     }
 
     // TODO: check policies
-    public function update(Request $request, Order $order)
+    public function update(OrderUpdateRequest $request, Order $order)
     {
         $order->state = $request->input('state');
         $order->save();
