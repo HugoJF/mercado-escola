@@ -21,7 +21,7 @@ export const Toast: React.FC<ToastProps> = ({id, toast}) => {
 
     return <div
         onClick={remove}
-        className="duration-150 flex items-center justify-center space-x-6 px-6 py-3
+        className="duration-150 flex items-center justify-center space-x-6 px-6 py-3 mt-8
             bg-white shadow-lg hover:shadow-xl cursor-pointer rounded-lg"
     >
         {/* Little exclamation */}

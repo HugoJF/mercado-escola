@@ -73,6 +73,6 @@ export const AdminOpeningViewSummary: React.FC<AdminOpeningViewSummaryProps> = (
             </div>
         </div>
 
-        <FlatButton>Mais informações</FlatButton>
+        {/*<FlatButton>Mais informações</FlatButton>*/}
     </div>
 };
