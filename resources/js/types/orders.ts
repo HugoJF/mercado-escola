@@ -1,11 +1,5 @@
-import {createModel} from "@rematch/core";
-import {RootModel}   from "../stores";
-import {RootState}   from "../store";
-import {normalize}                      from "normalizr";
-import {ordersSchema}                   from "../schemas";
 import {ProductType}                    from "./products";
 import {Pivot, SoftDeletes, Timestamps} from "../types";
-import {api}                            from "../api";
 import {AddressType}                    from "./addresses";
 import {OpeningType}                    from "./openings";
 
@@ -52,16 +46,4 @@ export enum OrderStateEnum {
     DELIVERED = 'DELIVERED',
     CANCELLED = 'CANCELLED',
     REJECTED = 'REJECTED',
-}
-
-// TODO: maybe replace this
-export type OrderProductsType = {
-    product_id: number;
-    quantity: number;
-}
-
-export type OrderStore = {
-    opening_id: number;
-    address_id: number;
-    products: OrderProductsType[];
 }

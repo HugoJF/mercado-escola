@@ -1,5 +1,5 @@
-import React, {useEffect, useState}       from "react";
-import {Redirect, Route, useLocation}     from "react-router-dom";
+import React, {ReactNode, useEffect, useState} from "react";
+import {Redirect, Route, useLocation}          from "react-router-dom";
 import {AnimationBox}                     from "../../../components/ui/AnimationBox";
 import clsx                               from 'clsx';
 import {MoreVertical}                     from "react-feather";
@@ -15,7 +15,8 @@ import useNavigation                      from "../../../hooks/useNavigation";
 type AdminOpeningTabProps = {
     onClick: () => void;
     selected: boolean;
-    target: any; // FIXME
+    target: ((node: ReactNode) => void)|null;
+
 }
 
 const AdminOpeningTabButton: React.FC<AdminOpeningTabProps> = ({onClick, selected, target, children}) => {
@@ -34,6 +35,7 @@ const AdminOpeningTabButton: React.FC<AdminOpeningTabProps> = ({onClick, selecte
         >
             {children}
         </div>
+
         <div
             className="w-full h-0.5 bg-gray-300"
             ref={target}

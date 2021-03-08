@@ -66,7 +66,8 @@ class CartController extends Controller
             [$product->id],
             [
                 'quantity'      => $request->input('quantity'),
-                'quantity_cost' => $product->quantity_cost, // FIXME: this should be ignored since it's not used until a order is placed (it's probably being used in the cart total cost)
+                // See CreateNewOrder@attachProducts on why quantity_cost should be used
+                'quantity_cost' => $product->quantity_cost,
             ],
             false
         );

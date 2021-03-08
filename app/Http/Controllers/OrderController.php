@@ -75,7 +75,6 @@ class OrderController extends Controller
         return new OrderResource($order);
     }
 
-    // TODO: check policies
     public function update(OrderUpdateRequest $request, Order $order)
     {
         $order->state = $request->input('state');

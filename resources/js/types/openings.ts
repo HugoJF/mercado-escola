@@ -24,7 +24,6 @@ export type OpeningProperties = {
 
 export type OpeningComputedProperties = {
     id: number;
-    products: number[]; // FIXME
     pickup_count: number;
     delivery_count: number;
 }

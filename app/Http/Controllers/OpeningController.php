@@ -106,16 +106,4 @@ class OpeningController extends Controller
 
         return new OpeningResource($opening);
     }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param \App\Models\Opening $opening
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Opening $opening)
-    {
-        // TODO: delete and cascade? soft delete?
-    }
 }

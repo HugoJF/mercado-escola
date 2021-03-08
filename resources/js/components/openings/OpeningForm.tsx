@@ -89,7 +89,6 @@ export const OpeningForm: React.FC<OpeningFormProps> = ({opening, onSubmit, acti
                     name="opens_at"
                     ampm={true}
                     format="d 'de' MMMM 'às' HH:mm:ss"
-                    disablePast
                     value={opensAt}
                     onChange={(date) => setOpensAt(date as Date)}
                 />
@@ -102,7 +101,6 @@ export const OpeningForm: React.FC<OpeningFormProps> = ({opening, onSubmit, acti
                     name="closes_at"
                     ampm={true}
                     format="d 'de' MMMM 'às' HH:mm:ss"
-                    disablePast
                     value={closesAt}
                     onChange={(date) => setClosesAt(date as Date)}
                 />
@@ -115,7 +113,6 @@ export const OpeningForm: React.FC<OpeningFormProps> = ({opening, onSubmit, acti
                     name="delivers_at"
                     ampm={true}
                     format="d 'de' MMMM 'às' HH:mm:ss"
-                    disablePast
                     value={deliversAt}
                     onChange={(date) => setDeliversAt(date as Date)}
                 />

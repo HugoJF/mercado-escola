@@ -71,7 +71,9 @@ class CreateNewOrder
             ->keyBy('id')
             ->map(fn($product) => [
                 'quantity'      => $product['pivot']['quantity'],
-                'quantity_cost' => $product->quantity_cost,
+                // quantity_cost is used because it's the price of
+                // the product when the user added it to the cart
+                'quantity_cost' => $product['pivot']['quantity_cost'],
             ]);
         $order->products()->sync($productsData);
     }
