@@ -37,7 +37,7 @@ export const Menu: React.FC = () => {
     const {bindGo} = useNavigation();
     const auth = useAuth();
 
-    return <div className="flex items-stretch justify-around bg-white shadow-menu">
+    return <div className="flex items-stretch justify-around bg-white shadow-menu z-50">
         {Object.entries(buttons)
             .filter(([name, details]) => !(details.adminOnly || false) || auth?.me?.admin)
             .map(([name, details]) => {
