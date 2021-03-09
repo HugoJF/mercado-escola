@@ -28,6 +28,7 @@ class AddCartAddressColumnToUsersTable extends Migration
     public function down()
     {
         Schema::table('users', function (Blueprint $table) {
+            $table->dropForeign('users_cart_address_id_foreign');
             $table->dropColumn(['cart_address_id']);
         });
     }
