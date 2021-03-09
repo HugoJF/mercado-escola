@@ -30,6 +30,7 @@ jobs:
         uses: shivammathur/setup-php@v2
         with:
           php-version: '7.4'
+          coverage: xdebug
 
       - name: Copy .env
         run: php -r "file_exists('.env') || copy('.env.actions', '.env');"
@@ -68,13 +69,13 @@ jobs:
       - name: Run ChromeDriver
         run: ./vendor/laravel/dusk/bin/chromedriver-linux > /dev/null 2>&1 &
 
-      - name: Execute tests (Unit and Feature tests) via PHPUnit
-        run: vendor/bin/phpunit --configuration phpunit.dist.xml
+      - name: Execute Laravel Dusk
+        run: php artisan dusk
         env:
           DB_PORT: ${{ job.services.mysql.ports[3306] }}
 
-      - name: Execute Laravel Dusk
-        run: php artisan dusk
+      - name: Execute tests (Unit and Feature tests) via PHPUnit
+        run: vendor/bin/phpunit --configuration phpunit.dist.xml
         env:
           DB_PORT: ${{ job.services.mysql.ports[3306] }}
 

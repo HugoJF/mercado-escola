@@ -103,8 +103,6 @@ class OrderTest extends TestCase
             'Accept' => 'application/json',
         ]);
 
-        dump($response->content());
-
         // Assert order was created
         $response->assertStatus(201);
         $this->assertDatabaseHas('orders', [
@@ -121,7 +119,7 @@ class OrderTest extends TestCase
             $order->products->pluck('id')
         );
     }
-
+/*
     public function test_order_can_be_cancelled()
     {
         // TODO
@@ -130,5 +128,5 @@ class OrderTest extends TestCase
     public function test_order_cannot_be_cancelled_if_not_pending()
     {
         // TODO
-    }
+    }*/
 }
