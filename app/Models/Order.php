@@ -33,6 +33,8 @@ class Order extends Model
 
     public $incrementing = false;
 
+    public $keyType = 'string';
+
     protected $with = ['products', 'address'];
 
     protected $appends = ['total'];

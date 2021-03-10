@@ -12,6 +12,7 @@ trait HasProducts
      */
     public function products()
     {
-        return $this->morphToMany(Product::class, 'holder', 'has_product')->withPivot('quantity', 'quantity_cost');
+        return $this->morphToMany(Product::class, 'holder', 'has_product', null, null, 'string_id')
+                    ->withPivot('quantity', 'quantity_cost');
     }
 }
