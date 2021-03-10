@@ -7,6 +7,11 @@ use Illuminate\Database\Eloquent\Relations\MorphToMany;
 
 trait HasProducts
 {
+    public function getStringIdAttribute()
+    {
+        return (string) $this->id;
+    }
+    
     /**
      * @return MorphToMany
      */
