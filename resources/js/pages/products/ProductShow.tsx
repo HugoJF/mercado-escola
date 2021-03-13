@@ -8,19 +8,34 @@ import {PagePadding}               from "../../containers/PagePadding";
 import {ProductType}               from "../../types/products";
 import {ProductQuantityCost}       from "../../components/ui/ProductQuantityCost";
 import {ProductQuantityActionMenu} from "../../action-menus/ProductQuantityActionMenu";
+import {Trash}                     from "react-feather";
+import useConfirmMenu              from "../../hooks/useConfirmMenu";
 
 export type ProductShowProps = {
     product: ProductType;
     quantity: number;
     onQuantityChange: (quantity: number) => void;
+    onRemove: () => void;
 }
 
-export const ProductShow: React.FC<ProductShowProps> = ({product, quantity, onQuantityChange}) => {
+export const ProductShow: React.FC<ProductShowProps> = ({product, quantity, onRemove, onQuantityChange}) => {
     const [adding, setAdding] = useState(false);
+    const [menu, confirm] = useConfirmMenu();
 
     const config = ProductQuantityConfig[product.quantity_type];
     const total = quantity * config.step;
     const text = total === 1 ? config.singular : config.plural;
+
+    async function handleOnRemove() {
+        if (await confirm({
+            title: "Remover do carrinho",
+            description: `Deseja remover ${product.name} do carrinho?`,
+            action: "Remover",
+        })) {
+            onRemove();
+        }
+
+    }
 
     function handleOnAdd() {
         setAdding(true);
@@ -38,6 +53,8 @@ export const ProductShow: React.FC<ProductShowProps> = ({product, quantity, onQu
             open={adding}
             onClose={handleOnClose}
         />
+
+        {menu}
 
         {/* Images */}
         <div className="lg:px-48 xl:px-64 w-full">
@@ -78,9 +95,15 @@ export const ProductShow: React.FC<ProductShowProps> = ({product, quantity, onQu
         </div>
 
         {/* Cart controls */}
-        <Button onClick={handleOnAdd}>
-            {quantity > 0 ? 'Modificar carrinho' : 'Adicionar ao carrinho'}
-        </Button>
+        <div className="flex justify-between">
+            {!!quantity && <Button className="mr-4" color="danger" onClick={handleOnRemove}>
+                <Trash/>
+            </Button>}
+
+            <Button className="flex-grow" onClick={handleOnAdd}>
+                {quantity > 0 ? 'Modificar quantidade' : 'Adicionar ao carrinho'}
+            </Button>
+        </div>
 
         {/* Cart warning */}
         {!!quantity && <div className="grid grid-cols-2 items-center my-4 divide-x">

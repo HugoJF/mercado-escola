@@ -33,6 +33,11 @@ export const ProductShowContainer: React.FC = () => {
         }
     }, [cartProduct.data]);
 
+    function handleOnRemove() {
+        cartRemoveProduct.mutate(productId);
+        setQuantity(0);
+    }
+
     function handleOnQuantityChange(newQuantity: number) {
         if (!product.data || !cartProduct.data) {
             return;
@@ -75,5 +80,6 @@ export const ProductShowContainer: React.FC = () => {
         product={product.data.data.data}
         quantity={quantity}
         onQuantityChange={handleOnQuantityChange}
+        onRemove={handleOnRemove}
     />
 };

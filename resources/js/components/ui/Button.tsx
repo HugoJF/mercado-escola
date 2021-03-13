@@ -5,6 +5,7 @@ import clsx     from 'clsx';
 type ButtonColors = 'default' | 'primary' | 'secondary' | 'danger';
 
 export type ButtonProps = React.HTMLAttributes<HTMLButtonElement> & {
+    className?: string;
     enabled?: boolean;
     color?: ButtonColors;
     outline?: boolean;
@@ -19,14 +20,15 @@ const classes: { [id in ButtonColors]: (params: ButtonProps) => string } = {
 };
 
 export const Button: React.FC<ButtonProps> = (props) => {
-    const {enabled = true, loading = false, color = 'primary', outline, children, ...rest} = props;
+    const {enabled = true, loading = false, color = 'primary', outline, className, children, ...rest} = props;
 
     return <button
         disabled={!enabled}
         {...rest}
         className={clsx(
+            className,
             classes[color](props),
-            'transition-all duration-150 py-3 w-full text-center text-xl',
+            'transition-all duration-150 py-3 px-4 text-center text-xl',
             'font-medium rounded-lg border-box hover:shadow', {
                 'cursor-not-allowed opacity-50': !enabled
             }
