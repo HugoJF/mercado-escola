@@ -31,7 +31,7 @@ export type CartIndexProps = {
 
 export const CartIndex: React.FC<CartIndexProps>
     = ({address, opening, products, onRemove, delivery, onShippingChanged, shippingOptionsOpen, setShippingOptionsOpen, onDeliverySelected, onOrderStore, pending}) => {
-    const {go} = useNavigation();
+    const {bindGo} = useNavigation();
     const total = useMemo(() => products.reduce((value, product) => (
         value + product.pivot.quantity * product.pivot.quantity_cost
     ), 0), [products]);
@@ -57,10 +57,18 @@ export const CartIndex: React.FC<CartIndexProps>
                 >
                     {(product) => <Edit
                         className="text-gray-400"
-                        onClick={() => go(`/produtos/${product.id}`)}
+                        onClick={bindGo(`/produtos/${product.id}`)}
                     />}
                 </ProductListSummary>
             </div>
+
+            <Link
+                className="block py-4 text-center text-base text-secondary-500 font-medium border-b border-gray-200"
+                to="/home"
+            >
+                Adicionar mais itens
+            </Link>
+
 
             {/* Total cost */}
             <div className="my-8 flex justify-between items-baseline text-xl">
