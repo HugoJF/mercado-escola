@@ -10,6 +10,7 @@ import {ProductQuantityCost}       from "../../components/ui/ProductQuantityCost
 import {ProductQuantityActionMenu} from "../../action-menus/ProductQuantityActionMenu";
 import {Trash}                     from "react-feather";
 import useConfirmMenu              from "../../hooks/useConfirmMenu";
+import useNavigation               from "../../hooks/useNavigation";
 
 export type ProductShowProps = {
     product: ProductType;
@@ -21,6 +22,7 @@ export type ProductShowProps = {
 export const ProductShow: React.FC<ProductShowProps> = ({product, quantity, onRemove, onQuantityChange}) => {
     const [adding, setAdding] = useState(false);
     const [menu, confirm] = useConfirmMenu();
+    const {go} = useNavigation();
 
     const config = ProductQuantityConfig[product.quantity_type];
     const total = quantity * config.step;
@@ -34,7 +36,11 @@ export const ProductShow: React.FC<ProductShowProps> = ({product, quantity, onRe
         })) {
             onRemove();
         }
+    }
 
+    function handleOnQuantityChange(quantity: number) {
+        onQuantityChange(quantity);
+        go('/carrinho');
     }
 
     function handleOnAdd() {
@@ -49,7 +55,7 @@ export const ProductShow: React.FC<ProductShowProps> = ({product, quantity, onRe
         <ProductQuantityActionMenu
             product={product}
             currentQuantity={quantity}
-            onQuantityChange={onQuantityChange}
+            onQuantityChange={handleOnQuantityChange}
             open={adding}
             onClose={handleOnClose}
         />
