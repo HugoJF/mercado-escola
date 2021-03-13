@@ -79,8 +79,8 @@ export const ProductQuantityActionMenu: React.FC<ModalProps & ProductQuantityAct
         {/* Buttons */}
         <div className="px-2 flex space-x-4">
             <div
-                className="transition-colors duration-150 w-24
-                            flex flex-shrink justify-center items-center border
+                className="transition-colors duration-150 px-6
+                            flex flex-shrink flex-grow-0 justify-center items-center border
                             text-gray-700 text-3xl font-bold
                             rounded-lg cursor-pointer select-none"
                 onClick={handleSubtract}
@@ -88,15 +88,15 @@ export const ProductQuantityActionMenu: React.FC<ModalProps & ProductQuantityAct
                 <span className="pb-1">-</span>
             </div>
             <div
-                className="transition-colors duration-150 w-24
-                            flex flex-shrink justify-center items-center border
+                className="transition-colors duration-150 px-6
+                            flex flex-shrink flex-grow-0 justify-center items-center border
                             text-gray-700 text-3xl font-bold
                             rounded-lg cursor-pointer select-none"
                 onClick={handleOnAdd}
             >
                 <span className="pb-1">+</span>
             </div>
-            <Button onClick={handleOnSubmit}>
+            <Button className="flex-grow" onClick={handleOnSubmit}>
                 {quantity === 0 ? (currentQuantity > 0 ? 'Remover' : 'Cancelar') : (currentQuantity > 0 ? 'Atualizar' : 'Adicionar')}
             </Button>
         </div>

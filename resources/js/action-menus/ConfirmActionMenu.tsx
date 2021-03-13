@@ -20,7 +20,7 @@ export const ConfirmActionMenu: React.FC<ModalProps & ConfirmActionMenuProps> = 
         </p>}
 
         {/* Actions button */}
-        <div className="mt-4 px-4 space-y-4">
+        <div className="grid grid-cols-2 gap-4 mt-4 px-4">
             <Button
                 onClick={() => {
                     onClick(true);
