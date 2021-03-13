@@ -20,7 +20,12 @@ export const ProductQuantityActionMenu: React.FC<ModalProps & ProductQuantityAct
     const text = total === 1 ? config.singular : config.plural;
 
     useEffect(() => {
-        setQuantity(currentQuantity)
+        // If item is not in cart, manually initialize the selector with 1 item
+        if (currentQuantity === 0) {
+            setQuantity(1);
+        } else {
+            setQuantity(currentQuantity)
+        }
     }, [currentQuantity]);
 
     function handleOnAdd() {
