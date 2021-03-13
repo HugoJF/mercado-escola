@@ -6,7 +6,7 @@ import {CSSTransition, TransitionGroup} from "react-transition-group";
 export const ToastsContainer = () => {
     const toasts = useToasts();
 
-    return <TransitionGroup className="flex flex-col items-center justify-center fixed w-full px-8 top-0">
+    return <TransitionGroup className="flex flex-col items-center justify-center fixed w-full px-8 top-0 z-50">
         {Object
             .entries(toasts)
             .filter((value, index) => index < 2)

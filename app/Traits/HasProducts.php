@@ -11,7 +11,7 @@ trait HasProducts
     {
         return (string) $this->id;
     }
-    
+
     /**
      * @return MorphToMany
      */
