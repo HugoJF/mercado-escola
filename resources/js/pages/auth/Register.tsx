@@ -92,13 +92,13 @@ export const Register: React.FC<object> = () => {
                         <Input
                             name="password_confirmation"
                             label="Confirmação da senha"
-                            error={errors.password}
+                            error={errors.password_confirmation}
                             inputProps={{
                                 ref: register({
                                     required: true,
-                                    validate: p => p === watch('password') || 'Verifique a confirmação da senha',
+                                    validate: p => p === watch('password') || 'As senhas não conferem',
                                 }),
-                                placeholder: 'Verifique a confirmação da senha',
+                                placeholder: 'Digite a senha novamente',
                                 type: 'password',
                             }}
                         />
