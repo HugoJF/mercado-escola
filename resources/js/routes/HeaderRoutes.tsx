@@ -7,8 +7,11 @@ import {ProductHeaderContainer} from "../headers/ProductHeaderContainer";
 export const HeaderRoutes: React.FC = () => {
     return <Switch>
         <Route exact path="/home" children={<HomeHeader/>}/>
-
         <Route path="/produtos/:productId" children={<ProductHeaderContainer/>}/>
+
+        <Route path="/login" children={null}/>
+        <Route path="/register" children={null}/>
+
         <Route children={<DefaultHeader/>}/>
     </Switch>
 };

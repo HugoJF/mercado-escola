@@ -104,9 +104,7 @@ export const Register: React.FC<object> = () => {
                         />
                     </div>
 
-                    <div className="mt-8">
-                        <Button loading={loading}>Registrar</Button>
-                    </div>
+                    <Button className="w-full mt-8" loading={loading}>Registrar</Button>
 
                     <div className="text-center mt-8">
                         <Link to="/login" className="w-full text-gray-500">

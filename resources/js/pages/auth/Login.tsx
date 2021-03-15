@@ -71,13 +71,11 @@ export const Login: React.FC<object> = () => {
                         </div>
                     </div>
 
-                    <div className="mt-10">
-                        <Button loading={loading}>
-                            Entrar
-                        </Button>
-                    </div>
+                    <Button className="w-full mt-4" loading={loading}>
+                        Entrar
+                    </Button>
 
-                    <div className="text-center mt-8">
+                    <div className="mt-8 px-4 text-center">
                         <Link to="/register" className="w-full text-gray-500">
                             Ainda não possui uma conta?
                             <span className="ml-1 text-orange-400">Registre-se aqui</span>
