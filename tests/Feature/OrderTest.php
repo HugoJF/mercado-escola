@@ -119,14 +119,97 @@ class OrderTest extends TestCase
             $order->products->pluck('id')
         );
     }
-/*
+
+    public function test_order_will_not_be_created_if_cart_is_invalid()
+    {
+        $this->loginAsUser();
+
+        /** @var User $user */
+        $user = auth()->user();
+        /** @var Address $address */
+        $address = Address::factory(['user_id' => $user])->create();
+        /** @var Collection $products */
+        $products = Product::factory()->count(5)->create();
+        /** @var Opening $opening */
+        $opening = Opening::factory([
+            'opens_at'            => now()->subDays(2),
+            'closes_at'           => now()->addDay(),
+            'max_delivery_orders' => 50,
+            'max_pickup_orders'   => 50,
+        ])->create();
+
+        $user->cartAddress()->associate($address);
+        $user->products()->sync($products->keyBy('id')->map(fn($id) => [
+            'quantity'      => 5,
+            'quantity_cost' => 30,
+        ]));
+
+        $response = $this->post(route('orders.store'), [], [
+            // Avoid redirects and just return error bag
+            'Accept' => 'application/json',
+        ]);
+
+        // Assert order was created
+        $response->assertStatus(412);
+    }
+
+    public function test_order_cannot_be_created_if_no_openings_are_available()
+    {
+        $this->loginAsUser();
+
+        $response = $this->post(route('orders.store'), [], [
+            // Avoid redirects and just return error bag
+            'Accept' => 'application/json',
+        ]);
+
+        $this->assertEquals(412, $response->status());
+    }
+
     public function test_order_can_be_cancelled()
     {
-        // TODO
+        $order = Order::factory()->create([
+            'state' => Order::PENDING,
+        ]);
+
+        $response = $this->patch(route('orders.cancel', $order), [], [
+            // Avoid redirects and just return error bag
+            'Accept' => 'application/json',
+        ]);
+
+        $this->assertEquals(200, $response->status());
+        $this->assertDatabaseHas('orders', array_merge($order->only('id'), ['state' => Order::CANCELLED]));
     }
 
     public function test_order_cannot_be_cancelled_if_not_pending()
     {
-        // TODO
-    }*/
+        $order = Order::factory()->create([
+            'state' => Order::ACCEPTED,
+        ]);
+
+        $response = $this->patch(route('orders.cancel', $order), [], [
+            // Avoid redirects and just return error bag
+            'Accept' => 'application/json',
+        ]);
+
+        $this->assertEquals(412, $response->status());
+    }
+
+    public function test_order_cannot_be_cancelled_if_opening_is_closed()
+    {
+        $opening = Opening::factory()->create([
+            'closes_at' => now()->subDays(1),
+        ]);
+
+        $order = Order::factory()->create([
+            'opening_id' => $opening->id,
+            'state'      => Order::ACCEPTED,
+        ]);
+
+        $response = $this->patch(route('orders.cancel', $order), [], [
+            // Avoid redirects and just return error bag
+            'Accept' => 'application/json',
+        ]);
+
+        $this->assertEquals(412, $response->status());
+    }
 }

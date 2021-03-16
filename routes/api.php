@@ -61,7 +61,7 @@ Route::apiResource('openings', \App\Http\Controllers\OpeningController::class);
 */
 
 Route::apiResource('orders', \App\Http\Controllers\OrderController::class);
-Route::patch('orders/{order}/cancel',[ \App\Http\Controllers\OrderController::class, 'cancel']);
+Route::patch('orders/{order}/cancel',[ \App\Http\Controllers\OrderController::class, 'cancel'])->name('orders.cancel');
 
 /*
 |--------------------------------------------------------------------------
