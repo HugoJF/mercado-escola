@@ -3,12 +3,14 @@
 namespace App\Actions\Orders;
 
 use App\Actions\Openings\FindCurrentOpening;
+use App\Exceptions\InvalidCartException;
+use App\Exceptions\MaximumDeliveryOrdersReachedException;
+use App\Exceptions\MaximumPickupOrdersReachedException;
+use App\Exceptions\NoActiveOpeningException;
 use App\Mail\OrderCreated;
-use App\Models\Address;
 use App\Models\Opening;
 use App\Models\Order;
 use App\Models\User;
-use Exception;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
@@ -51,7 +53,7 @@ class CreateNewOrder
     protected function clearCart(User $user): void
     {
         $user->products()->detach(
-            $user->products->pluck('id')->map(fn ($id) => (string) $id)
+            $user->products->pluck('id')->map(fn($id) => (string) $id)
         );
         $user->cartAddress()->dissociate();
     }
@@ -110,28 +112,22 @@ class CreateNewOrder
     /**
      * @param User         $user
      * @param Opening|null $opening
-     *
-     * @throws Exception
      */
     protected function checkPreconditions(User $user, ?Opening $opening): void
     {
         if (!$opening) {
-            throw new Exception('There are no active openings right now');
-        }
-
-        if ($opening->closed()) {
-            throw new Exception('Opening is closed');
+            throw new NoActiveOpeningException;
         }
 
         if ($user->cartAddress) {
             $pickupOrders = $opening->orders()->whereNull('address_id')->count();
             if ($pickupOrders >= $opening->max_pickup_orders) {
-                throw new Exception('Opening reached max pickup orders');
+                throw new MaximumPickupOrdersReachedException($opening);
             }
         } else {
             $deliveryOrders = $opening->orders()->whereNotNull('address_id')->count();
             if ($deliveryOrders >= $opening->max_delivery_orders) {
-                throw new Exception('Opening reached max delivery orders');
+                throw new MaximumDeliveryOrdersReachedException($opening);
             }
         }
 
@@ -143,7 +139,7 @@ class CreateNewOrder
         $diff = $cartProducts->diff($openingProducts);
 
         if ($diff->count() > 0) {
-            throw new Exception('Cart contains products that are not available in this opening: ' . $diff->join(', '));
+            throw new InvalidCartException($diff->toArray());
         }
     }
 }
