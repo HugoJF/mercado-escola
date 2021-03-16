@@ -8,7 +8,7 @@ export type PivotOpeningProduct = Pivot<{
     product_id: number;
 }>
 
-export type OpeningType<T = {}> = T
+export type OpeningType<T = unknown> = T
     & OpeningProperties
     & OpeningComputedProperties
     & OpeningRelationshipProperties

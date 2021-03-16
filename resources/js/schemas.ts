@@ -8,7 +8,7 @@ export const openingsSchema = new schema.Entity('openings', {
 export const ordersSchema = new schema.Entity('orders', {
     products: [productSchema],
 }, {
-    processStrategy: (value, parent, key) => {
+    processStrategy: (value) => {
         const quantities = value.products.reduce((acc: any, product: any) =>  {
             acc[product.id] = product.pivot.quantity;
             return acc;

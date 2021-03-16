@@ -6,7 +6,7 @@ export type WithQuantityPivot = Pivot<{
     quantity_cost: number;
 }>
 
-export type ProductType<T = {}> = T &
+export type ProductType<T = unknown> = T &
     ProductProperties &
     ProductComputedProperties &
     ProductRelationshipProperties &

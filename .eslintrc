@@ -1,0 +1,22 @@
+{
+    "root": true,
+    "parser": "@typescript-eslint/parser",
+    "plugins": [
+        "@typescript-eslint"
+    ],
+    "extends": [
+        "eslint:recommended",
+        "plugin:@typescript-eslint/eslint-recommended",
+        "plugin:@typescript-eslint/recommended"
+    ],
+    "rules": {
+        // Avoid unecessary return types
+        "@typescript-eslint/explicit-module-boundary-types": 0,
+
+        // Keep type annotations even when inferrable
+        "@typescript-eslint/no-inferrable-types": 0,
+
+        // Allow any
+        "@typescript-eslint/no-explicit-any": 0
+    }
+}

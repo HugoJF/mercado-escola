@@ -39,7 +39,7 @@ export const cart = createModel<RootModel>()({
 
             return state;
         },
-        reset: (state, payload) => {
+        reset: () => {
             return {
                 items: {},
                 address_id: null,

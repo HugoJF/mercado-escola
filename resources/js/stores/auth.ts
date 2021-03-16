@@ -1,13 +1,12 @@
 import {createModel}                                      from "@rematch/core";
 import {RootModel}                                        from "./index";
-import {RootState}                                        from "../store";
 import {AuthState, LoginCredentials, RegisterCredentials} from "../types/auth";
 import {UserProperties}                                   from "../types/users";
 
 export const auth = createModel<RootModel>()({
     state: {} as AuthState,
     reducers: {
-        setUser: (state, payload: object) => {
+        setUser: (state, payload: Partial<UserProperties>) => {
             return {me: payload} as AuthState;
         },
         setFailed: (state, payload: boolean) => {
@@ -20,14 +19,14 @@ export const auth = createModel<RootModel>()({
             await window.axios.get('/sanctum/csrf-cookie');
         },
 
-        async me(): Promise<object> {
+        async me(): Promise<UserProperties> {
             await dispatch.auth.csrf();
-            let response = await window.axios.get('/api/me');
+            const response = await window.axios.get('/api/me');
 
             const user = response.data.user;
 
             if (user) {
-                dispatch.auth.setUser(user as AuthState);
+                dispatch.auth.setUser(user as UserProperties);
             }
 
             return user;
@@ -47,7 +46,7 @@ export const auth = createModel<RootModel>()({
             const user = response.data.user;
 
             if (user) {
-                dispatch.auth.setUser(user as AuthState);
+                dispatch.auth.setUser(user as UserProperties);
             }
 
             return user;
@@ -56,13 +55,12 @@ export const auth = createModel<RootModel>()({
         async logout(): Promise<void> {
             const me = await dispatch.auth.me();
 
-            // @ts-ignore
             if (!me) {
                 return;
             }
 
             try {
-                const response = await window.axios.post('/logout');
+                await window.axios.post('/logout');
 
                 dispatch.auth.setUser({});
             } catch (e) {
@@ -70,19 +68,18 @@ export const auth = createModel<RootModel>()({
             }
         },
 
-        async login(payload: LoginCredentials, state: RootState): Promise<void> {
+        async login(payload: LoginCredentials): Promise<void> {
             const {email, password} = payload;
 
             await dispatch.auth.csrf();
             const me = await dispatch.auth.me();
 
-            // @ts-ignore
             if (me) {
                 return;
             }
 
             try {
-                const response = await window.axios.post('/login', {
+                await window.axios.post('/login', {
                     email, password,
                 });
 

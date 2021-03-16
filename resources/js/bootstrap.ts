@@ -64,7 +64,7 @@ declare global {
 }
 
 window.updateViewportProperty = function() {
-    let prevClientHeight: any;
+    let prevClientHeight: number;
     function handleResize() {
         const clientHeight = document.documentElement.clientHeight;
         if (clientHeight === prevClientHeight) return;

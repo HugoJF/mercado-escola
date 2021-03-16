@@ -7,11 +7,15 @@
         "watch-poll": "mix watch -- --watch-options-poll=1000",
         "hot": "mix watch --hot",
         "prod": "npm run production",
-        "production": "mix --production"
+        "production": "mix --production",
+        "lint": "eslint . --ext .ts"
     },
     "devDependencies": {
+        "@typescript-eslint/eslint-plugin": "^4.18.0",
+        "@typescript-eslint/parser": "^4.18.0",
         "axios": "^0.19",
         "cross-env": "^7.0.3",
+        "eslint": "^7.22.0",
         "laravel-mix": "^6.0.11",
         "lodash": "^4.17.21",
         "postcss": "^8.2.6",

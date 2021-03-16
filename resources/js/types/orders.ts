@@ -13,7 +13,7 @@ export type PivotOrderProduct = Pivot<{
     quantity_cost: number;
 }>
 
-export type OrderType<T = {}> = T &
+export type OrderType<T = unknown> = T &
     OrdersProperties &
     OrdersComputedProperties &
     OrderRelationshipProperties &
