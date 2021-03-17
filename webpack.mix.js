@@ -16,7 +16,8 @@ mix
     // .js('resources/js/bootstrap.js', 'public/js')
     .ts('resources/js/app.tsx', 'public/js')
     .postCss('resources/css/app.css', 'public/css', [
-        tailwindcss('./tailwind.config.js'),
+        // tailwindcss('./tailwind.config.js'),
+        require('@tailwindcss/jit'),
         require('postcss-100vh-fix'),
         require('postcss-viewport-height-correction'),
         require('postcss-hover-media-feature'),
