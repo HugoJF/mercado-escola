@@ -1,9 +1,11 @@
 import React           from 'react';
 import {Back}          from "./partials/Back";
 import {HeaderWrapper} from "./partials/HeaderWrapper";
+import {Cart}          from "./partials/Cart";
 
-export const DefaultHeader: React.FC = () => {
+export const DefaultHeaderWithCart: React.FC = () => {
     return <HeaderWrapper>
         <Back/>
+        <Cart/>
     </HeaderWrapper>
 };

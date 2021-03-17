@@ -3,6 +3,7 @@ import {Route, Switch}          from "react-router";
 import {HomeHeader}             from "../headers/HomeHeader";
 import {DefaultHeader}          from "../headers/DefaultHeader";
 import {ProductHeaderContainer} from "../headers/ProductHeaderContainer";
+import {DefaultHeaderWithCart}  from "../headers/DefaultHeaderWithCart";
 
 export const HeaderRoutes: React.FC = () => {
     return <Switch>
@@ -11,7 +12,10 @@ export const HeaderRoutes: React.FC = () => {
 
         <Route path="/login" children={null}/>
         <Route path="/register" children={null}/>
+        <Route path="/carrinho" children={<DefaultHeader/>}/>
+        <Route path="/conta" children={<DefaultHeader/>}/>
+        <Route path="/admin" children={<DefaultHeader/>}/>
 
-        <Route children={<DefaultHeader/>}/>
+        <Route children={<DefaultHeaderWithCart/>}/>
     </Switch>
 };

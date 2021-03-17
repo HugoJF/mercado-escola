@@ -1,9 +1,10 @@
-import React           from 'react';
-import {Heart}         from "react-feather";
-import {BackAndCart}   from "./partials/BackAndCart";
-import {HeaderWrapper} from "./partials/HeaderWrapper";
-import clsx            from 'clsx';
-import {ProductType}   from "../types/products";
+import React                from 'react';
+import {ChevronLeft, Heart} from "react-feather";
+import {HeaderWrapper}      from "./partials/HeaderWrapper";
+import clsx                 from 'clsx';
+import {ProductType}        from "../types/products";
+import {Cart}               from "./partials/Cart";
+import {useHistory}         from "react-router";
 
 export type ProductHeaderProps = {
     product: ProductType;
@@ -12,10 +13,11 @@ export type ProductHeaderProps = {
 }
 
 export const ProductHeader: React.FC<ProductHeaderProps> = ({product, favorite, onToggleFavorite}) => {
-    return <HeaderWrapper>
-        <BackAndCart/>
+    const history = useHistory();
 
-        <div className="flex justify-between items-center mt-12 px-6">
+    return <HeaderWrapper>
+        <div className="flex justify-between items-center py-4 px-6">
+            <ChevronLeft size={24} className="cursor-pointer" onClick={history.goBack}/>
             <h2 className="text-2xl font-medium truncate leading-none">{product.name}</h2>
             <div
                 className={clsx(
@@ -32,5 +34,6 @@ export const ProductHeader: React.FC<ProductHeaderProps> = ({product, favorite, 
                 />
             </div>
         </div>
+        <Cart/>
     </HeaderWrapper>
 };
