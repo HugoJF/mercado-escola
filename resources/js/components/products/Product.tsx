@@ -1,11 +1,10 @@
-import React                             from "react";
-import {Link}                            from "react-router-dom";
-import {PriceFormatter}                  from "../ui/PriceFormatter";
-import {ProductType}                     from "../../types/products";
-import {QuantityTypes, QuantityTypeText} from "../ui/QuantityTypeText";
-import {ImageHolder}                     from "../ui/ImageHolder";
-import {PlusCircle}                      from "react-feather";
-import {ProductQuantityCost}             from "../ui/ProductQuantityCost";
+import React                 from "react";
+import {Link}                from "react-router-dom";
+import {PriceFormatter}      from "../ui/PriceFormatter";
+import {ProductType}         from "../../types/products";
+import {ImageHolder}         from "../ui/ImageHolder";
+import {PlusCircle}          from "react-feather";
+import {ProductQuantityCost} from "../ui/ProductQuantityCost";
 
 export type ProductProps = {
     product: ProductType;

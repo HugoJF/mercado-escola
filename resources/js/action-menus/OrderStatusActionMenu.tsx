@@ -1,6 +1,6 @@
-import {Modal, ModalProps}          from "../components/ui/Modal";
-import React, {useEffect, useState} from "react";
-import {Button}                     from "../components/ui/Button";
+import {Modal, ModalProps}            from "../components/ui/Modal";
+import React, {useEffect, useState}   from "react";
+import {Button}                       from "../components/ui/Button";
 import {OrderStateEnum}               from "../types/orders";
 import {OrderStateTextMapping}        from "../components/ui/OrderStateText";
 import {OrderStateDescriptionMapping} from "../components/ui/OrderStateDescription";

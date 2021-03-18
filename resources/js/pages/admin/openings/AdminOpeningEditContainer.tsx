@@ -1,6 +1,4 @@
 import React               from "react";
-import {useDispatch}       from "react-redux";
-import {Dispatch}          from "../../../store";
 import {useParams}         from "react-router-dom";
 import {OpeningProperties} from "../../../types/openings";
 import useNavigation       from "../../../hooks/useNavigation";

@@ -5,8 +5,8 @@ import {Button}                         from "../ui/Button";
 import {useForm}                        from "react-hook-form";
 import {OpeningProperties, OpeningType} from "../../types/openings";
 import useLoading                       from "../../hooks/useLoading";
-import {FieldWrapper}        from "../form/FieldWrapper";
-import {formatISO, parseISO} from "date-fns";
+import {FieldWrapper}                   from "../form/FieldWrapper";
+import {formatISO, parseISO}            from "date-fns";
 
 export type OpeningFormProps = {
     opening?: OpeningType;

@@ -1,9 +1,8 @@
-import React                            from "react";
-import {ProductType, WithQuantityPivot} from "../../types/products";
-import {ImageHolder}                    from "../ui/ImageHolder";
+import React                             from "react";
+import {ProductType, WithQuantityPivot}  from "../../types/products";
+import {ImageHolder}                     from "../ui/ImageHolder";
 import {QuantityTypes, QuantityTypeText} from "../ui/QuantityTypeText";
 import {PriceFormatter}                  from "../ui/PriceFormatter";
-import {PivotOrderProduct}               from "../../types/orders";
 
 export type ProductListSummaryProps = {
     products: ProductType<WithQuantityPivot>[];

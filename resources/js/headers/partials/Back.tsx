@@ -1,7 +1,6 @@
 import React         from 'react';
 import {ChevronLeft} from "react-feather";
 import {useHistory}  from "react-router";
-import {Cart}        from "./Cart";
 
 export const Back: React.FC = () => {
     const history = useHistory();

@@ -1,6 +1,4 @@
 import React               from "react";
-import {useDispatch}       from "react-redux";
-import {Dispatch}          from "../../../store";
 import useConfirmMenu      from "../../../hooks/useConfirmMenu";
 import {AdminProductIndex} from "./AdminProductIndex";
 import {ProductType}       from "../../../types/products";

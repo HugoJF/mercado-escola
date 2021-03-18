@@ -4,9 +4,9 @@ import {isEmpty}                    from "../helpers/Functions";
 import {Loading}                    from "../components/ui/Loading";
 import {ProductHeader}              from "./ProductHeader";
 import {useProduct}                 from "../queries/useProduct";
-import {useFavorites}       from "../queries/useFavorites";
-import {useFavoriteCreate}  from "../mutations/useFavoriteCreate";
-import {useFavoriteDestroy} from "../mutations/useFavoriteDestroy";
+import {useFavorites}               from "../queries/useFavorites";
+import {useFavoriteCreate}          from "../mutations/useFavoriteCreate";
+import {useFavoriteDestroy}         from "../mutations/useFavoriteDestroy";
 
 type Params = {
     productId: string;

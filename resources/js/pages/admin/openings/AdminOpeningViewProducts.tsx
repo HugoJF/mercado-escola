@@ -1,18 +1,18 @@
 import React, {useMemo}                   from "react";
 import {OpeningType, OpeningWithProducts} from "../../../types/openings";
 import {HeightTransitioner}               from "../../../components/ui/HeightTransitioner";
-import {Box}                      from "../../../components/ui/Box";
-import {ImageHolder}              from "../../../components/ui/ImageHolder";
-import {Toggle}                   from "../../../components/ui/Toggle";
-import {useDispatch}              from "react-redux";
-import {Dispatch}                 from "../../../store";
-import {Title}                    from "../../../components/ui/Title";
-import {ProductType}              from "../../../types/products";
-import {useOpeningsAddProduct}    from "../../../mutations/useOpeningsAddProduct";
-import {useOpeningsRemoveProduct} from "../../../mutations/useOpeningsRemoveProduct";
-import {useProducts}              from "../../../queries/useProducts";
-import {Loading}                  from "../../../components/ui/Loading";
-import {Empty}                    from "../../../components/ui/Empty";
+import {Box}                              from "../../../components/ui/Box";
+import {ImageHolder}                      from "../../../components/ui/ImageHolder";
+import {Toggle}                           from "../../../components/ui/Toggle";
+import {useDispatch}                      from "react-redux";
+import {Dispatch}                         from "../../../store";
+import {Title}                            from "../../../components/ui/Title";
+import {ProductType}                      from "../../../types/products";
+import {useOpeningsAddProduct}            from "../../../mutations/useOpeningsAddProduct";
+import {useOpeningsRemoveProduct}         from "../../../mutations/useOpeningsRemoveProduct";
+import {useProducts}                      from "../../../queries/useProducts";
+import {Loading}                          from "../../../components/ui/Loading";
+import {Empty}                            from "../../../components/ui/Empty";
 
 export type AdminOpeningViewProductsProps = {
     opening: OpeningType<OpeningWithProducts>;

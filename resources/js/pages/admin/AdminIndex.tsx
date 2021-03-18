@@ -1,7 +1,6 @@
 import React                                              from "react";
 import {Title}                                            from "../../components/ui/Title";
 import {Calendar, ChevronRight, Icon, ShoppingBag, Users} from "react-feather";
-import useRelativePath                                    from "../../hooks/useRelativePath";
 import {PagePadding}                                      from "../../containers/PagePadding";
 import {Box}                                              from "../../components/ui/Box";
 import useNavigation                                      from "../../hooks/useNavigation";

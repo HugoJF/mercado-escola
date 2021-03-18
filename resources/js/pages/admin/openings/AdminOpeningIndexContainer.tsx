@@ -1,6 +1,4 @@
 import React                from "react";
-import {Dispatch}           from "../../../store";
-import {useDispatch}        from "react-redux";
 import useConfirmMenu       from "../../../hooks/useConfirmMenu";
 import {OpeningType}        from "../../../types/openings";
 import {AdminOpeningIndex}  from "./AdminOpeningIndex";

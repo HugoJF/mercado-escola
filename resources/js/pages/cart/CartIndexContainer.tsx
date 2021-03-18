@@ -3,8 +3,6 @@ import useNavigation                from "../../hooks/useNavigation";
 import {useCart}                    from "../../queries/useCart";
 import {Loading}                    from "../../components/ui/Loading";
 import {CartIndex}                  from "./CartIndex";
-import {useMutation}                from "react-query";
-import {api}                        from "../../api";
 import {useCartAddress}             from "../../mutations/useCartAddress";
 import {useOrderStore}              from "../../mutations/useOrderStore";
 
