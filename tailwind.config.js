@@ -1,4 +1,3 @@
-// tailwind.config.js
 module.exports = {
     purge: [
         './resources/js/**/*.tsx',
