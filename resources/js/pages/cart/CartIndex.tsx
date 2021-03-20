@@ -141,7 +141,11 @@ export const CartIndex: React.FC<CartIndexProps>
                 </p>
             </div>
 
-            <Button loading={pending} onClick={onOrderStore}>
+            <Button
+                enabled={products.length > 0}
+                loading={pending}
+                onClick={onOrderStore}
+            >
                 Finalizar pedido
             </Button>
         </div>
