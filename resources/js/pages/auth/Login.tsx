@@ -58,7 +58,7 @@ export const Login: React.FC<object> = () => {
                     <div className="my-8">
                         <Input
                             name="password"
-                            label="Password"
+                            label="Senha"
                             error={errors.password}
                             inputProps={{
                                 ref: register({required: true}),
