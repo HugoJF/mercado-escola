@@ -51,7 +51,7 @@ export const OrderStatusActionMenu: React.FC<ModalProps & OrderStatusActionMenuP
         </div>
 
         {/* Close button */}
-        <div className="px-2">
+        <div className="px-2 grid grid-cols-1">
             <Button loading={loading} onClick={handleClick}>
                 Atualizar
             </Button>
