@@ -1,15 +1,15 @@
 import React, {useState}  from "react";
 import {useDispatch}      from "react-redux";
-import {Dispatch}         from "../../store";
-import {useAuth}          from "../../selectors";
 import {useForm}          from "react-hook-form";
 import {Link}             from "react-router-dom";
-import {Input}            from "../../components/form/Input";
-import {Button}           from "../../components/ui/Button";
-import {Container}        from "../../containers/Container";
-import {Error}            from "../../components/ui/Error";
-import useNavigation      from "../../hooks/useNavigation";
 import {LoginCredentials} from "../../types/auth";
+import useNavigation      from "../../hooks/useNavigation";
+import {Container}        from "../../containers/Container";
+import {Dispatch}         from "../../store";
+import {useAuth}          from "../../selectors";
+import {Button}           from "../../components/ui/Button";
+import {Input}            from "../../components/form/Input";
+import {Error}            from "../../components/ui/Error";
 
 export const Login: React.FC<object> = () => {
     const auth = useAuth();
@@ -31,7 +31,6 @@ export const Login: React.FC<object> = () => {
 
     const failed = auth?.failed;
 
-    // @ts-ignore
     return <Container>
         <div className="mx-auto container min-h-screen flex justify-center items-center">
             <form className="px-4 w-full" onSubmit={handleSubmit(login)}>
@@ -67,7 +66,7 @@ export const Login: React.FC<object> = () => {
                         />
 
                         <div className="flex justify-end mt-4">
-                            <button className="text-right text-orange-500 font-medium">Esqueceu a sua senha?</button>
+                            <Link to="/forgot-password" className="text-right text-secondary-500 font-medium">Esqueceu a sua senha?</Link>
                         </div>
                     </div>
 
@@ -78,7 +77,7 @@ export const Login: React.FC<object> = () => {
                     <div className="mt-8 px-4 text-center">
                         <Link to="/register" className="w-full text-gray-500">
                             Ainda não possui uma conta?
-                            <span className="ml-1 text-orange-400">Registre-se aqui</span>
+                            <span className="ml-1 text-secondary-400">Registre-se aqui</span>
                         </Link>
                     </div>
                 </div>

@@ -4,6 +4,7 @@ import {HomeHeader}             from "../headers/HomeHeader";
 import {DefaultHeader}          from "../headers/DefaultHeader";
 import {ProductHeaderContainer} from "../headers/ProductHeaderContainer";
 import {DefaultHeaderWithCart}  from "../headers/DefaultHeaderWithCart";
+import {SwitchWithTransitions}  from "../components/ui/SwitchWithTransition";
 
 export const HeaderRoutes: React.FC = () => {
     return <Switch>
@@ -12,6 +13,9 @@ export const HeaderRoutes: React.FC = () => {
 
         <Route path="/login" children={null}/>
         <Route path="/register" children={null}/>
+        <Route path="/forgot-password" children={null}/>
+        <Route path="/reset-password/:token?" children={null}/>
+
         <Route path="/carrinho" children={<DefaultHeader/>}/>
         <Route path="/conta" children={<DefaultHeader/>}/>
         <Route path="/admin" children={<DefaultHeader/>}/>

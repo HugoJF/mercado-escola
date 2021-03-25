@@ -7,6 +7,10 @@ export type SoftDeletes = {
     deleted_at: string;
 }
 
+export type Errors<T> = {
+    [key in keyof T]: string[];
+}
+
 export type ResourceResponse<T> = {
     data: T;
 }
