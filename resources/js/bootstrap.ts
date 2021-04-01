@@ -1,21 +1,3 @@
-// window._ = require('lodash');
-
-/**
- * We'll load jQuery and the Bootstrap jQuery plugin which provides support
- * for JavaScript based Bootstrap features such as modals and tabs. This
- * code may be modified to fit the specific needs of your application.
- */
-
-// try {
-//     window.Popper = require('popper.js').default;
-//     window.$ = window.jQuery = require('jquery');
-//
-//     require('bootstrap');
-//     console.log('Popper.JS, jQuery and Bootstrap loaded!');
-// } catch (e) {
-//     console.error(e);
-// }
-
 /**
  * Globally declare axios object
  */
@@ -40,39 +22,30 @@ window.axios.defaults.headers.common['Accept'] = 'application/json';
 window.axios.defaults.withCredentials = true;
 window.axios.defaults.maxRedirects = 0;
 
-/**
- * Echo exposes an expressive API for subscribing to channels and listening
- * for events that are broadcast by Laravel. Echo and event broadcasting
- * allows your team to easily build robust real-time web applications.
- */
-
-// import Echo from 'laravel-echo';
-//
-// window.Pusher = require('pusher-js');
-//
-// window.Echo = new Echo({
-//     broadcaster: 'pusher',
-//     key: process.env.MIX_PUSHER_APP_KEY,
-//     cluster: process.env.MIX_PUSHER_APP_CLUSTER,
-//     encrypted: true
-// });
-
 declare global {
     interface Window {
         updateViewportProperty: () => () => void;
     }
 }
 
-window.updateViewportProperty = function() {
+/**
+ * postcss-viewport-height-correction variable updater
+ */
+window.updateViewportProperty = function () {
     let prevClientHeight: number;
+
     function handleResize() {
         const clientHeight = document.documentElement.clientHeight;
-        if (clientHeight === prevClientHeight) return;
-        requestAnimationFrame(function updateViewportHeight(){
+        if (clientHeight === prevClientHeight) {
+            return;
+        }
+
+        requestAnimationFrame(function updateViewportHeight() {
             document.documentElement.style.setProperty('--vh', (clientHeight * 0.01) + 'px');
             prevClientHeight = clientHeight;
         });
     }
+
     handleResize();
     return handleResize;
 };
