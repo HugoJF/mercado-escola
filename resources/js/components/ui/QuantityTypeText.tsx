@@ -1,4 +1,4 @@
-import React               from "react";
+import React from "react";
 import * as QuantityConfig from "../../configs/ProductQuantityConfig";
 
 export type QuantityTypes = keyof typeof QuantityConfig;

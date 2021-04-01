@@ -1,4 +1,4 @@
-import React            from "react";
+import React from "react";
 import {OrderStateEnum} from "../../types/orders";
 
 export type OrderStateTextProps = {

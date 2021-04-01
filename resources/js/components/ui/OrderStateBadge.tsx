@@ -1,7 +1,7 @@
-import React                from "react";
-import {OrderStateEnum}     from "../../types/orders";
+import React from "react";
+import {OrderStateEnum} from "../../types/orders";
 import {Badge, BadgeColors} from "./Badge";
-import {OrderStateText}     from "./OrderStateText";
+import {OrderStateText} from "./OrderStateText";
 
 export type OrderStateTextProps = {
     state: OrderStateEnum;

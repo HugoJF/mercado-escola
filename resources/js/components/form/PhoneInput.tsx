@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import InputMask, {Props}           from "react-input-mask";
+import InputMask, {Props} from "react-input-mask";
 
 type KeysToOmit = keyof { value: any, onChange: any };
 type NewProps = {

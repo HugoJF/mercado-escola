@@ -1,1 +1,1 @@
-declare type Id = number|string;
+declare type Id = number | string;

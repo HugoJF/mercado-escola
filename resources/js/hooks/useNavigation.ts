@@ -1,5 +1,5 @@
 import useRelativePath from "./useRelativePath";
-import {useHistory}    from "react-router-dom";
+import {useHistory} from "react-router-dom";
 
 export default function useNavigation() {
     const relative = useRelativePath();

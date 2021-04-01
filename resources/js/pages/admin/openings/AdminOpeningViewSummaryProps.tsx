@@ -1,7 +1,7 @@
-import React                   from "react";
+import React from "react";
 import {Calendar, ShoppingBag} from "react-feather";
-import {OpeningType}           from "../../../types/openings";
-import {Date}                  from "../../../components/ui/Date";
+import {OpeningType} from "../../../types/openings";
+import {Date} from "../../../components/ui/Date";
 
 export type AdminOpeningViewSummaryProps = {
     opening: OpeningType;

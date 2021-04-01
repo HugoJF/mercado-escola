@@ -1,12 +1,12 @@
-import React         from "react";
-import {Button}      from "../../components/ui/Button";
-import {Approve}     from "../../svg/approve";
-import {Link}        from "react-router-dom";
-import {OrderType}   from "../../types/orders";
+import React from "react";
+import {Button} from "../../components/ui/Button";
+import {Approve} from "../../svg/approve";
+import {Link} from "react-router-dom";
+import {OrderType} from "../../types/orders";
 import {OpeningType} from "../../types/openings";
 import {AddressType} from "../../types/addresses";
 import {PagePadding} from "../../containers/PagePadding";
-import {Date}        from "../../components/ui/Date";
+import {Date} from "../../components/ui/Date";
 
 export type OrderDoneProps = {
     order: OrderType;
@@ -35,7 +35,8 @@ export const OrderDone: React.FC<OrderDoneProps> = ({order, opening, address}) =
                         ?
                         <>Seu item será entregue no dia </>
                         :
-                        <>Seus <span className="text-gray-700 font-medium ">{order.products.length}</span> produtos serão entregues no dia </>
+                        <>Seus <span className="text-gray-700 font-medium ">{order.products.length}</span> produtos
+                            serão entregues no dia </>
                     }
 
                     <span className="mr-1 text-secondary-500 font-medium">

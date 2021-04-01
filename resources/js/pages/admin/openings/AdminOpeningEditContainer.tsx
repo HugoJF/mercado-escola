@@ -1,10 +1,10 @@
-import React               from "react";
-import {useParams}         from "react-router-dom";
+import React from "react";
+import {useParams} from "react-router-dom";
 import {OpeningProperties} from "../../../types/openings";
-import useNavigation       from "../../../hooks/useNavigation";
-import {Loading}           from "../../../components/ui/Loading";
-import {AdminOpeningEdit}  from "./AdminOpeningEdit";
-import {useOpening}        from "../../../queries/useOpening";
+import useNavigation from "../../../hooks/useNavigation";
+import {Loading} from "../../../components/ui/Loading";
+import {AdminOpeningEdit} from "./AdminOpeningEdit";
+import {useOpening} from "../../../queries/useOpening";
 import {useOpeningsUpdate} from "../../../mutations/useOpeningsUpdate";
 
 type Params = {

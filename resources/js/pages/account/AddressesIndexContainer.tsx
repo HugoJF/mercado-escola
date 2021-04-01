@@ -1,9 +1,9 @@
-import React               from "react";
-import useConfirmMenu      from "../../hooks/useConfirmMenu";
-import {AddressType}       from "../../types/addresses";
-import {Loading}           from "../../components/ui/Loading";
-import {AddressesIndex}    from "./AddressesIndex";
-import {useAddresses}      from "../../queries/useAddresses";
+import React from "react";
+import useConfirmMenu from "../../hooks/useConfirmMenu";
+import {AddressType} from "../../types/addresses";
+import {Loading} from "../../components/ui/Loading";
+import {AddressesIndex} from "./AddressesIndex";
+import {useAddresses} from "../../queries/useAddresses";
 import {useAddressDestroy} from "../../mutations/useAddressDestroy";
 
 export const AddressesIndexContainer: React.FC = () => {

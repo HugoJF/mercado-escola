@@ -1,9 +1,9 @@
-import React, {useEffect, useState}     from "react";
-import {Loader}                         from "react-feather";
+import React, {useEffect, useState} from "react";
+import {Loader} from "react-feather";
 import {CSSTransition, TransitionGroup} from "react-transition-group";
-import {useDispatch}                    from "react-redux";
-import useAsyncEffect                   from "../../hooks/useAsyncEffect";
-import {load}                           from "../../google";
+import {useDispatch} from "react-redux";
+import useAsyncEffect from "../../hooks/useAsyncEffect";
+import {load} from "../../google";
 
 export const Splash: React.FC = ({children}) => {
     const dispatch = useDispatch();

@@ -1,7 +1,7 @@
-import React          from 'react';
-import {FieldError}   from "react-hook-form";
+import React from 'react';
+import {FieldError} from "react-hook-form";
 import {FieldWrapper} from "./FieldWrapper";
-import clsx           from 'clsx';
+import clsx from 'clsx';
 
 export type InputProps = {
     name: string;
@@ -22,7 +22,6 @@ export const Input: React.FC<InputProps> = ({name, label, disabled = false, inpu
                     'bg-gray-300 text-gray-500 rounded': disabled,
                     'bg-transparent text-black': !disabled,
                 },
-
             )}
             id={name}
             name={name}

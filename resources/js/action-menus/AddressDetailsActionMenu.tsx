@@ -1,14 +1,14 @@
 import {Modal, ModalProps} from "../components/ui/Modal";
-import React               from "react";
-import {Skeleton}          from "../components/ui/Skeleton";
-import {Button}            from "../components/ui/Button";
+import React from "react";
+import {Skeleton} from "../components/ui/Skeleton";
+import {Button} from "../components/ui/Button";
 
 export type getSuggestionItemPropsActionMenuProps = {
     address: string;
     onNumber: (number: number) => void;
     onComplement: (complement: string) => void;
     number: number | null;
-    complement: string|null;
+    complement: string | null;
 }
 
 export const AddressDetailsActionMenu: React.FC<ModalProps & getSuggestionItemPropsActionMenuProps> =

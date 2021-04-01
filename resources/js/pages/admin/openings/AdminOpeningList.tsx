@@ -1,5 +1,5 @@
-import React                  from "react";
-import {OpeningType}          from "../../../types/openings";
+import React from "react";
+import {OpeningType} from "../../../types/openings";
 import {AdminOpeningListItem} from "./AdminOpeningListItem";
 
 export type AdminOpeningListProps = {

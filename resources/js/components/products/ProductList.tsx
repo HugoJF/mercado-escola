@@ -1,6 +1,6 @@
-import React         from "react";
+import React from "react";
 import {ProductType} from "../../types/products";
-import {Product}     from "./Product";
+import {Product} from "./Product";
 
 export type ProductListProps = {
     products: ProductType[];

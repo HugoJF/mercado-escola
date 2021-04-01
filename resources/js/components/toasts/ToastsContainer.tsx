@@ -1,6 +1,6 @@
-import React                            from 'react';
-import {Toast}                          from "./Toast";
-import {useToasts}                      from "../../selectors";
+import React from 'react';
+import {Toast} from "./Toast";
+import {useToasts} from "../../selectors";
 import {CSSTransition, TransitionGroup} from "react-transition-group";
 
 export const ToastsContainer = () => {

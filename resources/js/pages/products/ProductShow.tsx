@@ -1,16 +1,16 @@
-import React, {useState}           from 'react';
-import {Button}                    from "../../components/ui/Button";
-import {PriceFormatter}            from "../../components/ui/PriceFormatter";
-import * as ProductQuantityConfig  from "../../configs/ProductQuantityConfig";
-import {ImageHolder}               from "../../components/ui/ImageHolder";
-import {Link}                      from "react-router-dom";
-import {PagePadding}               from "../../containers/PagePadding";
-import {ProductType}               from "../../types/products";
-import {ProductQuantityCost}       from "../../components/ui/ProductQuantityCost";
+import React, {useState} from 'react';
+import {Button} from "../../components/ui/Button";
+import {PriceFormatter} from "../../components/ui/PriceFormatter";
+import * as ProductQuantityConfig from "../../configs/ProductQuantityConfig";
+import {ImageHolder} from "../../components/ui/ImageHolder";
+import {Link} from "react-router-dom";
+import {PagePadding} from "../../containers/PagePadding";
+import {ProductType} from "../../types/products";
+import {ProductQuantityCost} from "../../components/ui/ProductQuantityCost";
 import {ProductQuantityActionMenu} from "../../action-menus/ProductQuantityActionMenu";
-import {Trash}                     from "react-feather";
-import useConfirmMenu              from "../../hooks/useConfirmMenu";
-import useNavigation               from "../../hooks/useNavigation";
+import {Trash} from "react-feather";
+import useConfirmMenu from "../../hooks/useConfirmMenu";
+import useNavigation from "../../hooks/useNavigation";
 
 export type ProductShowProps = {
     product: ProductType;

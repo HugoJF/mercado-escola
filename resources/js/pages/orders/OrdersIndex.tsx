@@ -1,12 +1,12 @@
-import React         from "react";
-import {Title}       from "../../components/ui/Title";
+import React from "react";
+import {Title} from "../../components/ui/Title";
 import {PagePadding} from "../../containers/PagePadding";
-import {Empty}       from "../../components/ui/Empty";
-import {isEmpty}     from "../../helpers/Functions";
-import {OrderType}   from "../../types/orders";
-import {OrderList}   from "./OrderList";
+import {Empty} from "../../components/ui/Empty";
+import {isEmpty} from "../../helpers/Functions";
+import {OrderType} from "../../types/orders";
+import {OrderList} from "./OrderList";
 import usePagination from "../../hooks/usePagination";
-import {Pagination}  from "../../components/ui/Pagination";
+import {Pagination} from "../../components/ui/Pagination";
 
 export type OrdersIndexProps = {
     orders: OrderType[];

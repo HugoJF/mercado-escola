@@ -1,21 +1,21 @@
 import React, {ReactNode, useEffect, useState} from "react";
-import {Redirect, Route, useLocation}          from "react-router-dom";
-import {AnimationBox}                          from "../../../components/ui/AnimationBox";
-import clsx                                    from 'clsx';
-import {MoreVertical}                          from "react-feather";
-import {SwitchWithTransitions}                 from "../../../components/ui/SwitchWithTransition";
-import {PagePadding}                           from "../../../containers/PagePadding";
-import {AdminOpeningViewProducts}              from "./AdminOpeningViewProducts";
-import {AdminOpeningViewOrders}                from "./AdminOpeningViewOrders";
-import {AdminOpeningViewSummary}               from "./AdminOpeningViewSummaryProps";
-import {OpeningBadge}                          from "../../../components/openings/OpeningBadge";
-import {OpeningType, OpeningWithProducts}      from "../../../types/openings";
-import useNavigation                           from "../../../hooks/useNavigation";
+import {Redirect, Route, useLocation} from "react-router-dom";
+import {AnimationBox} from "../../../components/ui/AnimationBox";
+import clsx from 'clsx';
+import {MoreVertical} from "react-feather";
+import {SwitchWithTransitions} from "../../../components/ui/SwitchWithTransition";
+import {PagePadding} from "../../../containers/PagePadding";
+import {AdminOpeningViewProducts} from "./AdminOpeningViewProducts";
+import {AdminOpeningViewOrders} from "./AdminOpeningViewOrders";
+import {AdminOpeningViewSummary} from "./AdminOpeningViewSummaryProps";
+import {OpeningBadge} from "../../../components/openings/OpeningBadge";
+import {OpeningType, OpeningWithProducts} from "../../../types/openings";
+import useNavigation from "../../../hooks/useNavigation";
 
 type AdminOpeningTabProps = {
     onClick: () => void;
     selected: boolean;
-    target: ((node: ReactNode) => void)|null;
+    target: ((node: ReactNode) => void) | null;
 
 }
 

@@ -1,13 +1,13 @@
-import React         from "react";
-import {Title}       from "../../components/ui/Title";
-import {Plus}        from "react-feather";
+import React from "react";
+import {Title} from "../../components/ui/Title";
+import {Plus} from "react-feather";
 import {AddressList} from "../../components/addresses/AddressList";
-import {FlatButton}  from "../../components/ui/FlatButton";
+import {FlatButton} from "../../components/ui/FlatButton";
 import {PagePadding} from "../../containers/PagePadding";
 import {AddressType} from "../../types/addresses";
-import {Empty}       from "../../components/ui/Empty";
+import {Empty} from "../../components/ui/Empty";
 import useNavigation from "../../hooks/useNavigation";
-import {isEmpty}     from "../../helpers/Functions";
+import {isEmpty} from "../../helpers/Functions";
 
 export type AddressesIndexProps = {
     addresses: AddressType[];

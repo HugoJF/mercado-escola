@@ -1,7 +1,7 @@
-import {createModel}                                      from "@rematch/core";
-import {RootModel}                                        from "./index";
+import {createModel} from "@rematch/core";
+import {RootModel} from "./index";
 import {AuthState, LoginCredentials, RegisterCredentials} from "../types/auth";
-import {UserProperties}                                   from "../types/users";
+import {UserProperties} from "../types/users";
 
 export type PasswordResetParameters = {
     email: string,

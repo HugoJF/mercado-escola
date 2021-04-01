@@ -1,7 +1,7 @@
 import React, {useEffect} from 'react';
-import {Link}             from "react-router-dom";
-import useNavigation      from "../../hooks/useNavigation";
-import {useAddresses}     from "../../queries/useAddresses";
+import {Link} from "react-router-dom";
+import useNavigation from "../../hooks/useNavigation";
+import {useAddresses} from "../../queries/useAddresses";
 
 export const OnBoarding2: React.FC = () => {
     const {go, bindGo} = useNavigation();
@@ -24,7 +24,10 @@ export const OnBoarding2: React.FC = () => {
             Para entrega de pedidos, precisamos de um endereço para as entregas
         </h3>
 
-        <button onClick={bindGo('/conta/endereco/novo')} className="block w-full my-4 py-4 text-center text-xl text-white font-medium border-2 border-white rounded-lg">
+        <button
+            onClick={bindGo('/conta/endereco/novo')}
+            className="block w-full my-4 py-4 text-center text-xl text-white font-medium border-2 border-white rounded-lg"
+        >
             <span>Adicionar</span>
         </button>
 

@@ -1,9 +1,9 @@
-import React                 from "react";
-import {Link}                from "react-router-dom";
-import {PriceFormatter}      from "../ui/PriceFormatter";
-import {ProductType}         from "../../types/products";
-import {ImageHolder}         from "../ui/ImageHolder";
-import {PlusCircle}          from "react-feather";
+import React from "react";
+import {Link} from "react-router-dom";
+import {PriceFormatter} from "../ui/PriceFormatter";
+import {ProductType} from "../../types/products";
+import {ImageHolder} from "../ui/ImageHolder";
+import {PlusCircle} from "react-feather";
 import {ProductQuantityCost} from "../ui/ProductQuantityCost";
 
 export type ProductProps = {
@@ -12,7 +12,7 @@ export type ProductProps = {
 }
 
 export const Product: React.FC<ProductProps> = ({product, url}) => {
-    const {name, quantity_cost, quantity_type} = product;
+    const {name} = product;
 
     return <Link
         to={url}

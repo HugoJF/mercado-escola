@@ -1,11 +1,11 @@
-import React                      from "react";
-import {OrderType}                from "../../types/orders";
+import React from "react";
+import {OrderType} from "../../types/orders";
 import {formatDistance, parseISO} from "date-fns";
-import {Skeleton}                 from "../ui/Skeleton";
-import {OrderStateBadge}          from "../ui/OrderStateBadge";
-import {PriceFormatter}           from "../ui/PriceFormatter";
-import {ptBR}                     from "date-fns/locale";
-import {Box}                      from "../ui/Box";
+import {Skeleton} from "../ui/Skeleton";
+import {OrderStateBadge} from "../ui/OrderStateBadge";
+import {PriceFormatter} from "../ui/PriceFormatter";
+import {ptBR} from "date-fns/locale";
+import {Box} from "../ui/Box";
 
 export type OrderListItemProps = {
     order: OrderType;

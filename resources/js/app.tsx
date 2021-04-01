@@ -1,17 +1,17 @@
 import "./bootstrap";
-import React                              from "react";
-import ReactDOM                           from "react-dom";
-import * as Sentry                        from "@sentry/react";
-import {store}                            from "./store";
-import {BrowserRouter as Router}          from "react-router-dom";
-import {Integrations}                     from "@sentry/tracing";
-import {Provider}                         from "react-redux";
-import {hot, setConfig}                   from "react-hot-loader";
-import {MuiPickersUtilsProvider}          from '@material-ui/pickers';
-import DateFnsUtils                       from '@date-io/date-fns';
-import {ptBR}                             from "date-fns/locale";
-import {RootRoutes}                       from "./routes/RootRoutes";
-import {ReactQueryDevtools}               from 'react-query/devtools'
+import React from "react";
+import ReactDOM from "react-dom";
+import * as Sentry from "@sentry/react";
+import {store} from "./store";
+import {BrowserRouter as Router} from "react-router-dom";
+import {Integrations} from "@sentry/tracing";
+import {Provider} from "react-redux";
+import {hot, setConfig} from "react-hot-loader";
+import {MuiPickersUtilsProvider} from '@material-ui/pickers';
+import DateFnsUtils from '@date-io/date-fns';
+import {ptBR} from "date-fns/locale";
+import {RootRoutes} from "./routes/RootRoutes";
+import {ReactQueryDevtools} from 'react-query/devtools'
 import {QueryClient, QueryClientProvider} from "react-query";
 
 const isProduction = process.env.MIX_APP_ENV === 'production';
@@ -58,9 +58,9 @@ ReactDOM.render(
 
 if ('serviceWorker' in navigator) {
     navigator.serviceWorker
-        .register('service-worker.js')
-        .then(() => console.log('Service Worker: Registered'))
-        .catch((e) => console.log('Service Worker: Failed to register', e));
+             .register('service-worker.js')
+             .then(() => console.log('Service Worker: Registered'))
+             .catch((e) => console.log('Service Worker: Failed to register', e));
 } else {
     console.warn('Service work is not available')
 }

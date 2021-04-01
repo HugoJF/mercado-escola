@@ -1,10 +1,9 @@
-import React                    from 'react';
-import {Route, Switch}          from "react-router";
-import {HomeHeader}             from "../headers/HomeHeader";
-import {DefaultHeader}          from "../headers/DefaultHeader";
+import React from 'react';
+import {Route, Switch} from "react-router";
+import {HomeHeader} from "../headers/HomeHeader";
+import {DefaultHeader} from "../headers/DefaultHeader";
 import {ProductHeaderContainer} from "../headers/ProductHeaderContainer";
-import {DefaultHeaderWithCart}  from "../headers/DefaultHeaderWithCart";
-import {SwitchWithTransitions}  from "../components/ui/SwitchWithTransition";
+import {DefaultHeaderWithCart} from "../headers/DefaultHeaderWithCart";
 
 export const HeaderRoutes: React.FC = () => {
     return <Switch>

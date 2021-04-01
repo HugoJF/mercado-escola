@@ -1,4 +1,4 @@
-export function isEmpty(object: Record<string, unknown>|null|undefined|any[]) {
+export function isEmpty(object: Record<string, unknown> | null | undefined | any[]) {
     if (!object) {
         return true;
     }

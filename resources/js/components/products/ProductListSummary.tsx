@@ -1,12 +1,12 @@
-import React                             from "react";
-import {ProductType, WithQuantityPivot}  from "../../types/products";
-import {ImageHolder}                     from "../ui/ImageHolder";
+import React from "react";
+import {ProductType, WithQuantityPivot} from "../../types/products";
+import {ImageHolder} from "../ui/ImageHolder";
 import {QuantityTypes, QuantityTypeText} from "../ui/QuantityTypeText";
-import {PriceFormatter}                  from "../ui/PriceFormatter";
+import {PriceFormatter} from "../ui/PriceFormatter";
 
 export type ProductListSummaryProps = {
     products: ProductType<WithQuantityPivot>[];
-    children?: (product: ProductType, amount: number) => string|React.ReactNode;
+    children?: (product: ProductType, amount: number) => string | React.ReactNode;
 }
 
 export const ProductListSummary: React.FC<ProductListSummaryProps> = ({products, children}) => {
@@ -30,7 +30,10 @@ export const ProductListSummary: React.FC<ProductListSummaryProps> = ({products,
                                 />
                             </p>
                             <p className="mt-2 text-secondary-500 font-medium">
-                                <PriceFormatter cents price={product.pivot.quantity * product.pivot.quantity_cost}/>
+                                <PriceFormatter
+                                    cents
+                                    price={product.pivot.quantity * product.pivot.quantity_cost * product.pivot.quantity_cost}
+                                />
                             </p>
                         </div>
                         {children && <div className="flex items-center space-x-4">

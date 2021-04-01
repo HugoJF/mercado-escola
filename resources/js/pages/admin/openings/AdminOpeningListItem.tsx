@@ -1,13 +1,13 @@
 import {HeightTransitioner} from "../../../components/ui/HeightTransitioner";
-import {Calendar, Trash}    from "react-feather";
-import {Link}               from "react-router-dom";
-import React                from "react";
-import {OpeningType}        from "../../../types/openings";
-import useRelativePath      from "../../../hooks/useRelativePath";
-import {Box}                from "../../../components/ui/Box";
+import {Calendar, Trash} from "react-feather";
+import {Link} from "react-router-dom";
+import React from "react";
+import {OpeningType} from "../../../types/openings";
+import useRelativePath from "../../../hooks/useRelativePath";
+import {Box} from "../../../components/ui/Box";
 import {RotatingArrowRight} from "../../../components/ui/RotatingArrowRight";
-import {OpeningBadge}       from "../../../components/openings/OpeningBadge";
-import {Date}               from "../../../components/ui/Date";
+import {OpeningBadge} from "../../../components/openings/OpeningBadge";
+import {Date} from "../../../components/ui/Date";
 
 export type AdminOpeningListItemProps = {
     opening: OpeningType;

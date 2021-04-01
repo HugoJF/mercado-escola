@@ -1,18 +1,18 @@
-import React, {useMemo}                   from "react";
+import React, {useMemo} from "react";
 import {OpeningType, OpeningWithProducts} from "../../../types/openings";
-import {HeightTransitioner}               from "../../../components/ui/HeightTransitioner";
-import {Box}                              from "../../../components/ui/Box";
-import {ImageHolder}                      from "../../../components/ui/ImageHolder";
-import {Toggle}                           from "../../../components/ui/Toggle";
-import {useDispatch}                      from "react-redux";
-import {Dispatch}                         from "../../../store";
-import {Title}                            from "../../../components/ui/Title";
-import {ProductType}                      from "../../../types/products";
-import {useOpeningsAddProduct}            from "../../../mutations/useOpeningsAddProduct";
-import {useOpeningsRemoveProduct}         from "../../../mutations/useOpeningsRemoveProduct";
-import {useProducts}                      from "../../../queries/useProducts";
-import {Loading}                          from "../../../components/ui/Loading";
-import {Empty}                            from "../../../components/ui/Empty";
+import {HeightTransitioner} from "../../../components/ui/HeightTransitioner";
+import {Box} from "../../../components/ui/Box";
+import {ImageHolder} from "../../../components/ui/ImageHolder";
+import {Toggle} from "../../../components/ui/Toggle";
+import {useDispatch} from "react-redux";
+import {Dispatch} from "../../../store";
+import {Title} from "../../../components/ui/Title";
+import {ProductType} from "../../../types/products";
+import {useOpeningsAddProduct} from "../../../mutations/useOpeningsAddProduct";
+import {useOpeningsRemoveProduct} from "../../../mutations/useOpeningsRemoveProduct";
+import {useProducts} from "../../../queries/useProducts";
+import {Loading} from "../../../components/ui/Loading";
+import {Empty} from "../../../components/ui/Empty";
 
 export type AdminOpeningViewProductsProps = {
     opening: OpeningType<OpeningWithProducts>;
@@ -45,7 +45,8 @@ export const AdminOpeningViewProducts: React.FC<AdminOpeningViewProductsProps> =
     return <div className="px-4 py-4 space-y-6">
         <div className="space-y-3">
             <Title>Produtos habilitados na abertura</Title>
-            <Title sub>Os produtos selecionados abaixo estarão disponíveis para todos os clientes adicionarem em seus pedidos.</Title>
+            <Title sub>Os produtos selecionados abaixo estarão disponíveis para todos os clientes adicionarem em seus
+                pedidos.</Title>
         </div>
 
         <div className="divide-y divide-gray-200">

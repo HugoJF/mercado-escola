@@ -1,5 +1,5 @@
 import {useEffect} from "react";
-import useLoading  from "./useLoading";
+import useLoading from "./useLoading";
 
 export default function useLoadEffect(
     effect: () => Promise<void>,

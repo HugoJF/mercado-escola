@@ -1,11 +1,11 @@
-import React         from "react";
-import {Title}       from "../../components/ui/Title";
-import {Link}        from "react-router-dom";
+import React from "react";
+import {Title} from "../../components/ui/Title";
+import {Link} from "react-router-dom";
 import {ProductList} from "../../components/products/ProductList";
-import {Empty}       from "../../components/ui/Empty";
+import {Empty} from "../../components/ui/Empty";
 import {PagePadding} from "../../containers/PagePadding";
 import {ProductType} from "../../types/products";
-import {isEmpty}     from "../../helpers/Functions";
+import {isEmpty} from "../../helpers/Functions";
 
 export type FavoritesIndexProps = {
     favorites: ProductType[];

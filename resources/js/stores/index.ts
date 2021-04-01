@@ -1,5 +1,5 @@
 import {Models} from "@rematch/core";
-import {auth}   from "./auth";
+import {auth} from "./auth";
 import {toasts} from "./toasts";
 
 export interface RootModel extends Models<RootModel> {

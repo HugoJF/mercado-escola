@@ -1,6 +1,6 @@
-import React, {useMemo}        from "react";
+import React, {useMemo} from "react";
 import {format as f, parseISO} from "date-fns";
-import {ptBR}                  from "date-fns/locale";
+import {ptBR} from "date-fns/locale";
 
 type DateProps = {
     input: string;

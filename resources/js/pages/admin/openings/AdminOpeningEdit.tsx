@@ -1,8 +1,8 @@
-import React                            from "react";
-import {Title}                          from "../../../components/ui/Title";
+import React from "react";
+import {Title} from "../../../components/ui/Title";
 import {OpeningProperties, OpeningType} from "../../../types/openings";
-import {OpeningForm}                    from "../../../components/openings/OpeningForm";
-import {PagePadding}                    from "../../../containers/PagePadding";
+import {OpeningForm} from "../../../components/openings/OpeningForm";
+import {PagePadding} from "../../../containers/PagePadding";
 
 export type AdminOpeningEditProps = {
     opening: OpeningType;

@@ -5,7 +5,7 @@ const loader = new Loader(process.env.MIX_GOOGLE_MAPS_KEY, {
     language: 'pt-BR',
 });
 
-let instance: google|null = null;
+let instance: google | null = null;
 
 export const load = async () => {
     instance = await loader.load();

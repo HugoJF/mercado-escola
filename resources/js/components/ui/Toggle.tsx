@@ -1,4 +1,4 @@
-import React          from "react";
+import React from "react";
 import {AnimationBox} from "./AnimationBox";
 
 type ButtonColors = 'default' | 'primary' | 'secondary' | 'danger';

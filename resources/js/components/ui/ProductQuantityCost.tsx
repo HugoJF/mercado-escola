@@ -1,8 +1,8 @@
-import React               from "react";
+import React from "react";
 import * as QuantityConfig from "../../configs/ProductQuantityConfig";
-import * as DisplayConfig  from "../../configs/ProductDisplayConfig";
-import {ProductType}       from "../../types/products";
-import {rawTypeText}       from "./QuantityTypeText";
+import * as DisplayConfig from "../../configs/ProductDisplayConfig";
+import {ProductType} from "../../types/products";
+import {rawTypeText} from "./QuantityTypeText";
 
 export type QuantityTypes = keyof typeof QuantityConfig;
 

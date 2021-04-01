@@ -1,6 +1,6 @@
 import {useLocation} from "react-router-dom";
-import queryString   from 'query-string';
-import {useMemo}     from "react";
+import queryString from 'query-string';
+import {useMemo} from "react";
 import useNavigation from "./useNavigation";
 
 export default function usePagination() {

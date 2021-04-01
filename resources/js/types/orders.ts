@@ -1,7 +1,7 @@
-import {ProductType}                    from "./products";
+import {ProductType} from "./products";
 import {Pivot, SoftDeletes, Timestamps} from "../types";
-import {AddressType}                    from "./addresses";
-import {OpeningType}                    from "./openings";
+import {AddressType} from "./addresses";
+import {OpeningType} from "./openings";
 
 export type OrderWithAddress = { address?: AddressType };
 export type OrderWithOpening = { opening: OpeningType };

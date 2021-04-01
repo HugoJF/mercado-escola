@@ -1,5 +1,5 @@
 import React from "react";
-import clsx  from 'clsx';
+import clsx from 'clsx';
 
 export type BadgeColors = 'primary' | 'secondary' | 'warning' | 'info' | 'danger' | 'default';
 export type BadgeSizes = 'small' | 'normal';

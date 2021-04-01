@@ -1,5 +1,5 @@
-import {bxios}                    from "../bxios";
-import {ResourceResponse}         from "../types";
+import {bxios} from "../bxios";
+import {ResourceResponse} from "../types";
 import {UserProperties, UserType} from "../types/users";
 
 export const users = {

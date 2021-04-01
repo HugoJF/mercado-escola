@@ -1,6 +1,6 @@
 import {Map, Marker, TileLayer} from "react-leaflet";
-import {LatLngExpression}       from "leaflet";
-import React, {useState}        from "react";
+import {LatLngExpression} from "leaflet";
+import React, {useState} from "react";
 
 export type MapWithPingProps = {
     center: [number, number];
@@ -13,8 +13,12 @@ export const MapWithPing: React.FC<MapWithPingProps> = ({center}) => {
 
     return <Map
         onViewportChange={(e) => {
-            if (e.zoom) setZoom(e.zoom);
-            if (e.center) setCurrentCenter(e.center)
+            if (e.zoom) {
+                setZoom(e.zoom);
+            }
+            if (e.center) {
+                setCurrentCenter(e.center)
+            }
         }}
         zoom={zoom}
         center={currentCenter as LatLngExpression}

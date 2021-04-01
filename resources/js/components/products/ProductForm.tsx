@@ -1,17 +1,17 @@
-import React, {useEffect, useState}     from "react";
-import {useForm}                        from "react-hook-form";
-import * as QuantityConfig              from "../../configs/ProductQuantityConfig";
+import React, {useEffect, useState} from "react";
+import {useForm} from "react-hook-form";
+import * as QuantityConfig from "../../configs/ProductQuantityConfig";
 import {ProductProperties, ProductType} from "../../types/products";
-import {Input}                          from "../form/Input";
-import {Textarea}                       from "../form/Textarea";
-import {Select}                         from "../form/Select";
-import {Button}                         from "../ui/Button";
-import {useDropzone}                    from "react-dropzone";
-import {FieldWrapper}                   from "../form/FieldWrapper";
-import useConfirmMenu                   from "../../hooks/useConfirmMenu";
-import {QuantityTypes, rawTypeText}     from "../ui/QuantityTypeText";
-import {useProductDestroyMedia}         from "../../mutations/useProductDestroyMedia";
-import useLoading                       from "../../hooks/useLoading";
+import {Input} from "../form/Input";
+import {Textarea} from "../form/Textarea";
+import {Select} from "../form/Select";
+import {Button} from "../ui/Button";
+import {useDropzone} from "react-dropzone";
+import {FieldWrapper} from "../form/FieldWrapper";
+import useConfirmMenu from "../../hooks/useConfirmMenu";
+import {QuantityTypes, rawTypeText} from "../ui/QuantityTypeText";
+import {useProductDestroyMedia} from "../../mutations/useProductDestroyMedia";
+import useLoading from "../../hooks/useLoading";
 
 export type ProductFormProps = {
     product?: ProductType;
@@ -88,7 +88,10 @@ export const ProductForm: React.FC<ProductFormProps>
             return;
         }
 
-        const remove = await confirm({title: 'Deseja remover essa imagem?', action: 'Remover'});
+        const remove = await confirm({
+            title: 'Deseja remover essa imagem?',
+            action: 'Remover',
+        });
 
         if (remove) {
             productDestroyMedia.mutate({
@@ -178,7 +181,8 @@ export const ProductForm: React.FC<ProductFormProps>
                     inputProps={{
                         ref: register({required: 'Digite o nome do produto'}),
                         placeholder: "Digite o nome do produto...",
-                    }}/>
+                    }}
+                />
             </div>
 
             {/* Description */}

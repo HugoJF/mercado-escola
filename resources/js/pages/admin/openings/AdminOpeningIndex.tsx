@@ -1,13 +1,13 @@
-import React              from "react";
-import {FlatButton}       from "../../../components/ui/FlatButton";
-import {Plus}             from "react-feather";
-import {OpeningType}      from "../../../types/openings";
-import {Title}            from "../../../components/ui/Title";
-import {PagePadding}      from "../../../containers/PagePadding";
-import useNavigation      from "../../../hooks/useNavigation";
+import React from "react";
+import {FlatButton} from "../../../components/ui/FlatButton";
+import {Plus} from "react-feather";
+import {OpeningType} from "../../../types/openings";
+import {Title} from "../../../components/ui/Title";
+import {PagePadding} from "../../../containers/PagePadding";
+import useNavigation from "../../../hooks/useNavigation";
 import {AdminOpeningList} from "./AdminOpeningList";
-import {isEmpty}          from "../../../helpers/Functions";
-import {Empty}            from "../../../components/ui/Empty";
+import {isEmpty} from "../../../helpers/Functions";
+import {Empty} from "../../../components/ui/Empty";
 
 export type AdminOpeningIndexProps = {
     openings: OpeningType[];

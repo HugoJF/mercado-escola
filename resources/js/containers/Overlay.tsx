@@ -1,6 +1,6 @@
-import React             from "react";
-import {HeaderRoutes}    from "../routes/HeaderRoutes";
-import {MenuRoutes}      from "../routes/MenuRoutes";
+import React from "react";
+import {HeaderRoutes} from "../routes/HeaderRoutes";
+import {MenuRoutes} from "../routes/MenuRoutes";
 import {ToastsContainer} from "../components/toasts/ToastsContainer";
 
 

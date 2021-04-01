@@ -1,14 +1,14 @@
 import React, {useEffect, useState} from 'react';
-import {useParams}                  from "react-router";
-import {useDispatch}                from "react-redux";
-import {Dispatch}                   from "../../store";
-import {ProductShow}                from "./ProductShow";
-import {useProduct}                 from "../../queries/useProduct";
-import {useCartRemoveProduct}       from "../../mutations/useCartRemoveProduct";
-import {useCartProduct}             from "../../queries/useCartProduct";
-import {useCartAddProduct}          from "../../mutations/useCartAddProduct";
-import {Loading}                    from "../../components/ui/Loading";
-import {isEmpty}                    from "../../helpers/Functions";
+import {useParams} from "react-router";
+import {useDispatch} from "react-redux";
+import {Dispatch} from "../../store";
+import {ProductShow} from "./ProductShow";
+import {useProduct} from "../../queries/useProduct";
+import {useCartRemoveProduct} from "../../mutations/useCartRemoveProduct";
+import {useCartProduct} from "../../queries/useCartProduct";
+import {useCartAddProduct} from "../../mutations/useCartAddProduct";
+import {Loading} from "../../components/ui/Loading";
+import {isEmpty} from "../../helpers/Functions";
 
 type Params = {
     productId: string;

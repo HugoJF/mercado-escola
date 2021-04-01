@@ -1,5 +1,5 @@
 import React, {useMemo} from 'react';
-import clsx             from 'clsx';
+import clsx from 'clsx';
 
 export type PaginationProps = {
     current?: number;

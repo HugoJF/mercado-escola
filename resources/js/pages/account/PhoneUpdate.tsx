@@ -1,14 +1,14 @@
 import React, {useEffect, useState} from "react";
-import {useDispatch}                from "react-redux";
-import {Dispatch}                   from "../../store";
-import {Title}                      from "../../components/ui/Title";
-import {Loader}                     from "react-feather";
-import {useForm}                    from "react-hook-form";
-import {useAuth}                    from "../../selectors";
-import clsx                         from "clsx";
-import {PhoneInput}                 from "../../components/form/PhoneInput";
-import {PagePadding}                from "../../containers/PagePadding";
-import useNavigation                from "../../hooks/useNavigation";
+import {useDispatch} from "react-redux";
+import {Dispatch} from "../../store";
+import {Title} from "../../components/ui/Title";
+import {Loader} from "react-feather";
+import {useForm} from "react-hook-form";
+import {useAuth} from "../../selectors";
+import clsx from "clsx";
+import {PhoneInput} from "../../components/form/PhoneInput";
+import {PagePadding} from "../../containers/PagePadding";
+import useNavigation from "../../hooks/useNavigation";
 
 type PhoneUpdateForm = {
     phone: string;

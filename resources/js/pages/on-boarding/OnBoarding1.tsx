@@ -1,12 +1,12 @@
 import React, {useEffect, useState} from 'react';
-import clsx                         from 'clsx';
-import {Loader}                     from "react-feather";
-import {useForm}                    from "react-hook-form";
-import {useAuth}                    from "../../selectors";
-import {useDispatch}                from "react-redux";
-import {PhoneInput}                 from "../../components/form/PhoneInput";
-import useNavigation                from "../../hooks/useNavigation";
-import {UserProperties}             from "../../types/users";
+import clsx from 'clsx';
+import {Loader} from "react-feather";
+import {useForm} from "react-hook-form";
+import {useAuth} from "../../selectors";
+import {useDispatch} from "react-redux";
+import {PhoneInput} from "../../components/form/PhoneInput";
+import useNavigation from "../../hooks/useNavigation";
+import {UserProperties} from "../../types/users";
 
 type PhoneUpdateForm = {
     phone: string;
@@ -36,7 +36,8 @@ export const OnBoarding1: React.FC = () => {
 
     return <div className="px-4 bg-gradient-to-br from-primary-500 to-primary-700 min-h-screen flex flex-col justify-center bg-blue-500">
         <h1 className="text-5xl text-white text-center font-bold">Quase lá</h1>
-        <h3 className="px-10 text-primary-100 text-center tracking-tight">Precisamos de um número de telefone para entrar em contato quando necessário!</h3>
+        <h3 className="px-10 text-primary-100 text-center tracking-tight">Precisamos de um número de telefone para
+            entrar em contato quando necessário!</h3>
 
         <form className="mt-8 w-full" onSubmit={handleSubmit(updatePhone)}>
             <label

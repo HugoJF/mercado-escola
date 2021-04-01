@@ -1,6 +1,6 @@
-import React    from "react";
+import React from "react";
 import {Loader} from "react-feather";
-import clsx     from 'clsx';
+import clsx from 'clsx';
 
 type ButtonColors = 'default' | 'primary' | 'secondary' | 'danger';
 

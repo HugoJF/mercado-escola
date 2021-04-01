@@ -1,11 +1,11 @@
-import React                     from 'react';
-import {Route}                   from "react-router";
-import useRelativePath           from "../hooks/useRelativePath";
-import {AccountIndex}            from "../pages/account/AccountIndex";
-import {AddressesCreate}         from "../pages/account/AddressesCreate";
-import {SwitchWithTransitions}   from "../components/ui/SwitchWithTransition";
-import {PhoneUpdate}             from "../pages/account/PhoneUpdate";
-import {Logout}                  from "../pages/account/Logout";
+import React from 'react';
+import {Route} from "react-router";
+import useRelativePath from "../hooks/useRelativePath";
+import {AccountIndex} from "../pages/account/AccountIndex";
+import {AddressesCreate} from "../pages/account/AddressesCreate";
+import {SwitchWithTransitions} from "../components/ui/SwitchWithTransition";
+import {PhoneUpdate} from "../pages/account/PhoneUpdate";
+import {Logout} from "../pages/account/Logout";
 import {AddressesIndexContainer} from "../pages/account/AddressesIndexContainer";
 
 export const AccountRoutes: React.FC = () => {

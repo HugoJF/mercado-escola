@@ -1,9 +1,9 @@
-import React                                              from "react";
-import {Title}                                            from "../../components/ui/Title";
+import React from "react";
+import {Title} from "../../components/ui/Title";
 import {Calendar, ChevronRight, Icon, ShoppingBag, Users} from "react-feather";
-import {PagePadding}                                      from "../../containers/PagePadding";
-import {Box}                                              from "../../components/ui/Box";
-import useNavigation                                      from "../../hooks/useNavigation";
+import {PagePadding} from "../../containers/PagePadding";
+import {Box} from "../../components/ui/Box";
+import useNavigation from "../../hooks/useNavigation";
 
 type ButtonProps = {
     title: string;
@@ -11,23 +11,25 @@ type ButtonProps = {
     to: string;
 }
 
-const buttons: ButtonProps[] = [{
-    title: 'Produtos',
-    icon: ShoppingBag,
-    to: './produtos',
-}, {
-    title: 'Produtores',
-    icon: Users,
-    to: './produtores',
-}, {
-    title: 'Aberturas',
-    icon: Calendar,
-    to: './aberturas',
-}, {
-    title: 'Usuários',
-    icon: Users,
-    to: './usuarios',
-}];
+const buttons: ButtonProps[] = [
+    {
+        title: 'Produtos',
+        icon: ShoppingBag,
+        to: './produtos',
+    }, {
+        title: 'Produtores',
+        icon: Users,
+        to: './produtores',
+    }, {
+        title: 'Aberturas',
+        icon: Calendar,
+        to: './aberturas',
+    }, {
+        title: 'Usuários',
+        icon: Users,
+        to: './usuarios',
+    }
+];
 
 export const AdminIndex: React.FC = () => {
     const {bindGo} = useNavigation();

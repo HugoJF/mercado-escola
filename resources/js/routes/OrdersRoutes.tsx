@@ -1,10 +1,10 @@
-import React                   from 'react';
-import {Route}                 from "react-router";
-import useRelativePath         from "../hooks/useRelativePath";
+import React from 'react';
+import {Route} from "react-router";
+import useRelativePath from "../hooks/useRelativePath";
 import {SwitchWithTransitions} from "../components/ui/SwitchWithTransition";
-import {OrdersShowContainer}   from "../pages/orders/OrdersShowContainer";
-import {OrderDoneContainer}    from "../pages/orders/OrderDoneContainer";
-import {OrdersIndexContainer}  from "../pages/orders/OrdersIndexContainer";
+import {OrdersShowContainer} from "../pages/orders/OrdersShowContainer";
+import {OrderDoneContainer} from "../pages/orders/OrderDoneContainer";
+import {OrdersIndexContainer} from "../pages/orders/OrdersIndexContainer";
 
 export const OrdersRoutes: React.FC = () => {
     const relative = useRelativePath();

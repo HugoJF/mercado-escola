@@ -1,15 +1,15 @@
-import React, {useState}  from "react";
-import {useDispatch}      from "react-redux";
-import {useForm}          from "react-hook-form";
-import {Link}             from "react-router-dom";
+import React, {useState} from "react";
+import {useDispatch} from "react-redux";
+import {useForm} from "react-hook-form";
+import {Link} from "react-router-dom";
 import {LoginCredentials} from "../../types/auth";
-import useNavigation      from "../../hooks/useNavigation";
-import {Container}        from "../../containers/Container";
-import {Dispatch}         from "../../store";
-import {useAuth}          from "../../selectors";
-import {Button}           from "../../components/ui/Button";
-import {Input}            from "../../components/form/Input";
-import {Error}            from "../../components/ui/Error";
+import useNavigation from "../../hooks/useNavigation";
+import {Container} from "../../containers/Container";
+import {Dispatch} from "../../store";
+import {useAuth} from "../../selectors";
+import {Button} from "../../components/ui/Button";
+import {Input} from "../../components/form/Input";
+import {Error} from "../../components/ui/Error";
 
 export const Login: React.FC<object> = () => {
     const auth = useAuth();
@@ -66,7 +66,8 @@ export const Login: React.FC<object> = () => {
                         />
 
                         <div className="flex justify-end mt-4">
-                            <Link to="/forgot-password" className="text-right text-secondary-500 font-medium">Esqueceu a sua senha?</Link>
+                            <Link to="/forgot-password" className="text-right text-secondary-500 font-medium">Esqueceu a
+                                sua senha?</Link>
                         </div>
                     </div>
 

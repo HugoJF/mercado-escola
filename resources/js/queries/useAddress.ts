@@ -1,7 +1,7 @@
 import {useQuery} from "react-query";
-import {api}      from "../api";
+import {api} from "../api";
 
-export function useAddress(id: Id|null) {
+export function useAddress(id: Id | null) {
     if (!id) {
         return null;
     }

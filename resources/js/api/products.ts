@@ -1,6 +1,6 @@
-import {bxios}                                       from "../bxios";
+import {bxios} from "../bxios";
 import {PaginatedResourceResponse, ResourceResponse} from "../types";
-import {ProductType}                                 from "../types/products";
+import {ProductType} from "../types/products";
 
 export const products = {
     index: () => bxios()

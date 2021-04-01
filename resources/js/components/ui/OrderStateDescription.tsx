@@ -1,4 +1,4 @@
-import React            from "react";
+import React from "react";
 import {OrderStateEnum} from "../../types/orders";
 
 export type OrderStateDescriptionProps = {
@@ -8,7 +8,7 @@ export type OrderStateDescriptionProps = {
 export const OrderStateDescriptionMapping: { [state in OrderStateEnum]: string } = {
     [OrderStateEnum.ACCEPTED]: 'O pedido foi aceito pelo mercado e será preparado no final da abertura.',
     [OrderStateEnum.CANCELLED]: 'O pedido foi cancelado.',
-    [OrderStateEnum.DELIVERED]: 'O pedido foi entregue no endereço especificado.' ,
+    [OrderStateEnum.DELIVERED]: 'O pedido foi entregue no endereço especificado.',
     [OrderStateEnum.PENDING]: 'O pedido foi recebido pelo sistema mas ainda não foi confirmado pelo mercado.',
     [OrderStateEnum.READY]: 'O pedido está pronto para ser retirado.',
     [OrderStateEnum.REJECTED]: 'O pedido foi rejeitado.',

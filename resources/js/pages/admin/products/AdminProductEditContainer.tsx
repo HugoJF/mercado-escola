@@ -1,9 +1,9 @@
-import React              from "react";
-import {useParams}        from "react-router-dom";
-import useNavigation      from "../../../hooks/useNavigation";
+import React from "react";
+import {useParams} from "react-router-dom";
+import useNavigation from "../../../hooks/useNavigation";
 import {AdminProductEdit} from "./AdminProductEdit";
-import {Loading}          from "../../../components/ui/Loading";
-import {useProduct}       from "../../../queries/useProduct";
+import {Loading} from "../../../components/ui/Loading";
+import {useProduct} from "../../../queries/useProduct";
 import {useProductUpdate} from "../../../mutations/useProductUpdate";
 
 type Params = {

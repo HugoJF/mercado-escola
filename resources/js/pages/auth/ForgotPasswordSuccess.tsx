@@ -1,8 +1,8 @@
-import React         from "react";
+import React from "react";
 import useNavigation from "../../hooks/useNavigation";
-import {Button}      from "../../components/ui/Button";
+import {Button} from "../../components/ui/Button";
 import {PagePadding} from "../../containers/PagePadding";
-import {Mail}        from "../../svg/mail";
+import {Mail} from "../../svg/mail";
 
 export const ForgotPasswordSuccess: React.FC<object> = () => {
     const {bindGo} = useNavigation();

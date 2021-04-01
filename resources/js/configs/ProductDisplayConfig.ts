@@ -1,5 +1,5 @@
 export type ProductDisplayConfig = {
-    factor: number|null;
+    factor: number | null;
 }
 
 export const UNIT: ProductDisplayConfig = {

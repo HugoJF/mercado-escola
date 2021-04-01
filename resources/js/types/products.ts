@@ -1,5 +1,5 @@
 import {Media, Pivot, SoftDeletes, Timestamps} from "../types";
-import {QuantityTypes}                         from "../components/ui/QuantityTypeText";
+import {QuantityTypes} from "../components/ui/QuantityTypeText";
 
 export type WithQuantityPivot = Pivot<{
     quantity: number;

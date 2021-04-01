@@ -1,12 +1,12 @@
-import React            from "react";
-import {Title}          from "../../components/ui/Title";
-import {AddressList}    from "../../components/addresses/AddressList";
-import {PagePadding}    from "../../containers/PagePadding";
-import {ChevronRight}   from "react-feather";
-import useNavigation    from "../../hooks/useNavigation";
-import {useAddresses}   from "../../queries/useAddresses";
-import {Loading}        from "../../components/ui/Loading";
-import {AddressType}    from "../../types/addresses";
+import React from "react";
+import {Title} from "../../components/ui/Title";
+import {AddressList} from "../../components/addresses/AddressList";
+import {PagePadding} from "../../containers/PagePadding";
+import {ChevronRight} from "react-feather";
+import useNavigation from "../../hooks/useNavigation";
+import {useAddresses} from "../../queries/useAddresses";
+import {Loading} from "../../components/ui/Loading";
+import {AddressType} from "../../types/addresses";
 import {useCartAddress} from "../../mutations/useCartAddress";
 
 export const CartAddress: React.FC = () => {

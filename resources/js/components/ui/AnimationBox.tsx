@@ -17,7 +17,7 @@ type OverlayWrapperData = {
 
 export const AnimationBox: React.FC<OverlayWrapperProps> = ({dependencies = [], children}) => {
     const ref = useRef<HTMLElement>();
-    const [data, setData] = useState<Partial<OverlayWrapperData|null>>(null);
+    const [data, setData] = useState<Partial<OverlayWrapperData | null>>(null);
 
     const target = useCallback((node) => {
         if (!node) {

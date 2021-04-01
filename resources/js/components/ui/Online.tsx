@@ -1,7 +1,7 @@
-import React, {useEffect, useState}     from "react";
-import {WifiOff}                        from "react-feather";
+import React, {useEffect, useState} from "react";
+import {WifiOff} from "react-feather";
 import {CSSTransition, TransitionGroup} from "react-transition-group";
-import {Container}                      from "../../containers/Container";
+import {Container} from "../../containers/Container";
 
 export const Online: React.FC = ({children}) => {
     const [online, setOnline] = useState(navigator?.onLine ?? true);
@@ -45,7 +45,8 @@ export const Online: React.FC = ({children}) => {
 
                         {/* Description */}
                         <p className="text-center text-primary-100 tracking-tighter">
-                            Precisamos de conexão com a internet para funcionar. Por favor verifique sua conexão para continuar!
+                            Precisamos de conexão com a internet para funcionar. Por favor verifique sua conexão para
+                            continuar!
                         </p>
                     </div>
                 }

@@ -1,4 +1,4 @@
-import {bxios}                          from "../bxios";
+import {bxios} from "../bxios";
 import {AddressProperties, AddressType} from "../types/addresses";
 
 export const addresses = {

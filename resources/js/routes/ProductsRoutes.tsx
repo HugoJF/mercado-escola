@@ -1,9 +1,9 @@
-import React                   from 'react';
-import {Route}                 from "react-router";
-import useRelativePath         from "../hooks/useRelativePath";
+import React from 'react';
+import {Route} from "react-router";
+import useRelativePath from "../hooks/useRelativePath";
 import {SwitchWithTransitions} from "../components/ui/SwitchWithTransition";
-import {ProductIndex}          from "../pages/products/ProductIndex";
-import {ProductShowContainer}  from "../pages/products/ProductShowContainer";
+import {ProductIndex} from "../pages/products/ProductIndex";
+import {ProductShowContainer} from "../pages/products/ProductShowContainer";
 
 export const ProductsRoutes: React.FC = () => {
     const relative = useRelativePath();

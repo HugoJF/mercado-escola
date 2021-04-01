@@ -1,11 +1,11 @@
-import React               from "react";
-import {Title}             from "../../components/ui/Title";
-import {Link}              from "react-router-dom";
-import {ProductList}       from "../../components/products/ProductList";
-import {Empty}             from "../../components/ui/Empty";
-import {PagePadding}       from "../../containers/PagePadding";
-import {isEmpty}           from "../../helpers/Functions";
-import {Loading}           from "../../components/ui/Loading";
+import React from "react";
+import {Title} from "../../components/ui/Title";
+import {Link} from "react-router-dom";
+import {ProductList} from "../../components/products/ProductList";
+import {Empty} from "../../components/ui/Empty";
+import {PagePadding} from "../../containers/PagePadding";
+import {isEmpty} from "../../helpers/Functions";
+import {Loading} from "../../components/ui/Loading";
 import {useCurrentOpening} from "../../queries/useCurrentOpening";
 
 export const HomePage: React.FC = () => {

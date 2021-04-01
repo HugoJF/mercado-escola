@@ -1,6 +1,6 @@
-import React         from 'react';
+import React from 'react';
 import {ChevronLeft} from "react-feather";
-import {useHistory}  from "react-router";
+import {useHistory} from "react-router";
 
 export const Back: React.FC = () => {
     const history = useHistory();

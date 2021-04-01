@@ -1,7 +1,7 @@
-import React          from 'react';
-import {FieldError}   from "react-hook-form";
+import React from 'react';
+import {FieldError} from "react-hook-form";
 import {FieldWrapper} from "./FieldWrapper";
-import clsx           from 'clsx';
+import clsx from 'clsx';
 
 export type SelectProps = {
     name: string;

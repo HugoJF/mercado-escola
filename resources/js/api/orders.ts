@@ -1,5 +1,5 @@
-import {bxios}                                                                              from "../bxios";
-import {PaginatedResourceResponse, ResourceResponse}                                        from "../types";
+import {bxios} from "../bxios";
+import {PaginatedResourceResponse, ResourceResponse} from "../types";
 import {OrdersProperties, OrderType, OrderWithAddress, OrderWithOpening, OrderWithProducts} from "../types/orders";
 
 export const orders = {

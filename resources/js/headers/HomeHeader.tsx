@@ -1,7 +1,7 @@
-import React           from 'react';
+import React from 'react';
 import {HeaderWrapper} from "./partials/HeaderWrapper";
-import {Cart}          from "./partials/Cart";
-import {useAuth}       from "../selectors";
+import {Cart} from "./partials/Cart";
+import {useAuth} from "../selectors";
 
 export const HomeHeader: React.FC = () => {
     const auth = useAuth();

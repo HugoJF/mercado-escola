@@ -1,10 +1,10 @@
-import {Modal, ModalProps}          from "../components/ui/Modal";
+import {Modal, ModalProps} from "../components/ui/Modal";
 import React, {useEffect, useState} from "react";
-import {Button}                     from "../components/ui/Button";
-import {ProductType}                from "../types/products";
-import {PriceFormatter}             from "../components/ui/PriceFormatter";
-import {ProductQuantityCost}        from "../components/ui/ProductQuantityCost";
-import * as ProductQuantityConfig   from "../configs/ProductQuantityConfig";
+import {Button} from "../components/ui/Button";
+import {ProductType} from "../types/products";
+import {PriceFormatter} from "../components/ui/PriceFormatter";
+import {ProductQuantityCost} from "../components/ui/ProductQuantityCost";
+import * as ProductQuantityConfig from "../configs/ProductQuantityConfig";
 
 export type ProductQuantityActionMenuProps = {
     product: ProductType;

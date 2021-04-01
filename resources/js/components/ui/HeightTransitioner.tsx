@@ -1,5 +1,5 @@
 import React, {RefObject, useEffect, useRef, useState} from 'react';
-import AnimateHeight                                   from "react-animate-height";
+import AnimateHeight from "react-animate-height";
 
 export type HeightTransitionerProps = {
     useFix?: boolean;

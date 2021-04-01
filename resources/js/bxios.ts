@@ -14,28 +14,28 @@ export class Bxios {
         this.headers['Accept'] = 'application/json';
     }
 
-    get(...url: (string|any)[]) {
+    get(...url: (string | any)[]) {
         this.parseUrl(url);
         this.method = 'get';
 
         return this;
     }
 
-    post(...url: (string|any)[]) {
+    post(...url: (string | any)[]) {
         this.parseUrl(url);
         this.method = 'post';
 
         return this;
     }
 
-    patch(...url: (string|any)[]) {
+    patch(...url: (string | any)[]) {
         this.parseUrl(url);
         this.method = 'patch';
 
         return this;
     }
 
-    delete(...url: (string|any)[]) {
+    delete(...url: (string | any)[]) {
         this.parseUrl(url);
         this.method = 'delete';
 
@@ -46,21 +46,6 @@ export class Bxios {
         this.setData(data);
 
         return this;
-    }
-
-    private parseUrl(url: string | any[]) {
-        if (!Array.isArray(url)) {
-            url = [url];
-        }
-
-        url = ['api', ...url];
-        url = url.join('/');
-
-        if (!url.startsWith('/')) {
-            url = '/' + url;
-        }
-
-        this.url = url;
     }
 
     setCustom(data: AxiosRequestConfig) {
@@ -102,5 +87,20 @@ export class Bxios {
             data: this.formData ?? this.data,
             ...this.custom,
         })
+    }
+
+    private parseUrl(url: string | any[]) {
+        if (!Array.isArray(url)) {
+            url = [url];
+        }
+
+        url = ['api', ...url];
+        url = url.join('/');
+
+        if (!url.startsWith('/')) {
+            url = '/' + url;
+        }
+
+        this.url = url;
     }
 }

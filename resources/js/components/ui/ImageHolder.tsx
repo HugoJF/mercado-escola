@@ -1,7 +1,7 @@
 import React, {useState} from "react";
-import {LazyLoadImage}   from "./Image";
-import clsx              from 'clsx';
-import useTimeout        from "use-timeout";
+import {LazyLoadImage} from "./Image";
+import clsx from 'clsx';
+import useTimeout from "use-timeout";
 
 export type ImageHolderProps = React.DetailedHTMLProps<React.ImgHTMLAttributes<HTMLImageElement>, HTMLImageElement>
 

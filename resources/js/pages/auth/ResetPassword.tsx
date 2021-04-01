@@ -1,16 +1,16 @@
 import React, {useMemo, useState} from "react";
-import queryString                from "query-string";
-import {useForm}                  from "react-hook-form";
-import {useParams}                from "react-router";
-import {useDispatch}              from "react-redux";
-import {useLocation}              from "react-router-dom";
-import useNavigation              from "../../hooks/useNavigation";
-import {PagePadding}              from "../../containers/PagePadding";
-import {Button}                   from "../../components/ui/Button";
-import {Title}                    from "../../components/ui/Title";
-import {Input}                    from "../../components/form/Input";
-import {Dispatch}                 from "../../store";
-import {Errors}                   from "../../types";
+import queryString from "query-string";
+import {useForm} from "react-hook-form";
+import {useParams} from "react-router";
+import {useDispatch} from "react-redux";
+import {useLocation} from "react-router-dom";
+import useNavigation from "../../hooks/useNavigation";
+import {PagePadding} from "../../containers/PagePadding";
+import {Button} from "../../components/ui/Button";
+import {Title} from "../../components/ui/Title";
+import {Input} from "../../components/form/Input";
+import {Dispatch} from "../../store";
+import {Errors} from "../../types";
 
 type Form = {
     email: string;

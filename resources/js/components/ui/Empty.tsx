@@ -1,4 +1,4 @@
-import React           from "react";
+import React from "react";
 import {Archive, Icon} from "react-feather";
 
 type EmptyProps = {

@@ -1,5 +1,5 @@
-import {bxios}                                               from "../bxios";
-import {ResourceResponse}                                    from "../types";
+import {bxios} from "../bxios";
+import {ResourceResponse} from "../types";
 import {OpeningProperties, OpeningType, OpeningWithProducts} from "../types/openings";
 
 export const openings = {

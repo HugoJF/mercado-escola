@@ -1,13 +1,13 @@
-import React              from "react";
-import {Plus}             from "react-feather";
-import {FlatButton}       from "../../../components/ui/FlatButton";
-import {ProductType}      from "../../../types/products";
-import useNavigation      from "../../../hooks/useNavigation";
+import React from "react";
+import {Plus} from "react-feather";
+import {FlatButton} from "../../../components/ui/FlatButton";
+import {ProductType} from "../../../types/products";
+import useNavigation from "../../../hooks/useNavigation";
 import {AdminProductList} from "./AdminProductList";
-import {Empty}            from "../../../components/ui/Empty";
-import {Title}            from "../../../components/ui/Title";
-import {PagePadding}      from "../../../containers/PagePadding";
-import {isEmpty}          from "../../../helpers/Functions";
+import {Empty} from "../../../components/ui/Empty";
+import {Title} from "../../../components/ui/Title";
+import {PagePadding} from "../../../containers/PagePadding";
+import {isEmpty} from "../../../helpers/Functions";
 
 export type AdminProductIndexProps = {
     products: ProductType[];
