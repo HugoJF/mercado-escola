@@ -21,7 +21,7 @@ class ProductController extends Controller
         if ($ids = $request->input('id')) {
             return ProductResource::collection(Product::query()->findMany($ids));
         } else {
-            return ProductResource::collection(Product::paginate());
+            return ProductResource::collection(Product::get());
         }
     }
 
