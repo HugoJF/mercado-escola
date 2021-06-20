@@ -29,7 +29,11 @@ export const HomePage: React.FC = () => {
                     <Link to="/produtos" className="text-gray-500">Ver todos ›</Link>
                 </div>
 
-                <ProductList products={data.data.data.products}/>
+                <ProductList
+                    products={
+                        data.data.data.products.sort((a, b) => a.name.localeCompare(b.name))
+                    }
+                />
             </>}
         </PagePadding>
         :
