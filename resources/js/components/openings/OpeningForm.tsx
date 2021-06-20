@@ -84,36 +84,57 @@ export const OpeningForm: React.FC<OpeningFormProps> = ({opening, onSubmit, acti
         />
 
         <FieldWrapper name="opens_at" label="Data de abertura">
-            <div className="flex flex-col items-stretch w-full px-2 pb-4">
+            <div className="flex flex-col items-stretch w-full pb-4">
                 <DateTimePicker
                     name="opens_at"
                     ampm={true}
                     format="d 'de' MMMM 'às' HH:mm:ss"
                     value={opensAt}
+                    className="bg-white px-3 py-4 rounded-lg"
+                    inputProps={{
+                        className: '!px-3 !py-4'
+                    }}
+                    InputProps={{
+                        className: 'before:opacity-0 after:opacity-0'
+                    }}
                     onChange={(date) => setOpensAt(date as Date)}
                 />
             </div>
         </FieldWrapper>
 
         <FieldWrapper name="closes_at" label="Data de fechamento">
-            <div className="flex flex-col items-stretch w-full px-2 pb-4">
+            <div className="flex flex-col items-stretch w-full pb-4">
                 <DateTimePicker
                     name="closes_at"
                     ampm={true}
                     format="d 'de' MMMM 'às' HH:mm:ss"
                     value={closesAt}
+                    className="bg-white px-3 py-4 rounded-lg"
+                    inputProps={{
+                        className: '!px-3 !py-4'
+                    }}
+                    InputProps={{
+                        className: 'before:opacity-0 after:opacity-0'
+                    }}
                     onChange={(date) => setClosesAt(date as Date)}
                 />
             </div>
         </FieldWrapper>
 
         <FieldWrapper name="delivers_at" label="Data de entrega">
-            <div className="flex flex-col items-stretch w-full px-2 pb-4">
+            <div className="flex flex-col items-stretch w-full pb-4">
                 <DateTimePicker
                     name="delivers_at"
                     ampm={true}
                     format="d 'de' MMMM 'às' HH:mm:ss"
                     value={deliversAt}
+                    className="bg-white px-3 py-4 rounded-lg"
+                    inputProps={{
+                        className: '!px-3 !py-4'
+                    }}
+                    InputProps={{
+                        className: 'before:opacity-0 after:opacity-0'
+                    }}
                     onChange={(date) => setDeliversAt(date as Date)}
                 />
             </div>

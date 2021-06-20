@@ -115,7 +115,8 @@ export const AddressesCreate: React.FC = () => {
                             <input
                                 {...getInputProps({
                                     placeholder: 'Digite seu endereço...',
-                                    className: 'transition-colors duration-300 block w-full mb-4 py-3 px-4 placeholder-gray-400 text-gray-900 bg-transparent border-b border-lg',
+                                    className: 'transition-colors duration-300 block w-full mb-4 py-3 px-4 ' +
+                                        'placeholder-gray-400 text-gray-900 bg-white border-b border-lg rounded-lg',
                                 })}
                             />
 

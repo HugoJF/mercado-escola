@@ -1,4 +1,5 @@
 module.exports = {
+    mode: 'jit',
     purge: [
         './resources/js/**/*.tsx',
         './resources/js/**/*.ts',

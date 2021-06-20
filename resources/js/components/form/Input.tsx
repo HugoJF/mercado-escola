@@ -17,10 +17,10 @@ export const Input: React.FC<InputProps> = ({name, label, disabled = false, inpu
             className={clsx(
                 'transition-colors duration-300',
                 'block w-full py-3 px-4 placeholder-gray-400',
-                'border-b border-lg', {
+                'border-b border-lg rounded-lg', {
                     'border-red-500': error,
-                    'bg-gray-300 text-gray-500 rounded': disabled,
-                    'bg-transparent text-black': !disabled,
+                    'bg-gray-300 text-gray-500': disabled,
+                    'bg-white text-black': !disabled,
                 },
             )}
             id={name}

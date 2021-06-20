@@ -51,7 +51,12 @@ export const PhoneUpdate: React.FC = () => {
                 Telefone
             </label>
             <PhoneInput
-                className={`transition-colors duration-300 block w-full mb-8 py-3 px-4 text-black bg-transparent border-b border-lg${errors.phone ? ' border-red-500' : ''}`}
+                className={clsx(
+                    `transition-colors duration-300 block w-full mb-8 py-3 px-4 bg-white text-black bg-white border-b border-lg rounded-lg`,
+                    {
+                        'border-red-500': errors.phone
+                    }
+                )}
                 id="phone"
                 name="phone"
                 type="text"

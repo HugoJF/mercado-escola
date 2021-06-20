@@ -18,7 +18,7 @@ export const Select: React.FC<SelectProps> = ({name, label, selectProps, error, 
             className={clsx(
                 'transition-colors duration-300',
                 'block w-full py-3 px-4 text-black',
-                'bg-transparent border-b border-lg', {
+                'bg-white border-b border-lg rounded-lg', {
                     'border-red-500': error
                 }
             )}
