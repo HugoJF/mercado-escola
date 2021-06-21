@@ -1,9 +1,8 @@
 ARG PHP_VERSION=${PHP_VERSION:-8.0}
-FROM php:${PHP_VERSION}-fpm-alpine3.14 AS php-system-setup
+FROM php:${PHP_VERSION}-fpm-alpine AS php-system-setup
 
 # Install system dependencies
-RUN apk add --no-cache dcron busybox-suid libcap curl zip unzip git bash
-RUN apk add  --no-cache --repository http://dl-cdn.alpinelinux.org/alpine/v3.12/main/ nodejs=12.18.4-r0 npm=12.18.4-r0
+RUN apk add --no-cache dcron busybox-suid libcap curl zip unzip git
 
 # Install PHP extensions
 COPY --from=mlocati/php-extension-installer /usr/bin/install-php-extensions /usr/bin/
