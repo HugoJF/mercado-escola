@@ -49,6 +49,9 @@ export const ProductForm: React.FC<ProductFormProps>
             // @ts-ignore
             setValue(prop, product[prop]);
         }
+
+        // Custom setter to convert cents to BRL
+        setValue('quantity_cost', product.quantity_cost / 100);
     }, [setValue, product]);
 
     function setErrors(errors: object) {
@@ -122,7 +125,6 @@ export const ProductForm: React.FC<ProductFormProps>
 
     return <form onSubmit={handleSubmit(submit)}>
         {menu}
-        <div>
             {/* Images */}
             <FieldWrapper label="Imagens" name="images">
                 <ul className="grid grid-cols-4 gap-4 mb-4 pt-2">
@@ -232,9 +234,8 @@ export const ProductForm: React.FC<ProductFormProps>
                 />
             </div>
 
-            <Button loading={loading}>
+            <Button className="w-full" loading={loading}>
                 {action}
             </Button>
-        </div>
     </form>
 };
