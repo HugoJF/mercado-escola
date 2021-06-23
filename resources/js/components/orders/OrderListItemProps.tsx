@@ -67,7 +67,7 @@ export const OrderListItem: React.FC<OrderListItemProps> = ({order, onClick}) =>
                     {/* Separator */}
                     <span className="mx-2 font-bold text-gray-500">·</span>
 
-                    {/* Product quantity */}
+                    {/* Product amount */}
                     {order.products?.length ?
                         <li>
                             <span className="inline-block text-secondary-600 font-medium">

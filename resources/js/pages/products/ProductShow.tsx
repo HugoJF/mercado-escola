@@ -24,9 +24,9 @@ export const ProductShow: React.FC<ProductShowProps> = ({product, quantity, onRe
     const [menu, confirm] = useConfirmMenu();
     const {go} = useNavigation();
 
-    const config = ProductQuantityConfig[product.quantity_type];
-    const total = quantity * config.step;
-    const text = total === 1 ? config.singular : config.plural;
+    const total = quantity * (product.quantity_type === 'weight' ? product.weight_increment : 1);
+    // TODO: find better pattern
+    const text = total === 1 ? (product.unit_name_singular ?? 'unidade') : (product.unit_name_plural ?? 'unidades');
 
     async function handleOnRemove() {
         if (await confirm({
@@ -80,7 +80,7 @@ export const ProductShow: React.FC<ProductShowProps> = ({product, quantity, onRe
         {/* Price and quantities */}
         <div className="my-8 flex items-center justify-between">
             <div className="flex items-baseline">
-                {/* If cart has any quantity of this product, show the total cost */}
+                {/* If cart has any amount of this product, show the total cost */}
                 {!!quantity && <span className="text-xl text-secondary-500 font-medium">
                     <PriceFormatter cents price={product.quantity_cost * quantity}/>
                 </span>}

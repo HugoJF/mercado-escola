@@ -65,7 +65,7 @@ class CartController extends Controller
         $user->products()->syncWithPivotValues(
             [$product->id],
             [
-                'quantity'      => $request->input('quantity'),
+                'amount'      => $request->input('amount'),
                 // See CreateNewOrder@attachProducts on why quantity_cost should be used
                 'quantity_cost' => $product->quantity_cost,
             ],

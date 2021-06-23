@@ -5,10 +5,11 @@ import clsx from 'clsx';
 export type FieldWrapperProps = {
     name: string;
     label: string;
+    description?: string;
     error?: FieldError;
 }
 
-export const FieldWrapper: React.FC<FieldWrapperProps> = ({name, label, error, children}) => {
+export const FieldWrapper: React.FC<FieldWrapperProps> = ({name, label, description, error, children}) => {
     return <>
         <label
             htmlFor={`#${name}`}
@@ -23,6 +24,11 @@ export const FieldWrapper: React.FC<FieldWrapperProps> = ({name, label, error, c
         </label>
 
         {children}
+
+        {
+            description &&
+            <p className="text-sm text-gray-600">{description}</p>
+        }
 
         {
             error &&

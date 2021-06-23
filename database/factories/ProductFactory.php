@@ -21,17 +21,27 @@ class ProductFactory extends Factory
      */
     public function definition()
     {
-        return [
-            'name'         => $this->faker->name,
+        $type = $this->faker->randomElement([
+            'weight', 'unit',
+        ]);
+
+        if ($type === 'unit') {
+            $extra = [
+                'unit_name_singular' => 'caixa',
+                'unit_name_plural'   => 'caixas',
+            ];
+        } else {
+            $extra = [
+                'weight_increment' => 555,
+            ];
+        }
+
+        return array_merge($extra, [
+            'name'          => $this->faker->name,
             'description'   => $this->faker->sentence,
-            'quantity_type' => $this->faker->randomElement([
-                'UNIT',
-                'WEIGHT_1G',
-                'WEIGHT_10G',
-                'WEIGHT_100G',
-                'WEIGHT_1000G',
-            ]),
+            'quantity_type' => $type,
+
             'quantity_cost' => $this->faker->numberBetween(1, 1000),
-        ];
+        ]);
     }
 }

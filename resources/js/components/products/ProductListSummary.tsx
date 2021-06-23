@@ -1,7 +1,7 @@
 import React from "react";
 import {ProductType, WithQuantityPivot} from "../../types/products";
 import {ImageHolder} from "../ui/ImageHolder";
-import {QuantityTypes, QuantityTypeText} from "../ui/QuantityTypeText";
+import {QuantityTypeText} from "../ui/QuantityTypeText";
 import {PriceFormatter} from "../ui/PriceFormatter";
 
 export type ProductListSummaryProps = {
@@ -24,8 +24,8 @@ export const ProductListSummary: React.FC<ProductListSummaryProps> = ({products,
                         <div className="flex-grow">
                             <p className="text-gray-500">
                                 <QuantityTypeText
-                                    type={product.quantity_type as QuantityTypes}
-                                    quantity={product.pivot.quantity}
+                                    product={product}
+                                    amount={product.pivot.quantity}
                                     showTotal
                                 />
                             </p>

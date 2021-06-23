@@ -26,11 +26,11 @@ class OrderTest extends TestCase
         $order = Order::factory()->create();
 
         $order->products()->attach($product1, [
-            'quantity'      => 2,
+            'amount'      => 2,
             'quantity_cost' => 2,
         ]);
         $order->products()->attach($product2, [
-            'quantity'      => 5,
+            'amount'      => 5,
             'quantity_cost' => 5,
         ]);
 
@@ -48,7 +48,7 @@ class OrderTest extends TestCase
             'user_id' => auth()->id(),
         ])->hasAttached(
             Product::factory()->count(5),
-            ['quantity' => 5, 'quantity_cost' => 5]
+            ['amount' => 5, 'quantity_cost' => 5]
         )->create();
 
         $this->get(route('orders.index'))
@@ -64,7 +64,7 @@ class OrderTest extends TestCase
             'user_id' => auth()->id(),
         ])->hasAttached(
             Product::factory()->count(5),
-            ['quantity' => 5, 'quantity_cost' => 5]
+            ['amount' => 5, 'quantity_cost' => 5]
         )->create();
 
         $this->get(route('orders.show', $order))
@@ -94,7 +94,7 @@ class OrderTest extends TestCase
 
         $user->cartAddress()->associate($address);
         $user->products()->sync($products->keyBy('id')->map(fn($id) => [
-            'quantity'      => 5,
+            'amount'      => 5,
             'quantity_cost' => 30,
         ]));
 
@@ -140,7 +140,7 @@ class OrderTest extends TestCase
 
         $user->cartAddress()->associate($address);
         $user->products()->sync($products->keyBy('id')->map(fn($id) => [
-            'quantity'      => 5,
+            'amount'      => 5,
             'quantity_cost' => 30,
         ]));
 

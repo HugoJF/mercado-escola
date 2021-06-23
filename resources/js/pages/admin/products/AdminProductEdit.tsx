@@ -1,6 +1,6 @@
 import React from "react";
 import {Title} from "../../../components/ui/Title";
-import {ProductForm} from "../../../components/products/ProductForm";
+import {ProductForm} from "../../../components/products/ProductForm/ProductForm";
 import {PagePadding} from "../../../containers/PagePadding";
 import {ProductType} from "../../../types/products";
 

@@ -15,9 +15,9 @@ export type ProductQuantityActionMenuProps = {
 export const ProductQuantityActionMenu: React.FC<ModalProps & ProductQuantityActionMenuProps> = ({product, currentQuantity, open, onQuantityChange, onClose}) => {
     const [quantity, setQuantity] = useState(1);
 
-    const config = ProductQuantityConfig[product.quantity_type];
-    const total = quantity * config.step;
-    const text = total === 1 ? config.singular : config.plural;
+    const total = quantity * (product.quantity_type === 'weight' ? product.weight_increment : 1);
+    // TODO: find better pattern
+    const text = total === 1 ? (product.unit_name_singular ?? 'grama') : (product.unit_name_plural ?? 'gramas');
 
     useEffect(() => {
         // If item is not in cart, manually initialize the selector with 1 item
@@ -56,7 +56,7 @@ export const ProductQuantityActionMenu: React.FC<ModalProps & ProductQuantityAct
         {/* Prices and quantities */}
         <div className="px-4 flex items-center justify-between">
             <div className="flex items-baseline">
-                {/* If cart has any quantity of this product, show the total cost */}
+                {/* If cart has any amount of this product, show the total cost */}
                 {!!quantity && <span className="text-xl text-secondary-500 font-medium">
                     <PriceFormatter cents price={product.quantity_cost * quantity}/>
                 </span>}

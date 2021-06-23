@@ -53,13 +53,13 @@ export const AdminProductListItem: React.FC<AdminProductListItemProps>
                             <li className="text-center">
                                 <PriceFormatter cents price={product.quantity_cost}/>
                                 /
-                                <QuantityTypeText type={product.quantity_type}/>
+                                <QuantityTypeText product={product}/>
                             </li>
 
                             {/* Separator */}
                             <span className="font-bold text-gray-300">·</span>
 
-                            {/* Product quantity */}
+                            {/* Product amount */}
                             <li className="text-center">
                                 {Object.values(product.media_links).length} imagens
                             </li>
