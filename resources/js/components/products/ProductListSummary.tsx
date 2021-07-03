@@ -1,12 +1,13 @@
 import React from "react";
 import {ProductType, WithQuantityPivot} from "../../types/products";
 import {ImageHolder} from "../ui/ImageHolder";
-import {QuantityTypeText} from "../ui/QuantityTypeText";
 import {PriceFormatter} from "../ui/PriceFormatter";
+import {ProductQuantity} from "./helpers/ProductQuantity";
+import {ProductQuantityCost} from "./helpers/ProductQuantityCost";
 
 export type ProductListSummaryProps = {
     products: ProductType<WithQuantityPivot>[];
-    children?: (product: ProductType, amount: number) => string | React.ReactNode;
+    children?: (product: ProductType, quantity: number) => string | React.ReactNode;
 }
 
 export const ProductListSummary: React.FC<ProductListSummaryProps> = ({products, children}) => {
@@ -23,17 +24,21 @@ export const ProductListSummary: React.FC<ProductListSummaryProps> = ({products,
                     <div className="flex">
                         <div className="flex-grow">
                             <p className="text-gray-500">
-                                <QuantityTypeText
+                                <ProductQuantity
                                     product={product}
-                                    amount={product.pivot.quantity}
-                                    showTotal
-                                />
+                                    quantity={product.pivot.quantity}
+                                >{({total, text}) => <>
+                                    {total} {text}
+                                </>}</ProductQuantity>
                             </p>
                             <p className="mt-2 text-secondary-500 font-medium">
-                                <PriceFormatter
-                                    cents
-                                    price={product.pivot.quantity * product.pivot.quantity_cost * product.pivot.quantity_cost}
-                                />
+                                <ProductQuantityCost
+                                    product={product}
+                                    quantity={product.pivot.quantity}
+                                    quantityCostOverride={product.pivot.quantity_cost}
+                                >
+                                    {({cost}) => <PriceFormatter cents price={cost}/>}
+                                </ProductQuantityCost>
                             </p>
                         </div>
                         {children && <div className="flex items-center space-x-4">

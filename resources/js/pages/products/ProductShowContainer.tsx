@@ -43,7 +43,7 @@ export const ProductShowContainer: React.FC = () => {
             return;
         }
 
-        // TODO: handle mutation fail (reset to previous amount)
+        // TODO: handle mutation fail (reset to previous quantity)
         if (onCart) {
             if (newQuantity === 0) {
                 dispatch.toasts.add({

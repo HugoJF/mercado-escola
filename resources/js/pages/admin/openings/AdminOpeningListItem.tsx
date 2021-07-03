@@ -87,7 +87,7 @@ export const AdminOpeningListItem: React.FC<AdminOpeningListItemProps>
                         {/* Separator */}
                         <span className="mx-2 font-bold text-gray-300">·</span>
 
-                        {/* Product amount */}
+                        {/* Product quantity */}
                         <li className="text-center">
                             {opening.products.length} produtos
                         </li>

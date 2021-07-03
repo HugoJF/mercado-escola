@@ -56,7 +56,7 @@ class DatabaseSeeder extends Seeder
                 ->random(random_int(2, 5))
                 ->keyBy(fn($product) => $product->id)
                 ->map(fn() => [
-                    'amount'      => random_int(2, 5),
+                    'quantity'      => random_int(2, 5),
                     'quantity_cost' => random_int(5, 150),
                 ]);
             $order->products()->sync($p);

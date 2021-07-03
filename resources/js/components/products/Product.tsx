@@ -4,7 +4,7 @@ import {PriceFormatter} from "../ui/PriceFormatter";
 import {ProductType} from "../../types/products";
 import {ImageHolder} from "../ui/ImageHolder";
 import {PlusCircle} from "react-feather";
-import {ProductQuantityCost} from "../ui/ProductQuantityCost";
+import {ProductCost} from "./helpers/ProductCost";
 
 export type ProductProps = {
     product: ProductType;
@@ -32,8 +32,8 @@ export const Product: React.FC<ProductProps> = ({product, url}) => {
         </h3>
 
         <h4 className="text-lg">
-            <ProductQuantityCost product={product}>
-                {(cost, text) => <>
+            <ProductCost product={product}>
+                {({cost, text}) => <>
                     <span className="text-secondary-400 text-xl font-medium">
                         <PriceFormatter cents price={cost}/>
                     </span>
@@ -41,7 +41,7 @@ export const Product: React.FC<ProductProps> = ({product, url}) => {
                         /{text}
                     </small>
                 </>}
-            </ProductQuantityCost>
+            </ProductCost>
         </h4>
 
         <div className="flex justify-center mt-4 space-x-2 text-gray-400 text-sm">

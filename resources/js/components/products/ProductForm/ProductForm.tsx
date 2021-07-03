@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react";
-import {useForm} from "react-hook-form";
+import {Controller, useForm} from "react-hook-form";
 import {ProductProperties, ProductType} from "../../../types/products";
 import {Input} from "../../form/Input";
 import {Textarea} from "../../form/Textarea";
@@ -23,7 +23,9 @@ type FileWithPreview = { file: File, preview: string };
 export const ProductForm: React.FC<ProductFormProps>
     = ({onSubmit, product, action}) => {
     const {loading, load} = useLoading();
-    const {register, handleSubmit, errors, setError, setValue, watch} = useForm<ProductProperties>();
+    const {register, handleSubmit, errors, setError, setValue, watch, control} = useForm<ProductProperties>({
+        defaultValues: product,
+    });
     const [menu, confirm] = useConfirmMenu();
     const [uploadingFiles, setUploadingFiles] = useState<FileWithPreview[]>([]);
     const {getRootProps, getInputProps} = useDropzone({
@@ -43,14 +45,14 @@ export const ProductForm: React.FC<ProductFormProps>
         if (!product) {
             return;
         }
-
+        console.log(product);
         for (let prop of Object.keys(product)) {
             // @ts-ignore
             setValue(prop, product[prop]);
         }
 
         // Custom setter to convert cents to BRL
-        setValue('quantity_cost', product.quantity_cost / 100);
+        // setValue('quantity_cost', product.quantity_cost / 100);
     }, [setValue, product]);
 
     function setErrors(errors: object) {
@@ -64,9 +66,6 @@ export const ProductForm: React.FC<ProductFormProps>
         load(async () => {
             try {
                 const form = new FormData;
-
-                // Deal with API price format being cents
-                data.quantity_cost = data.quantity_cost * 100;
 
                 for (const [key, value] of Object.entries(data)) {
                     form.append(key, String(value));
@@ -246,13 +245,15 @@ export const ProductForm: React.FC<ProductFormProps>
             </div>
         </FieldWrapper>
 
-        {watch('quantity_type2') === 'unit' && <ProductFormUnit
-            error={errors.quantity_type}
+        {watch('quantity_type') === 'unit' && <ProductFormUnit
+            control={control}
+            errors={errors}
             register={register}
         />}
 
-        {watch('quantity_type2') === 'weight' && <ProductFormWeight
-            error={errors.quantity_type}
+        {watch('quantity_type') === 'weight' && <ProductFormWeight
+            control={control}
+            errors={errors}
             register={register}
         />}
 

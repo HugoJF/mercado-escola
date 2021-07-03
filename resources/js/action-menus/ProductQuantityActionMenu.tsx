@@ -3,8 +3,9 @@ import React, {useEffect, useState} from "react";
 import {Button} from "../components/ui/Button";
 import {ProductType} from "../types/products";
 import {PriceFormatter} from "../components/ui/PriceFormatter";
-import {ProductQuantityCost} from "../components/ui/ProductQuantityCost";
-import * as ProductQuantityConfig from "../configs/ProductQuantityConfig";
+import {ProductCost} from "../components/products/helpers/ProductCost";
+import {ProductQuantity} from "../components/products/helpers/ProductQuantity";
+import {ProductQuantityCost} from "../components/products/helpers/ProductQuantityCost";
 
 export type ProductQuantityActionMenuProps = {
     product: ProductType;
@@ -14,10 +15,6 @@ export type ProductQuantityActionMenuProps = {
 
 export const ProductQuantityActionMenu: React.FC<ModalProps & ProductQuantityActionMenuProps> = ({product, currentQuantity, open, onQuantityChange, onClose}) => {
     const [quantity, setQuantity] = useState(1);
-
-    const total = quantity * (product.quantity_type === 'weight' ? product.weight_increment : 1);
-    // TODO: find better pattern
-    const text = total === 1 ? (product.unit_name_singular ?? 'grama') : (product.unit_name_plural ?? 'gramas');
 
     useEffect(() => {
         // If item is not in cart, manually initialize the selector with 1 item
@@ -56,23 +53,27 @@ export const ProductQuantityActionMenu: React.FC<ModalProps & ProductQuantityAct
         {/* Prices and quantities */}
         <div className="px-4 flex items-center justify-between">
             <div className="flex items-baseline">
-                {/* If cart has any amount of this product, show the total cost */}
-                {!!quantity && <span className="text-xl text-secondary-500 font-medium">
-                    <PriceFormatter cents price={product.quantity_cost * quantity}/>
+                {/* If cart has any quantity of this product, show the total cost */}
+                {Boolean(quantity) && <span className="text-xl text-secondary-500 font-medium">
+                    <ProductQuantityCost product={product} quantity={quantity}>
+                        {({cost}) => <PriceFormatter cents price={cost}/>}
+                    </ProductQuantityCost>
                 </span>}
 
                 {/* If cart doesn't contain the product, just show the display format of it */}
-                {!quantity && <ProductQuantityCost product={product}>
-                    {(cost, text) => <>
+                {!quantity && <ProductCost product={product}>
+                    {({cost, text}) => <>
                         <span className="text-xl text-secondary-500 font-medium">
                             <PriceFormatter cents price={cost}/>
                         </span>
-                        <span className="ml-px text-gray-500">/{text}</span>
-                    </>}
-                </ProductQuantityCost>}
+                    <span className="ml-px text-gray-500">/{text}</span>
+                </>}
+                </ProductCost>}
             </div>
-            {!!quantity && <div className="flex items-center">
-                <div className="mx-4 text-xl font-medium">{total} {text}</div>
+            {Boolean(quantity) && <div className="flex items-center">
+                <ProductQuantity product={product} quantity={quantity}>
+                    {({total, text}) => <div className="mx-4 text-xl font-medium">{total} {text}</div>}
+                </ProductQuantity>
             </div>}
         </div>
 

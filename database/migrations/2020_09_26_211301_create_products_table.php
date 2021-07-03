@@ -13,19 +13,6 @@ class CreateProductsTable extends Migration
      */
     public function up()
     {
-        // TODO: identificar use-cases para mostrar o preco e implementar algo decente (price vs cost)
-        // TODO: produtos adicionados no carrinho dao mensagem de sucesso no erro
-        // TODO: calculo de peso ainda esta incompleto (faltando conversao pra KG)
-        // TODO: logica de nomes repetida
-        // TODO: atualizar coisas relacionados ao carrinho
-        // TODO: adicionar campos de forms e regras
-        // TODO: documentar logica de peso se normalizado por kg
-        // TODO: atualizar email
-        // TODO: procurar usos de quantity_type
-        // TODO: backup do BD em producao
-        // TODO: atualizar informacao no carrinho (dados que armazenam a quantidade que foi comprada)
-
-
         Schema::create('products', function (Blueprint $table) {
             $table->id();
 

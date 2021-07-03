@@ -160,4 +160,4 @@ export const Approve = () => (
             fill="#3f3d56"
         />
     </svg>
-)
+);

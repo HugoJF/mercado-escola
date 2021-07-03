@@ -1,12 +1,12 @@
 import {HeightTransitioner} from "../../../components/ui/HeightTransitioner";
 import {ShoppingBag, Trash} from "react-feather";
 import {PriceFormatter} from "../../../components/ui/PriceFormatter";
-import {QuantityTypeText} from "../../../components/ui/QuantityTypeText";
 import {Link} from "react-router-dom";
 import React from "react";
 import {ProductType} from "../../../types/products";
 import useRelativePath from "../../../hooks/useRelativePath";
 import {RotatingArrowRight} from "../../../components/ui/RotatingArrowRight";
+import {ProductCost} from "../../../components/products/helpers/ProductCost";
 
 export type AdminProductListItemProps = {
     product: ProductType;
@@ -51,15 +51,19 @@ export const AdminProductListItem: React.FC<AdminProductListItemProps>
                         <ul className="flex space-x-2 text-sm text-gray-500 tracking-tight">
                             {/* Product price */}
                             <li className="text-center">
-                                <PriceFormatter cents price={product.quantity_cost}/>
-                                /
-                                <QuantityTypeText product={product}/>
+                                <ProductCost product={product}>
+                                    {({text, cost}) => <>
+                                        <PriceFormatter cents price={cost}/>
+                                        /
+                                        {text}
+                                    </>}
+                                </ProductCost>
                             </li>
 
                             {/* Separator */}
                             <span className="font-bold text-gray-300">·</span>
 
-                            {/* Product amount */}
+                            {/* Product quantity */}
                             <li className="text-center">
                                 {Object.values(product.media_links).length} imagens
                             </li>

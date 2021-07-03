@@ -1,16 +1,15 @@
 import React, {useState} from 'react';
 import {Button} from "../../components/ui/Button";
 import {PriceFormatter} from "../../components/ui/PriceFormatter";
-import * as ProductQuantityConfig from "../../configs/ProductQuantityConfig";
 import {ImageHolder} from "../../components/ui/ImageHolder";
 import {Link} from "react-router-dom";
 import {PagePadding} from "../../containers/PagePadding";
 import {ProductType} from "../../types/products";
-import {ProductQuantityCost} from "../../components/ui/ProductQuantityCost";
 import {ProductQuantityActionMenu} from "../../action-menus/ProductQuantityActionMenu";
 import {Trash} from "react-feather";
 import useConfirmMenu from "../../hooks/useConfirmMenu";
 import useNavigation from "../../hooks/useNavigation";
+import {ProductCost} from "../../components/products/helpers/ProductCost";
 
 export type ProductShowProps = {
     product: ProductType;
@@ -80,20 +79,20 @@ export const ProductShow: React.FC<ProductShowProps> = ({product, quantity, onRe
         {/* Price and quantities */}
         <div className="my-8 flex items-center justify-between">
             <div className="flex items-baseline">
-                {/* If cart has any amount of this product, show the total cost */}
+                {/* If cart has any quantity of this product, show the total cost */}
                 {!!quantity && <span className="text-xl text-secondary-500 font-medium">
                     <PriceFormatter cents price={product.quantity_cost * quantity}/>
                 </span>}
 
                 {/* If cart doesn't contain the product, just show the display format of it */}
-                {!quantity && <ProductQuantityCost product={product}>
-                    {(cost, text) => <>
+                {!quantity && <ProductCost product={product}>
+                    {({cost, text}) => <>
                         <span className="text-xl text-secondary-500 font-medium">
                             <PriceFormatter cents price={cost}/>
                         </span>
                         <span className="ml-px text-gray-500">/{text}</span>
                     </>}
-                </ProductQuantityCost>}
+                </ProductCost>}
             </div>
             {!!quantity && <div className="flex items-center">
                 <div className="mx-4 text-xl font-medium">{total} {text}</div>

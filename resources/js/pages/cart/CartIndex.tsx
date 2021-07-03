@@ -32,6 +32,7 @@ export type CartIndexProps = {
 export const CartIndex: React.FC<CartIndexProps>
     = ({address, opening, products, onRemove, delivery, onShippingChanged, shippingOptionsOpen, setShippingOptionsOpen, onDeliverySelected, onOrderStore, pending}) => {
     const {bindGo} = useNavigation();
+    // TODO: replace every usage of 'weight' so this calculation is correct
     const total = useMemo(() => products.reduce((value, product) => (
         value + product.pivot.quantity * product.pivot.quantity_cost
     ), 0), [products]);
