@@ -32,15 +32,14 @@ class ProductFactory extends Factory
             ];
         } else {
             $extra = [
-                'weight_increment' => 555,
+                'weight_increment' => 350,
             ];
         }
 
         return array_merge($extra, [
             'name'          => $this->faker->name,
             'description'   => $this->faker->sentence,
-            'quantity_type' => $type,
-
+            'type'          => $type,
             'quantity_cost' => $this->faker->numberBetween(1, 1000),
         ]);
     }

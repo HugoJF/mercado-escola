@@ -17,7 +17,7 @@ class Product extends Model implements HasMedia
     protected $fillable = [
         'name',
         'description',
-        'quantity_type',
+        'type',
         'quantity_cost',
         'unit_name_singular',
         'unit_name_plural',
@@ -25,6 +25,8 @@ class Product extends Model implements HasMedia
     ];
 
     protected $appends = ['media_links'];
+
+
 
     public function getMediaLinksAttribute()
     {
@@ -48,6 +50,7 @@ class Product extends Model implements HasMedia
 
     public function orders()
     {
-        return $this->morphedByMany(Order::class, 'holder', 'has_product')->withPivot('quantity', 'quantity_cost');
+        return $this->morphedByMany(Order::class, 'holder', 'has_product')
+                    ->withPivot('quantity', 'quantity_cost');
     }
 }

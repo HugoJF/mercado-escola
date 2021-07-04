@@ -16,7 +16,7 @@ class CreateHasProductTable extends Migration
         Schema::create('has_product', function (Blueprint $table) {
             $table->id();
 
-            $table->unsignedInteger('quantity');
+            $table->unsignedInteger('quantity'); // units|grams
             $table->unsignedInteger('quantity_cost');
 
             $table->string("holder_type");

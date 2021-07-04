@@ -50,9 +50,6 @@ export const ProductForm: React.FC<ProductFormProps>
             // @ts-ignore
             setValue(prop, product[prop]);
         }
-
-        // Custom setter to convert cents to BRL
-        // setValue('quantity_cost', product.quantity_cost / 100);
     }, [setValue, product]);
 
     function setErrors(errors: object) {
@@ -199,16 +196,16 @@ export const ProductForm: React.FC<ProductFormProps>
 
         {/* Quantity type */}
         <FieldWrapper
-            name="quantity_type"
+            name="type"
             label="Como o produto é vendido?"
-            error={errors.quantity_type}
+            error={errors.type}
         >
             <div className="grid grid-cols-2 mb-8">
                 <div>
                     <input
                         className="appearance-none peer sr-only"
-                        id="quantity_type-unit"
-                        name="quantity_type"
+                        id="type-unit"
+                        name="type"
                         type="radio"
                         value="unit"
                         ref={register}
@@ -218,7 +215,7 @@ export const ProductForm: React.FC<ProductFormProps>
                         peer-checked:bg-blue-500 peer-checked:text-white
                         text-lg text-center font-medium hover:bg-gray-200
                         border border-r-0 rounded-l-lg cursor-pointer"
-                        htmlFor="quantity_type-unit"
+                        htmlFor="type-unit"
                     >
                         Por unidade
                     </label>
@@ -226,8 +223,8 @@ export const ProductForm: React.FC<ProductFormProps>
                 <div>
                     <input
                         className="appearance-none peer sr-only"
-                        id="quantity_type-weight"
-                        name="quantity_type"
+                        id="type-weight"
+                        name="type"
                         type="radio"
                         value="weight"
                         ref={register}
@@ -237,7 +234,7 @@ export const ProductForm: React.FC<ProductFormProps>
                         peer-checked:bg-blue-500 peer-checked:text-white
                         text-lg text-center font-medium hover:bg-gray-200
                         border border-l-0 rounded-r-lg cursor-pointer"
-                        htmlFor="quantity_type-weight"
+                        htmlFor="type-weight"
                     >
                         Por peso
                     </label>
@@ -245,13 +242,13 @@ export const ProductForm: React.FC<ProductFormProps>
             </div>
         </FieldWrapper>
 
-        {watch('quantity_type') === 'unit' && <ProductFormUnit
+        {watch('type') === 'unit' && <ProductFormUnit
             control={control}
             errors={errors}
             register={register}
         />}
 
-        {watch('quantity_type') === 'weight' && <ProductFormWeight
+        {watch('type') === 'weight' && <ProductFormWeight
             control={control}
             errors={errors}
             register={register}

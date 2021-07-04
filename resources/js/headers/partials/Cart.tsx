@@ -1,4 +1,4 @@
-import React, {useMemo} from 'react';
+import React from 'react';
 import {ShoppingCart} from "react-feather";
 import {Link} from "react-router-dom";
 import {useCart} from "../../queries/useCart";
@@ -8,9 +8,7 @@ export const Cart: React.FC = () => {
     const cart = useCart();
 
     const itemCount = cart?.data?.data?.products?.length;
-    const total = useMemo(() => cart?.data?.data?.products?.reduce((value, product) => (
-        value + product.pivot.quantity * product.pivot.quantity_cost
-    ), 0), [cart.data]);
+    const total = cart?.data?.data?.cost;
 
     if (!itemCount) {
         return null;

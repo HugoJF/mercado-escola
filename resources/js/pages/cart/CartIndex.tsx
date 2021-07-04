@@ -10,15 +10,13 @@ import clsx from 'clsx';
 import {PagePadding} from "../../containers/PagePadding";
 import {AddressType} from "../../types/addresses";
 import {OpeningType} from "../../types/openings";
-import {PivotCartProductsUser} from "../../types/cart";
+import {CartType, PivotCartProductsUser} from "../../types/cart";
 import {ProductListSummary} from "../../components/products/ProductListSummary";
 import {Date} from "../../components/ui/Date";
 import useNavigation from "../../hooks/useNavigation";
 
 export type CartIndexProps = {
-    address: AddressType | null;
-    opening: OpeningType;
-    products: ProductType<PivotCartProductsUser>[];
+    cart: CartType;
     onRemove: (product: ProductType) => void;
     setShippingOptionsOpen: (open: boolean) => void;
     shippingOptionsOpen: boolean;
@@ -30,12 +28,9 @@ export type CartIndexProps = {
 }
 
 export const CartIndex: React.FC<CartIndexProps>
-    = ({address, opening, products, onRemove, delivery, onShippingChanged, shippingOptionsOpen, setShippingOptionsOpen, onDeliverySelected, onOrderStore, pending}) => {
+    = ({cart, onRemove, delivery, onShippingChanged, shippingOptionsOpen, setShippingOptionsOpen, onDeliverySelected, onOrderStore, pending}) => {
     const {bindGo} = useNavigation();
-    // TODO: replace every usage of 'weight' so this calculation is correct
-    const total = useMemo(() => products.reduce((value, product) => (
-        value + product.pivot.quantity * product.pivot.quantity_cost
-    ), 0), [products]);
+    const total = cart.cost;
 
     function handleOnClose() {
         setShippingOptionsOpen(false);
@@ -48,13 +43,13 @@ export const CartIndex: React.FC<CartIndexProps>
 
             {/* Cart products */}
             <div className="pb-4 border-b border-gray-200">
-                {!Object.values(products).length &&
+                {!Object.values(cart.products).length &&
                 <h2 className="py-6 text-lg text-gray-500 text-center tracking-wide">
                     Carrinho vazio!
                 </h2>}
 
                 <ProductListSummary
-                    products={products}
+                    products={cart.products}
                 >
                     {(product) => <Edit
                         className="text-gray-400"
@@ -108,18 +103,18 @@ export const CartIndex: React.FC<CartIndexProps>
                     to="/carrinho/endereco"
                     className={clsx(
                         'mt-2 mb-8 py-2 flex items-center', {
-                            'text-gray-500': address,
+                            'text-gray-500': cart.address,
                         }
                     )}
                 >
-                    {address ?
+                    {cart.address ?
                         <MapPin className="mr-3 flex flex-shrink-0 text-gray-500"/>
                         :
                         <AlertTriangle className="animate-ping mr-3 flex flex-shrink-0 text-red-500"/>
                     }
                     <p className="flex-grow text-gray-500">
-                        {address ?
-                            [address.complement, address.address, address.number].join(' ')
+                        {cart.address ?
+                            [cart.address.complement, cart.address.address, cart.address.number].join(' ')
                             :
                             'Selecionar um endereço'
                         }
@@ -135,15 +130,15 @@ export const CartIndex: React.FC<CartIndexProps>
                 <Calendar className="mr-4 text-gray-500"/>
                 <p className="text-gray-500">
                     <span className="text-secondary-500 font-medium">
-                        <Date input={opening.delivers_at} format="dd/LL/yyyy"/>
+                        <Date input={cart.opening.delivers_at} format="dd/LL/yyyy"/>
                     </span>
                     {' '}a partir das{' '}
-                    <Date input={opening.delivers_at} format="HH'h'mm'm'"/>
+                    <Date input={cart.opening.delivers_at} format="HH'h'mm'm'"/>
                 </p>
             </div>
 
             <Button
-                enabled={products.length > 0}
+                enabled={cart.products.length > 0}
                 loading={pending}
                 onClick={onOrderStore}
             >

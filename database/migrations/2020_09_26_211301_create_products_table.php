@@ -19,12 +19,13 @@ class CreateProductsTable extends Migration
             $table->string('name');
             $table->mediumText('description')->nullable();
 
-            $table->string('quantity_type');
-            $table->unsignedInteger('quantity_cost');
+            $table->enum('type', ['weight', 'unit']);
+            $table->unsignedInteger('quantity_cost')->nullable(); // cents per unit|kg
 
             $table->string('unit_name_singular')->nullable();
             $table->string('unit_name_plural')->nullable();
-            $table->unsignedInteger('weight_increment')->nullable();
+
+            $table->unsignedInteger('weight_increment')->nullable(); // grams
 
             $table->softDeletes();
             $table->timestamps();

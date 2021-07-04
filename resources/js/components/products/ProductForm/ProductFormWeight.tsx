@@ -20,6 +20,9 @@ export const ProductFormWeight: React.FC<ProductFormWeightProps> = ({errors, con
                     error={errors.weight_increment}
                     inputProps={{
                         ref: register,
+                        type: 'number',
+                        min: 0,
+                        step: 0.001,
                     }}
                 />
             </div>
@@ -36,7 +39,7 @@ export const ProductFormWeight: React.FC<ProductFormWeightProps> = ({errors, con
                         inputProps={{
                             type: 'number',
                             min: 0,
-                            step: 0.01,
+                            step: 0.001,
                             // TODO: replace . with , to avoid problems with decimal separators
                             onChange: val => onChange(parseFloat(val.currentTarget.value ?? '0') * 100),
                             value: value / 100,

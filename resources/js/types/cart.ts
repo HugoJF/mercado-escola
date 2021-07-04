@@ -12,6 +12,7 @@ export type PivotCartProductsUser = Pivot<{
 }>
 
 export type CartType = {
+    cost: number;
     opening: OpeningType;
     address: AddressType | null;
     products: ProductType<PivotCartProductsUser>[];

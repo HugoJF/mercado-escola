@@ -17,7 +17,16 @@ class CartController extends Controller
         /** @var User $user */
         $user = auth()->user();
 
+        $cost = $user->products->map(function ($product) {
+            if ($product->type === 'unit') {
+                return $product->quantity_cost * $product->pivot->quantity;
+            }
+
+            return $product->quantity_cost * $product->pivot->quantity * $product->weight_increment / 1000;
+        })->sum();
+
         return [
+            'cost'     => round($cost),
             'opening'  => $currentOpening->find(),
             'address'  => $user->cartAddress,
             'products' => $user->products,
@@ -67,7 +76,7 @@ class CartController extends Controller
             [
                 // See CreateNewOrder@attachProducts on why quantity_cost should be used
                 'quantity_cost' => $product->quantity_cost,
-                'quantity'        => $request->input('quantity'),
+                'quantity'      => $request->input('quantity'),
             ],
             false
         );

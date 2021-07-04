@@ -48,7 +48,7 @@ export const ProductFormUnit: React.FC<ProductFormUnitProps> = ({errors, control
                         min: 0,
                         step: 0.01,
                         // TODO: replace . with , to avoid problems with decimal separators
-                        onChange: val => onChange(parseFloat(val.currentTarget.value ?? '0') * 100),
+                        onChange: e => onChange(parseFloat(e.currentTarget.value ?? '0') * 100),
                         value: value / 100
                     }}
                 />}

@@ -10,6 +10,7 @@ import {Trash} from "react-feather";
 import useConfirmMenu from "../../hooks/useConfirmMenu";
 import useNavigation from "../../hooks/useNavigation";
 import {ProductCost} from "../../components/products/helpers/ProductCost";
+import {ProductQuantityCost} from "../../components/products/helpers/ProductQuantityCost";
 
 export type ProductShowProps = {
     product: ProductType;
@@ -22,10 +23,6 @@ export const ProductShow: React.FC<ProductShowProps> = ({product, quantity, onRe
     const [adding, setAdding] = useState(false);
     const [menu, confirm] = useConfirmMenu();
     const {go} = useNavigation();
-
-    const total = quantity * (product.quantity_type === 'weight' ? product.weight_increment : 1);
-    // TODO: find better pattern
-    const text = total === 1 ? (product.unit_name_singular ?? 'unidade') : (product.unit_name_plural ?? 'unidades');
 
     async function handleOnRemove() {
         if (await confirm({
@@ -80,8 +77,10 @@ export const ProductShow: React.FC<ProductShowProps> = ({product, quantity, onRe
         <div className="my-8 flex items-center justify-between">
             <div className="flex items-baseline">
                 {/* If cart has any quantity of this product, show the total cost */}
-                {!!quantity && <span className="text-xl text-secondary-500 font-medium">
-                    <PriceFormatter cents price={product.quantity_cost * quantity}/>
+                {Boolean(quantity) && <span className="text-xl text-secondary-500 font-medium">
+                    <ProductQuantityCost quantity={quantity} product={product}>{({cost}) => (
+                        <PriceFormatter cents price={cost}/>
+                    )}</ProductQuantityCost>
                 </span>}
 
                 {/* If cart doesn't contain the product, just show the display format of it */}
@@ -94,14 +93,17 @@ export const ProductShow: React.FC<ProductShowProps> = ({product, quantity, onRe
                     </>}
                 </ProductCost>}
             </div>
-            {!!quantity && <div className="flex items-center">
-                <div className="mx-4 text-xl font-medium">{total} {text}</div>
+            {Boolean(quantity) && <div className="flex items-center">
+                <ProductCost product={product}>
+                    {({cost, text}) => <div className="mx-4 text-xl font-medium">{cost} {text}</div>}
+                </ProductCost>
+
             </div>}
         </div>
 
         {/* Cart controls */}
         <div className="flex justify-between">
-            {!!quantity && <Button className="mr-4" color="danger" onClick={handleOnRemove}>
+            {Boolean(quantity) && <Button className="mr-4" color="danger" onClick={handleOnRemove}>
                 <Trash/>
             </Button>}
 
@@ -111,7 +113,7 @@ export const ProductShow: React.FC<ProductShowProps> = ({product, quantity, onRe
         </div>
 
         {/* Cart warning */}
-        {!!quantity && <div className="grid grid-cols-2 items-center my-4 divide-x">
+        {Boolean(quantity) && <div className="grid grid-cols-2 items-center my-4 divide-x">
             <Link to="/carrinho" className="py-2 px-2 text-center text-gray-500 text-sm tracking-tight">
                 Ver no carrinho
             </Link>

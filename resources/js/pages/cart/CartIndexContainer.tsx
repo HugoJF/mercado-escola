@@ -48,9 +48,7 @@ export const CartIndexContainer: React.FC = () => {
     return cart.data
         ?
         <CartIndex
-            address={cart.data.data.address}
-            products={cart.data.data.products}
-            opening={cart.data.data.opening}
+            cart={cart.data.data}
             pending={updateCartAddress.isLoading || orderStore.isLoading}
             onDeliverySelected={handleOnDeliverySelected}
             onOrderStore={handleOnOrderStore}
