@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Actions\Cart\CartCost;
 use App\Actions\Openings\FindCurrentOpening;
 use App\Exceptions\ProductNotInOpeningException;
 use App\Http\Requests\CartProductUpdateRequest;
@@ -12,21 +13,13 @@ use App\Models\User;
 
 class CartController extends Controller
 {
-    public function index(FindCurrentOpening $currentOpening)
+    public function index(CartCost $cartCost, FindCurrentOpening $currentOpening)
     {
         /** @var User $user */
         $user = auth()->user();
 
-        $cost = $user->products->map(function ($product) {
-            if ($product->type === 'unit') {
-                return $product->quantity_cost * $product->pivot->quantity;
-            }
-
-            return $product->quantity_cost * $product->pivot->quantity * $product->weight_increment / 1000;
-        })->sum();
-
         return [
-            'cost'     => round($cost),
+            'cost'     => $cartCost->handle($user->products),
             'opening'  => $currentOpening->find(),
             'address'  => $user->cartAddress,
             'products' => $user->products,

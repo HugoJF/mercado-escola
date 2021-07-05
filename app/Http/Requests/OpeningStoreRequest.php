@@ -22,14 +22,4 @@ class OpeningStoreRequest extends FormRequest
             'max_pickup_orders'   => 'required|numeric|min:1',
         ];
     }
-
-    public function opensAt()
-    {
-        return Carbon::parse($this->input('opens_at'));
-    }
-
-    public function closesAt()
-    {
-        return Carbon::parse($this->input('closes_at'));
-    }
 }

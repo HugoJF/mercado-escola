@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Traits\HasProducts;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 /*
  * States:
@@ -20,6 +21,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Order extends Model
 {
+    use SoftDeletes;
     use HasFactory;
     use HasProducts;
 

@@ -25,7 +25,7 @@ class CreateNewOrder
         $this->currentOpening = $currentOpening;
     }
 
-    public function create()
+    public function handle()
     {
         return DB::transaction(fn() => $this->run());
     }

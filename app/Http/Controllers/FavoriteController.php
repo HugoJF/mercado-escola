@@ -28,7 +28,7 @@ class FavoriteController extends Controller
     {
         auth()->user()->favorites()->attach($product);
 
-        return response(null, 201);
+        return response()->noContent(201);
     }
 
     /**
@@ -42,6 +42,6 @@ class FavoriteController extends Controller
     {
         auth()->user()->favorites()->detach($product);
 
-        return response(null, 200);
+        return response()->noContent(200);
     }
 }

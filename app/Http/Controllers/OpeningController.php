@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Actions\Openings\CreateNewOpening;
 use App\Actions\Openings\FindCurrentOpening;
 use App\Actions\Openings\FindOverlappingOpenings;
 use App\Exceptions\OverlappingOpeningException;
@@ -37,29 +38,16 @@ class OpeningController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param FindOverlappingOpenings $overlappingOpenings
-     * @param OpeningStoreRequest     $request
+     * @param CreateNewOpening    $createNewOpening
+     * @param OpeningStoreRequest $request
      *
      * @return OpeningResource
      */
     public function store(
-        FindOverlappingOpenings $overlappingOpenings,
+        CreateNewOpening $createNewOpening,
         OpeningStoreRequest $request
     ) {
-
-        $overlap = $overlappingOpenings->find(
-            $request->opensAt(),
-            $request->closesAt(),
-        );
-
-        if ($overlap) {
-            throw new OverlappingOpeningException;
-        }
-
-        $opening = new Opening($request->validated());
-        $opening->save();
-
-        return new OpeningResource($opening);
+        return new OpeningResource($createNewOpening->handle($request->validated()));
     }
 
     /**

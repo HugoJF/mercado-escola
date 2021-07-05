@@ -2,12 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Actions\Products\CreateNewProduct;
+use App\Actions\Products\UpdateProduct;
 use App\Http\Resources\ProductResource;
 use App\Models\Product;
-use Exception;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
-use Spatie\MediaLibrary\MediaCollections\FileAdder;
 
 class ProductController extends Controller
 {
@@ -18,33 +17,18 @@ class ProductController extends Controller
 
     public function index(Request $request)
     {
+        $query = Product::query();
+
         if ($ids = $request->input('id')) {
-            return ProductResource::collection(Product::query()->findMany($ids));
-        } else {
-            return ProductResource::collection(Product::get());
+            return ProductResource::collection($query->whereKey($ids));
         }
+
+        return ProductResource::collection($query->get());
     }
 
-    public function store(Request $request)
+    public function store(CreateNewProduct $createNewProduct, Request $request)
     {
-        try {
-            DB::beginTransaction();
-
-            $product = new Product($request->all());
-            $product->save();
-
-            if ($request->hasFile('images')) {
-                $product->addMultipleMediaFromRequest(['images'])
-                        ->each(fn(FileAdder $file) => $file->toMediaCollection());
-            }
-
-            DB::commit();
-        } catch (Exception $e) {
-            DB::rollBack();
-            throw $e;
-        }
-
-        return new ProductResource($product);
+        return new ProductResource($createNewProduct->handle($request->all()));
     }
 
     public function show(Product $product)
@@ -52,16 +36,9 @@ class ProductController extends Controller
         return new ProductResource($product);
     }
 
-    public function update(Request $request, Product $product)
+    public function update(UpdateProduct $updateProduct, Request $request, Product $product)
     {
-        $product->update($request->input());
-
-        if ($request->hasFile('images')) {
-            $product->addMultipleMediaFromRequest(['images'])
-                    ->each(fn(FileAdder $file) => $file->toMediaCollection());
-        }
-
-        return new ProductResource($product);
+        return new ProductResource($updateProduct->handle($product, $request->all()));
     }
 
     public function destroy(Product $product)

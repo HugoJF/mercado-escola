@@ -2,14 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Actions\Orders\CancelOrder;
 use App\Actions\Orders\CreateNewOrder;
-use App\Exceptions\OrderAlreadyCancelledException;
-use App\Exceptions\OrderCannotBeCancelledException;
 use App\Http\Requests\OrderUpdateRequest;
 use App\Http\Resources\OrderResource;
 use App\Models\Order;
 use Exception;
-use Illuminate\Http\Request;
 
 class OrderController extends Controller
 {
@@ -31,30 +29,24 @@ class OrderController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param Request $request
+     * @param CreateNewOrder $createNewOrder
      *
      * @return OrderResource
-     * @throws Exception
      */
-    public function store(CreateNewOrder $newOrder)
+    public function store(CreateNewOrder $createNewOrder)
     {
-        return new OrderResource($newOrder->create());
+        return new OrderResource($createNewOrder->handle());
     }
 
-    public function cancel(Order $order)
+    /**
+     * @param CancelOrder $cancelOrder
+     * @param Order       $order
+     *
+     * @return OrderResource
+     */
+    public function cancel(CancelOrder $cancelOrder, Order $order)
     {
-        if ($order->state === Order::CANCELLED) {
-            throw new OrderAlreadyCancelledException($order);
-        }
-
-        if ($order->state !== Order::PENDING || $order->opening->closed()) {
-            throw new OrderCannotBeCancelledException($order);
-        }
-
-        $order->state = Order::CANCELLED;
-        $order->save();
-
-        return new OrderResource($order);
+        return new OrderResource($cancelOrder->handle($order));
     }
 
     /**

@@ -2,7 +2,7 @@
 
 namespace App\Http\Resources;
 
-use App\Models\Product;
+use App\Actions\Cart\CartCost;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class OrderResource extends JsonResource
@@ -16,35 +16,17 @@ class OrderResource extends JsonResource
      */
     public function toArray($request)
     {
+        /** @var CartCost $cartCost */
+        $cartCost = app(CartCost::class);
+
         $extra = [
             'products' => ProductResource::collection($this->products),
-            'total'    => round($this->orderCost()),
+            'total'    => $cartCost->handle($this->products),
         ];
 
         return array_merge(
             parent::toArray($request),
             $extra,
         );
-    }
-
-    protected function orderCost()
-    {
-        return $this->products->map(function (Product $product) {
-            if ($product->type === 'unit') {
-                return $this->byUnit($product);
-            }
-
-            return $this->byWeight($product);
-        })->sum();
-    }
-
-    protected function byUnit(Product $product)
-    {
-        return $product->pivot->quantity_cost * $product->pivot->quantity;
-    }
-
-    protected function byWeight(Product $product)
-    {
-        return $product->pivot->quantity * $product->weight_increment * $product->pivot->quantity_cost / 1000;
     }
 }

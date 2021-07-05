@@ -14,11 +14,7 @@ class MeController extends Controller
      */
     public function index()
     {
-        if (auth()->check()) {
-            $user = auth()->user();
-        } else {
-            $user = null;
-        }
+        $user = auth()->user();
 
         return response()->json(compact('user'));
     }
