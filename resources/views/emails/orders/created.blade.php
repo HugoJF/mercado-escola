@@ -16,8 +16,8 @@ Você receberá uma notificação **quando o pedido estiver pronto para ser reti
 
 | Produto       | Quantidade         | Custo  |
 | :------------ | :----------------: | -----: |
-@foreach ($order->products as $product)
-| {{ $product->name }} | {{ $product->pivot->quantity }} | R$ {{ number_format($product->quantity_cost * $product->pivot->quantity / 100, 2) }} |
+@foreach ($data as $row)
+| {{ $row['name'] }} | {{ $row['quantity'] }} | R$ {{ number_format($row['cost'] / 100, 2) }} |
 @endforeach
 
 <br>

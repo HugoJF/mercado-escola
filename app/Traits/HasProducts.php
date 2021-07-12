@@ -2,6 +2,7 @@
 
 namespace App\Traits;
 
+use App\Models\AttachedProduct;
 use App\Models\Product;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
 

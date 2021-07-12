@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Actions\Cart\CartCost;
 use App\Traits\HasProducts;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -58,6 +59,9 @@ class Order extends Model
 
     public function getTotalAttribute()
     {
-        return $this->products->reduce(fn ($total, $product) => $total + $product->quantity_cost * $product->pivot->quantity, 0);
+        /** @var CartCost $cartCost */
+        $cartCost = app(CartCost::class);
+
+        return $cartCost->handle($this->products);
     }
 }

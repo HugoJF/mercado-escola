@@ -20,15 +20,15 @@ class CartCost
         return round($cost, 2);
     }
 
-    protected function costByUnit(Product $product)
+    public function costByUnit(Product $product)
     {
         return $product->pivot->quantity_cost * $product->pivot->quantity;
     }
 
-    protected function costByWeight(Product $product)
+    public function costByWeight(Product $product)
     {
-        $kg = $product->pivot->quantity / 1000;
+        $kg = $product->pivot->quantity * $product->weight_increment / 1000;
 
-        return $kg * $product->weight_increment * $product->pivot->quantity_cost;
+        return $kg * $product->pivot->quantity_cost;
     }
 }
