@@ -22,6 +22,7 @@ export type OrderType<T = unknown> = T &
 
 export type OrdersProperties = {
     state: OrderStateEnum;
+    delivery_fee: number;
     opening_id: number;
     address_id: number;
 }
@@ -29,6 +30,7 @@ export type OrdersProperties = {
 export type OrdersComputedProperties = {
     id: string;
     total: number;
+    products_cost: number;
 }
 
 export type OrderRelationshipProperties = {

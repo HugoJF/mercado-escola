@@ -8,6 +8,7 @@ use App\Exceptions\ProductNotInOpeningException;
 use App\Http\Requests\CartProductUpdateRequest;
 use App\Http\Requests\CartUpdateRequest;
 use App\Http\Resources\ProductResource;
+use App\Models\Opening;
 use App\Models\Product;
 use App\Models\User;
 
@@ -17,10 +18,15 @@ class CartController extends Controller
     {
         /** @var User $user */
         $user = auth()->user();
+        /** @var Opening $opening */
+        $opening = $currentOpening->find();
+
+        $productsCost = $cartCost->handle($user->products);
+        $deliveryCost = $user->cartAddress ? $opening->delivery_fee : 0;
 
         return [
-            'cost'     => $cartCost->handle($user->products),
-            'opening'  => $currentOpening->find(),
+            'cost'     => $productsCost + $deliveryCost,
+            'opening'  => $opening,
             'address'  => $user->cartAddress,
             'products' => $user->products,
         ];

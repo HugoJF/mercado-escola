@@ -62,6 +62,6 @@ class Order extends Model
         /** @var ProductCost $cartCost */
         $cartCost = app(ProductCost::class);
 
-        return $cartCost->handle($this->products);
+        return $cartCost->handle($this->products) + $this->delivery_fee;
     }
 }

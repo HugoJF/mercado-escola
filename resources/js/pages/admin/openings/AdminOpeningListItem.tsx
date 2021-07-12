@@ -8,6 +8,7 @@ import {Box} from "../../../components/ui/Box";
 import {RotatingArrowRight} from "../../../components/ui/RotatingArrowRight";
 import {OpeningBadge} from "../../../components/openings/OpeningBadge";
 import {Date} from "../../../components/ui/Date";
+import {PriceFormatter} from "../../../components/ui/PriceFormatter";
 
 export type AdminOpeningListItemProps = {
     opening: OpeningType;
@@ -90,6 +91,14 @@ export const AdminOpeningListItem: React.FC<AdminOpeningListItemProps>
                         {/* Product quantity */}
                         <li className="text-center">
                             {opening.products.length} produtos
+                        </li>
+
+                        {/* Separator */}
+                        <span className="mx-2 font-bold text-gray-300">·</span>
+
+                        {/* Product quantity */}
+                        <li className="text-center">
+                            Entrega de <PriceFormatter price={opening.delivery_fee} cents/>
                         </li>
                     </ul>
                 </div>

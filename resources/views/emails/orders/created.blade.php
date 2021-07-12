@@ -23,6 +23,10 @@ Você receberá uma notificação **quando o pedido estiver pronto para ser reti
 <br>
 <br>
 
+@if($order->address)
+**Taxa de entrega:** R$ {{ number_format($order->delivery_fee / 100, 2) }}
+@endif
+
 **Custo total:** R$ {{ number_format($order->total / 100, 2) }}
 
 @component('mail::button', ['url' => '/pedidos/' . $order->id])

@@ -55,10 +55,20 @@ export const OrdersShow: React.FC<OrdersShowProps> = ({order, onCancel}) => {
             <div className="my-6 flex items-center">
                 <DollarSign className="mr-4 flex-shrink-0 text-gray-500"/>
                 <p className="text-gray-500">
+                    {/* Product price */}
                     <span className="mr-1 text-secondary-500 font-medium">
-                        <PriceFormatter price={order.total} cents/>
+                        <PriceFormatter price={order.products_cost} cents/>
                     </span>
                     em {order.products.length} {order.products.length === 1 ? 'item' : 'items'}
+
+                    {/* Delivery fee */}
+                    {order.address && <>
+                        <span className="mx-1 font-medium">+</span>
+                        <span className="mr-1 text-secondary-500 font-medium">
+                            <PriceFormatter price={order.delivery_fee} cents/>
+                        </span>
+                        <span>taxa de entrega</span>
+                    </>}
                 </p>
             </div>
 

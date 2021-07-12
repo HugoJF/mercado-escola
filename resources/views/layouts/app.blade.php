@@ -12,10 +12,6 @@
     <!-- Web app manifest -->
     <link rel="manifest" href="/manifest.json">
 
-    <!-- Fonts -->
-    <link rel="dns-prefetch" href="//fonts.gstatic.com">
-    <link href="//fonts.googleapis.com/css?family=Inter&subset=latin" rel="stylesheet" type="text/css">
-
     <!-- Styles -->
     <link href="{{ mix('css/app.css') }}" rel="stylesheet">
 

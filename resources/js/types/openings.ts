@@ -15,6 +15,7 @@ export type OpeningType<T = unknown> = T
     & Timestamps;
 
 export type OpeningProperties = {
+    delivery_fee: number;
     max_delivery_orders: number;
     max_pickup_orders: number;
     opens_at: string;
