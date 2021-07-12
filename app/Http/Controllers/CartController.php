@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Actions\Cart\CartCost;
+use App\Actions\Cart\ProductCost;
 use App\Actions\Openings\FindCurrentOpening;
 use App\Exceptions\ProductNotInOpeningException;
 use App\Http\Requests\CartProductUpdateRequest;
@@ -13,7 +13,7 @@ use App\Models\User;
 
 class CartController extends Controller
 {
-    public function index(CartCost $cartCost, FindCurrentOpening $currentOpening)
+    public function index(ProductCost $cartCost, FindCurrentOpening $currentOpening)
     {
         /** @var User $user */
         $user = auth()->user();

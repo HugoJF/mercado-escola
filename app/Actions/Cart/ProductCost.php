@@ -5,7 +5,7 @@ namespace App\Actions\Cart;
 use App\Models\Product;
 use Illuminate\Support\Collection;
 
-class CartCost
+class ProductCost
 {
     public function handle(Collection $products)
     {

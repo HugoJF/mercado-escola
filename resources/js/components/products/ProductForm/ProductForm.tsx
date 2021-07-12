@@ -126,11 +126,10 @@ export const ProductForm: React.FC<ProductFormProps>
                 {Object.entries(product?.media_links ?? {}).map(([id, url]) =>
                     <li
                         key={url}
-                        className="relative flex items-center justify-center
-                                border-4 border-gray-300 rounded-lg"
+                        className="relative flex items-center justify-center rounded-lg shadow"
                     >
                         <img
-                            className="rounded"
+                            className="rounded-lg"
                             onClick={() => removeExistingImage(parseInt(id))}
                             src={url}
                             alt={product?.name}
@@ -214,7 +213,7 @@ export const ProductForm: React.FC<ProductFormProps>
                         className="duration-150 block py-4
                         peer-checked:bg-blue-500 peer-checked:text-white
                         text-lg text-center font-medium hover:bg-gray-200
-                        border border-r-0 rounded-l-lg cursor-pointer"
+                        border border-r-0 border-gray-300 rounded-l-lg cursor-pointer"
                         htmlFor="type-unit"
                     >
                         Por unidade
@@ -233,7 +232,7 @@ export const ProductForm: React.FC<ProductFormProps>
                         className="duration-150 block py-4
                         peer-checked:bg-blue-500 peer-checked:text-white
                         text-lg text-center font-medium hover:bg-gray-200
-                        border border-l-0 rounded-r-lg cursor-pointer"
+                        border border-l-0 border-gray-300 rounded-r-lg cursor-pointer"
                         htmlFor="type-weight"
                     >
                         Por peso

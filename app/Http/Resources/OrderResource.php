@@ -2,7 +2,7 @@
 
 namespace App\Http\Resources;
 
-use App\Actions\Cart\CartCost;
+use App\Actions\Cart\ProductCost;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class OrderResource extends JsonResource
@@ -16,8 +16,8 @@ class OrderResource extends JsonResource
      */
     public function toArray($request)
     {
-        /** @var CartCost $cartCost */
-        $cartCost = app(CartCost::class);
+        /** @var ProductCost $cartCost */
+        $cartCost = app(ProductCost::class);
 
         $extra = [
             'products' => ProductResource::collection($this->products),

@@ -2,7 +2,7 @@
 
 namespace App\Mail;
 
-use App\Actions\Cart\CartCost;
+use App\Actions\Cart\ProductCost;
 use App\Models\Order;
 use App\Models\Product;
 use Illuminate\Bus\Queueable;
@@ -14,7 +14,7 @@ class OrderCreated extends Mailable
     use Queueable, SerializesModels;
 
     public Order $order;
-    protected CartCost $cost;
+    protected ProductCost $cost;
 
     /**
      * Create a new message instance.
@@ -24,7 +24,7 @@ class OrderCreated extends Mailable
     public function __construct(Order $order)
     {
         $this->order = $order;
-        $this->cost = app(CartCost::class);
+        $this->cost = app(ProductCost::class);
     }
 
     /**

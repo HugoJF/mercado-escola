@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use App\Actions\Cart\CartCost;
+use App\Actions\Cart\ProductCost;
 use App\Traits\HasProducts;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -59,8 +59,8 @@ class Order extends Model
 
     public function getTotalAttribute()
     {
-        /** @var CartCost $cartCost */
-        $cartCost = app(CartCost::class);
+        /** @var ProductCost $cartCost */
+        $cartCost = app(ProductCost::class);
 
         return $cartCost->handle($this->products);
     }
