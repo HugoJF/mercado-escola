@@ -19,9 +19,12 @@ class OrderResource extends JsonResource
         /** @var ProductCost $cartCost */
         $cartCost = app(ProductCost::class);
 
+        $productsCost = $cartCost->handle($this->products);
+
         $extra = [
-            'products' => ProductResource::collection($this->products),
-            'total'    => $cartCost->handle($this->products),
+            'products'      => ProductResource::collection($this->products),
+            'products_cost' => $productsCost,
+            'total'         => $productsCost + $this->delivery_fee,
         ];
 
         return array_merge(

@@ -99,6 +99,9 @@ class CreateNewOrder
     {
         $order = new Order;
 
+        if ($user->cartAddress) {
+            $order->delivery_fee = $opening->delivery_fee;
+        }
         $order->state = Order::PENDING;
         $order->address()->associate($user->cartAddress);
         $order->opening()->associate($opening);

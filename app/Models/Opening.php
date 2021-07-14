@@ -11,9 +11,10 @@ class Opening extends Model
     use HasFactory;
 
     protected $fillable = [
-        'opens_at',
+        'delivery_fee',
         'max_delivery_orders',
         'max_pickup_orders',
+        'opens_at',
         'closes_at',
         'delivers_at',
     ];

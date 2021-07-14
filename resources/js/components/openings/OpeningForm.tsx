@@ -2,7 +2,7 @@ import React, {useEffect, useState} from "react";
 import {Input} from "../form/Input";
 import {DateTimePicker} from "@material-ui/pickers";
 import {Button} from "../ui/Button";
-import {useForm} from "react-hook-form";
+import {Controller, useForm} from "react-hook-form";
 import {OpeningProperties, OpeningType} from "../../types/openings";
 import useLoading from "../../hooks/useLoading";
 import {FieldWrapper} from "../form/FieldWrapper";
@@ -19,7 +19,7 @@ export const OpeningForm: React.FC<OpeningFormProps> = ({opening, onSubmit, acti
     const [opensAt, setOpensAt] = useState(new Date);
     const [closesAt, setClosesAt] = useState(new Date);
     const [deliversAt, setDeliversAt] = useState(new Date);
-    const {register, handleSubmit, errors, setError, setValue} = useForm<OpeningProperties>();
+    const {register, handleSubmit, errors, control, setError, setValue} = useForm<OpeningProperties>();
 
     async function submit(data: OpeningProperties) {
         load(async () => {
@@ -61,6 +61,24 @@ export const OpeningForm: React.FC<OpeningFormProps> = ({opening, onSubmit, acti
     }
 
     return <form className="space-y-4" onSubmit={handleSubmit(submit)}>
+        <Controller
+            name="delivery_fee"
+            control={control}
+            render={({value, onChange}) => <Input
+                name="delivery_fee"
+                label="Taxa de entrega"
+                error={errors.delivery_fee}
+                inputProps={{
+                    type: 'number',
+                    min: 0,
+                    step: 0.01,
+                    // TODO: replace . with , to avoid problems with decimal separators
+                    onChange: e => onChange(parseFloat(e.currentTarget.value ?? '0') * 100),
+                    value: value / 100
+                }}
+            />}
+        />
+
         <Input
             name="max_delivery_orders"
             label="Quantidade máxima de pedidos delivery"

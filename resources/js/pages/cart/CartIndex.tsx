@@ -1,4 +1,4 @@
-import React, {useMemo} from "react";
+import React from "react";
 import {Link} from "react-router-dom";
 import {Button} from "../../components/ui/Button";
 import {Title} from "../../components/ui/Title";
@@ -8,9 +8,7 @@ import {PriceFormatter} from "../../components/ui/PriceFormatter";
 import {ShippingOptionActionMenu} from "../../action-menus/ShippingOptionActionMenu";
 import clsx from 'clsx';
 import {PagePadding} from "../../containers/PagePadding";
-import {AddressType} from "../../types/addresses";
-import {OpeningType} from "../../types/openings";
-import {CartType, PivotCartProductsUser} from "../../types/cart";
+import {CartType} from "../../types/cart";
 import {ProductListSummary} from "../../components/products/ProductListSummary";
 import {Date} from "../../components/ui/Date";
 import useNavigation from "../../hooks/useNavigation";
@@ -59,16 +57,24 @@ export const CartIndex: React.FC<CartIndexProps>
             </div>
 
             <Link
-                className="block py-4 text-center text-base text-secondary-500 font-medium border-b border-gray-200"
+                className="block py-4 mb-8 text-center text-base text-secondary-500 font-medium border-b border-gray-200"
                 to="/home"
             >
                 Adicionar mais itens
             </Link>
 
+            {/* Delivery fee */}
+            {cart.address && <div className="mb-4 flex justify-between items-baseline">
+                <span className="text-gray-500">Taxa de entrega</span>
+                <span className="text-secondary-500">
+                    <PriceFormatter cents price={cart.opening.delivery_fee}/>
+                </span>
+            </div>}
+
 
             {/* Total cost */}
-            <div className="my-8 flex justify-between items-baseline text-xl">
-                <span className="text-gray-500">Valor total</span>
+            <div className="mb-8 flex justify-between items-baseline text-xl">
+                <span className="text-gray-700">Valor total</span>
                 <span className="text-secondary-500 font-medium">
                     <PriceFormatter cents price={total}/>
                 </span>
