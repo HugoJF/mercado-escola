@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {useParams} from "react-router";
-import {isEmpty} from "../helpers/Functions";
+import isEmpty from "lodash.isempty";
 import {Loading} from "../components/ui/Loading";
 import {ProductHeader} from "./ProductHeader";
 import {useProduct} from "../queries/useProduct";

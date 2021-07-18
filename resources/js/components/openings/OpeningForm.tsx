@@ -19,7 +19,7 @@ export const OpeningForm: React.FC<OpeningFormProps> = ({opening, onSubmit, acti
     const [opensAt, setOpensAt] = useState(new Date);
     const [closesAt, setClosesAt] = useState(new Date);
     const [deliversAt, setDeliversAt] = useState(new Date);
-    const {register, handleSubmit, errors, control, setError, setValue} = useForm<OpeningProperties>();
+    const {register, handleSubmit, formState: {errors}, control, setError, setValue} = useForm<OpeningProperties>();
 
     async function submit(data: OpeningProperties) {
         load(async () => {
@@ -64,7 +64,7 @@ export const OpeningForm: React.FC<OpeningFormProps> = ({opening, onSubmit, acti
         <Controller
             name="delivery_fee"
             control={control}
-            render={({value, onChange}) => <Input
+            render={({field: {value, onChange}}) => <Input
                 name="delivery_fee"
                 label="Taxa de entrega"
                 error={errors.delivery_fee}
@@ -84,7 +84,7 @@ export const OpeningForm: React.FC<OpeningFormProps> = ({opening, onSubmit, acti
             label="Quantidade máxima de pedidos delivery"
             error={errors.max_delivery_orders}
             inputProps={{
-                ref: register({required: 'Digite quantidade máxima de pedidos delivery'}),
+                ...register('max_delivery_orders', {required: 'Digite quantidade máxima de pedidos delivery'}),
                 min: 0,
                 type: 'number',
             }}
@@ -95,7 +95,7 @@ export const OpeningForm: React.FC<OpeningFormProps> = ({opening, onSubmit, acti
             label="Quantidade máxima de pedidos retirada"
             error={errors.max_pickup_orders}
             inputProps={{
-                ref: register({required: 'Digite quantidade máxima de pedidos retirada'}),
+                ...register('max_pickup_orders', {required: 'Digite quantidade máxima de pedidos retirada'}),
                 min: 0,
                 type: 'number',
             }}

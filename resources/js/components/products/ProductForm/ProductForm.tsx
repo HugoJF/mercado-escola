@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react";
-import {Controller, useForm} from "react-hook-form";
+import {useForm} from "react-hook-form";
 import {ProductProperties, ProductType} from "../../../types/products";
 import {Input} from "../../form/Input";
 import {Textarea} from "../../form/Textarea";
@@ -11,6 +11,7 @@ import {useProductDestroyMedia} from "../../../mutations/useProductDestroyMedia"
 import useLoading from "../../../hooks/useLoading";
 import {ProductFormUnit} from "./ProductFormUnit";
 import {ProductFormWeight} from "./ProductFormWeight";
+import isEmpty from "lodash.isempty";
 
 export type ProductFormProps = {
     product?: ProductType;
@@ -23,9 +24,12 @@ type FileWithPreview = { file: File, preview: string };
 export const ProductForm: React.FC<ProductFormProps>
     = ({onSubmit, product, action}) => {
     const {loading, load} = useLoading();
-    const {register, handleSubmit, errors, setError, setValue, watch, control} = useForm<ProductProperties>({
-        defaultValues: product,
-    });
+    const {register, handleSubmit, formState: {errors}, setError, setValue, watch, control} = useForm<ProductProperties>(
+        {
+            defaultValues: product,
+            mode: "onChange",
+        }
+    );
     const [menu, confirm] = useConfirmMenu();
     const [uploadingFiles, setUploadingFiles] = useState<FileWithPreview[]>([]);
     const {getRootProps, getInputProps} = useDropzone({
@@ -175,7 +179,7 @@ export const ProductForm: React.FC<ProductFormProps>
                 label="Nome"
                 error={errors.name}
                 inputProps={{
-                    ref: register({required: 'Digite o nome do produto'}),
+                    ...register('name', {required: 'Digite o nome do produto'}),
                     placeholder: "Digite o nome do produto...",
                 }}
             />
@@ -187,9 +191,7 @@ export const ProductForm: React.FC<ProductFormProps>
                 name="description"
                 label="Descrição"
                 error={errors.description}
-                textAreaProps={{
-                    ref: register({required: 'Digite a descrição do produto'}),
-                }}
+                textAreaProps={register('description', {required: 'Digite a descrição do produto'})}
             />
         </div>
 
@@ -204,10 +206,9 @@ export const ProductForm: React.FC<ProductFormProps>
                     <input
                         className="appearance-none peer sr-only"
                         id="type-unit"
-                        name="type"
                         type="radio"
                         value="unit"
-                        ref={register}
+                        {...register('type')}
                     />
                     <label
                         className="duration-150 block py-4
@@ -223,10 +224,9 @@ export const ProductForm: React.FC<ProductFormProps>
                     <input
                         className="appearance-none peer sr-only"
                         id="type-weight"
-                        name="type"
                         type="radio"
                         value="weight"
-                        ref={register}
+                        {...register('type')}
                     />
                     <label
                         className="duration-150 block py-4
@@ -253,7 +253,7 @@ export const ProductForm: React.FC<ProductFormProps>
             register={register}
         />}
 
-        <Button className="w-full" loading={loading}>
+        <Button enabled={isEmpty(errors)} className="w-full" loading={loading}>
             {action}
         </Button>
     </form>

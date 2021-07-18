@@ -17,9 +17,9 @@ export const Input: React.FC<InputProps> = ({name, label, description, disabled 
         <input
             className={clsx(
                 'transition-colors duration-300',
-                'block w-full py-3 px-4 placeholder-gray-400',
-                'border-b border-lg rounded-lg', {
-                    'border-red-500': error,
+                'block w-full py-3 px-4 placeholder-gray-400 rounded-lg', {
+                    'border-b': !error,
+                    'border border-red-500': error,
                     'bg-gray-300 text-gray-500': disabled,
                     'bg-white text-black': !disabled,
                 },

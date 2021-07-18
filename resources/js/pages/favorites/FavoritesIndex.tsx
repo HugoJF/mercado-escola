@@ -5,7 +5,7 @@ import {ProductList} from "../../components/products/ProductList";
 import {Empty} from "../../components/ui/Empty";
 import {PagePadding} from "../../containers/PagePadding";
 import {ProductType} from "../../types/products";
-import {isEmpty} from "../../helpers/Functions";
+import isEmpty from "lodash.isempty";
 
 export type FavoritesIndexProps = {
     favorites: ProductType[];

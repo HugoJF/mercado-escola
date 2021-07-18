@@ -26,13 +26,14 @@ export const FieldWrapper: React.FC<FieldWrapperProps> = ({name, label, descript
         {children}
 
         {
-            description &&
+            description && !error &&
             <p className="text-sm text-gray-600">{description}</p>
         }
 
         {
             error &&
-            <p className="text-sm text-red-500 font-medium">{error.message}</p>
+            <p className="text-sm text-red-500 font-bold">{error.message}</p>
         }
+
     </>
 };

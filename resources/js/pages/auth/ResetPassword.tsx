@@ -28,7 +28,7 @@ export const ResetPassword: React.FC<object> = () => {
     const location = useLocation();
     const {go} = useNavigation();
     const [loading, setLoading] = useState(false);
-    const {register, handleSubmit, setError, watch, errors} = useForm<Form>();
+    const {register, handleSubmit, setError, watch, formState: {errors}} = useForm<Form>();
 
     const parsed = useMemo(() => queryString.parse(location.search), [location]);
     const email = parsed.email as string;
@@ -89,7 +89,7 @@ export const ResetPassword: React.FC<object> = () => {
                             label="Senha"
                             error={errors.password}
                             inputProps={{
-                                ref: register({required: 'Digite a sua nova senha'}),
+                                ...register('password', {required: 'Digite a sua nova senha'}),
                                 placeholder: 'Digite a sua nova senha',
                                 type: 'password',
                             }}
@@ -103,7 +103,7 @@ export const ResetPassword: React.FC<object> = () => {
                             label="Confirmação da senha"
                             error={errors.password_confirmation}
                             inputProps={{
-                                ref: register({
+                                ...register('password_confirmation', {
                                     required: true,
                                     validate: p => p === watch('password') || 'As senhas não conferem',
                                 }),

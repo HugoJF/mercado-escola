@@ -16,8 +16,11 @@ export const Textarea: React.FC<TextareaProps> = ({name, label, textAreaProps, e
             className={clsx(
                 'transition-colors duration-300',
                 'block w-full py-3 px-4 text-black',
-                'bg-white border-b border-lg rounded-lg',
-                {'border-red-500': error}
+                'bg-white rounded-lg',
+                {
+                    'border-b': !error,
+                    'border border-red-500': error
+                }
             )}
             id={name}
             name={name}

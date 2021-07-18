@@ -7,7 +7,7 @@ import {AdminProductList} from "./AdminProductList";
 import {Empty} from "../../../components/ui/Empty";
 import {Title} from "../../../components/ui/Title";
 import {PagePadding} from "../../../containers/PagePadding";
-import {isEmpty} from "../../../helpers/Functions";
+import isEmpty from "lodash.isempty";
 
 export type AdminProductIndexProps = {
     products: ProductType[];
