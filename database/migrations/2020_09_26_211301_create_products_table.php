@@ -19,13 +19,8 @@ class CreateProductsTable extends Migration
             $table->string('name');
             $table->mediumText('description')->nullable();
 
-            $table->enum('type', ['weight', 'unit']);
+            $table->string('quantity_type');
             $table->unsignedInteger('quantity_cost'); // cents per unit|kg
-
-            $table->string('unit_name_singular')->nullable();
-            $table->string('unit_name_plural')->nullable();
-
-            $table->unsignedInteger('weight_increment')->nullable(); // grams
 
             $table->softDeletes();
             $table->timestamps();
