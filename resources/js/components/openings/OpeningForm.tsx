@@ -73,8 +73,8 @@ export const OpeningForm: React.FC<OpeningFormProps> = ({opening, onSubmit, acti
                     min: 0,
                     step: 0.01,
                     // TODO: replace . with , to avoid problems with decimal separators
-                    onChange: e => onChange(parseFloat(e.currentTarget.value ?? '0') * 100),
-                    value: value / 100
+                    onChange: e => onChange(parseFloat(e.currentTarget.value ?? '0')),
+                    value: value
                 }}
             />}
         />
