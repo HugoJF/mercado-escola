@@ -1,28 +1,24 @@
-import React, {useEffect, useState} from 'react';
-import InputMask, {Props} from "react-input-mask";
+import React from 'react';
+import InputMask from "react-input-mask";
+import {Controller} from "react-hook-form";
 
-type KeysToOmit = keyof { value: any, onChange: any };
-type NewProps = {
-    initialValue?: string;
+type Props = {
+    id: string;
+    className: string;
+    name: string;
+    control: any;
 }
 
-export type PhoneInputProps = Omit<Props & NewProps, KeysToOmit>
-
-export const PhoneInput: React.FC<PhoneInputProps> = React.forwardRef(({initialValue, ...rest}, ref) => {
-    const [phone, setPhone] = useState(initialValue ?? '');
-
-    useEffect(() => {
-        if (initialValue) {
-            setPhone(initialValue);
-        }
-    }, [initialValue]);
-
-    return <InputMask
-        value={phone}
-        onChange={(e) => setPhone(e.currentTarget.value)}
-        maskPlaceholder=" "
-        /* @ts-ignore */
-        ref={ref}
-        {...rest}
+export const PhoneInput: React.FC<Props> = ({id, className, name, control}) => {
+    return <Controller
+        name={name}
+        control={control}
+        render={({field: {value, onChange}}) => <InputMask
+            id={id}
+            className={className}
+            value={value}
+            onChange={(e) => onChange(e.currentTarget.value)}
+            mask="(67) 9 9999 9999"
+        />}
     />
-});
+};

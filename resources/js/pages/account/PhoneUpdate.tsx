@@ -1,14 +1,14 @@
 import React, {useEffect, useState} from "react";
-import {useDispatch} from "react-redux";
-import {Dispatch} from "../../store";
-import {Title} from "../../components/ui/Title";
+import clsx from "clsx";
 import {Loader} from "react-feather";
 import {useForm} from "react-hook-form";
-import {useAuth} from "../../selectors";
-import clsx from "clsx";
+import {useDispatch} from "react-redux";
+import {Title} from "../../components/ui/Title";
 import {PhoneInput} from "../../components/form/PhoneInput";
 import {PagePadding} from "../../containers/PagePadding";
 import useNavigation from "../../hooks/useNavigation";
+import {useAuth} from "../../selectors";
+import {Dispatch} from "../../store";
 
 type PhoneUpdateForm = {
     phone: string;
@@ -20,14 +20,13 @@ export const PhoneUpdate: React.FC = () => {
     const {goBack} = useNavigation();
     const [loading, setLoading] = useState(false);
 
-    const {register, handleSubmit, formState: {errors}, setValue} = useForm<PhoneUpdateForm>();
+    const {handleSubmit, control, formState: {errors}, setValue} = useForm<PhoneUpdateForm>();
 
     useEffect(() => {
         if (auth.me?.phone) {
             setValue('phone', auth.me.phone);
         }
     }, [setValue, auth.me?.phone]);
-
 
     async function updatePhone(data: PhoneUpdateForm) {
         setLoading(true);
@@ -50,6 +49,7 @@ export const PhoneUpdate: React.FC = () => {
             >
                 Telefone
             </label>
+
             <PhoneInput
                 className={clsx(
                     `transition-colors duration-300 block w-full mb-8 py-3 px-4 bg-white text-black bg-white border-b border-lg rounded-lg`,
@@ -58,11 +58,8 @@ export const PhoneUpdate: React.FC = () => {
                     }
                 )}
                 id="phone"
-                type="text"
-                mask="(67) 9 9999 9999"
-                /* This is needed in order to also update react-input-mask state, since react-hook-form operates directly on the DOM */
-                initialValue={auth.me?.phone ?? ''}
-                {...register('phone', {required: true})}
+                name="phone"
+                control={control}
             />
 
             <button className="w-full py-4 bg-primary-500 text-center text-xl text-white font-medium rounded-lg">
