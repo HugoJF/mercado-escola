@@ -7,6 +7,7 @@ use App\Models\Opening;
 use App\Models\Order;
 use App\Models\Product;
 use App\Models\User;
+use Exception;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -20,9 +21,9 @@ class DatabaseSeeder extends Seeder
     {
         /** @var User $user */
         $user = User::factory()->create([
-            'email'    => 'asd@asd.com',
+            'email' => 'asd@asd.com',
             'password' => bcrypt('123123123'),
-            'admin'    => true,
+            'admin' => true,
         ]);
         $addresses = Address::factory()->count(5)->create();
         $opening = Opening::factory()->create();
@@ -34,6 +35,12 @@ class DatabaseSeeder extends Seeder
 
             foreach (range(0, $images) as $i) {
                 $image = file_get_contents("https://picsum.photos/500/500");
+                try {
+                    mkdir(storage_path("app/seed"), 0777, true);
+                } catch (Exception $e) {
+
+                }
+
                 file_put_contents(storage_path("app/seed/image.jpg"), $image);
 
                 $media = $product->addMedia(storage_path("app/seed/image.jpg"));
@@ -47,7 +54,7 @@ class DatabaseSeeder extends Seeder
         $orders = Order::factory([
             'opening_id' => $opening->id,
             'address_id' => $addresses->random()->id,
-            'user_id'    => $user->id,
+            'user_id' => $user->id,
         ])->count(5)->create();
 
         /** @var Order $order */
@@ -56,7 +63,7 @@ class DatabaseSeeder extends Seeder
                 ->random(random_int(2, 5))
                 ->keyBy(fn($product) => $product->id)
                 ->map(fn() => [
-                    'quantity'      => random_int(2, 5),
+                    'quantity' => random_int(2, 5),
                     'quantity_cost' => random_int(5, 150),
                 ]);
             $order->products()->sync($p);
