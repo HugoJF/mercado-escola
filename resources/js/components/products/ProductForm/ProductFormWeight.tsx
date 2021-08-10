@@ -19,7 +19,7 @@ export const ProductFormWeight: React.FC<ProductFormWeightProps> = ({errors, con
                     description="Múltiplos em que o usuário poderá escolher (ex: 400 irá deixar o usuário selecionar 400g, 800g, 1200g, etc)"
                     error={errors.weight_increment}
                     inputProps={{
-                        ref: register,
+                        ...register('weight_increment'),
                         type: 'number',
                         min: 0,
                         step: 0.001,
@@ -32,17 +32,16 @@ export const ProductFormWeight: React.FC<ProductFormWeightProps> = ({errors, con
                     name="quantity_cost"
                     rules={{required: 'Digite o preço (em R$) de 1 unidade do produto'}}
                     control={control}
-                    render={({onChange, value}) => <Input
+                    render={({field: {value, onChange}}) => <Input
                         name="quantity_cost"
                         label="Preço por quilograma"
                         error={errors.quantity_cost}
                         inputProps={{
                             type: 'number',
                             min: 0,
-                            step: 0.001,
-                            // TODO: replace . with , to avoid problems with decimal separators
-                            onChange: val => onChange(parseFloat(val.currentTarget.value ?? '0') * 100),
-                            value: value / 100,
+                            step: 0.01,
+                            onChange: event => onChange(event.currentTarget.value),
+                            value: value,
                         }}
                     />}
                 />

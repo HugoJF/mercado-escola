@@ -17,7 +17,7 @@ export const ForgotPassword: React.FC<object> = () => {
     const dispatch = useDispatch<Dispatch>();
     const {go} = useNavigation();
     const [loading, setLoading] = useState(false);
-    const {register, handleSubmit, setError, errors} = useForm<Form>();
+    const {register, handleSubmit, setError, formState: {errors}} = useForm<Form>();
 
     function setErrors(errors: Errors<Form>) {
         for (let [key, messages] of Object.entries(errors)) {
@@ -49,7 +49,7 @@ export const ForgotPassword: React.FC<object> = () => {
                             label="Email"
                             error={errors.email}
                             inputProps={{
-                                ref: register({required: 'Digite o email da sua conta'}),
+                                ...register('email', {required: 'Digite o email da sua conta'}),
                                 placeholder: 'Digite o email da sua conta',
                                 type: 'email',
                             }}

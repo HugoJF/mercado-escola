@@ -17,7 +17,7 @@ export const OnBoarding1: React.FC = () => {
     const dispatch = useDispatch();
     const [loading, setLoading] = useState(false);
     const {go} = useNavigation();
-    const {register, handleSubmit, errors} = useForm<PhoneUpdateForm>();
+    const {register, handleSubmit, formState: {errors}} = useForm<PhoneUpdateForm>();
 
     useEffect(() => {
         if (auth.me?.phone) {
@@ -52,11 +52,9 @@ export const OnBoarding1: React.FC = () => {
             <PhoneInput
                 className={`transition-colors duration-300 block w-full mb-8 py-3 px-4 text-white bg-transparent border-b border-lg${errors.phone ? ' border-red-500' : ''}`}
                 id="phone"
-                name="phone"
                 type="text"
                 mask="(67) 9 9999 9999"
-                /* @ts-ignore */
-                ref={register({required: true})}
+                {...register('phone', {required: true})}
             />
 
             <button className="w-full py-4 text-center text-xl text-white font-medium border-2 border-white rounded-lg">

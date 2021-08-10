@@ -6,7 +6,7 @@ import {Title} from "../../../components/ui/Title";
 import {PagePadding} from "../../../containers/PagePadding";
 import useNavigation from "../../../hooks/useNavigation";
 import {AdminOpeningList} from "./AdminOpeningList";
-import {isEmpty} from "../../../helpers/Functions";
+import isEmpty from "lodash.isempty";
 import {Empty} from "../../../components/ui/Empty";
 
 export type AdminOpeningIndexProps = {

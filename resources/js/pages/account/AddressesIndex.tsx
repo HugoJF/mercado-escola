@@ -7,7 +7,7 @@ import {PagePadding} from "../../containers/PagePadding";
 import {AddressType} from "../../types/addresses";
 import {Empty} from "../../components/ui/Empty";
 import useNavigation from "../../hooks/useNavigation";
-import {isEmpty} from "../../helpers/Functions";
+import isEmpty from "lodash.isempty";
 
 export type AddressesIndexProps = {
     addresses: AddressType[];

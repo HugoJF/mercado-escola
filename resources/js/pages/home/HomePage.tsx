@@ -4,7 +4,7 @@ import {Link} from "react-router-dom";
 import {ProductList} from "../../components/products/ProductList";
 import {Empty} from "../../components/ui/Empty";
 import {PagePadding} from "../../containers/PagePadding";
-import {isEmpty} from "../../helpers/Functions";
+import isEmpty from "lodash.isempty";
 import {Loading} from "../../components/ui/Loading";
 import {useCurrentOpening} from "../../queries/useCurrentOpening";
 

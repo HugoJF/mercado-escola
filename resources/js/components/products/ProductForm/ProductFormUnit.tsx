@@ -2,6 +2,7 @@ import React from "react";
 import {Input} from "../../form/Input";
 import {Controller, DeepMap, FieldError} from "react-hook-form";
 import {ProductProperties} from "../../../types/products";
+import {isValidNumber, parseNumber} from "../../../helpers/Functions";
 
 type ProductFormUnitProps = {
     errors: DeepMap<ProductProperties, FieldError>;
@@ -17,9 +18,7 @@ export const ProductFormUnit: React.FC<ProductFormUnitProps> = ({errors, control
                 label="Nome da unidade no singular"
                 description="Exemplos: pacote de 12, bandeja, saco, dúzia, etc"
                 error={errors.unit_name_singular}
-                inputProps={{
-                    ref: register,
-                }}
+                inputProps={register('unit_name_singular', {required: 'Digite o nome da unidade'})}
             />
         </div>
 
@@ -29,9 +28,7 @@ export const ProductFormUnit: React.FC<ProductFormUnitProps> = ({errors, control
                 label="Nome da unidade no plural"
                 description="Exemplos: pacotes com 12, bandejas, sacos, dúzias, etc"
                 error={errors.unit_name_plural}
-                inputProps={{
-                    ref: register
-                }}
+                inputProps={register('unit_name_plural', {required: 'Digite o nome da unidade'})}
             />
         </div>
 
@@ -39,7 +36,13 @@ export const ProductFormUnit: React.FC<ProductFormUnitProps> = ({errors, control
             <Controller
                 name="quantity_cost"
                 control={control}
-                render={({value, onChange}) => <Input
+                rules={{
+                    required: 'Digite um valor',
+                    validate: {
+                        validNumber: value => isValidNumber(value) || 'Número inválido',
+                    }
+                }}
+                render={({field: {value, onChange}}) => <Input
                     name="quantity_cost"
                     label="Preço da unidade"
                     error={errors.quantity_cost}
@@ -47,9 +50,9 @@ export const ProductFormUnit: React.FC<ProductFormUnitProps> = ({errors, control
                         type: 'number',
                         min: 0,
                         step: 0.01,
-                        // TODO: replace . with , to avoid problems with decimal separators
-                        onChange: e => onChange(parseFloat(e.currentTarget.value ?? '0') * 100),
-                        value: value / 100
+                        onChange: event => onChange(event.currentTarget.value),
+                        onBlur: event => isValidNumber(event.currentTarget.value) && onChange(parseNumber(event.currentTarget.value)),
+                        value: value
                     }}
                 />}
             />

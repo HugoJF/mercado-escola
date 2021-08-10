@@ -16,7 +16,7 @@ export const Login: React.FC<object> = () => {
     const dispatch = useDispatch<Dispatch>();
     const {go} = useNavigation();
     const [loading, setLoading] = useState(false);
-    const {register, handleSubmit, errors} = useForm<LoginCredentials>();
+    const {register, handleSubmit, formState: {errors}} = useForm<LoginCredentials>();
 
     async function login(credentials: LoginCredentials) {
         setLoading(true);
@@ -48,9 +48,7 @@ export const Login: React.FC<object> = () => {
                             name="email"
                             label="Email"
                             error={errors.email}
-                            inputProps={{
-                                ref: register({required: true})
-                            }}
+                            inputProps={register('email', {required: 'Digite seu email'})}
                         />
                     </div>
 
@@ -60,7 +58,7 @@ export const Login: React.FC<object> = () => {
                             label="Senha"
                             error={errors.password}
                             inputProps={{
-                                ref: register({required: true}),
+                                ...register('password', {required: 'Digite a sua senha'}),
                                 type: 'password',
                             }}
                         />

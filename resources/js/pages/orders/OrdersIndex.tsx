@@ -2,7 +2,7 @@ import React from "react";
 import {Title} from "../../components/ui/Title";
 import {PagePadding} from "../../containers/PagePadding";
 import {Empty} from "../../components/ui/Empty";
-import {isEmpty} from "../../helpers/Functions";
+import isEmpty from "lodash.isempty";
 import {OrderType} from "../../types/orders";
 import {OrderList} from "./OrderList";
 import usePagination from "../../hooks/usePagination";

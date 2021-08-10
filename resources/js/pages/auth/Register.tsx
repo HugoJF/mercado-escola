@@ -14,7 +14,7 @@ export const Register: React.FC<object> = () => {
     const dispatch = useDispatch<Dispatch>();
     const {go} = useNavigation();
     const [loading, setLoading] = useState(false);
-    const {register, handleSubmit, watch, errors, setError} = useForm<RegisterCredentials>();
+    const {register, handleSubmit, watch, formState: {errors}, setError} = useForm<RegisterCredentials>();
 
     function setErrors(errors: object) {
         for (let [key, messages] of Object.entries(errors)) {
@@ -52,7 +52,7 @@ export const Register: React.FC<object> = () => {
                             label="Nome"
                             error={errors.name}
                             inputProps={{
-                                ref: register({required: 'Digite o seu nome'}),
+                                ...register('name', {required: 'Digite o seu nome'}),
                                 placeholder: 'Digite o seu nome',
                                 type: 'text',
                             }}
@@ -66,7 +66,7 @@ export const Register: React.FC<object> = () => {
                             label="Email"
                             error={errors.email}
                             inputProps={{
-                                ref: register({required: 'Digite um email para registrar'}),
+                                ...register('email', {required: 'Digite um email para registrar'}),
                                 placeholder: 'Digite um email para registrar',
                                 type: 'email',
                             }}
@@ -80,7 +80,7 @@ export const Register: React.FC<object> = () => {
                             label="Senha"
                             error={errors.password}
                             inputProps={{
-                                ref: register({required: 'Digite uma senha'}),
+                                ...register('password', {required: 'Digite uma senha'}),
                                 placeholder: 'Digite uma senha',
                                 type: 'password',
                             }}
@@ -94,7 +94,7 @@ export const Register: React.FC<object> = () => {
                             label="Confirmação da senha"
                             error={errors.password_confirmation}
                             inputProps={{
-                                ref: register({
+                                ...register('password_confirmation', {
                                     required: true,
                                     validate: p => p === watch('password') || 'As senhas não conferem',
                                 }),

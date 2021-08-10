@@ -8,7 +8,7 @@ import {useCartRemoveProduct} from "../../mutations/useCartRemoveProduct";
 import {useCartProduct} from "../../queries/useCartProduct";
 import {useCartAddProduct} from "../../mutations/useCartAddProduct";
 import {Loading} from "../../components/ui/Loading";
-import {isEmpty} from "../../helpers/Functions";
+import isEmpty from "lodash.isempty";
 
 type Params = {
     productId: string;

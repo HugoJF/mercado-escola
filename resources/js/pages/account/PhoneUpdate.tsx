@@ -20,7 +20,7 @@ export const PhoneUpdate: React.FC = () => {
     const {goBack} = useNavigation();
     const [loading, setLoading] = useState(false);
 
-    const {register, handleSubmit, errors, setValue} = useForm<PhoneUpdateForm>();
+    const {register, handleSubmit, formState: {errors}, setValue} = useForm<PhoneUpdateForm>();
 
     useEffect(() => {
         if (auth.me?.phone) {
@@ -58,13 +58,11 @@ export const PhoneUpdate: React.FC = () => {
                     }
                 )}
                 id="phone"
-                name="phone"
                 type="text"
                 mask="(67) 9 9999 9999"
                 /* This is needed in order to also update react-input-mask state, since react-hook-form operates directly on the DOM */
                 initialValue={auth.me?.phone ?? ''}
-                /* @ts-ignore */
-                ref={register({required: true})}
+                {...register('phone', {required: true})}
             />
 
             <button className="w-full py-4 bg-primary-500 text-center text-xl text-white font-medium rounded-lg">
