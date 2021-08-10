@@ -51,7 +51,7 @@ export const ProductFormUnit: React.FC<ProductFormUnitProps> = ({errors, control
                         min: 0,
                         step: 0.01,
                         onChange: event => onChange(event.currentTarget.value),
-                        onBlur: event => isValidNumber(event.currentTarget.value) && onChange(parseNumber(event.currentTarget.value)),
+                        onBlur: event => isValidNumber(value) && onChange(parseNumber(+value)),
                         value: value
                     }}
                 />}

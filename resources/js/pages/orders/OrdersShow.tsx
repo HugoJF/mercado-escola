@@ -57,7 +57,7 @@ export const OrdersShow: React.FC<OrdersShowProps> = ({order, onCancel}) => {
                 <p className="text-gray-500">
                     {/* Product price */}
                     <span className="mr-1 text-secondary-500 font-medium">
-                        <PriceFormatter price={order.products_cost} cents/>
+                        <PriceFormatter price={order.products_cost}/>
                     </span>
                     em {order.products.length} {order.products.length === 1 ? 'item' : 'items'}
 
@@ -65,7 +65,7 @@ export const OrdersShow: React.FC<OrdersShowProps> = ({order, onCancel}) => {
                     {order.address && <>
                         <span className="mx-1 font-medium">+</span>
                         <span className="mr-1 text-secondary-500 font-medium">
-                            <PriceFormatter price={order.delivery_fee} cents/>
+                            <PriceFormatter price={order.delivery_fee}/>
                         </span>
                         <span>taxa de entrega</span>
                     </>}

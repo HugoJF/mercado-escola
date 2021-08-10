@@ -2,6 +2,7 @@ import React from "react";
 import {Input} from "../../form/Input";
 import {Controller, DeepMap, FieldError} from "react-hook-form";
 import {ProductProperties} from "../../../types/products";
+import {isValidNumber, parseNumber} from "../../../helpers/Functions";
 
 type ProductFormWeightProps = {
     errors: DeepMap<ProductProperties, FieldError>;
@@ -41,6 +42,7 @@ export const ProductFormWeight: React.FC<ProductFormWeightProps> = ({errors, con
                             min: 0,
                             step: 0.01,
                             onChange: event => onChange(event.currentTarget.value),
+                            onBlur: event => isValidNumber(value) && onChange(parseNumber(value)),
                             value: value,
                         }}
                     />}

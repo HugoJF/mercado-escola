@@ -53,7 +53,7 @@ export const AdminProductListItem: React.FC<AdminProductListItemProps>
                             <li className="text-center">
                                 <ProductCost product={product}>
                                     {({text, cost}) => <>
-                                        <PriceFormatter cents price={cost}/>
+                                        <PriceFormatter price={cost}/>
                                         /
                                         {text}
                                     </>}

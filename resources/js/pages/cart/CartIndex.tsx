@@ -67,7 +67,7 @@ export const CartIndex: React.FC<CartIndexProps>
             {cart.address && <div className="mb-4 flex justify-between items-baseline">
                 <span className="text-gray-500">Taxa de entrega</span>
                 <span className="text-secondary-500">
-                    <PriceFormatter cents price={cart.opening.delivery_fee}/>
+                    <PriceFormatter price={cart.opening.delivery_fee}/>
                 </span>
             </div>}
 
@@ -76,7 +76,7 @@ export const CartIndex: React.FC<CartIndexProps>
             <div className="mb-8 flex justify-between items-baseline text-xl">
                 <span className="text-gray-700">Valor total</span>
                 <span className="text-secondary-500 font-medium">
-                    <PriceFormatter cents price={total}/>
+                    <PriceFormatter price={total}/>
                 </span>
             </div>
 

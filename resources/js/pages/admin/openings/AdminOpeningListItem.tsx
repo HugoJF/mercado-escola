@@ -98,7 +98,7 @@ export const AdminOpeningListItem: React.FC<AdminOpeningListItemProps>
 
                         {/* Product quantity */}
                         <li className="text-center">
-                            Entrega de <PriceFormatter price={opening.delivery_fee} cents/>
+                            Entrega de <PriceFormatter price={opening.delivery_fee}/>
                         </li>
                     </ul>
                 </div>
