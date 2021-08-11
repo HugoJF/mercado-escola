@@ -22,7 +22,7 @@ class OpeningFactory extends Factory
     public function definition()
     {
         return [
-            'delivery_fee'        => $this->faker->numberBetween(3, 15) * 100,
+            'delivery_fee'        => $this->faker->randomFloat(2, 3, 15),
             'max_delivery_orders' => $this->faker->numberBetween(10, 100),
             'max_pickup_orders'   => $this->faker->biasedNumberBetween(10, 100),
             'opens_at'            => $this->faker->dateTimeBetween(now()->subMonth(), now()),

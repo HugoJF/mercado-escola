@@ -35,7 +35,7 @@ export const Product: React.FC<ProductProps> = ({product, url}) => {
             <ProductCost product={product}>
                 {({cost, text}) => <>
                     <span className="text-secondary-400 text-xl font-medium">
-                        <PriceFormatter cents price={cost}/>
+                        <PriceFormatter price={cost}/>
                     </span>
                     <small className="ml-px text-gray-500 tracking-tight">
                         /{text}

@@ -37,7 +37,7 @@ export const ProductListSummary: React.FC<ProductListSummaryProps> = ({products,
                                     quantity={product.pivot.quantity}
                                     quantityCostOverride={product.pivot.quantity_cost}
                                 >
-                                    {({cost}) => <PriceFormatter cents price={cost}/>}
+                                    {({cost}) => <PriceFormatter price={cost}/>}
                                 </ProductQuantityCost>
                             </p>
                         </div>

@@ -23,7 +23,7 @@ export const Cart: React.FC = () => {
         </div>
         <div>Ver carrinho</div>
         <div>
-            <PriceFormatter price={total ?? 0} cents/>
+            <PriceFormatter price={total ?? 0}/>
         </div>
     </Link>
 };

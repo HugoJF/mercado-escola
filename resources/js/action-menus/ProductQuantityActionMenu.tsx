@@ -56,7 +56,7 @@ export const ProductQuantityActionMenu: React.FC<ModalProps & ProductQuantityAct
                 {/* If cart has any quantity of this product, show the total cost */}
                 {Boolean(quantity) && <span className="text-xl text-secondary-500 font-medium">
                     <ProductQuantityCost product={product} quantity={quantity}>
-                        {({cost}) => <PriceFormatter cents price={cost}/>}
+                        {({cost}) => <PriceFormatter price={cost}/>}
                     </ProductQuantityCost>
                 </span>}
 
@@ -64,7 +64,7 @@ export const ProductQuantityActionMenu: React.FC<ModalProps & ProductQuantityAct
                 {!quantity && <ProductCost product={product}>
                     {({cost, text}) => <>
                         <span className="text-xl text-secondary-500 font-medium">
-                            <PriceFormatter cents price={cost}/>
+                            <PriceFormatter price={cost}/>
                         </span>
                     <span className="ml-px text-gray-500">/{text}</span>
                 </>}

@@ -57,7 +57,7 @@ export const OrderListItem: React.FC<OrderListItemProps> = ({order, onClick}) =>
                     <li>
                         <span className="inline-block text-secondary-600 font-medium">
                             {order.total ?
-                                <PriceFormatter cents price={order.total}/>
+                                <PriceFormatter price={order.total}/>
                                 :
                                 <Skeleton className="w-8"/>
                             }

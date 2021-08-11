@@ -79,7 +79,7 @@ export const ProductShow: React.FC<ProductShowProps> = ({product, quantity, onRe
                 {/* If cart has any quantity of this product, show the total cost */}
                 {Boolean(quantity) && <span className="text-xl text-secondary-500 font-medium">
                     <ProductQuantityCost quantity={quantity} product={product}>{({cost}) => (
-                        <PriceFormatter cents price={cost}/>
+                        <PriceFormatter price={cost}/>
                     )}</ProductQuantityCost>
                 </span>}
 
@@ -87,7 +87,7 @@ export const ProductShow: React.FC<ProductShowProps> = ({product, quantity, onRe
                 {!quantity && <ProductCost product={product}>
                     {({cost, text}) => <>
                         <span className="text-xl text-secondary-500 font-medium">
-                            <PriceFormatter cents price={cost}/>
+                            <PriceFormatter price={cost}/>
                         </span>
                         <span className="ml-px text-gray-500">/{text}</span>
                     </>}
