@@ -40,7 +40,10 @@ export const AdminProductIndex: React.FC<AdminProductIndexProps>
         <Input
             name="filter"
             label="Filtrar por nome"
-            inputProps={{onChange: handleOnChange}}
+            inputProps={{
+                onChange: handleOnChange,
+                autoComplete: "off"
+            }}
         />
 
         {isEmpty(products) && <Empty
