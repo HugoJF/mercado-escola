@@ -20,6 +20,13 @@ COPY --from=composer/composer:2 /usr/bin/composer /usr/local/bin/composer
 
 FROM php-system-setup AS app-setup
 
+# Install mc
+RUN curl -L "https://dl.min.io/client/mc/release/linux-amd64/mc" -o /usr/local/bin/mc
+RUN chmod +x /usr/local/bin/mc
+
+# Install MySQL client
+RUN apt-get install -y mysql-client-core-8.0
+
 # Set working directory
 ENV LARAVEL_PATH=/srv/app
 WORKDIR $LARAVEL_PATH
