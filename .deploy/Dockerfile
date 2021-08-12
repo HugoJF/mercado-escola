@@ -26,6 +26,7 @@ RUN chmod +x /usr/local/bin/mc
 
 # Install MySQL client
 RUN apk add mysql-client
+RUN apk add mariadb-connector-c
 
 # Set working directory
 ENV LARAVEL_PATH=/srv/app
