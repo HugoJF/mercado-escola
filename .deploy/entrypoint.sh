@@ -12,6 +12,8 @@ php artisan migrate --no-interaction --force
 # Clear user carts
 php artisan cart:clear
 
+echo "Running with environment $APP_ENV"
+
 echo "🎬 start supervisord"
 
 supervisord -c $LARAVEL_PATH/.deploy/config/supervisor.conf
