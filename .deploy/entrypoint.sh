@@ -1,17 +1,5 @@
 #!/bin/sh
 
-echo "🎬 entrypoint.sh: [$(whoami)] [PHP $(php -r 'echo phpversion();')]"
-
-composer dump-autoload --no-interaction --no-dev --optimize
-
-echo "🎬 artisan commands"
-
-# 💡 Group into a custom command e.g. php artisan app:on-deploy
-php artisan migrate --no-interaction --force
-
-# Clear user carts
-php artisan cart:clear
-
 echo "Running with environment \"$APP_ENV\""
 
 if [ "$APP_ENV" == "staging" ]
@@ -25,6 +13,18 @@ then
     echo "Dumping production database to staging"
     mysqldump --host $DB_ORIGIN_HOST -u $DB_ORIGIN_USERNAME --password=$DB_ORIGIN_PASSWORD --port $DB_ORIGIN_PORT $DB_ORIGIN_DATABASE | mysql --host $DB_HOST -u $DB_USERNAME --password=$DB_PASSWORD --port $DB_PORT $DB_DATABASE
 fi
+
+echo "🎬 entrypoint.sh: [$(whoami)] [PHP $(php -r 'echo phpversion();')]"
+
+composer dump-autoload --no-interaction --no-dev --optimize
+
+echo "🎬 artisan commands"
+
+# 💡 Group into a custom command e.g. php artisan app:on-deploy
+php artisan migrate --no-interaction --force
+
+# Clear user carts
+php artisan cart:clear
 
 echo "🎬 start supervisord"
 
