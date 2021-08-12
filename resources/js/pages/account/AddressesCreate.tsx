@@ -42,6 +42,10 @@ export const AddressesCreate: React.FC = () => {
                     return;
                 }
 
+                if (!results) {
+                    return;
+                }
+
                 if (results.length === 0) {
                     return;
                 }
