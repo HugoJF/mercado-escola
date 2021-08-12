@@ -25,7 +25,7 @@ RUN curl -L "https://dl.min.io/client/mc/release/linux-amd64/mc" -o /usr/local/b
 RUN chmod +x /usr/local/bin/mc
 
 # Install MySQL client
-RUN apt-get install -y mysql-client-core-8.0
+RUN apk add mysql-client
 
 # Set working directory
 ENV LARAVEL_PATH=/srv/app
