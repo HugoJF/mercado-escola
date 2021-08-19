@@ -28,7 +28,7 @@ export const AdminProductIndex: React.FC<AdminProductIndexProps>
         }
 
         return products.filter(product => product.name.toLowerCase().indexOf(filter.toLowerCase()) !== -1);
-    }, [filter])
+    }, [products, filter])
 
     function handleOnChange(e: ChangeEvent<HTMLInputElement>) {
         setFilter(e.currentTarget.value);
