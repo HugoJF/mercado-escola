@@ -50,6 +50,7 @@ Route::apiResource('users', \App\Http\Controllers\UserController::class);
 */
 
 Route::get('openings/current', [\App\Http\Controllers\OpeningController::class, 'current'])->name('openings.current');
+Route::get('openings/{opening}/report', [\App\Http\Controllers\OpeningController::class, 'report'])->name('openings.report');
 Route::post('openings/{opening}/products/{product}', [\App\Http\Controllers\OpeningController::class, 'addProduct'])->name('openings.addProduct');
 Route::delete('openings/{opening}/products/{product}', [\App\Http\Controllers\OpeningController::class, 'removeProduct'])->name('openings.removeProduct');
 Route::apiResource('openings', \App\Http\Controllers\OpeningController::class);

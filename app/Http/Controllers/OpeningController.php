@@ -4,8 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Actions\Openings\CreateNewOpening;
 use App\Actions\Openings\FindCurrentOpening;
-use App\Actions\Openings\FindOverlappingOpenings;
-use App\Exceptions\OverlappingOpeningException;
 use App\Http\Requests\OpeningStoreRequest;
 use App\Http\Resources\OpeningResource;
 use App\Models\Opening;
@@ -35,18 +33,60 @@ class OpeningController extends Controller
         return new OpeningResource($currentOpening->find());
     }
 
+    public function report(Opening $opening)
+    {
+        $opening->loadMissing(['orders', 'orders.products']);
+        /** @var Collection $orders */
+        $orders = $opening->orders;
+
+        $data = $orders->pluck('products')->flatten(1)->groupBy('id')->map(function ($products, $id) {
+            $product = Product::find($id);
+            $total = $products->pluck('pivot')->sum('quantity');
+
+            if ($products[0]->type === 'weight') {
+                $weight = $total * $products[0]->weight_increment;
+                if ($weight > 1000) {
+                    $weight = round($weight / 1000, 3);
+                    $text = "$weight kg";
+                } else {
+                    $text = "$weight gramas";
+                }
+            } else {
+                if ($total === 1) {
+                    $text = "$total $product->unit_name_singular";
+                } else {
+                    $text = "$total $product->unit_name_plural";
+                }
+            }
+
+            return [
+                'product' => $product->toArray(),
+                'report' => [
+                    'total' => $text,
+                    'orders' => $products->count(),
+                ]
+            ];
+        })->values();
+
+        return [
+            'opening' => $opening,
+            'data' => $data,
+        ];
+    }
+
     /**
      * Store a newly created resource in storage.
      *
-     * @param CreateNewOpening    $createNewOpening
+     * @param CreateNewOpening $createNewOpening
      * @param OpeningStoreRequest $request
      *
      * @return OpeningResource
      */
     public function store(
-        CreateNewOpening $createNewOpening,
+        CreateNewOpening    $createNewOpening,
         OpeningStoreRequest $request
-    ) {
+    )
+    {
         return new OpeningResource($createNewOpening->handle($request->validated()));
     }
 
@@ -70,7 +110,7 @@ class OpeningController extends Controller
      * Update the specified resource in storage.
      *
      * @param \Illuminate\Http\Request $request
-     * @param \App\Models\Opening      $opening
+     * @param \App\Models\Opening $opening
      *
      * @return OpeningResource
      */

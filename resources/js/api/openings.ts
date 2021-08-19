@@ -1,11 +1,14 @@
 import {bxios} from "../bxios";
 import {ResourceResponse} from "../types";
-import {OpeningProperties, OpeningType, OpeningWithProducts} from "../types/openings";
+import {OpeningProperties, OpeningReport, OpeningType, OpeningWithProducts} from "../types/openings";
 
 export const openings = {
     index: () => bxios()
         .get('openings')
         .send<ResourceResponse<OpeningType[]>>(),
+    report: (id: Id) => bxios()
+        .get('openings', id, 'report')
+        .send<OpeningReport>(),
     show: (id: Id) => bxios()
         .get('openings', id)
         .send<ResourceResponse<OpeningType<OpeningWithProducts>>>(),

@@ -8,6 +8,19 @@ export type PivotOpeningProduct = Pivot<{
     product_id: number;
 }>
 
+export type OpeningReportProperties = {
+    product: ProductType;
+    report: {
+        total: string;
+        orders: number;
+    }
+}
+
+export type OpeningReport = {
+    opening: OpeningType;
+    data: OpeningReportProperties[];
+};
+
 export type OpeningType<T = unknown> = T
     & OpeningProperties
     & OpeningComputedProperties
