@@ -7,7 +7,7 @@ import {SwitchWithTransitions} from "../../../components/ui/SwitchWithTransition
 import {PagePadding} from "../../../containers/PagePadding";
 import {AdminOpeningViewProducts} from "./AdminOpeningViewProducts";
 import {AdminOpeningViewOrders} from "./AdminOpeningViewOrders";
-import {AdminOpeningViewSummary} from "./AdminOpeningViewSummaryProps";
+import {AdminOpeningViewSummary} from "./AdminOpeningViewSummary";
 import {OpeningBadge} from "../../../components/openings/OpeningBadge";
 import {OpeningType, OpeningWithProducts} from "../../../types/openings";
 import useNavigation from "../../../hooks/useNavigation";
