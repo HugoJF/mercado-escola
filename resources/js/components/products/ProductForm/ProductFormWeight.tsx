@@ -1,8 +1,8 @@
 import React from "react";
 import {Input} from "../../form/Input";
 import {Controller, DeepMap, FieldError} from "react-hook-form";
-import {ProductProperties} from "../../../types/products";
-import {isValidNumber, parseNumber} from "../../../helpers/Functions";
+import {ProductProperties} from "@type/products";
+import {isValidNumber, parseNumber} from "~/helpers/Functions";
 
 type ProductFormWeightProps = {
     errors: DeepMap<ProductProperties, FieldError>;

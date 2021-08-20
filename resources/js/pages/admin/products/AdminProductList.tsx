@@ -1,5 +1,5 @@
 import React from "react";
-import {ProductType} from "../../../types/products";
+import {ProductType} from "@type/products";
 import {AdminProductListItem} from "./AdminProductListItem";
 
 export type AdminProductListItemProps = {

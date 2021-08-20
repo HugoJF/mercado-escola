@@ -1,14 +1,14 @@
 import React, {useEffect, useState} from "react";
 import {useForm} from "react-hook-form";
-import {ProductProperties, ProductType} from "../../../types/products";
+import {ProductProperties, ProductType} from "@type/products";
 import {Input} from "../../form/Input";
 import {Textarea} from "../../form/Textarea";
 import {Button} from "../../ui/Button";
 import {useDropzone} from "react-dropzone";
 import {FieldWrapper} from "../../form/FieldWrapper";
-import useConfirmMenu from "../../../hooks/useConfirmMenu";
-import {useProductDestroyMedia} from "../../../mutations/useProductDestroyMedia";
-import useLoading from "../../../hooks/useLoading";
+import useConfirmMenu from "@hooks/useConfirmMenu";
+import {useProductDestroyMedia} from "~/mutations/useProductDestroyMedia";
+import useLoading from "@hooks/useLoading";
 import {ProductFormUnit} from "./ProductFormUnit";
 import {ProductFormWeight} from "./ProductFormWeight";
 import isEmpty from "lodash.isempty";

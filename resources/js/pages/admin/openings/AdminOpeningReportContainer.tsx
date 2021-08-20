@@ -1,7 +1,7 @@
 import React from "react";
-import {Loading} from "../../../components/ui/Loading";
+import {Loading} from "@components/ui/Loading";
 import {AdminOpeningReport} from "./AdminOpeningReport";
-import {useOpeningReport} from "../../../queries/useOpeningReport";
+import {useOpeningReport} from "@queries/useOpeningReport";
 
 export const AdminOpeningReportContainer: React.FC = () => {
     const {status, data, error, isFetching} = useOpeningReport(1);

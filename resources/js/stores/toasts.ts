@@ -1,7 +1,7 @@
 import {createModel} from "@rematch/core";
 import {v4 as uuid} from 'uuid';
 import {RootModel} from "./index";
-import {ToastType, ToastTypes} from "../types/toasts";
+import {ToastType, ToastTypes} from "@type/toasts";
 
 export type ToastsState = {
     [id: string]: ToastType

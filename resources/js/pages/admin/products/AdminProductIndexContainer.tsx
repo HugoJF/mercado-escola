@@ -1,11 +1,11 @@
 import React from "react";
-import useConfirmMenu from "../../../hooks/useConfirmMenu";
+import useConfirmMenu from "@hooks/useConfirmMenu";
 import {AdminProductIndex} from "./AdminProductIndex";
-import {ProductType} from "../../../types/products";
-import {Loading} from "../../../components/ui/Loading";
-import useToggle from "../../../hooks/useToggle";
-import {useProducts} from "../../../queries/useProducts";
-import {useProductDestroy} from "../../../mutations/useProductDestroy";
+import {ProductType} from "@type/products";
+import {Loading} from "@components/ui/Loading";
+import useToggle from "@hooks/useToggle";
+import {useProducts} from "@queries/useProducts";
+import {useProductDestroy} from "@mutations/useProductDestroy";
 
 export const AdminProductIndexContainer: React.FC = () => {
     const [expanded, setExpanded] = useToggle();

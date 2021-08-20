@@ -1,5 +1,5 @@
 import {useMutation, useQueryClient} from "react-query";
-import {api} from "../api";
+import {api} from "~/api";
 
 type Params = {
     product_id: Id,

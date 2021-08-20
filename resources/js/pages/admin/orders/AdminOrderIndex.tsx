@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import {DateTimePicker} from "@material-ui/pickers";
-import {Input} from "../../../components/form/Input";
-import {Button} from "../../../components/ui/Button";
+import {Input} from "@components/form/Input";
+import {Button} from "@components/ui/Button";
 
 export const AdminOrderIndex: React.FC = () => {
     const [opensAt, setOpensAt] = useState(new Date);

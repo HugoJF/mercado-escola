@@ -1,12 +1,12 @@
-import {HeightTransitioner} from "../../../components/ui/HeightTransitioner";
+import {HeightTransitioner} from "@components/ui/HeightTransitioner";
 import {ShoppingBag, Trash} from "react-feather";
-import {PriceFormatter} from "../../../components/ui/PriceFormatter";
+import {PriceFormatter} from "@components/ui/PriceFormatter";
 import {Link} from "react-router-dom";
 import React from "react";
-import {ProductType} from "../../../types/products";
-import useRelativePath from "../../../hooks/useRelativePath";
-import {RotatingArrowRight} from "../../../components/ui/RotatingArrowRight";
-import {ProductCost} from "../../../components/products/helpers/ProductCost";
+import {ProductType} from "@type/products";
+import useRelativePath from "@hooks/useRelativePath";
+import {RotatingArrowRight} from "@components/ui/RotatingArrowRight";
+import {ProductCost} from "@components/products/helpers/ProductCost";
 
 export type AdminProductListItemProps = {
     product: ProductType;

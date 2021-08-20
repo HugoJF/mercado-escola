@@ -2,7 +2,7 @@ import React from 'react';
 import {ChevronLeft, Heart} from "react-feather";
 import {HeaderWrapper} from "./partials/HeaderWrapper";
 import clsx from 'clsx';
-import {ProductType} from "../types/products";
+import {ProductType} from "@type/products";
 import {Cart} from "./partials/Cart";
 import {useHistory} from "react-router";
 

@@ -1,16 +1,16 @@
 import React, {ReactNode, useEffect, useState} from "react";
 import {Redirect, Route, useLocation} from "react-router-dom";
-import {AnimationBox} from "../../../components/ui/AnimationBox";
+import {AnimationBox} from "@components/ui/AnimationBox";
 import clsx from 'clsx';
 import {MoreVertical} from "react-feather";
-import {SwitchWithTransitions} from "../../../components/ui/SwitchWithTransition";
-import {PagePadding} from "../../../containers/PagePadding";
+import {SwitchWithTransitions} from "@components/ui/SwitchWithTransition";
+import {PagePadding} from "@containers/PagePadding";
 import {AdminOpeningViewProducts} from "./AdminOpeningViewProducts";
 import {AdminOpeningViewOrders} from "./AdminOpeningViewOrders";
 import {AdminOpeningViewSummary} from "./AdminOpeningViewSummary";
-import {OpeningBadge} from "../../../components/openings/OpeningBadge";
-import {OpeningType, OpeningWithProducts} from "../../../types/openings";
-import useNavigation from "../../../hooks/useNavigation";
+import {OpeningBadge} from "@components/openings/OpeningBadge";
+import {OpeningType, OpeningWithProducts} from "@type/openings";
+import useNavigation from "@hooks/useNavigation";
 
 type AdminOpeningTabProps = {
     onClick: () => void;

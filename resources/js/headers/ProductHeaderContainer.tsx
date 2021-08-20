@@ -1,12 +1,12 @@
 import React, {useEffect, useState} from 'react';
 import {useParams} from "react-router";
 import isEmpty from "lodash.isempty";
-import {Loading} from "../components/ui/Loading";
+import {Loading} from "@components/ui/Loading";
 import {ProductHeader} from "./ProductHeader";
-import {useProduct} from "../queries/useProduct";
-import {useFavorites} from "../queries/useFavorites";
-import {useFavoriteCreate} from "../mutations/useFavoriteCreate";
-import {useFavoriteDestroy} from "../mutations/useFavoriteDestroy";
+import {useProduct} from "@queries/useProduct";
+import {useFavorites} from "@queries/useFavorites";
+import {useFavoriteCreate} from "@mutations/useFavoriteCreate";
+import {useFavoriteDestroy} from "@mutations/useFavoriteDestroy";
 
 type Params = {
     productId: string;

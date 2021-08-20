@@ -1,4 +1,4 @@
-import {ProductType} from "../../../types/products";
+import {ProductType} from "@type/products";
 import React from "react";
 
 type ProductQuantityProps = {

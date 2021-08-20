@@ -1,5 +1,5 @@
 import {ProductType} from "./products";
-import {Pivot, SoftDeletes, Timestamps} from "../types";
+import {Pivot, SoftDeletes, Timestamps} from "~/types";
 import {AddressType} from "./addresses";
 import {OpeningType} from "./openings";
 

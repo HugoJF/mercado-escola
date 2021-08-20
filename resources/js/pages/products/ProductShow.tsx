@@ -1,16 +1,16 @@
 import React, {useState} from 'react';
-import {Button} from "../../components/ui/Button";
-import {PriceFormatter} from "../../components/ui/PriceFormatter";
-import {ImageHolder} from "../../components/ui/ImageHolder";
+import {Button} from "@components/ui/Button";
+import {PriceFormatter} from "@components/ui/PriceFormatter";
+import {ImageHolder} from "@components/ui/ImageHolder";
 import {Link} from "react-router-dom";
-import {PagePadding} from "../../containers/PagePadding";
-import {ProductType} from "../../types/products";
-import {ProductQuantityActionMenu} from "../../action-menus/ProductQuantityActionMenu";
+import {PagePadding} from "@containers/PagePadding";
+import {ProductType} from "@type/products";
+import {ProductQuantityActionMenu} from "@menus/ProductQuantityActionMenu";
 import {Trash} from "react-feather";
-import useConfirmMenu from "../../hooks/useConfirmMenu";
-import useNavigation from "../../hooks/useNavigation";
-import {ProductCost} from "../../components/products/helpers/ProductCost";
-import {ProductQuantityCost} from "../../components/products/helpers/ProductQuantityCost";
+import useConfirmMenu from "@hooks/useConfirmMenu";
+import useNavigation from "@hooks/useNavigation";
+import {ProductCost} from "@components/products/helpers/ProductCost";
+import {ProductQuantityCost} from "@components/products/helpers/ProductQuantityCost";
 
 export type ProductShowProps = {
     product: ProductType;

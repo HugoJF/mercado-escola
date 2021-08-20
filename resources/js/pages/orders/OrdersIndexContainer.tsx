@@ -1,8 +1,8 @@
 import React from "react";
 import {OrdersIndex} from "./OrdersIndex";
-import {Loading} from "../../components/ui/Loading";
-import usePagination from "../../hooks/usePagination";
-import {useOrders} from "../../queries/useOrders";
+import {Loading} from "@components/ui/Loading";
+import usePagination from "@hooks/usePagination";
+import {useOrders} from "@queries/useOrders";
 
 export const OrdersIndexContainer: React.FC = () => {
     const pagination = usePagination();

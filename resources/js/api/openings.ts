@@ -1,6 +1,6 @@
-import {bxios} from "../bxios";
-import {ResourceResponse} from "../types";
-import {OpeningProperties, OpeningReport, OpeningType, OpeningWithProducts} from "../types/openings";
+import {bxios} from "~/bxios";
+import {ResourceResponse} from "~/types";
+import {OpeningProperties, OpeningReport, OpeningType, OpeningWithProducts} from "@type/openings";
 
 export const openings = {
     index: () => bxios()

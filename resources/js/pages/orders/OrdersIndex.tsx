@@ -1,12 +1,12 @@
 import React from "react";
-import {Title} from "../../components/ui/Title";
-import {PagePadding} from "../../containers/PagePadding";
-import {Empty} from "../../components/ui/Empty";
+import {Title} from "@components/ui/Title";
+import {PagePadding} from "@containers/PagePadding";
+import {Empty} from "@components/ui/Empty";
 import isEmpty from "lodash.isempty";
-import {OrderType} from "../../types/orders";
+import {OrderType} from "@type/orders";
 import {OrderList} from "./OrderList";
-import usePagination from "../../hooks/usePagination";
-import {Pagination} from "../../components/ui/Pagination";
+import usePagination from "@hooks/usePagination";
+import {Pagination} from "@components/ui/Pagination";
 
 export type OrdersIndexProps = {
     orders: OrderType[];

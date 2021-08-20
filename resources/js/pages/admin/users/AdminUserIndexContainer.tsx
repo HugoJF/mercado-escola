@@ -1,11 +1,11 @@
 import React from "react";
 import {useDispatch} from "react-redux";
-import {Dispatch} from "../../../store";
-import {Loading} from "../../../components/ui/Loading";
+import {Dispatch} from "~/store";
+import {Loading} from "@components/ui/Loading";
 import {AdminUserIndex} from "./AdminUserIndex";
-import {useUsers} from "../../../queries/useUsers";
-import {useUserUpdate} from "../../../mutations/useUserUpdate";
-import {UserType} from "../../../types/users";
+import {useUsers} from "@queries/useUsers";
+import {useUserUpdate} from "@mutations/useUserUpdate";
+import {UserType} from "@type/users";
 
 export const AdminUserIndexContainer: React.FC = () => {
     const dispatch = useDispatch<Dispatch>();

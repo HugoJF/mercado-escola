@@ -1,9 +1,9 @@
-import {Modal, ModalProps} from "../components/ui/Modal";
+import {Modal, ModalProps} from "@components/ui/Modal";
 import React, {useEffect, useState} from "react";
-import {Button} from "../components/ui/Button";
-import {OrderStateEnum} from "../types/orders";
-import {OrderStateTextMapping} from "../components/ui/OrderStateText";
-import {OrderStateDescriptionMapping} from "../components/ui/OrderStateDescription";
+import {Button} from "@components/ui/Button";
+import {OrderStateEnum} from "@type/orders";
+import {OrderStateTextMapping} from "@components/ui/OrderStateText";
+import {OrderStateDescriptionMapping} from "@components/ui/OrderStateDescription";
 
 export type OrderStatusActionMenuProps = {
     state: OrderStateEnum;

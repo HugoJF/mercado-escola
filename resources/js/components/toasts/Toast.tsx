@@ -1,9 +1,9 @@
 import React from 'react';
 import {useDispatch} from "react-redux";
-import {Dispatch} from "../../store";
+import {Dispatch} from "~/store";
 import clsx from 'clsx';
 import useTimeout from 'use-timeout'
-import {ToastType, ToastTypes} from "../../types/toasts";
+import {ToastType, ToastTypes} from "@type/toasts";
 
 export type ToastProps = {
     id: string;

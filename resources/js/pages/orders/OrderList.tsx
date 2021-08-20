@@ -1,8 +1,8 @@
-import {HeightTransitioner} from "../../components/ui/HeightTransitioner";
-import {OrderListItem} from "../../components/orders/OrderListItemProps";
+import {HeightTransitioner} from "@components/ui/HeightTransitioner";
+import {OrderListItem} from "@components/orders/OrderListItemProps";
 import React from "react";
-import {OrderType} from "../../types/orders";
-import useNavigation from "../../hooks/useNavigation";
+import {OrderType} from "@type/orders";
+import useNavigation from "@hooks/useNavigation";
 
 export type OrderListProps = {
     orders: OrderType[];

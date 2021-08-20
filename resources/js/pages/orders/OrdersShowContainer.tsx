@@ -1,11 +1,11 @@
 import React from "react";
 import {useParams} from "react-router";
 import {OrdersShow} from "./OrdersShow";
-import {OrderType} from "../../types/orders";
-import {Loading} from "../../components/ui/Loading";
-import useNavigation from "../../hooks/useNavigation";
-import {useOrder} from "../../queries/useOrder";
-import {useOrderCancel} from "../../mutations/useOrderCancel";
+import {OrderType} from "@type/orders";
+import {Loading} from "@components/ui/Loading";
+import useNavigation from "@hooks/useNavigation";
+import {useOrder} from "@queries/useOrder";
+import {useOrderCancel} from "@mutations/useOrderCancel";
 
 type Params = {
     orderId: string;

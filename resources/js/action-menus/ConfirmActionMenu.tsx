@@ -1,6 +1,6 @@
-import {Modal, ModalProps} from "../components/ui/Modal";
+import {Modal, ModalProps} from "@components/ui/Modal";
 import React, {ReactNode} from "react";
-import {Button} from "../components/ui/Button";
+import {Button} from "@components/ui/Button";
 
 export type ConfirmActionMenuProps = {
     title: string | ReactNode;

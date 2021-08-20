@@ -1,15 +1,15 @@
 import React from "react";
-import {Title} from "../../components/ui/Title";
+import {Title} from "@components/ui/Title";
 import {Calendar, DollarSign, Info, MapPin} from "react-feather";
-import {PriceFormatter} from "../../components/ui/PriceFormatter";
-import {PagePadding} from "../../containers/PagePadding";
-import {OrderType, OrderWithAddress, OrderWithOpening, OrderWithProducts} from "../../types/orders";
-import {Button} from "../../components/ui/Button";
-import useConfirmMenu from "../../hooks/useConfirmMenu";
-import {OrderStateBadge} from "../../components/ui/OrderStateBadge";
-import {OrderStateDescription} from "../../components/ui/OrderStateDescription";
-import {ProductListSummary} from "../../components/products/ProductListSummary";
-import {Date} from "../../components/ui/Date";
+import {PriceFormatter} from "@components/ui/PriceFormatter";
+import {PagePadding} from "@containers/PagePadding";
+import {OrderType, OrderWithAddress, OrderWithOpening, OrderWithProducts} from "@type/orders";
+import {Button} from "@components/ui/Button";
+import useConfirmMenu from "@hooks/useConfirmMenu";
+import {OrderStateBadge} from "@components/ui/OrderStateBadge";
+import {OrderStateDescription} from "@components/ui/OrderStateDescription";
+import {ProductListSummary} from "@components/products/ProductListSummary";
+import {Date} from "@components/ui/Date";
 
 export type OrdersShowProps = {
     order: OrderType<OrderWithAddress & OrderWithOpening & OrderWithProducts>;

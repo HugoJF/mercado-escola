@@ -1,5 +1,5 @@
 import React from "react";
-import {ProductType, WithQuantityPivot} from "../../types/products";
+import {ProductType, WithQuantityPivot} from "@type/products";
 import {ImageHolder} from "../ui/ImageHolder";
 import {PriceFormatter} from "../ui/PriceFormatter";
 import {ProductQuantity} from "./helpers/ProductQuantity";
