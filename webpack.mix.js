@@ -5,9 +5,12 @@ const tsconfig = require('./tsconfig.json');
 const paths = tsconfig.compilerOptions.paths;
 const aliases = Object.entries(paths).reduce((acc, entry) => {
     const [key, value] = entry;
+
+    // Remove wildcards
     const cleanKey = key.replace('/*', '');
     const cleanValue = value[0].replace('/*', '').replace('*', '');
 
+    // Build path to alias
     acc[cleanKey] = path.resolve(__dirname, 'resources/js', cleanValue);
 
     return acc;
@@ -39,7 +42,6 @@ mix
             alias: {
                 'react-dom': '@hot-loader/react-dom',
                 ...aliases,
-                '@routes': path.resolve(__dirname, 'resources/js/routes'),
             }
         }
     })
