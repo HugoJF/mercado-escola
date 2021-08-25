@@ -34,8 +34,13 @@ class Product extends Model implements HasMedia
         $media = $this->getMedia();
 
         return $media->mapWithKeys(fn(Media $m) => [
-            $m->id => $m->getFullUrl(),
+            $m->id => $m->getFullUrl('optimized'),
         ])->toArray();
+    }
+
+    public function registerMediaConversions(Media $media = null): void
+    {
+        $this->addMediaConversion('optimized')->width(1000);
     }
 
     public function openings()
