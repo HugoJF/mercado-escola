@@ -4,12 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Actions\Openings\CreateNewOpening;
 use App\Actions\Openings\FindCurrentOpening;
+use App\Actions\Openings\GenerateReport;
 use App\Http\Requests\OpeningStoreRequest;
 use App\Http\Resources\OpeningResource;
 use App\Models\Opening;
 use App\Models\Product;
 use Illuminate\Http\Request;
-use Illuminate\Support\Collection;
 
 class OpeningController extends Controller
 {
@@ -33,45 +33,11 @@ class OpeningController extends Controller
         return new OpeningResource($currentOpening->find());
     }
 
-    public function report(Opening $opening)
+    public function report(GenerateReport $generateReport, Opening $opening)
     {
-        $opening->loadMissing(['orders', 'orders.products']);
-        /** @var Collection $orders */
-        $orders = $opening->orders;
+        $data = $generateReport->handle($opening);
 
-        $data = $orders->pluck('products')->flatten(1)->groupBy('id')->map(function ($products, $id) {
-            $product = Product::find($id);
-            $total = $products->pluck('pivot')->sum('quantity');
-
-            if ($products[0]->type === 'weight') {
-                $weight = $total * $products[0]->weight_increment;
-                if ($weight > 1000) {
-                    $weight = round($weight / 1000, 3);
-                    $text = "$weight kg";
-                } else {
-                    $text = "$weight gramas";
-                }
-            } else {
-                if ($total === 1) {
-                    $text = "$total $product->unit_name_singular";
-                } else {
-                    $text = "$total $product->unit_name_plural";
-                }
-            }
-
-            return [
-                'product' => $product->toArray(),
-                'report' => [
-                    'total' => $text,
-                    'orders' => $products->count(),
-                ]
-            ];
-        })->values();
-
-        return [
-            'opening' => $opening,
-            'data' => $data,
-        ];
+        return compact('opening', 'data');
     }
 
     /**
