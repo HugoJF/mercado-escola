@@ -1,4 +1,9 @@
-import {Media, Pivot, SoftDeletes, Timestamps} from "~/types";
+import {Pivot, SoftDeletes, Timestamps} from "~/types";
+import {Media} from "@type/media";
+
+export type WithMedia = {
+    media: Media[];
+}
 
 export type WithQuantityPivot = Pivot<{
     quantity: number;

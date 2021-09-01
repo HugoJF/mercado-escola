@@ -17,6 +17,8 @@ export const ProductListSummary: React.FC<ProductListSummaryProps> = ({products,
                 <div className="w-4/12">
                     <ImageHolder
                         src={Object.values(product.media_links)[0]}
+                        base64svg={Object.values(product.media)[0].responsive_images['optimized'].base64svg}
+                        alt={product.name}
                     />
                 </div>
                 <div className="px-4 flex-grow">

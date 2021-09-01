@@ -27,7 +27,6 @@ class Product extends Model implements HasMedia
     protected $appends = ['media_links'];
 
 
-
     public function getMediaLinksAttribute()
     {
         /** @var Collection $media */
@@ -40,7 +39,10 @@ class Product extends Model implements HasMedia
 
     public function registerMediaConversions(Media $media = null): void
     {
-        $this->addMediaConversion('optimized')->width(1000);
+        $this
+            ->addMediaConversion('optimized')
+            ->width(1000)
+            ->withResponsiveImages();
     }
 
     public function openings()
@@ -56,6 +58,6 @@ class Product extends Model implements HasMedia
     public function orders()
     {
         return $this->morphedByMany(Order::class, 'holder', 'has_product')
-                    ->withPivot('quantity', 'quantity_cost');
+            ->withPivot('quantity', 'quantity_cost');
     }
 }

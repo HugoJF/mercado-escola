@@ -19,26 +19,6 @@ export type Pivot<T> = {
     pivot: T;
 }
 
-export type Media = {
-    id: number;
-    model_type: string;
-    model_id: number;
-    uuid: string;
-    collection_name: string;
-    name: string;
-    file_name: string;
-    mime_type: string;
-    disk: string;
-    conversion_disk: string;
-    size: number;
-    manipulations: any[];
-    custom_properties: any[];
-    responsive_images: any[];
-    order_column: number;
-    created_at: string;
-    updated_at: string;
-}
-
 export type PaginatedResourceResponse<T> = ResourceResponse<T> & {
     links: {
         first: string;
