@@ -1,12 +1,12 @@
 import React, {useState} from "react";
-import {OpeningType} from "../../../types/openings";
-import {HeightTransitioner} from "../../../components/ui/HeightTransitioner";
-import {Title} from "../../../components/ui/Title";
-import {OrderListItem} from "../../../components/orders/OrderListItemProps";
-import {Empty} from "../../../components/ui/Empty";
-import {OrderStatusActionMenu} from "../../../action-menus/OrderStatusActionMenu";
-import {useOrderUpdate} from "../../../mutations/useOrderUpdate";
-import {OrderStateEnum} from "../../../types/orders";
+import {OpeningType} from "@type/openings";
+import {HeightTransitioner} from "@components/ui/HeightTransitioner";
+import {Title} from "@components/ui/Title";
+import {OrderListItem} from "@components/orders/OrderListItemProps";
+import {Empty} from "@components/ui/Empty";
+import {OrderStatusActionMenu} from "@menus/OrderStatusActionMenu";
+import {useOrderUpdate} from "@mutations/useOrderUpdate";
+import {OrderStateEnum} from "@type/orders";
 
 export type AdminOpeningViewOrdersProps = {
     opening: OpeningType;

@@ -1,11 +1,11 @@
 import React from "react";
-import useConfirmMenu from "../../../hooks/useConfirmMenu";
-import {OpeningType} from "../../../types/openings";
+import useConfirmMenu from "@hooks/useConfirmMenu";
+import {OpeningType} from "@type/openings";
 import {AdminOpeningIndex} from "./AdminOpeningIndex";
-import {Loading} from "../../../components/ui/Loading";
-import useToggle from "../../../hooks/useToggle";
-import {useOpenings} from "../../../queries/useOpenings";
-import {useOpeningsDestroy} from "../../../mutations/useOpeningsDestroy";
+import {Loading} from "@components/ui/Loading";
+import useToggle from "@hooks/useToggle";
+import {useOpenings} from "@queries/useOpenings";
+import {useOpeningsDestroy} from "@mutations/useOpeningsDestroy";
 
 export const AdminOpeningIndexContainer: React.FC = () => {
     const [expanded, setExpanded] = useToggle();

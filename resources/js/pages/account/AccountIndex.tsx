@@ -1,7 +1,7 @@
 import React from "react";
 import {Link, useRouteMatch} from "react-router-dom";
-import {Box} from "../../components/ui/Box";
-import {DivOrLink} from "../../components/ui/DivOrLink";
+import {Box} from "@components/ui/Box";
+import {DivOrLink} from "@components/ui/DivOrLink";
 import {
     AlertCircle,
     Book,
@@ -15,11 +15,11 @@ import {
     Smartphone,
     User
 } from "react-feather";
-import {useAuth} from "../../selectors";
-import {Title} from "../../components/ui/Title";
+import {useAuth} from "~/selectors";
+import {Title} from "@components/ui/Title";
 import clsx from 'clsx';
-import {Skeleton} from "../../components/ui/Skeleton";
-import {PagePadding} from "../../containers/PagePadding";
+import {Skeleton} from "@components/ui/Skeleton";
+import {PagePadding} from "@containers/PagePadding";
 
 export const AccountIndex: React.FC = () => {
     const match = useRouteMatch();

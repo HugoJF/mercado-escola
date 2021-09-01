@@ -1,12 +1,12 @@
 import React from "react";
-import {Title} from "../../../components/ui/Title";
-import {HeightTransitioner} from "../../../components/ui/HeightTransitioner";
-import {Skeleton} from "../../../components/ui/Skeleton";
-import {PagePadding} from "../../../containers/PagePadding";
-import {Box} from "../../../components/ui/Box";
-import {Toggle} from "../../../components/ui/Toggle";
-import {Badge} from "../../../components/ui/Badge";
-import {UserType} from "../../../types/users";
+import {Title} from "@components/ui/Title";
+import {HeightTransitioner} from "@components/ui/HeightTransitioner";
+import {Skeleton} from "@components/ui/Skeleton";
+import {PagePadding} from "@containers/PagePadding";
+import {Box} from "@components/ui/Box";
+import {Toggle} from "@components/ui/Toggle";
+import {Badge} from "@components/ui/Badge";
+import {UserType} from "@type/users";
 
 export type AdminUserIndexProps = {
     users: UserType[];

@@ -1,10 +1,10 @@
 import React from "react";
-import useConfirmMenu from "../../hooks/useConfirmMenu";
-import {AddressType} from "../../types/addresses";
-import {Loading} from "../../components/ui/Loading";
+import useConfirmMenu from "@hooks/useConfirmMenu";
+import {AddressType} from "@type/addresses";
+import {Loading} from "@components/ui/Loading";
 import {AddressesIndex} from "./AddressesIndex";
-import {useAddresses} from "../../queries/useAddresses";
-import {useAddressDestroy} from "../../mutations/useAddressDestroy";
+import {useAddresses} from "@queries/useAddresses";
+import {useAddressDestroy} from "@mutations/useAddressDestroy";
 
 export const AddressesIndexContainer: React.FC = () => {
     const [menu, confirm] = useConfirmMenu();

@@ -3,12 +3,12 @@ import clsx from "clsx";
 import {Loader} from "react-feather";
 import {useForm} from "react-hook-form";
 import {useDispatch} from "react-redux";
-import {Title} from "../../components/ui/Title";
-import {PhoneInput} from "../../components/form/PhoneInput";
-import {PagePadding} from "../../containers/PagePadding";
-import useNavigation from "../../hooks/useNavigation";
-import {useAuth} from "../../selectors";
-import {Dispatch} from "../../store";
+import {Title} from "@components/ui/Title";
+import {PhoneInput} from "@components/form/PhoneInput";
+import {PagePadding} from "@containers/PagePadding";
+import useNavigation from "@hooks/useNavigation";
+import {useAuth} from "~/selectors";
+import {Dispatch} from "~/store";
 
 type PhoneUpdateForm = {
     phone: string;

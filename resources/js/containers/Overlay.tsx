@@ -1,7 +1,7 @@
 import React from "react";
-import {HeaderRoutes} from "../routes/HeaderRoutes";
-import {MenuRoutes} from "../routes/MenuRoutes";
-import {ToastsContainer} from "../components/toasts/ToastsContainer";
+import {HeaderRoutes} from "@routes/HeaderRoutes";
+import {MenuRoutes} from "@routes/MenuRoutes";
+import {ToastsContainer} from "@components/toasts/ToastsContainer";
 
 
 export const Overlay: React.FC = ({children}) => {

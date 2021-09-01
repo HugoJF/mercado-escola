@@ -1,17 +1,17 @@
 import React from "react";
 import {Link} from "react-router-dom";
-import {Button} from "../../components/ui/Button";
-import {Title} from "../../components/ui/Title";
+import {Button} from "@components/ui/Button";
+import {Title} from "@components/ui/Title";
 import {AlertTriangle, Calendar, ChevronRight, Edit, MapPin, ShoppingBag} from "react-feather";
-import {ProductType} from "../../types/products";
-import {PriceFormatter} from "../../components/ui/PriceFormatter";
-import {ShippingOptionActionMenu} from "../../action-menus/ShippingOptionActionMenu";
+import {ProductType} from "@type/products";
+import {PriceFormatter} from "@components/ui/PriceFormatter";
+import {ShippingOptionActionMenu} from "@menus/ShippingOptionActionMenu";
 import clsx from 'clsx';
-import {PagePadding} from "../../containers/PagePadding";
-import {CartType} from "../../types/cart";
-import {ProductListSummary} from "../../components/products/ProductListSummary";
-import {Date} from "../../components/ui/Date";
-import useNavigation from "../../hooks/useNavigation";
+import {PagePadding} from "@containers/PagePadding";
+import {CartType} from "@type/cart";
+import {ProductListSummary} from "@components/products/ProductListSummary";
+import {Date} from "@components/ui/Date";
+import useNavigation from "@hooks/useNavigation";
 
 export type CartIndexProps = {
     cart: CartType;

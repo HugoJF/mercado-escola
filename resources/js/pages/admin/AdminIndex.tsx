@@ -1,9 +1,9 @@
 import React from "react";
-import {Title} from "../../components/ui/Title";
+import {Title} from "@components/ui/Title";
 import {Calendar, ChevronRight, Icon, ShoppingBag, Users} from "react-feather";
-import {PagePadding} from "../../containers/PagePadding";
-import {Box} from "../../components/ui/Box";
-import useNavigation from "../../hooks/useNavigation";
+import {PagePadding} from "@containers/PagePadding";
+import {Box} from "@components/ui/Box";
+import useNavigation from "@hooks/useNavigation";
 
 type ButtonProps = {
     title: string;

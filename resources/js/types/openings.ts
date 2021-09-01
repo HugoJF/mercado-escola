@@ -1,4 +1,4 @@
-import {Pivot, Timestamps} from "../types";
+import {Pivot, Timestamps} from "~/types";
 import {ProductType} from "./products";
 import {OrderType} from "./orders";
 

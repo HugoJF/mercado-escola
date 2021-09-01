@@ -7,6 +7,20 @@
             "dom.iterable",
             "esnext"
         ],
+        "baseUrl": "./resources/js",
+        "paths": {
+            "~/*": ["*"],
+            "@components/*": ["components/*"],
+            "@type/*": ["types/*"],
+            "@containers/*": ["containers/*"],
+            "@api/*": ["api/*"],
+            "@svg/*": ["svg/*"],
+            "@hooks/*": ["hooks/*"],
+            "@routes/*": ["routes/*"],
+            "@queries/*": ["queries/*"],
+            "@mutations/*": ["mutations/*"],
+            "@menus/*": ["action-menus/*"]
+        },
         "allowJs": true,
         "skipLibCheck": true,
         "esModuleInterop": true,

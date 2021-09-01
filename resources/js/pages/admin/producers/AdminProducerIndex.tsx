@@ -1,6 +1,6 @@
 import React from "react";
-import {WorkInProgress} from "../../../components/ui/WorkInProgress";
-import {PagePadding} from "../../../containers/PagePadding";
+import {WorkInProgress} from "@components/ui/WorkInProgress";
+import {PagePadding} from "@containers/PagePadding";
 
 export const AdminProducerIndex: React.FC = () => {
     return <PagePadding className="h-full flex flex-col items-center justify-center">

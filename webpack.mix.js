@@ -1,4 +1,22 @@
 const mix = require('laravel-mix');
+const path = require('path');
+const tsconfig = require('./tsconfig.json');
+
+const paths = tsconfig.compilerOptions.paths;
+const aliases = Object.entries(paths).reduce((acc, entry) => {
+    const [key, value] = entry;
+
+    // Remove wildcards
+    const cleanKey = key.replace('/*', '');
+    const cleanValue = value[0].replace('/*', '').replace('*', '');
+
+    // Build path to alias
+    acc[cleanKey] = path.resolve(__dirname, 'resources/js', cleanValue);
+
+    return acc;
+}, {})
+
+console.log('Alises generated from tsconfig.json', aliases);
 
 /*
  |--------------------------------------------------------------------------
@@ -22,7 +40,8 @@ mix
     .webpackConfig({
         resolve: {
             alias: {
-                'react-dom': '@hot-loader/react-dom'
+                'react-dom': '@hot-loader/react-dom',
+                ...aliases,
             }
         }
     })

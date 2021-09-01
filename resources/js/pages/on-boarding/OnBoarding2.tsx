@@ -1,7 +1,7 @@
 import React, {useEffect} from 'react';
 import {Link} from "react-router-dom";
-import useNavigation from "../../hooks/useNavigation";
-import {useAddresses} from "../../queries/useAddresses";
+import useNavigation from "@hooks/useNavigation";
+import {useAddresses} from "@queries/useAddresses";
 
 export const OnBoarding2: React.FC = () => {
     const {go, bindGo} = useNavigation();

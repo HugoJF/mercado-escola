@@ -1,5 +1,5 @@
-import {bxios} from "../bxios";
-import {AddressProperties, AddressType} from "../types/addresses";
+import {bxios} from "~/bxios";
+import {AddressProperties, AddressType} from "@type/addresses";
 
 export const addresses = {
     index: () => bxios()

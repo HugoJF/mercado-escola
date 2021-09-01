@@ -1,10 +1,10 @@
 import React from "react";
 import {Calendar, ShoppingBag} from "react-feather";
-import {OpeningType} from "../../../types/openings";
-import {Date} from "../../../components/ui/Date";
-import {FlatButton} from "../../../components/ui/FlatButton";
-import {Stat} from "../../../components/ui/Stat";
-import useNavigation from "../../../hooks/useNavigation";
+import {OpeningType} from "@type/openings";
+import {Date} from "@components/ui/Date";
+import {FlatButton} from "@components/ui/FlatButton";
+import {Stat} from "@components/ui/Stat";
+import useNavigation from "@hooks/useNavigation";
 
 type Props = {
     opening: OpeningType;

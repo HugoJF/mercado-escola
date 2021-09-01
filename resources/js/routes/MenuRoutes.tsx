@@ -1,6 +1,6 @@
 import React from "react";
 import {Route, Switch} from "react-router";
-import {Menu} from "../Menu";
+import {Menu} from "~/Menu";
 
 export const MenuRoutes: React.FC = () => {
     return <Switch>

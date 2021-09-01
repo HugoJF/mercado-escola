@@ -1,16 +1,16 @@
 import React, {useState} from "react";
 import {ChevronRight, Loader, MapPin} from "react-feather";
 import PlacesAutocomplete from 'react-places-autocomplete';
-import {Title} from "../../components/ui/Title";
-import {AddressProperties} from "../../types/addresses";
-import {Box} from "../../components/ui/Box";
-import {Google} from "../../google";
-import {MapWithPing} from "../../components/addresses/MapWithPing";
-import {Button} from "../../components/ui/Button";
-import {PagePadding} from "../../containers/PagePadding";
-import useNavigation from "../../hooks/useNavigation";
-import {useAddressCreate} from "../../mutations/useAddressCreate";
-import {AddressDetailsActionMenu} from "../../action-menus/AddressDetailsActionMenu";
+import {Title} from "@components/ui/Title";
+import {AddressProperties} from "@type/addresses";
+import {Box} from "@components/ui/Box";
+import {Google} from "~/google";
+import {MapWithPing} from "@components/addresses/MapWithPing";
+import {Button} from "@components/ui/Button";
+import {PagePadding} from "@containers/PagePadding";
+import useNavigation from "@hooks/useNavigation";
+import {useAddressCreate} from "@mutations/useAddressCreate";
+import {AddressDetailsActionMenu} from "@menus/AddressDetailsActionMenu";
 
 const fixOnBlur = (refObj: any) => {
     // Avoid clearing suggestions when input loses focus

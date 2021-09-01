@@ -1,8 +1,8 @@
 import React from 'react';
 import {ShoppingCart} from "react-feather";
 import {Link} from "react-router-dom";
-import {useCart} from "../../queries/useCart";
-import {PriceFormatter} from "../../components/ui/PriceFormatter";
+import {useCart} from "@queries/useCart";
+import {PriceFormatter} from "@components/ui/PriceFormatter";
 
 export const Cart: React.FC = () => {
     const cart = useCart();

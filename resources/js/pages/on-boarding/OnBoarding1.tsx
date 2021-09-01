@@ -2,11 +2,11 @@ import React, {useEffect, useState} from 'react';
 import clsx from 'clsx';
 import {Loader} from "react-feather";
 import {useForm} from "react-hook-form";
-import {useAuth} from "../../selectors";
+import {useAuth} from "~/selectors";
 import {useDispatch} from "react-redux";
-import {PhoneInput} from "../../components/form/PhoneInput";
-import useNavigation from "../../hooks/useNavigation";
-import {UserProperties} from "../../types/users";
+import {PhoneInput} from "@components/form/PhoneInput";
+import useNavigation from "@hooks/useNavigation";
+import {UserProperties} from "@type/users";
 
 type PhoneUpdateForm = {
     phone: string;

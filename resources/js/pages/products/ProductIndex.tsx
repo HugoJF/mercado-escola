@@ -1,10 +1,10 @@
 import React from "react";
-import {Title} from "../../components/ui/Title";
+import {Title} from "@components/ui/Title";
 import {Link} from "react-router-dom";
-import {ProductList} from "../../components/products/ProductList";
-import {PagePadding} from "../../containers/PagePadding";
-import {Loading} from "../../components/ui/Loading";
-import {useProducts} from "../../queries/useProducts";
+import {ProductList} from "@components/products/ProductList";
+import {PagePadding} from "@containers/PagePadding";
+import {Loading} from "@components/ui/Loading";
+import {useProducts} from "@queries/useProducts";
 
 export const ProductIndex: React.FC = () => {
     const {status, data, error, isFetching} = useProducts();

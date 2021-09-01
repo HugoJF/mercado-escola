@@ -1,12 +1,12 @@
 import React from "react";
-import {Button} from "../../components/ui/Button";
-import {Approve} from "../../svg/approve";
+import {Button} from "@components/ui/Button";
+import {Approve} from "@svg/approve";
 import {Link} from "react-router-dom";
-import {OrderType} from "../../types/orders";
-import {OpeningType} from "../../types/openings";
-import {AddressType} from "../../types/addresses";
-import {PagePadding} from "../../containers/PagePadding";
-import {Date} from "../../components/ui/Date";
+import {OrderType} from "@type/orders";
+import {OpeningType} from "@type/openings";
+import {AddressType} from "@type/addresses";
+import {PagePadding} from "@containers/PagePadding";
+import {Date} from "@components/ui/Date";
 
 export type OrderDoneProps = {
     order: OrderType;

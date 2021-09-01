@@ -1,14 +1,14 @@
 import React, {ChangeEvent, useMemo, useState} from "react";
 import {Plus} from "react-feather";
-import {FlatButton} from "../../../components/ui/FlatButton";
-import {ProductType} from "../../../types/products";
-import useNavigation from "../../../hooks/useNavigation";
+import {FlatButton} from "@components/ui/FlatButton";
+import {ProductType} from "@type/products";
+import useNavigation from "@hooks/useNavigation";
 import {AdminProductList} from "./AdminProductList";
-import {Empty} from "../../../components/ui/Empty";
-import {Title} from "../../../components/ui/Title";
-import {PagePadding} from "../../../containers/PagePadding";
+import {Empty} from "@components/ui/Empty";
+import {Title} from "@components/ui/Title";
+import {PagePadding} from "@containers/PagePadding";
 import isEmpty from "lodash.isempty";
-import {Input} from "../../../components/form/Input";
+import {Input} from "@components/form/Input";
 
 export type AdminProductIndexProps = {
     products: ProductType[];

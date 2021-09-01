@@ -1,7 +1,7 @@
-import {Modal, ModalProps} from "../components/ui/Modal";
+import {Modal, ModalProps} from "@components/ui/Modal";
 import React from "react";
-import {Skeleton} from "../components/ui/Skeleton";
-import {Button} from "../components/ui/Button";
+import {Skeleton} from "@components/ui/Skeleton";
+import {Button} from "@components/ui/Button";
 
 export type getSuggestionItemPropsActionMenuProps = {
     address: string;

@@ -1,13 +1,13 @@
 import React from "react";
-import {Title} from "../../../components/ui/Title";
-import {PagePadding} from "../../../containers/PagePadding";
-import {OpeningReport} from "../../../types/openings";
-import {Table} from "../../../components/ui/table/Table";
-import {Thead} from "../../../components/ui/table/Thead";
-import {Tr} from "../../../components/ui/table/Tr";
-import {Tbody} from "../../../components/ui/table/Tbody";
-import {Td} from "../../../components/ui/table/Td";
-import {Th} from "../../../components/ui/table/Th";
+import {Title} from "@components/ui/Title";
+import {PagePadding} from "@containers/PagePadding";
+import {OpeningReport} from "@type/openings";
+import {Table} from "@components/ui/table/Table";
+import {Thead} from "@components/ui/table/Thead";
+import {Tr} from "@components/ui/table/Tr";
+import {Tbody} from "@components/ui/table/Tbody";
+import {Td} from "@components/ui/table/Td";
+import {Th} from "@components/ui/table/Th";
 
 type AdminOpeningReportProps = {
     report: OpeningReport;

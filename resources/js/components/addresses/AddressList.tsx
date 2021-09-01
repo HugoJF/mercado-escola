@@ -1,5 +1,5 @@
 import React from "react";
-import {AddressType} from "../../types/addresses";
+import {AddressType} from "@type/addresses";
 import {X} from "react-feather";
 import {Box} from "../ui/Box";
 import {HeightTransitioner} from "../ui/HeightTransitioner";

@@ -1,4 +1,4 @@
-import {SoftDeletes, Timestamps} from "../types";
+import {SoftDeletes, Timestamps} from "~/types";
 
 export type AddressType = AddressProperties & AddressComputedProperties & Timestamps & SoftDeletes;
 

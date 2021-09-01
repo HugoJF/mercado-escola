@@ -1,10 +1,10 @@
 import React, {useEffect, useState} from "react";
-import useNavigation from "../../hooks/useNavigation";
-import {useCart} from "../../queries/useCart";
-import {Loading} from "../../components/ui/Loading";
+import useNavigation from "@hooks/useNavigation";
+import {useCart} from "@queries/useCart";
+import {Loading} from "@components/ui/Loading";
 import {CartIndex} from "./CartIndex";
-import {useCartAddress} from "../../mutations/useCartAddress";
-import {useOrderStore} from "../../mutations/useOrderStore";
+import {useCartAddress} from "@mutations/useCartAddress";
+import {useOrderStore} from "@mutations/useOrderStore";
 
 export const CartIndexContainer: React.FC = () => {
     const {go} = useNavigation();

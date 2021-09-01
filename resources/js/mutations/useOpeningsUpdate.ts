@@ -1,6 +1,6 @@
 import {useMutation, useQueryClient} from "react-query";
-import {api} from "../api";
-import {OpeningProperties} from "../types/openings";
+import {api} from "~/api";
+import {OpeningProperties} from "@type/openings";
 
 type Params = {
     id: Id;

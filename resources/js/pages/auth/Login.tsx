@@ -2,14 +2,14 @@ import React, {useState} from "react";
 import {useDispatch} from "react-redux";
 import {useForm} from "react-hook-form";
 import {Link} from "react-router-dom";
-import {LoginCredentials} from "../../types/auth";
-import useNavigation from "../../hooks/useNavigation";
-import {Container} from "../../containers/Container";
-import {Dispatch} from "../../store";
-import {useAuth} from "../../selectors";
-import {Button} from "../../components/ui/Button";
-import {Input} from "../../components/form/Input";
-import {Error} from "../../components/ui/Error";
+import {LoginCredentials} from "@type/auth";
+import useNavigation from "@hooks/useNavigation";
+import {Container} from "@containers/Container";
+import {Dispatch} from "~/store";
+import {useAuth} from "~/selectors";
+import {Button} from "@components/ui/Button";
+import {Input} from "@components/form/Input";
+import {Error} from "@components/ui/Error";
 
 export const Login: React.FC<object> = () => {
     const auth = useAuth();
