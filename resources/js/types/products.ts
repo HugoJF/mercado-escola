@@ -1,4 +1,13 @@
+<<<<<<< Updated upstream
 import {Media, Pivot, SoftDeletes, Timestamps} from "../types";
+=======
+import {Pivot, SoftDeletes, Timestamps} from "~/types";
+import {Media} from "@type/media";
+
+export type WithMedia = {
+    media: Media[];
+}
+>>>>>>> Stashed changes
 
 export type WithQuantityPivot = Pivot<{
     quantity: number;

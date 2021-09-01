@@ -62,6 +62,8 @@ export const ProductShow: React.FC<ProductShowProps> = ({product, quantity, onRe
         <div className="lg:px-48 xl:px-64 w-full">
             <ImageHolder
                 src={Object.values(product.media_links ?? [])?.[0]}
+                base64svg={Object.values(product.media)[0].responsive_images['optimized'].base64svg}
+                alt={product.name}
             />
         </div>
 
