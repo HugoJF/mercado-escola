@@ -26,6 +26,10 @@ class Product extends Model implements HasMedia
 
     protected $appends = ['media_links'];
 
+    protected $casts = [
+        'weight_increment' => 'float',
+        'quantity_cost' => 'float',
+    ];
 
     public function getMediaLinksAttribute()
     {

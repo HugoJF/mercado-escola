@@ -17,17 +17,19 @@ export const ProductQuantityCost: React.FC<ProductQuantityCostProps> = ({product
         })
     }
 
-    if (quantity > 1000) {
+    const kg = quantity;
+    if (kg > 1) {
         return children({
             text: 'kg',
-            cost: (quantity * product.weight_increment / 1000) * (product.quantity_cost ?? quantityCostOverride),
-            total: quantity / 1000,
+            cost: kg * (product.quantity_cost ?? quantityCostOverride),
+            total: kg,
         })
     }
 
+    const grams = Math.round(kg * 1000);
     return children({
-        text: quantity === 1 ? 'grama' : 'gramas',
-        cost: (quantity * product.weight_increment / 1000) * (product.quantity_cost ?? quantityCostOverride),
-        total: quantity,
+        text: grams === 1 ? 'grama' : 'gramas',
+        cost: kg * (product.quantity_cost ?? quantityCostOverride),
+        total: grams,
     })
 };

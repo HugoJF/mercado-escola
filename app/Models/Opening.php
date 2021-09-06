@@ -21,6 +21,10 @@ class Opening extends Model
 
     protected $dates = ['opens_at', 'closes_at', 'delivers_at'];
 
+    protected $casts = [
+        'delivery_fee' => 'float',
+    ];
+
     public function orders()
     {
         return $this->hasMany(Order::class);

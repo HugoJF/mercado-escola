@@ -50,15 +50,15 @@ class GenerateReport
 
     protected function generateWeightReport(Collection $productGroup)
     {
-        $weight = $productGroup->reduce(function ($weight, $product) {
-            return $weight + $product->weight_increment * $product->pivot->quantity;
-        }, 0);
+        // TODO: test
+        $kg = $productGroup->pluck('weight_increment')->sum();
 
-        if ($weight > 1000) {
-            $weight = round($weight / 1000, 3);
-            $text = "$weight kg";
+        if ($kg > 1) {
+            $kg = round($kg, 3);
+            $text = "$kg kg";
         } else {
-            $text = "$weight gramas";
+            $g = round($kg * 1000, 3);
+            $text = "$g gramas";
         }
 
         return [
@@ -70,9 +70,8 @@ class GenerateReport
     protected function generateUnitReport(Collection $productGroup)
     {
         $product = $productGroup->first();
-        $units = $productGroup->reduce(function ($units, $product) {
-            return $units + $product->pivot->quantity;
-        }, 0);
+        // TODO: test
+        $units = $productGroup->pluck('quantity')->sum();
 
         if ($units === 1) {
             $text = "$units $product->unit_name_singular";

@@ -25,7 +25,7 @@ class ReportTest extends TestCase
 
         $product1 = Product::factory()->create([
             'type' => 'weight',
-            'weight_increment' => 500,
+            'weight_increment' => 0.5,
             'quantity_cost' => 5,
         ]);
         $product2 = Product::factory()->create([

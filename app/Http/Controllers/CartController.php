@@ -74,6 +74,7 @@ class CartController extends Controller
             [$product->id],
             [
                 // See CreateNewOrder@attachProducts on why quantity_cost should be used
+                'type'          => $product->type,
                 'quantity_cost' => $product->quantity_cost,
                 'quantity'      => $request->input('quantity'),
             ],

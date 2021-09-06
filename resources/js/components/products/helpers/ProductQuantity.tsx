@@ -1,5 +1,6 @@
 import {ProductType} from "@type/products";
 import React from "react";
+import {round} from "~/helpers/Functions";
 
 type ProductQuantityProps = {
     product: ProductType;
@@ -15,17 +16,17 @@ export const ProductQuantity: React.FC<ProductQuantityProps> = ({product, quanti
         })
     }
 
-    const weight = product.weight_increment * quantity;
-
-    if (weight > 1000) {
+    const kg = round(quantity, 3);
+    if (kg > 1) {
         return children({
             text: 'kg',
-            total: weight / 1000,
+            total: kg,
         })
     }
 
+    const grams = round(kg * 1000, 3);
     return children({
-        text: weight === 1 ? 'grama' : 'gramas',
-        total: weight,
+        text: grams === 1 ? 'grama' : 'gramas',
+        total: grams,
     })
 };

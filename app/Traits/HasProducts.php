@@ -3,6 +3,7 @@
 namespace App\Traits;
 
 use App\Models\AttachedProduct;
+use App\Models\HasProduct;
 use App\Models\Product;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
 
@@ -10,7 +11,7 @@ trait HasProducts
 {
     public function getStringIdAttribute()
     {
-        return (string) $this->id;
+        return (string)$this->id;
     }
 
     /**
@@ -19,6 +20,7 @@ trait HasProducts
     public function products()
     {
         return $this->morphToMany(Product::class, 'holder', 'has_product', null, null, 'string_id')
-                    ->withPivot('quantity', 'quantity_cost');
+            ->withPivot('type', 'quantity', 'quantity_cost')
+            ->using(HasProduct::class);
     }
 }

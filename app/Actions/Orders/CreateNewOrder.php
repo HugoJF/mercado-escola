@@ -21,7 +21,8 @@ class CreateNewOrder
 
     public function __construct(
         FindCurrentOpening $currentOpening
-    ) {
+    )
+    {
         $this->currentOpening = $currentOpening;
     }
 
@@ -53,13 +54,13 @@ class CreateNewOrder
     protected function clearCart(User $user): void
     {
         $user->products()->detach(
-            $user->products->pluck('id')->map(fn($id) => (string) $id)
+            $user->products->pluck('id')->map(fn($id) => (string)$id)
         );
         $user->cartAddress()->dissociate();
     }
 
     /**
-     * @param User  $user
+     * @param User $user
      * @param Order $order
      */
     protected function attachProducts(User $user, Order $order): void
@@ -72,7 +73,8 @@ class CreateNewOrder
             ->products
             ->keyBy('id')
             ->map(fn($product) => [
-                'quantity'      => $product['pivot']['quantity'],
+                'type' => $product['pivot']['type'],
+                'quantity' => $product['pivot']['quantity'],
                 // quantity_cost is used because it's the price of
                 // the product when the user added it to the cart
                 'quantity_cost' => $product['pivot']['quantity_cost'],
@@ -81,7 +83,7 @@ class CreateNewOrder
     }
 
     /**
-     * @param User  $user
+     * @param User $user
      * @param Order $order
      */
     protected function notifyUser(User $user, Order $order): void
@@ -90,7 +92,7 @@ class CreateNewOrder
     }
 
     /**
-     * @param User         $user
+     * @param User $user
      * @param Opening|null $opening
      *
      * @return Order
@@ -113,7 +115,7 @@ class CreateNewOrder
     }
 
     /**
-     * @param User         $user
+     * @param User $user
      * @param Opening|null $opening
      */
     protected function checkPreconditions(User $user, ?Opening $opening): void

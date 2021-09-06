@@ -19,10 +19,12 @@ class UserResource extends JsonResource
         return parent::toArray($request);
     }
 
+    // TODO: check usages
     protected function calculateCost()
     {
-        return $this->products->reduce(function (int $total, Product $product) {
-            return $total + $product->quantity_cost * $product->pivot->quantity;
-        }, 0);
+        // TODO: test
+        return $this->products->map(function (int $total, Product $product) {
+            return $product->pivot->quantity_cost * $product->pivot->quantity;
+        })->sum();
     }
 }

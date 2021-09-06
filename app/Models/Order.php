@@ -42,6 +42,10 @@ class Order extends Model
 
     protected $appends = ['total'];
 
+    protected $casts = [
+        'delivery_fee' => 'float',
+    ];
+
     public function opening()
     {
         return $this->belongsTo(Opening::class);

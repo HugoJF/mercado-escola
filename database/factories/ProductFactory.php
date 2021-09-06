@@ -32,7 +32,7 @@ class ProductFactory extends Factory
             ];
         } else {
             $extra = [
-                'weight_increment' => 350,
+                'weight_increment' => 0.350,
             ];
         }
 

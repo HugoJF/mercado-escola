@@ -14,7 +14,6 @@ class OrderCreated extends Mailable
     use Queueable, SerializesModels;
 
     public Order $order;
-    protected ProductCost $cost;
 
     /**
      * Create a new message instance.
@@ -24,7 +23,6 @@ class OrderCreated extends Mailable
     public function __construct(Order $order)
     {
         $this->order = $order;
-        $this->cost = app(ProductCost::class);
     }
 
     /**
@@ -49,21 +47,21 @@ class OrderCreated extends Mailable
         if ($product->type === 'unit') {
             return [
                 'quantity' => $product->pivot->quantity,
-                'cost'     => $this->cost->costByUnit($product),
+                'cost' => $product->pivot->quantity * $product->pivot->quantity_cost,
             ];
         }
 
-        $weight = $product->pivot->quantity * $product->weight_increment;
+        $weight = $product->pivot->quantity;
 
-        if ($weight < 1000) {
-            $weight .= ' gramas';
+        if ($weight < 1) {
+            $weight = round($weight * 1000, 3) . ' gramas';
         } else {
-            $weight = round($weight / 1000) . ' kg';
+            $weight = round($weight, 3) . ' kg';
         }
 
         return [
             'quantity' => $weight,
-            'cost'     => $this->cost->costByWeight($product),
+            'cost' => $product->quantity * $product->quantity_cost,
         ];
     }
 

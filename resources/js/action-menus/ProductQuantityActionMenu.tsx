@@ -15,22 +15,23 @@ export type ProductQuantityActionMenuProps = {
 
 export const ProductQuantityActionMenu: React.FC<ModalProps & ProductQuantityActionMenuProps> = ({product, currentQuantity, open, onQuantityChange, onClose}) => {
     const [quantity, setQuantity] = useState(1);
+    const increment = product.type === 'weight' ? product.weight_increment : 1;
 
     useEffect(() => {
         // If item is not in cart, manually initialize the selector with 1 item
         if (currentQuantity === 0) {
-            setQuantity(1);
+            setQuantity(increment);
         } else {
             setQuantity(currentQuantity)
         }
     }, [currentQuantity]);
 
     function handleOnAdd() {
-        setQuantity(quantity + 1);
+        setQuantity(quantity + increment);
     }
 
     function handleSubtract() {
-        setQuantity(Math.max(0, quantity - 1))
+        setQuantity(Math.max(0, quantity - increment))
     }
 
     function handleOnSubmit() {

@@ -16,8 +16,8 @@ export const ProductFormWeight: React.FC<ProductFormWeightProps> = ({errors, con
             <div>
                 <Input
                     name="weight_increment"
-                    label="Incremento de peso (em gramas)"
-                    description="Múltiplos em que o usuário poderá escolher (ex: 400 irá deixar o usuário selecionar 400g, 800g, 1200g, etc)"
+                    label="Incremento de peso"
+                    description="Múltiplos em que o usuário poderá escolher (ex: 1.5 irá deixar o usuário selecionar 1.5kg, 3kg, 4.5kg, etc)"
                     error={errors.weight_increment}
                     inputProps={{
                         ...register('weight_increment'),
