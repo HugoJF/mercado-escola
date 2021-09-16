@@ -19,6 +19,8 @@
         "laravel/sanctum": "^2.6",
         "laravel/tinker": "^2.0",
         "league/flysystem-aws-s3-v3": "~1.0",
+        "mll-lab/laravel-graphql-playground": "^2.5",
+        "nuwave/lighthouse": "^5.23",
         "sentry/sentry-laravel": "^2.3",
         "spatie/laravel-medialibrary": "^8.0.0"
     },

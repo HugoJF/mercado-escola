@@ -1,0 +1,57 @@
+"A date string with format `Y-m-d`, e.g. `2011-05-23`."
+scalar Date @scalar(class: "Nuwave\\Lighthouse\\Schema\\Types\\Scalars\\Date")
+
+"A datetime string with format `Y-m-d H:i:s`, e.g. `2018-05-23 13:43:32`."
+scalar DateTime @scalar(class: "Nuwave\\Lighthouse\\Schema\\Types\\Scalars\\DateTime")
+
+type Query {
+    users: [User!]! @paginate(defaultCount: 10)
+    user(id: ID @eq): User @find
+}
+
+type User {
+    id: ID!
+    name: String!
+    email: String!
+    products: [Product]! @morphMany
+    created_at: DateTime!
+    updated_at: DateTime!
+}
+
+type ProductPivot {
+    holder_id: String!
+    product_id: ID!
+    holder_type: String!
+    quantity: Float!
+    quantity_cost: Float!
+}
+
+type Product {
+    id: String!
+    name: String!
+    description: String!
+    quantity_cost: Int!
+    deleted_at: DateTime
+    created_at: DateTime!
+    updated_at: DateTime!
+    type: String!
+    unit_name_singular: String
+    unit_name_plural: String
+    pivot: ProductPivot
+    media: [Media] @morphMany
+}
+
+"manipulations missing | "
+type Media {
+    id: ID!
+    model_type: String!
+    model_id: ID!
+    uuid: String!
+    collection_name: String!
+    name: String!
+    file_name: String!
+    mime_type: String!
+    disk: String!
+    conversions_disk: String!
+    size: Int!
+}
