@@ -1,11 +1,8 @@
-import React, {useEffect} from "react";
-import {useForm} from "react-hook-form";
+import React, {useState} from "react";
 import {ProductProperties, ProductType} from "@type/products";
 import {Button} from "../../ui/Button";
 import {FieldWrapper} from "../../form/FieldWrapper";
 import useConfirmMenu from "@hooks/useConfirmMenu";
-import {useProductDestroyMedia} from "~/mutations/useProductDestroyMedia";
-import useLoading from "@hooks/useLoading";
 import {ProductFormUnit} from "./ProductFormUnit";
 import {ProductFormWeight} from "./ProductFormWeight";
 import isEmpty from "lodash.isempty";
@@ -14,80 +11,47 @@ import {ProductDescription} from "~/forms/fields/ProductDescription";
 import useImageDropzone from "@hooks/useImageDropzone";
 import {ProductImages} from "~/forms/fields/ProductImages";
 import {QuantityType} from "~/forms/fields/QuantityType";
+import {FileWithPreview} from "@type/forms";
+import useFormy from "@hooks/useMyFormy";
 
 export type ProductFormProps = {
     product?: ProductType;
-    onSubmit: (data: FormData) => void;
+    onSubmit: (data: ProductProperties, files: FileWithPreview[]) => Promise<void>;
+    onRemoveMedia: (request: { productId: number, mediaId: number }) => void;
     action: string;
 }
 
-export const ProductForm: React.FC<ProductFormProps>
-    = ({onSubmit, product, action}) => {
-    const {loading, load} = useLoading();
-    const {
-        register,
-        handleSubmit,
-        formState: {errors},
-        setError,
-        setValue,
-        watch,
-        control
-    } = useForm<ProductProperties>(
-        {
-            defaultValues: product,
-            mode: "onChange",
-        }
-    );
+export const ProductForm: React.FC<ProductFormProps> = ({onSubmit, onRemoveMedia, product, action}) => {
+    const [loading, setLoading] = useState(false);
     const [menu, confirm] = useConfirmMenu();
+
+    const {
+        form: {
+            handleSubmit,
+            formState: {errors},
+            watch,
+            control
+        },
+        setErrors,
+    } = useFormy<ProductProperties>({
+        defaultValues: product,
+        mode: "onChange",
+    }, product);
+
     const {
         uploadingFiles,
         removeFile,
         dropzone: {getInputProps, getRootProps}
     } = useImageDropzone();
 
-    // TODO: move to container
-    const productDestroyMedia = useProductDestroyMedia();
-
-    // TODO: this should be removed once ProductForm get's a container.
-    // defaultValues for useForm() should be used instead
-    useEffect(() => {
-        if (!product) {
-            return;
-        }
-
-        for (let prop of Object.keys(product)) {
-            // @ts-ignore
-            setValue(prop, product[prop]);
-        }
-    }, [setValue, product]);
-
-    function setErrors(errors: object) {
-        for (let [key, messages] of Object.entries(errors)) {
-            // @ts-ignore
-            setError(key, {type: 'manual', message: messages[0]});
-        }
-    }
-
     async function submit(data: ProductProperties) {
-        load(async () => {
-            try {
-                const form = new FormData;
-
-                for (const [key, value] of Object.entries(data)) {
-                    form.append(key, String(value));
-                }
-
-                uploadingFiles.forEach((value) => {
-                    form.append('images[]', value.file);
-                });
-
-                await onSubmit(form);
-            } catch (e) {
-                // TODO: type check this
-                setErrors(e.errors);
-                throw e;
-            }
-        });
+        setLoading(true);
+        try {
+            await onSubmit(data, uploadingFiles);
+        } catch (e) {
+            setErrors(e);
+        }
+        setLoading(false);
     }
 
     async function removeExistingImage(id: number) {
@@ -101,7 +65,7 @@ export const ProductForm: React.FC<ProductFormProps>
         });
 
         if (remove) {
-            productDestroyMedia.mutate({
+            onRemoveMedia({
                 productId: product.id,
                 mediaId: id,
             })
@@ -112,14 +76,14 @@ export const ProductForm: React.FC<ProductFormProps>
         {menu}
 
         {/* Images */}
-        {product && <ProductImages
+        <ProductImages
             product={product}
             inputProps={getInputProps()}
             rootProps={getRootProps()}
             uploads={uploadingFiles}
             onRemoveImage={id => removeExistingImage(parseInt(id.toString()))}
             onRemoveUpload={upload => removeFile(upload)}
-        />}
+        />
 
         {/* Title */}
         <div className="mb-8">

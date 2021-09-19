@@ -4,7 +4,7 @@ import {FieldWrapper} from "@components/form/FieldWrapper";
 import {ProductType} from "@type/products";
 
 type Props = {
-    product: ProductType;
+    product?: ProductType;
     rootProps: React.HTMLAttributes<HTMLDivElement>
     inputProps: React.HTMLAttributes<HTMLInputElement>
     onRemoveImage: (id: Id) => void;
@@ -31,7 +31,7 @@ export const ProductImages: React.FC<Props> = ({
 
     return <FieldWrapper label="Imagens" name="images">
         <ul className="grid grid-cols-4 gap-4 mb-4 pt-2">
-            {Object.entries(product.media_links).map(([id, url]) =>
+            {product && Object.entries(product.media_links).map(([id, url]) =>
                 <li
                     key={url}
                     className="relative flex items-center justify-center rounded-lg shadow"
