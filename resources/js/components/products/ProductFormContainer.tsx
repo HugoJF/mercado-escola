@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React from "react";
 import {ProductProperties, ProductType} from "@type/products";
 import {ProductForm} from "@components/products/ProductForm/ProductForm";
 import {useProductDestroyMedia} from "@mutations/useProductDestroyMedia";

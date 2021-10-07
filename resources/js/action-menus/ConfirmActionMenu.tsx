@@ -9,7 +9,14 @@ export type ConfirmActionMenuProps = {
     onClick: (confirmed: boolean) => void;
 }
 
-export const ConfirmActionMenu: React.FC<ModalProps & ConfirmActionMenuProps> = ({open, title, description, action, onClose, onClick}) => {
+export const ConfirmActionMenu: React.FC<ModalProps & ConfirmActionMenuProps> = ({
+                                                                                     open,
+                                                                                     title,
+                                                                                     description,
+                                                                                     action,
+                                                                                     onClose,
+                                                                                     onClick
+                                                                                 }) => {
     return <Modal open={open} onClose={onClose}>
         {/* Header */}
         <h1 className="px-2 text-center text-lg font-medium">

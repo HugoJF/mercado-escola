@@ -16,7 +16,8 @@ export const OnBoarding2: React.FC = () => {
         }
     }, [data]);
 
-    return <div className="px-4 bg-gradient-to-br from-primary-500 to-primary-700 min-h-screen flex flex-col justify-center bg-blue-500">
+    return <div
+        className="px-4 bg-gradient-to-br from-primary-500 to-primary-700 min-h-screen flex flex-col justify-center bg-blue-500">
         <h1 className="text-5xl text-white text-center font-bold">
             Último passo
         </h1>

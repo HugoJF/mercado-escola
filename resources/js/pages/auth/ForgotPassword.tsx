@@ -1,13 +1,11 @@
 import React, {useState} from "react";
 import {useDispatch} from "react-redux";
 import {Dispatch} from "~/store";
-import {useForm} from "react-hook-form";
 import {Input} from "@components/form/Input";
 import {Button} from "@components/ui/Button";
 import useNavigation from "@hooks/useNavigation";
 import {Title} from "@components/ui/Title";
 import {PagePadding} from "@containers/PagePadding";
-import {Errors} from "~/types";
 import useFormy from "@hooks/useMyFormy";
 
 type Form = {
