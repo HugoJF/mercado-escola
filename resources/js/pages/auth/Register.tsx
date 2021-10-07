@@ -1,7 +1,6 @@
 import React, {useState} from "react";
 import {useDispatch} from "react-redux";
 import {Dispatch} from "~/store";
-import {useForm} from "react-hook-form";
 import {Link} from "react-router-dom";
 import {Input} from "@components/form/Input";
 import {Button} from "@components/ui/Button";
@@ -9,19 +8,13 @@ import {Title} from "@components/ui/Title";
 import {PagePadding} from "@containers/PagePadding";
 import useNavigation from "@hooks/useNavigation";
 import {RegisterCredentials} from "@type/auth";
+import useFormy from "@hooks/useMyFormy";
 
-export const Register: React.FC<object> = () => {
+export const Register: React.FC = () => {
     const dispatch = useDispatch<Dispatch>();
     const {go} = useNavigation();
     const [loading, setLoading] = useState(false);
-    const {register, handleSubmit, watch, formState: {errors}, setError} = useForm<RegisterCredentials>();
-
-    function setErrors(errors: object) {
-        for (let [key, messages] of Object.entries(errors)) {
-            // @ts-ignore
-            setError(key, {type: 'manual', message: messages[0]});
-        }
-    }
+    const {setErrors, form: {register, handleSubmit, watch, formState: {errors}}} = useFormy<RegisterCredentials>();
 
     async function registerUser(credentials: RegisterCredentials) {
         setLoading(true);
@@ -38,7 +31,6 @@ export const Register: React.FC<object> = () => {
         setLoading(false);
     }
 
-    // @ts-ignore
     return <PagePadding>
         <div className="mx-auto container">
             <form onSubmit={handleSubmit(registerUser)}>

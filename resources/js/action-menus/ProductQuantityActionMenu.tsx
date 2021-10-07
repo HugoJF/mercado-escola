@@ -13,7 +13,13 @@ export type ProductQuantityActionMenuProps = {
     onQuantityChange: (quantity: number) => void;
 }
 
-export const ProductQuantityActionMenu: React.FC<ModalProps & ProductQuantityActionMenuProps> = ({product, currentQuantity, open, onQuantityChange, onClose}) => {
+export const ProductQuantityActionMenu: React.FC<ModalProps & ProductQuantityActionMenuProps> = ({
+                                                                                                     product,
+                                                                                                     currentQuantity,
+                                                                                                     open,
+                                                                                                     onQuantityChange,
+                                                                                                     onClose
+                                                                                                 }) => {
     const [quantity, setQuantity] = useState(1);
     const increment = product.type === 'weight' ? product.weight_increment : 1;
 
@@ -67,8 +73,8 @@ export const ProductQuantityActionMenu: React.FC<ModalProps & ProductQuantityAct
                         <span className="text-xl text-secondary-500 font-medium">
                             <PriceFormatter price={cost}/>
                         </span>
-                    <span className="ml-px text-gray-500">/{text}</span>
-                </>}
+                        <span className="ml-px text-gray-500">/{text}</span>
+                    </>}
                 </ProductCost>}
             </div>
             {Boolean(quantity) && <div className="flex items-center">

@@ -14,15 +14,18 @@
     transform: translateX(100%);
     opacity: 0;
 }
+
 .slide-enter-active {
     transform: translateX(0%);
     transition: opacity 500ms, transform 500ms;
     opacity: 1;
 }
+
 .slide-exit {
     transform: translateX(0%);
     opacity: 1;
 }
+
 .slide-exit-active {
     transform: translateX(-100%);
     transition: opacity 500ms, transform 500ms;
@@ -32,13 +35,16 @@
 .fade-enter {
     opacity: 0;
 }
+
 .fade-enter-active {
     transition: opacity 1000ms;
     opacity: 1;
 }
+
 .fade-exit {
     opacity: 1;
 }
+
 .fade-exit-active {
     transition: opacity 1000ms;
     opacity: 0;

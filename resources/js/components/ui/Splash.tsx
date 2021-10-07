@@ -26,7 +26,8 @@ export const Splash: React.FC = ({children}) => {
             timeout={1000}
         >
             {loading ?
-                <div className="w-full h-full flex flex-col items-center justify-center bg-gradient-to-br from-primary-500 to-primary-700 justify-center">
+                <div
+                    className="w-full h-full flex flex-col items-center justify-center bg-gradient-to-br from-primary-500 to-primary-700 justify-center">
                     <h1 className="mb-8 text-center text-5xl text-white font-bold leading-none tracking-tight">
                         Mercado Escola
                     </h1>

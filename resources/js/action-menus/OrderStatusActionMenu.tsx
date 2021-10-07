@@ -10,7 +10,12 @@ export type OrderStatusActionMenuProps = {
     onUpdate: (status: OrderStateEnum) => void;
 }
 
-export const OrderStatusActionMenu: React.FC<ModalProps & OrderStatusActionMenuProps> = ({open, state, onClose, onUpdate}) => {
+export const OrderStatusActionMenu: React.FC<ModalProps & OrderStatusActionMenuProps> = ({
+                                                                                             open,
+                                                                                             state,
+                                                                                             onClose,
+                                                                                             onUpdate
+                                                                                         }) => {
     const [newState, setNewState] = useState<OrderStateEnum>(state);
     const [loading, setLoading] = useState(false);
     useEffect(() => {

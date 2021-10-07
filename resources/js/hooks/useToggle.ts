@@ -1,7 +1,7 @@
 import {useState} from "react";
 
 export type useToggleProps = [
-    number | undefined,
+        number | undefined,
     (newId: number | undefined) => void,
 ]
 

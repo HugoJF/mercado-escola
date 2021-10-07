@@ -1,6 +1,5 @@
 import React, {useState} from "react";
 import {useDispatch} from "react-redux";
-import {useForm} from "react-hook-form";
 import {Link} from "react-router-dom";
 import {LoginCredentials} from "@type/auth";
 import useNavigation from "@hooks/useNavigation";
@@ -10,13 +9,14 @@ import {useAuth} from "~/selectors";
 import {Button} from "@components/ui/Button";
 import {Input} from "@components/form/Input";
 import {Error} from "@components/ui/Error";
+import useFormy from "@hooks/useMyFormy";
 
 export const Login: React.FC<object> = () => {
     const auth = useAuth();
     const dispatch = useDispatch<Dispatch>();
     const {go} = useNavigation();
     const [loading, setLoading] = useState(false);
-    const {register, handleSubmit, formState: {errors}} = useForm<LoginCredentials>();
+    const {setErrors, form: {register, handleSubmit, formState: {errors}}} = useFormy<LoginCredentials>();
 
     async function login(credentials: LoginCredentials) {
         setLoading(true);
@@ -24,7 +24,7 @@ export const Login: React.FC<object> = () => {
             await dispatch.auth.login(credentials);
             go('/home');
         } catch (e) {
-            // TODO
+            setErrors(e.response.data.errors);
         }
         setLoading(false);
     }

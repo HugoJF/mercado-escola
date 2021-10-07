@@ -8,7 +8,12 @@ export type ShippingOptionActionMenuProps = {
     onChange: (isDelivery: boolean) => void;
 }
 
-export const ShippingOptionActionMenu: React.FC<ModalProps & ShippingOptionActionMenuProps> = ({open, isDelivery, onClose, onChange}) => {
+export const ShippingOptionActionMenu: React.FC<ModalProps & ShippingOptionActionMenuProps> = ({
+                                                                                                   open,
+                                                                                                   isDelivery,
+                                                                                                   onClose,
+                                                                                                   onChange
+                                                                                               }) => {
     return <Modal open={open} onClose={onClose}>
         {/* Header */}
         <h1 className="text-center text-lg font-medium">Selecionar opção</h1>
