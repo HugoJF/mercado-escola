@@ -3,7 +3,7 @@ import {useEffect} from "react";
 import {FieldValues, UseFormProps} from "react-hook-form/dist/types";
 
 export default function useFormy<T extends FieldValues = FieldValues, U extends object = object>(
-    params: UseFormProps<T, U>,
+    params?: UseFormProps<T, U>,
     initial?: Record<string, unknown>
 ) {
     const form = useForm<T, U>(params)

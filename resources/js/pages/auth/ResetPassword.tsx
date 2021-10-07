@@ -11,6 +11,7 @@ import {Title} from "@components/ui/Title";
 import {Input} from "@components/form/Input";
 import {Dispatch} from "~/store";
 import {Errors} from "~/types";
+import useFormy from "@hooks/useMyFormy";
 
 type Form = {
     email: string;
@@ -22,13 +23,13 @@ type Params = {
     token: string;
 }
 
-export const ResetPassword: React.FC<object> = () => {
+export const ResetPassword: React.FC = () => {
     const dispatch = useDispatch<Dispatch>();
     const params = useParams<Params>();
     const location = useLocation();
     const {go} = useNavigation();
     const [loading, setLoading] = useState(false);
-    const {register, handleSubmit, setError, watch, formState: {errors}} = useForm<Form>();
+    const {setErrors, form: {register, handleSubmit, watch, formState: {errors}}} = useFormy<Form>();
 
     const parsed = useMemo(() => queryString.parse(location.search), [location]);
     const email = parsed.email as string;
@@ -41,12 +42,6 @@ export const ResetPassword: React.FC<object> = () => {
         });
         go('/login');
         return <></>;
-    }
-
-    function setErrors(errors: Errors<Form>) {
-        for (let [key, messages] of Object.entries(errors)) {
-            setError(key as keyof Form, {type: 'manual', message: messages[0]});
-        }
     }
 
     async function resetPassword({password, password_confirmation}: Form) {
