@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Models\Address;
 use App\Models\Product;
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -19,7 +20,10 @@ class CartUpdateRequest extends FormRequest
         ];
     }
 
-    public function address()
+    /**
+     * @return Address|null
+     */
+    public function address(): ?Address
     {
         if ($id = $this->input('address_id')) {
             return Product::query()->find($id);
