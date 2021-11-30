@@ -51,7 +51,7 @@ class GenerateReport
     protected function generateWeightReport(Collection $productGroup)
     {
         // TODO: test
-        $kg = $productGroup->pluck('weight_increment')->sum();
+        $kg = $productGroup->pluck('pivot.quantity')->sum();
 
         if ($kg > 1) {
             $kg = round($kg, 3);
@@ -71,7 +71,7 @@ class GenerateReport
     {
         $product = $productGroup->first();
         // TODO: test
-        $units = $productGroup->pluck('quantity')->sum();
+        $units = $productGroup->pluck('pivot.quantity')->sum();
 
         if ($units === 1) {
             $text = "$units $product->unit_name_singular";
