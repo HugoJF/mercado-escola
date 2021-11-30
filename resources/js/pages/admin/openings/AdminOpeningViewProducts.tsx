@@ -69,7 +69,7 @@ export const AdminOpeningViewProducts: React.FC<AdminOpeningViewProductsProps> =
                                     <div className="w-1/4 mr-4">
                                         <ImageHolder
                                             src={Object.values(product.media_links ?? [])[0]}
-                                            base64svg={Object.values(product.media)[0].responsive_images?.['optimized']?.base64svg}
+                                            base64svg={Object.values(product.media)[0]?.responsive_images?.['optimized']?.base64svg}
                                             alt={product.name}
                                         />
                                     </div>
