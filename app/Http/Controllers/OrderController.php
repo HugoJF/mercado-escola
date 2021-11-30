@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Actions\Orders\CancelOrder;
-use App\Actions\Orders\CreateNewOrder;
+use App\Actions\Orders\CreateOrder;
 use App\Http\Requests\OrderUpdateRequest;
 use App\Http\Resources\OrderResource;
 use App\Models\Order;
@@ -29,11 +29,11 @@ class OrderController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param CreateNewOrder $createNewOrder
+     * @param CreateOrder $createNewOrder
      *
      * @return OrderResource
      */
-    public function store(CreateNewOrder $createNewOrder)
+    public function store(CreateOrder $createNewOrder)
     {
         return new OrderResource($createNewOrder->handle());
     }
@@ -80,13 +80,13 @@ class OrderController extends Controller
      *
      * @param Order $order
      *
-     * @return Order
+     * @return \Illuminate\Http\Response
      * @throws Exception
      */
     public function destroy(Order $order)
     {
         $order->delete();
 
-        return $order;
+        return response()->noContent();
     }
 }

@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Actions\Openings\CreateNewOpening;
+use App\Actions\Openings\CreateOpening;
 use App\Actions\Openings\FindCurrentOpening;
 use App\Actions\Openings\GenerateReport;
 use App\Http\Requests\OpeningStoreRequest;
@@ -43,13 +43,13 @@ class OpeningController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param CreateNewOpening $createNewOpening
+     * @param CreateOpening $createNewOpening
      * @param OpeningStoreRequest $request
      *
      * @return OpeningResource
      */
     public function store(
-        CreateNewOpening    $createNewOpening,
+        CreateOpening       $createNewOpening,
         OpeningStoreRequest $request
     )
     {

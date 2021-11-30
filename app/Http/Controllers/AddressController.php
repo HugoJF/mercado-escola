@@ -75,6 +75,6 @@ class AddressController extends Controller
     {
         $address->delete();
 
-        return $address;
+        return response()->noContent();
     }
 }
