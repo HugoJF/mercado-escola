@@ -6,10 +6,12 @@ use App\Actions\Openings\GenerateReport;
 use App\Models\Opening;
 use App\Models\Order;
 use App\Models\Product;
+use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Tests\TestCase;
 
 class ReportTest extends TestCase
 {
+    use DatabaseTransactions;
     /**
      * A basic unit test example.
      *
@@ -49,7 +51,7 @@ class ReportTest extends TestCase
             'quantity_cost' => 10,
         ]);
         $order2->products()->attach($product2, [
-            'quantity' => 2.5,
+            'quantity' => 3,
             'quantity_cost' => 20,
         ]);
 
@@ -61,7 +63,7 @@ class ReportTest extends TestCase
         $statsReport = collect($report)->map(fn($item) => $item['report'])->toArray();
         $expectedReport = [
             $product1->id => [
-                "total" => "2.5 kg",
+                "total" => "5 kg",
                 "orders" => 2,
             ],
             $product2->id => [

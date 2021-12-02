@@ -36,7 +36,7 @@ class GenerateReport
             ];
         });
 
-        return $report->values()->toArray();
+        return $report->toArray();
     }
 
     protected function generateReport(Collection $productGroup)
