@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Actions\Address\CreateAddress;
+use App\Actions\Address\UpdateAddress;
 use App\Models\Address;
 use Illuminate\Http\Request;
 
@@ -29,15 +31,11 @@ class AddressController extends Controller
      *
      * @return Address
      */
-    public function store(Request $request)
+    public function store(CreateAddress $createAddress, Request $request)
     {
-        $address = new Address($request->all());
-
-        $address->user()->associate(auth()->user());
-
-        $address->save();
-
-        return $address;
+        return $createAddress->handle(
+            auth()->user(), $request->all(),
+        );
     }
 
     /**
@@ -60,13 +58,9 @@ class AddressController extends Controller
      *
      * @return Address
      */
-    public function update(Request $request, Address $address)
+    public function update(UpdateAddress $updateAddress, Request $request, Address $address)
     {
-        $address->fill($request->all());
-
-        $address->save();
-
-        return $address;
+        return $updateAddress->handle($address, $request->all());
     }
 
     /**
@@ -81,6 +75,6 @@ class AddressController extends Controller
     {
         $address->delete();
 
-        return $address;
+        return response()->noContent();
     }
 }

@@ -5,7 +5,6 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Illuminate\Support\Collection;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
@@ -31,22 +30,20 @@ class Product extends Model implements HasMedia
         'quantity_cost' => 'float',
     ];
 
-    public function getMediaLinksAttribute()
-    {
-        /** @var Collection $media */
-        $media = $this->getMedia();
-
-        return $media->mapWithKeys(fn(Media $m) => [
-            $m->id => $m->getFullUrl('optimized'),
-        ])->toArray();
-    }
-
     public function registerMediaConversions(Media $media = null): void
     {
         $this
             ->addMediaConversion('optimized')
             ->width(1000)
             ->withResponsiveImages();
+    }
+
+    public function getMediaLinksAttribute()
+    {
+        return $this->media()->get()
+            ->keyBy('id')
+            ->map(fn(Media $m) => $m->getFullUrl('optimized'))
+            ->toArray();
     }
 
     public function openings()

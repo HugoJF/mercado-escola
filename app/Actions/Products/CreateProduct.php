@@ -6,7 +6,7 @@ use App\Models\Product;
 use Illuminate\Support\Facades\DB;
 use Spatie\MediaLibrary\MediaCollections\FileAdder;
 
-class CreateNewProduct
+class CreateProduct
 {
     public function handle(array $data)
     {

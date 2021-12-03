@@ -6,7 +6,7 @@ use App\Exceptions\OverlappingOpeningException;
 use App\Models\Opening;
 use Carbon\Carbon;
 
-class CreateNewOpening
+class CreateOpening
 {
     protected FindOverlappingOpenings $overlappingOpenings;
 
