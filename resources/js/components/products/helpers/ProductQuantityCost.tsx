@@ -8,7 +8,12 @@ type ProductQuantityCostProps = {
     children: (data: { cost: number, total: number, text: string }) => JSX.Element;
 }
 
-export const ProductQuantityCost: React.FC<ProductQuantityCostProps> = ({product, quantityCostOverride, quantity, children}) => {
+export const ProductQuantityCost: React.FC<ProductQuantityCostProps> = ({
+                                                                            product,
+                                                                            quantityCostOverride,
+                                                                            quantity,
+                                                                            children
+                                                                        }) => {
     if (product.type === 'unit') {
         return children({
             cost: quantity * (product.quantity_cost ?? quantityCostOverride),

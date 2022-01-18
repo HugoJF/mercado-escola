@@ -1,13 +1,12 @@
 import React, {useState} from "react";
 import {useDispatch} from "react-redux";
 import {Dispatch} from "~/store";
-import {useForm} from "react-hook-form";
 import {Input} from "@components/form/Input";
 import {Button} from "@components/ui/Button";
 import useNavigation from "@hooks/useNavigation";
 import {Title} from "@components/ui/Title";
 import {PagePadding} from "@containers/PagePadding";
-import {Errors} from "~/types";
+import useFormy from "@hooks/useMyFormy";
 
 type Form = {
     email: string;
@@ -17,13 +16,7 @@ export const ForgotPassword: React.FC<object> = () => {
     const dispatch = useDispatch<Dispatch>();
     const {go} = useNavigation();
     const [loading, setLoading] = useState(false);
-    const {register, handleSubmit, setError, formState: {errors}} = useForm<Form>();
-
-    function setErrors(errors: Errors<Form>) {
-        for (let [key, messages] of Object.entries(errors)) {
-            setError(key as keyof Form, {type: 'manual', message: messages[0]});
-        }
-    }
+    const {setErrors, form: {register, handleSubmit, formState: {errors}}} = useFormy<Form>();
 
     async function requestPasswordReset(params: Form) {
         setLoading(true);

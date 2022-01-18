@@ -48,6 +48,6 @@ class Opening extends Model
     public function scopeActive(Builder $query)
     {
         return $query->where('opens_at', '<', now())
-                     ->where('closes_at', '>', now());
+            ->where('closes_at', '>', now());
     }
 }

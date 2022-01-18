@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Actions\Cart\AddProduct;
 use App\Actions\Cart\ProductCost;
+use App\Actions\Cart\RemoveProduct;
+use App\Actions\Cart\UpdateCartAddress;
 use App\Actions\Openings\FindCurrentOpening;
 use App\Exceptions\ProductNotInOpeningException;
 use App\Http\Requests\CartProductUpdateRequest;
@@ -11,6 +14,7 @@ use App\Http\Resources\ProductResource;
 use App\Models\Opening;
 use App\Models\Product;
 use App\Models\User;
+use Illuminate\Contracts\Auth\Access\Gate;
 
 class CartController extends Controller
 {
@@ -40,56 +44,36 @@ class CartController extends Controller
         return new ProductResource($user->products()->find($product));
     }
 
-    public function updateAddress(CartUpdateRequest $request)
+    public function updateAddress(UpdateCartAddress $updateCartAddress, CartUpdateRequest $request)
     {
         /** @var User $user */
         $user = auth()->user();
+        $address = $request->address();
 
-        if ($address = $request->address()) {
-            $this->authorize('view', $address);
-
-            $user->cartAddress()->associate($address);
-        } else {
-            $user->cartAddress()->dissociate();
-        }
-        $user->save();
+        $updateCartAddress->handle($user, $address);
 
         return app()->call('App\Http\Controllers\CartController@index');
     }
 
     public function addProduct(
-        FindCurrentOpening $currentOpening,
+        AddProduct $addProduct,
         CartProductUpdateRequest $request,
         Product $product
     ) {
         /** @var User $user */
         $user = auth()->user();
-        $opening = $currentOpening->find();
 
-        if (!$opening || !$opening->products()->find($product)) {
-            throw new ProductNotInOpeningException($product);
-        }
-
-        $user->products()->syncWithPivotValues(
-            [$product->id],
-            [
-                // See CreateNewOrder@attachProducts on why quantity_cost should be used
-                'type'          => $product->type,
-                'quantity_cost' => $product->quantity_cost,
-                'quantity'      => $request->input('quantity'),
-            ],
-            false
-        );
+        $addProduct->handle($user, $product, $request->input('quantity'));
 
         return app()->call('App\Http\Controllers\CartController@index');
     }
 
-    public function removeProduct(Product $product)
+    public function removeProduct(RemoveProduct $removeProduct, Product $product)
     {
         /** @var User $user */
         $user = auth()->user();
 
-        $user->products()->detach($product);
+        $removeProduct->handle($user, $product);
 
         return app()->call('App\Http\Controllers\CartController@index');
     }

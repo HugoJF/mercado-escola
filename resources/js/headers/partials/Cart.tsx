@@ -17,7 +17,8 @@ export const Cart: React.FC = () => {
     return <Link to="/carrinho" className="flex justify-between px-5 py-3 bg-red-500">
         <div className="relative">
             <ShoppingCart/>
-            <div className="absolute top-[-0.25rem] right-[-0.25rem] flex items-center justify-center w-4 h-4 bg-white text-sm text-red-500 rounded-full shadow">
+            <div
+                className="absolute top-[-0.25rem] right-[-0.25rem] flex items-center justify-center w-4 h-4 bg-white text-sm text-red-500 rounded-full shadow">
                 {itemCount}
             </div>
         </div>

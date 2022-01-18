@@ -92,7 +92,7 @@ class ProductTest extends TestCase
                 ->toMediaCollection();
 
         $this->get(route('products.show', $product))
-             ->assertJsonCount(1, 'data.media')
+             ->assertJsonCount(1, 'data.media_links')
              ->assertStatus(200);
     }
 }

@@ -26,7 +26,17 @@ export type CartIndexProps = {
 }
 
 export const CartIndex: React.FC<CartIndexProps>
-    = ({cart, onRemove, delivery, onShippingChanged, shippingOptionsOpen, setShippingOptionsOpen, onDeliverySelected, onOrderStore, pending}) => {
+    = ({
+           cart,
+           onRemove,
+           delivery,
+           onShippingChanged,
+           shippingOptionsOpen,
+           setShippingOptionsOpen,
+           onDeliverySelected,
+           onOrderStore,
+           pending
+       }) => {
     const {bindGo} = useNavigation();
     const total = cart.cost;
 

@@ -42,6 +42,6 @@ class FavoriteController extends Controller
     {
         auth()->user()->favorites()->detach($product);
 
-        return response()->noContent(200);
+        return response()->noContent();
     }
 }

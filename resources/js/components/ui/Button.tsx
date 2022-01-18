@@ -13,10 +13,16 @@ export type ButtonProps = React.HTMLAttributes<HTMLButtonElement> & {
 }
 
 const classes: { [id in ButtonColors]: (params: ButtonProps) => string } = {
-    default: ({enabled, outline}) => `${outline ? 'text-gray-500 border-2 border-gray-500' : 'bg-gray-500 hover:bg-gray-600 text-white'}`,
+    default: ({
+                  enabled,
+                  outline
+              }) => `${outline ? 'text-gray-500 border-2 border-gray-500' : 'bg-gray-500 hover:bg-gray-600 text-white'}`,
     primary: ({enabled, outline}) => 'bg-primary-500 hover:bg-primary-600 text-white',
     secondary: ({enabled, outline}) => 'bg-secondary-500 hover:bg-secondary-600 text-white',
-    danger: ({enabled, outline}) => `${outline ? 'text-red-500 border-2 border-red-500' : 'bg-red-500 hover:bg-red-600 text-white'}`
+    danger: ({
+                 enabled,
+                 outline
+             }) => `${outline ? 'text-red-500 border-2 border-red-500' : 'bg-red-500 hover:bg-red-600 text-white'}`
 };
 
 export const Button: React.FC<ButtonProps> = (props) => {

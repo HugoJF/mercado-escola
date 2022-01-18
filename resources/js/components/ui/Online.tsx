@@ -34,7 +34,8 @@ export const Online: React.FC = ({children}) => {
                 {online ?
                     <>{children}</>
                     :
-                    <div className="px-8 space-y-8 w-full min-h-full flex flex-col items-center justify-center bg-gradient-to-br from-primary-500 to-primary-700 justify-center">
+                    <div
+                        className="px-8 space-y-8 w-full min-h-full flex flex-col items-center justify-center bg-gradient-to-br from-primary-500 to-primary-700 justify-center">
                         {/* Icon */}
                         <WifiOff size={48} className="text-white"/>
 

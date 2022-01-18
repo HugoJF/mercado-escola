@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Actions\Products\CreateNewProduct;
+use App\Actions\Products\CreateProduct;
 use App\Actions\Products\UpdateProduct;
 use App\Http\Resources\ProductResource;
 use App\Models\Product;
@@ -26,7 +26,7 @@ class ProductController extends Controller
         return ProductResource::collection($query->get());
     }
 
-    public function store(CreateNewProduct $createNewProduct, Request $request)
+    public function store(CreateProduct $createNewProduct, Request $request)
     {
         return new ProductResource($createNewProduct->handle($request->all()));
     }
