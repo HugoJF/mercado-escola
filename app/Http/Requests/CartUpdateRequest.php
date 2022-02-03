@@ -26,7 +26,7 @@ class CartUpdateRequest extends FormRequest
     public function address(): ?Address
     {
         if ($id = $this->input('address_id')) {
-            return Product::query()->find($id);
+            return Address::query()->find($id);
         } else {
             return null;
         }
