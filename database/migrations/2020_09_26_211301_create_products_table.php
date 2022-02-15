@@ -22,8 +22,8 @@ class CreateProductsTable extends Migration
             $table->decimal('quantity_cost', 8, 2, true);
             $table->decimal('quantity_step', 8, 3, true);
 
-            $table->string('unit_name_singular')->nullable();
-            $table->string('unit_name_plural')->nullable();
+            $table->string('unit_name_singular');
+            $table->string('unit_name_plural');
 
             $table->softDeletes();
             $table->timestamps();

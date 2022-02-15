@@ -26,12 +26,12 @@ class ReportTest extends TestCase
         $opening = Opening::factory()->create();
 
         $product1 = Product::factory()->create([
-            'type' => 'weight',
+            'unit_name_singular' => 'kg',
+            'unit_name_plural' => 'kg',
             'quantity_step' => 0.5,
             'quantity_cost' => 5,
         ]);
         $product2 = Product::factory()->create([
-            'type' => 'unit',
             'unit_name_singular' => 'caixa',
             'unit_name_plural' => 'caixas',
             'quantity_cost' => 15,

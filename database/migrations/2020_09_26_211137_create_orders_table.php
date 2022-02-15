@@ -20,7 +20,7 @@ class CreateOrdersTable extends Migration
             $table->foreignId('user_id')->constrained();
             $table->foreignId('address_id')->nullable()->constrained();
 
-            $table->decimal('delivery_fee', 8, 2, true)->change();
+            $table->decimal('delivery_fee', 8, 2, true)->default(0);
 
             $table->string('state');
 

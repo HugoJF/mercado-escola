@@ -98,6 +98,6 @@ class AddressTest extends TestCase
         $address = Address::factory()->create(['user_id' => $user->id]);
 
         $this->delete(route('addresses.destroy', $address))
-             ->assertStatus(200);
+             ->assertStatus(204);
     }
 }

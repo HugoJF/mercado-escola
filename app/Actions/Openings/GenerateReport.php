@@ -41,14 +41,13 @@ class GenerateReport
 
     protected function generateReport(Collection $productGroup)
     {
-        // TODO: test
         /** @var Product $product */
         $product = $productGroup->first();
         $quantity = $productGroup->pluck('pivot.quantity')->sum();
         $text = $quantity === 1 ? $product->unit_name_singular : $product->unit_name_plural;
 
         return [
-            'total' => $text,
+            'total' => $quantity . ' ' . $text,
             'orders' => $productGroup->count(),
         ];
     }

@@ -64,7 +64,7 @@ class FavoriteTest extends TestCase
         $user->favorites()->attach($product);
 
         $this->delete(route('favorites.destroy', $product))
-             ->assertStatus(200);
+             ->assertStatus(204);
 
         $this->get(route('favorites.index'))
              ->assertJson([]);
