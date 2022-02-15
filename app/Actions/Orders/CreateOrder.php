@@ -73,7 +73,6 @@ class CreateOrder
             ->products
             ->keyBy('id')
             ->map(fn($product) => [
-                'type' => $product['pivot']['type'],
                 'quantity' => $product['pivot']['quantity'],
                 // quantity_cost is used because it's the price of
                 // the product when the user added it to the cart

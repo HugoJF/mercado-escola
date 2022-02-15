@@ -27,19 +27,21 @@ class ProductFactory extends Factory
 
         if ($type === 'unit') {
             $extra = [
+                'quantity_step' => 1,
                 'unit_name_singular' => 'caixa',
-                'unit_name_plural'   => 'caixas',
+                'unit_name_plural' => 'caixas',
             ];
         } else {
             $extra = [
-                'weight_increment' => 0.350,
+                'quantity_step' => 0.350,
+                'unit_name_singular' => 'kg',
+                'unit_name_plural' => 'kg',
             ];
         }
 
         return array_merge($extra, [
-            'name'          => $this->faker->name,
-            'description'   => $this->faker->sentence,
-            'type'          => $type,
+            'name' => $this->faker->name,
+            'description' => $this->faker->sentence,
             'quantity_cost' => $this->faker->numberBetween(1, 1000),
         ]);
     }

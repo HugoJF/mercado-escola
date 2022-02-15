@@ -41,43 +41,11 @@ class GenerateReport
 
     protected function generateReport(Collection $productGroup)
     {
-        if ($productGroup->first()->type === 'weight') {
-            return $this->generateWeightReport($productGroup);
-        } else {
-            return $this->generateUnitReport($productGroup);
-        }
-    }
-
-    protected function generateWeightReport(Collection $productGroup)
-    {
         // TODO: test
-        $kg = $productGroup->pluck('pivot.quantity')->sum();
-
-        if ($kg > 1) {
-            $kg = round($kg, 3);
-            $text = "$kg kg";
-        } else {
-            $g = round($kg * 1000, 3);
-            $text = "$g gramas";
-        }
-
-        return [
-            'total' => $text,
-            'orders' => $productGroup->count(),
-        ];
-    }
-
-    protected function generateUnitReport(Collection $productGroup)
-    {
+        /** @var Product $product */
         $product = $productGroup->first();
-        // TODO: test
-        $units = $productGroup->pluck('pivot.quantity')->sum();
-
-        if ($units === 1) {
-            $text = "$units $product->unit_name_singular";
-        } else {
-            $text = "$units $product->unit_name_plural";
-        }
+        $quantity = $productGroup->pluck('pivot.quantity')->sum();
+        $text = $quantity === 1 ? $product->unit_name_singular : $product->unit_name_plural;
 
         return [
             'total' => $text,

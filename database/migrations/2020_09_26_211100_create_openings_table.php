@@ -19,6 +19,8 @@ class CreateOpeningsTable extends Migration
             $table->unsignedInteger('max_delivery_orders')->default(0);
             $table->unsignedInteger('max_pickup_orders')->default(0);
 
+            $table->decimal('delivery_fee', 8, 2, true)->default(0);
+
             $table->dateTime('opens_at');
             $table->dateTime('closes_at');
             $table->dateTime('delivers_at');

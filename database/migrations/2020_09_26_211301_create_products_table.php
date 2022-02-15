@@ -19,8 +19,11 @@ class CreateProductsTable extends Migration
             $table->string('name');
             $table->mediumText('description')->nullable();
 
-            $table->string('quantity_type');
-            $table->unsignedInteger('quantity_cost'); // cents per unit|kg
+            $table->decimal('quantity_cost', 8, 2, true);
+            $table->decimal('quantity_step', 8, 3, true);
+
+            $table->string('unit_name_singular')->nullable();
+            $table->string('unit_name_plural')->nullable();
 
             $table->softDeletes();
             $table->timestamps();

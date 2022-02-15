@@ -16,11 +16,8 @@ class CreateProducerProductTable extends Migration
         Schema::create('producer_product', function (Blueprint $table) {
             $table->id();
 
-            $table->unsignedBigInteger('producer_id');
-            $table->foreign('producer_id')->references('id')->on('producers');
-
-            $table->unsignedBigInteger('product_id');
-            $table->foreign('product_id')->references('id')->on('products');
+            $table->foreignId('producer_id')->constrained();
+            $table->foreignId('product_id')->constrained();
 
             $table->timestamps();
         });

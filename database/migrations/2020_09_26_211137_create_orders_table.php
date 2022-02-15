@@ -16,18 +16,16 @@ class CreateOrdersTable extends Migration
         Schema::create('orders', function (Blueprint $table) {
             $table->string('id')->primary();
 
-            $table->unsignedBigInteger('opening_id');
-            $table->foreign('opening_id')->references('id')->on('openings');
+            $table->foreignId('opening_id')->constrained();
+            $table->foreignId('user_id')->constrained();
+            $table->foreignId('address_id')->nullable()->constrained();
 
-            $table->unsignedBigInteger('user_id');
-            $table->foreign('user_id')->references('id')->on('users');
-
-            $table->unsignedBigInteger('address_id')->nullable();
-            $table->foreign('address_id')->references('id')->on('addresses');
+            $table->decimal('delivery_fee', 8, 2, true)->change();
 
             $table->string('state');
 
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

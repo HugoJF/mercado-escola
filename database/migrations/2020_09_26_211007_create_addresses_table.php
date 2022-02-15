@@ -23,8 +23,7 @@ class CreateAddressesTable extends Migration
             $table->float('latitude', 12, 6);
             $table->float('longitude', 12, 6);
 
-            $table->unsignedBigInteger('user_id');
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreignId('user_id')->constrained();
 
             $table->softDeletes();
             $table->timestamps();

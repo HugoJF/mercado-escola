@@ -16,15 +16,14 @@ class CreateHasProductTable extends Migration
         Schema::create('has_product', function (Blueprint $table) {
             $table->id();
 
-            $table->unsignedInteger('quantity'); // units|grams
-            $table->unsignedInteger('quantity_cost');
+            $table->decimal('quantity', 8, 3, true);
+            $table->decimal('quantity_cost', 8, 2, true);
 
             $table->string("holder_type");
             $table->string("holder_id");
             $table->index(["holder_type", "holder_id"]);
 
-            $table->unsignedBigInteger('product_id');
-            $table->foreign('product_id')->references('id')->on('products');
+            $table->foreignId('product_id')->constrained();
 
             $table->timestamps();
         });

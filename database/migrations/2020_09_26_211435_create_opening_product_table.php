@@ -16,11 +16,8 @@ class CreateOpeningProductTable extends Migration
         Schema::create('opening_product', function (Blueprint $table) {
             $table->id();
 
-            $table->unsignedBigInteger('opening_id');
-            $table->foreign('opening_id')->references('id')->on('openings');
-
-            $table->unsignedBigInteger('product_id');
-            $table->foreign('product_id')->references('id')->on('products');
+            $table->foreignId('opening_id')->constrained();
+            $table->foreignId('product_id')->constrained();
 
             $table->timestamps();
         });

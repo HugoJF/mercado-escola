@@ -16,17 +16,16 @@ class Product extends Model implements HasMedia
     protected $fillable = [
         'name',
         'description',
-        'type',
         'quantity_cost',
+        'quantity_step',
         'unit_name_singular',
         'unit_name_plural',
-        'weight_increment',
     ];
 
     protected $appends = ['media_links'];
 
     protected $casts = [
-        'weight_increment' => 'float',
+        'quantity_step' => 'float',
         'quantity_cost' => 'float',
     ];
 
