@@ -16,7 +16,6 @@ class AddCartAddressColumnToUsersTable extends Migration
         Schema::table('users', function (Blueprint $table) {
             $table->unsignedBigInteger('cart_address_id')->nullable();
             $table->foreign('cart_address_id')->references('id')->on('addresses');
-
         });
     }
 
