@@ -2,41 +2,145 @@ service: mercado-escola
 
 useDotenv: true
 
+plugins:
+  # We need to include the Bref plugin
+  - ./vendor/bref/bref
+  - ./vendor/bref/extra-php-extensions
+  - serverless-lift
+
 provider:
-    name: aws
-    # The AWS region in which to deploy (us-east-1 is the default)
-    region: us-east-1
-    # The stage of the application, e.g. dev, production, staging… ('dev' is the default)
-    stage: dev
-    runtime: provided.al2
-    lambdaHashingVersion: 20201221
+  name: aws
+  region: sa-east-1
+  stage: ${opt:stage, 'staging'}
+  runtime: provided.al2
+  lambdaHashingVersion: 20201221
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - dynamodb:Query
+        - dynamodb:Scan
+        - dynamodb:GetItem
+        - dynamodb:PutItem
+        - dynamodb:UpdateItem
+        - dynamodb:DeleteItem
+      Resource:
+        - { "Fn::Join": ["", [ { "Fn::GetAtt": ["CacheDynamoDB", "Arn" ] }, "/*" ] ] }
+    - Effect: Allow
+      Action: # TODO split media and backup + remove delete permissions from backup
+        - "*"
+      Resource:
+        - { "Fn::GetAtt": ["MediaBucket", "Arn" ] }
+        - { "Fn::GetAtt": ["BackupBucket", "Arn" ] }
+
+  environment:
+    # App variables
+    APP_NAME: ${env:APP_NAME}
+    APP_KEY: ${ssm:/mercado-escola/${sls:stage}/app-key}
+    APP_ENV: ${env:APP_ENV}
+    APP_DEBUG: ${env:APP_DEBUG}
+    APP_URL: ${env:APP_URL}
+
+    # Database
+    DB_HOST: ${ssm:/mercado-escola/${sls:stage}/database-host}
+    DB_PASSWORD: ${ssm:/mercado-escola/${sls:stage}/database-password}
+    DB_CONNECTION: ${env:DB_CONNECTION}
+    DB_PORT: ${env:DB_PORT}
+    DB_DATABASE: ${env:DB_DATABASE}
+    DB_USERNAME: ${env:DB_USERNAME}
+
+    # Database clone origin
+    DB_ORIGIN_HOST: ${ssm:/mercado-escola/production/database-host}
+    DB_ORIGIN_PASSWORD: ${ssm:/mercado-escola/production/database-password}
+    DB_ORIGIN_PORT: ${env:DB_ORIGIN_PORT}
+    DB_ORIGIN_DATABASE: ${env:DB_ORIGIN_DATABASE}
+    DB_ORIGIN_USERNAME: ${env:DB_ORIGIN_USERNAME}
+
+    # Queue
+    QUEUE_CONNECTION: sqs
+    SQS_QUEUE: ${construct:queue.queueUrl}
+
+    # Broadcasting
+    BROADCAST_DRIVER: pusher
+    PUSHER_APP_ID: ${ssm:/mercado-escola/production/pusher-app-id}
+    PUSHER_APP_KEY: ${ssm:/mercado-escola/production/pusher-key}
+    PUSHER_APP_SECRET: ${ssm:/mercado-escola/production/pusher-secret}
+    PUSHER_APP_CLUSTER: sa1
+
+    # Cache
+    CACHE_DRIVER: dynamodb
+    DYNAMODB_CACHE_TABLE: mercado-escola-${sls:stage}-cache
+
+    # Mail
+    MAIL_MAILER: ${env:MAIL_MAILER}
+    MAIL_FROM_ADDRESS: ${env:MAIL_FROM_ADDRESS}
+    MAIL_FROM_NAME: ${env:MAIL_FROM_NAME}
+    BACKUP_EMAIL_TO: ${env:BACKUP_EMAIL_TO}
+
+    # Static
+    MEDIA_BUCKET: mercado-escola-${sls:stage}-media
+    BACKUP_BUCKET: mercado-escola-${sls:stage}-backup
+    DEBUGBAR_ENABLED: false
+    LOG_CHANNEL: stderr
+    SESSION_DRIVER: cookie
+    MEDIA_LIBRARY_DISK: media
+
+    # Services
+    GOOGLE_MAPS_KEY: ${ssm:/mercado-escola/${sls:stage}/google-maps-api-key}
+    MAILGUN_SECRET: ${ssm:/mercado-escola/${sls:stage}/mailgun-secret}
+
+constructs:
+  queue:
+    type: queue
+    worker:
+      handler: worker.php
+      layers:
+        - arn:aws:lambda:sa-east-1:186669703643:layer:php-80:1
 
 package:
-    # Directories to exclude from deployment
-    patterns:
-        - '!node_modules/**'
-        - '!public/storage'
-        - '!resources/assets/**'
-        - '!storage/**'
-        - '!tests/**'
+  patterns:
+    - '!node_modules/**'
+    - '!public/storage'
+    - '!resources/assets/**'
+    - '!storage/**'
+    - '!tests/**'
 
 functions:
-    # This function runs the Laravel website/API
-    web:
-        handler: public/index.php
-        timeout: 28 # in seconds (API Gateway has a timeout of 29 seconds)
-        layers:
-            - ${bref:layer.php-80-fpm}
-        events:
-            - httpApi: '*'
-    # This function lets us run artisan commands in Lambda
-    artisan:
-        handler: artisan
-        timeout: 120 # in seconds
-        layers:
-            - ${bref:layer.php-80} # PHP
-            - ${bref:layer.console} # The "console" layer
+  # This function runs the Laravel website/API
+  web:
+    handler: public/index.php
+    timeout: 28 # in seconds (API Gateway has a timeout of 29 seconds)
+    layers:
+      - arn:aws:lambda:sa-east-1:186669703643:layer:php-80-fpm:1
+      - ${bref-extra:pgsql-php-80}
+    events:
+      - httpApi: '*'
+  # This function lets us run artisan commands in Lambda
+  artisan:
+    handler: artisan
+    timeout: 120 # in seconds
+    layers:
+      - arn:aws:lambda:sa-east-1:186669703643:layer:php-80:1 # PHP
+      - arn:aws:lambda:sa-east-1:186669703643:layer:console:1 # The "console" layer
+      - ${bref-extra:pgsql-php-80}
 
-plugins:
-    # We need to include the Bref plugin
-    - ./vendor/bref/bref
+resources:
+  Resources:
+    BackupBucket:
+      Type: AWS::S3::Bucket
+      Properties:
+        BucketName: mercado-escola-${sls:stage}-backups
+    MediaBucket:
+      Type: AWS::S3::Bucket
+      Properties:
+        BucketName: mercado-escola-${sls:stage}-media
+    CacheDynamoDB:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: mercado-escola-${sls:stage}-cache
+        BillingMode: PAY_PER_REQUEST
+        AttributeDefinitions:
+          - AttributeName: key
+            AttributeType: S
+        KeySchema:
+          - AttributeName: key
+            KeyType: HASH
