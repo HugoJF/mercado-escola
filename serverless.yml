@@ -43,7 +43,7 @@ provider:
     DB_CONNECTION: ${env:DB_CONNECTION}
     DB_HOST: ${ssm:/mercado-escola/${sls:stage}/database-host}
     DB_PORT: ${env:DB_PORT}
-    DB_DATABASE: ${env:DB_D ATABASE}
+    DB_DATABASE: ${env:DB_DATABASE}
     DB_USERNAME: ${env:DB_USERNAME}
     DB_PASSWORD: ${ssm:/mercado-escola/${sls:stage}/database-password}
 
