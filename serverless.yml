@@ -100,7 +100,7 @@ constructs:
 
 package:
   patterns:
-    - "node_modules/**"
+    - "!node_modules/**"
     - "!public/storage"
     - "!resources/assets/**"
     - "!storage/**"
