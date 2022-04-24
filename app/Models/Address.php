@@ -11,7 +11,7 @@ class Address extends Model
     use HasFactory;
     use SoftDeletes;
 
-    protected $fillable = ['address', 'number', 'complement', 'latitude', 'longitude'];
+    protected $fillable = ['name', 'address', 'number', 'complement', 'latitude', 'longitude'];
 
     public function getLatitudeAttribute(float $latitude)
     {
