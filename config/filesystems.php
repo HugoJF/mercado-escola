@@ -52,19 +52,13 @@ return [
             'driver' => 's3',
             'token' => env('AWS_SESSION_TOKEN'),
             'bucket' => env('MEDIA_BUCKET'),
+            'url' => env('MEDIA_BUCKET_URL'),
         ],
 
         'backup' => [
             'driver' => 's3',
             'token' => env('AWS_SESSION_TOKEN'),
             'bucket' => env('BACKUP_BUCKET'),
-        ],
-
-        'public' => [
-            'driver' => 'local',
-            'root' => storage_path('app/public'),
-            'url' => env('APP_URL') . '/storage',
-            'visibility' => 'public',
         ],
 
         'tests' => [
@@ -86,7 +80,7 @@ return [
     */
 
     'links' => [
-        public_path('storage') => storage_path('app/public'),
+        //
     ],
 
 ];

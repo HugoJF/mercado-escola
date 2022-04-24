@@ -1,16 +1,12 @@
-name: Run tests
+name: Run tests and deploy
 
 on:
   push:
     branches: [ master ]
-  pull_request:
-    branches: [ master ]
 
 jobs:
-  laravel-tests:
-
+  tests:
     runs-on: ubuntu-latest
-
     timeout-minutes: 7
 
     services:
@@ -29,7 +25,7 @@ jobs:
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
-          php-version: '7.4'
+          php-version: '8.0'
           coverage: xdebug
 
       - name: Copy .env
@@ -84,3 +80,32 @@ jobs:
           token: ${{ secrets.CODECOV_TOKEN }} # not required for public repos
           file: ./build/logs/clover.xml # optional
           fail_ci_if_error: true # optional (default = false)
+
+  deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 7
+    needs:
+      - tests
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.0'
+
+      - name: Copy .env
+        run: php -r "file_exists('.env') || copy('.env.${{ secrets.SLS_STAGE }}', '.env');"
+
+      - name: Install Composer dependencies
+        run: composer install -q --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist
+
+      - name: Install NPM dependencies
+        run: npm ci
+
+      - name: Build assets
+        run: npm run prod
+
+      - name: Deploy
+        if: contains(['production', 'staging'], secrets.SLS_STAGE)
+        run: npx serverless deploy --stage ${{ secrets.SLS_STAGE }} --no-interactive --no-confirm --verbose

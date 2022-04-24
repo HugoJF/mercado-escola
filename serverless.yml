@@ -3,7 +3,6 @@ service: mercado-escola
 useDotenv: true
 
 plugins:
-  # We need to include the Bref plugin
   - ./vendor/bref/bref
   - ./vendor/bref/extra-php-extensions
   - serverless-lift
@@ -11,7 +10,7 @@ plugins:
 provider:
   name: aws
   region: sa-east-1
-  stage: ${opt:stage, 'staging'}
+  stage: ${opt:stage, "staging"}
   runtime: provided.al2
   lambdaHashingVersion: 20201221
   iamRoleStatements:
@@ -24,13 +23,13 @@ provider:
         - dynamodb:UpdateItem
         - dynamodb:DeleteItem
       Resource:
-        - { "Fn::Join": ["", [ { "Fn::GetAtt": ["CacheDynamoDB", "Arn" ] }, "/*" ] ] }
+        - !Join [ "", [ { "Fn::GetAtt": ["CacheDynamoDB", "Arn" ] }, "/*" ] ]
     - Effect: Allow
-      Action: # TODO split media and backup + remove delete permissions from backup
+      Action:
         - "*"
       Resource:
-        - { "Fn::GetAtt": ["MediaBucket", "Arn" ] }
-        - { "Fn::GetAtt": ["BackupBucket", "Arn" ] }
+        - !GetAtt [ "MediaBucket", "Arn" ]
+        - !GetAtt [ "BackupBucket", "Arn" ]
 
   environment:
     # App variables
@@ -41,12 +40,12 @@ provider:
     APP_URL: ${env:APP_URL}
 
     # Database
-    DB_HOST: ${ssm:/mercado-escola/${sls:stage}/database-host}
-    DB_PASSWORD: ${ssm:/mercado-escola/${sls:stage}/database-password}
     DB_CONNECTION: ${env:DB_CONNECTION}
+    DB_HOST: ${ssm:/mercado-escola/${sls:stage}/database-host}
     DB_PORT: ${env:DB_PORT}
-    DB_DATABASE: ${env:DB_DATABASE}
+    DB_DATABASE: ${env:DB_D ATABASE}
     DB_USERNAME: ${env:DB_USERNAME}
+    DB_PASSWORD: ${ssm:/mercado-escola/${sls:stage}/database-password}
 
     # Database clone origin
     DB_ORIGIN_HOST: ${ssm:/mercado-escola/production/database-host}
@@ -74,15 +73,18 @@ provider:
     MAIL_MAILER: ${env:MAIL_MAILER}
     MAIL_FROM_ADDRESS: ${env:MAIL_FROM_ADDRESS}
     MAIL_FROM_NAME: ${env:MAIL_FROM_NAME}
-    BACKUP_EMAIL_TO: ${env:BACKUP_EMAIL_TO}
+    BACKUP_EMAIL_TO: ${ssm:/mercado-escola/${sls:stage}/backup-email-to}
+
+    # Media bucket
+    MEDIA_BUCKET: mercado-escola-${sls:stage}-media
+    MEDIA_BUCKET_URL: ${env:MEDIA_BUCKET_URL}
+    MEDIA_LIBRARY_DISK: media
 
     # Static
-    MEDIA_BUCKET: mercado-escola-${sls:stage}-media
     BACKUP_BUCKET: mercado-escola-${sls:stage}-backup
     DEBUGBAR_ENABLED: false
     LOG_CHANNEL: stderr
     SESSION_DRIVER: cookie
-    MEDIA_LIBRARY_DISK: media
 
     # Services
     GOOGLE_MAPS_KEY: ${ssm:/mercado-escola/${sls:stage}/google-maps-api-key}
@@ -98,29 +100,28 @@ constructs:
 
 package:
   patterns:
-    - '!node_modules/**'
-    - '!public/storage'
-    - '!resources/assets/**'
-    - '!storage/**'
-    - '!tests/**'
+    - "node_modules/**"
+    - "!public/storage"
+    - "!resources/assets/**"
+    - "!storage/**"
+    - "!tests/**"
 
 functions:
-  # This function runs the Laravel website/API
   web:
     handler: public/index.php
-    timeout: 28 # in seconds (API Gateway has a timeout of 29 seconds)
+    timeout: 28 # API Gateway has a timeout of 29 seconds
     layers:
       - arn:aws:lambda:sa-east-1:186669703643:layer:php-80-fpm:1
       - ${bref-extra:pgsql-php-80}
     events:
-      - httpApi: '*'
-  # This function lets us run artisan commands in Lambda
+      - httpApi: "*"
+
   artisan:
     handler: artisan
-    timeout: 120 # in seconds
+    timeout: 120
     layers:
-      - arn:aws:lambda:sa-east-1:186669703643:layer:php-80:1 # PHP
-      - arn:aws:lambda:sa-east-1:186669703643:layer:console:1 # The "console" layer
+      - arn:aws:lambda:sa-east-1:186669703643:layer:php-80:1
+      - arn:aws:lambda:sa-east-1:186669703643:layer:console:1
       - ${bref-extra:pgsql-php-80}
 
 resources:
@@ -133,6 +134,23 @@ resources:
       Type: AWS::S3::Bucket
       Properties:
         BucketName: mercado-escola-${sls:stage}-media
+        AccessControl: PublicReadWrite
+    MediaBucketPolicy:
+      Type: AWS::S3::BucketPolicy
+      Properties:
+        Bucket: !Ref MediaBucket
+        PolicyDocument:
+          Version: "2012-10-17"
+          Statement:
+            - Effect: Allow
+              Principal: "*"
+              Action:
+                - s3:GetObject
+              Resource: !Join
+                - ""
+                - - "arn:aws:s3:::"
+                  - !Ref MediaBucket
+                  - /*
     CacheDynamoDB:
       Type: AWS::DynamoDB::Table
       Properties:
