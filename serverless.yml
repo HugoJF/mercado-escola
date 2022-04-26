@@ -6,6 +6,15 @@ plugins:
   - ./vendor/bref/bref
   - ./vendor/bref/extra-php-extensions
   - serverless-lift
+  - serverless-domain-manager
+
+custom:
+  customDomain:
+    domainName: ${sls:stage}.api.mercadoescola.com.br
+    endpointType: regional
+    apiType: http
+    createRoute53Record: false
+    autoDomain: false
 
 provider:
   name: aws
@@ -85,6 +94,7 @@ provider:
     DEBUGBAR_ENABLED: false
     LOG_CHANNEL: stderr
     SESSION_DRIVER: cookie
+    SESSION_DOMAIN: ${env:SESSION_DOMAIN}
 
     # Services
     GOOGLE_MAPS_KEY: ${ssm:/mercado-escola/${sls:stage}/google-maps-api-key}
