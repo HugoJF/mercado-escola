@@ -22,6 +22,8 @@ provider:
   stage: ${opt:stage, "staging"}
   runtime: provided.al2
   lambdaHashingVersion: 20201221
+  httpApi:
+    cors: true
   iamRoleStatements:
     - Effect: Allow
       Action:
