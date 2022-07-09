@@ -124,8 +124,8 @@ functions:
     handler: public/index.php
     timeout: 28 # API Gateway has a timeout of 29 seconds
     layers:
-      - arn:aws:lambda:sa-east-1:186669703643:layer:php-80-fpm:1
-      - ${bref-extra:pgsql-php-80}
+      - ${bref:layer.php-81-fpm}
+      - ${bref-extra:pgsql-php-81}
     events:
       - httpApi: "*"
 
@@ -133,8 +133,8 @@ functions:
     handler: artisan
     timeout: 120
     layers:
-      - arn:aws:lambda:sa-east-1:186669703643:layer:php-80:1
-      - arn:aws:lambda:sa-east-1:186669703643:layer:console:1
+      - ${bref:layer.php-81}
+      - ${bref:layer.console}
       - ${bref-extra:pgsql-php-80}
 
 resources:
