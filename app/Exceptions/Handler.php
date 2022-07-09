@@ -40,7 +40,7 @@ class Handler extends ExceptionHandler
     {
         if (
             $this->shouldReport($exception) &&
-            app()->environment('production') &&
+            app()->environment('production', 'staging') &&
             app()->bound('sentry')
         ) {
             app('sentry')->captureException($exception);
