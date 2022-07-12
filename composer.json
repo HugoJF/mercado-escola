@@ -9,9 +9,9 @@
     "license": "MIT",
     "require": {
         "php": "^8.0.2",
-        "bref/bref": "^1.5",
-        "bref/extra-php-extensions": "^0.11.27",
-        "bref/laravel-bridge": "^1.1",
+        "bref/bref": "^1.7.0",
+        "bref/extra-php-extensions": "^0.11.32",
+        "bref/laravel-bridge": "^1.2.0",
         "doctrine/dbal": "^3.1",
         "fruitcake/laravel-cors": "^2.0",
         "guzzlehttp/guzzle": "^7.0.1",
